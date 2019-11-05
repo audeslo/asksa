@@ -3,14 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
- * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"nomcomplet"}, message="Ce client existe déjà")
  */
 class Client
 {
@@ -23,152 +18,59 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir le referent !")
      */
-    private $referent;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir le nom complet !")
      */
-    private $nomcomplet;
+    private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     */
-    private $adresserue;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *@Assert\NotBlank(message="Veuillez renseigner le type du client !")
-     */
-    private $type;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $telephone;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $ville;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $codepostal;
+    private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $mail;
+    private $codePostal;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
-     * @Gedmo\Slug(fields={"nomcomplet"})
+     * @ORM\Column(type="string", length=255)
      */
-    private $slug;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $createdOn;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     */
-    private $createdBy;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $editedOn;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     */
-    private $editedBy;
-
-    /**
-     * @ORM\PrePersist()
-     */
-    public function datecreated()
-    {
-        $this->setCreatedOn(new \DateTime('now'));
-    }
-
-    /**
-     * @ORM\PreUpdate()
-     */
-    public function dateupdated()
-    {
-        $this->setEditedOn(new \DateTime('now'));
-    }
-
+    private $telephone;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getReferent(): ?string
+    public function getNom(): ?string
     {
-        return $this->referent;
+        return $this->nom;
     }
 
-    public function setReferent(string $referent): self
+    public function setNom(string $nom): self
     {
-        $this->referent = $referent;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getNomcomplet(): ?string
+    public function getPrenom(): ?string
     {
-        return $this->nomcomplet;
+        return $this->prenom;
     }
 
-    public function setNomcomplet(string $nomcomplet): self
+    public function setPrenom(string $prenom): self
     {
-        $this->nomcomplet = $nomcomplet;
-
-        return $this;
-    }
-
-    public function getAdresserue(): ?string
-    {
-        return $this->adresserue;
-    }
-
-    public function setAdresserue(?string $adresserue): self
-    {
-        $this->adresserue = $adresserue;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(?string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(?string $telephone): self
-    {
-        $this->telephone = $telephone;
+        $this->prenom = $prenom;
 
         return $this;
     }
@@ -178,93 +80,45 @@ class Client
         return $this->ville;
     }
 
-    public function setVille(?string $ville): self
+    public function setVille(string $ville): self
     {
         $this->ville = $ville;
 
         return $this;
     }
 
-    public function getCodepostal(): ?string
+    public function getAdresse(): ?string
     {
-        return $this->codepostal;
+        return $this->adresse;
     }
 
-    public function setCodepostal(?string $codepostal): self
+    public function setAdresse(string $adresse): self
     {
-        $this->codepostal = $codepostal;
+        $this->adresse = $adresse;
 
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getCodePostal(): ?string
     {
-        return $this->mail;
+        return $this->codePostal;
     }
 
-    public function setMail(?string $mail): self
+    public function setCodePostal(string $codePostal): self
     {
-        $this->mail = $mail;
+        $this->codePostal = $codePostal;
 
         return $this;
     }
 
-    public function getSlug(): ?string
+    public function getTelephone(): ?string
     {
-        return $this->slug;
+        return $this->telephone;
     }
 
-    public function setSlug(string $slug): self
+    public function setTelephone(string $telephone): self
     {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getCreatedOn(): ?\DateTimeInterface
-    {
-        return $this->createdOn;
-    }
-
-    public function setCreatedOn(\DateTimeInterface $createdOn): self
-    {
-        $this->createdOn = $createdOn;
-
-        return $this;
-    }
-
-    public function getEditedOn(): ?\DateTimeInterface
-    {
-        return $this->editedOn;
-    }
-
-    public function setEditedOn(?\DateTimeInterface $editedOn): self
-    {
-        $this->editedOn = $editedOn;
-
-        return $this;
-    }
-
-    public function getCreatedBy(): ?User
-    {
-        return $this->createdBy;
-    }
-
-    public function setCreatedBy(?User $createdBy): self
-    {
-        $this->createdBy = $createdBy;
-
-        return $this;
-    }
-
-    public function getEditedBy(): ?User
-    {
-        return $this->editedBy;
-    }
-
-    public function setEditedBy(?User $editedBy): self
-    {
-        $this->editedBy = $editedBy;
+        $this->telephone = $telephone;
 
         return $this;
     }

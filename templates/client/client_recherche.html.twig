@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+{% use 'bootstrap_3_layout.html.twig' %}
+
+{% block body %}
+    <div class="container-fluid tm-mt-big tm-mb-big">
+        <div class="row">
+            <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
+                <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
+                    <h2 class="tm-block-title d-inline-block">Liste des clients</h2>
+                    <div class="col-md-4 float-right">
+                        <div class="form-group">
+                            <input type="text" style="background-color: aliceblue;" class="form-control" placeholder="Rechercher...">
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="tm-product-table-container">
+                        <table class="table table-hover tm-table-small tm-product-table">
+                            <thead>
+                            <tr>
+                                <th scope="col">&nbsp;</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Nom & Prénoms</th>
+                                <th scope="col">Ville</th>
+                                <th scope="col">Adresse</th>
+                                <th scope="col">Code postal</th>
+                                <th scope="col">Téléphone</th>
+                                <th scope="col">&nbsp;</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for client in clients %}
+                            <tr>
+                                <th scope="row"><input type="checkbox" /></th>
+                                <td class="tm-product-name">{{client.id}}</td>
+                                <td class="tm-product-name">{{client.nom ~ " " ~ client.prenom}}</td>
+                                <td>{{client.ville}}</td>
+                                <td>{{client.adresse}}</td>
+                                <td>{{client.codePostal}}</td>
+                                <td>{{client.telephone}}</td>
+                                <td>
+                                    <a href="{{ path('client.update',{id:client.id})}}" class="tm-product-delete-link">
+                                        <i class="fas fa-eye tm-product-delete-icon"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

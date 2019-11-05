@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="asksa" uuid="f706c6c7-a06c-49c0-820b-33d74d267718">
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://localhost:3306/asksa</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
@@ -14,6 +14,12 @@
         <property name="characterSetResults" value="utf8" />
         <property name="yearIsDateType" value="false" />
       </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="asksa@localhost" uuid="71c0e5a7-ff09-400e-8a77-a8692b65da80">
+      <driver-ref>mysql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/asksa</jdbc-url>
     </data-source>
   </component>
 </project>
