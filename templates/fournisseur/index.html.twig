@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseur index{% endblock %}
+
+{% block body %}
+    <h1>Fournisseur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomcourt</th>
+                <th>Nomcomplet</th>
+                <th>Representant</th>
+                <th>Adresserue</th>
+                <th>Telephone</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>Codepostal</th>
+                <th>Mail</th>
+                <th>Slug</th>
+                <th>CreatedOn</th>
+                <th>EditedOn</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fournisseur in fournisseurs %}
+            <tr>
+                <td>{{ fournisseur.id }}</td>
+                <td>{{ fournisseur.nomcourt }}</td>
+                <td>{{ fournisseur.nomcomplet }}</td>
+                <td>{{ fournisseur.representant }}</td>
+                <td>{{ fournisseur.Adresserue }}</td>
+                <td>{{ fournisseur.telephone }}</td>
+                <td>{{ fournisseur.Ville }}</td>
+                <td>{{ fournisseur.Pays }}</td>
+                <td>{{ fournisseur.Codepostal }}</td>
+                <td>{{ fournisseur.Mail }}</td>
+                <td>{{ fournisseur.slug }}</td>
+                <td>{{ fournisseur.createdOn ? fournisseur.createdOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ fournisseur.editedOn ? fournisseur.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('fournisseur_show', {'id': fournisseur.id}) }}">show</a>
+                    <a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="14">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('fournisseur_new') }}">Create new</a>
+{% endblock %}

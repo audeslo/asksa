@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fournisseur{% endblock %}
+
+{% block body %}
+    <h1>Fournisseur</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ fournisseur.id }}</td>
+            </tr>
+            <tr>
+                <th>Nomcourt</th>
+                <td>{{ fournisseur.nomcourt }}</td>
+            </tr>
+            <tr>
+                <th>Nomcomplet</th>
+                <td>{{ fournisseur.nomcomplet }}</td>
+            </tr>
+            <tr>
+                <th>Representant</th>
+                <td>{{ fournisseur.representant }}</td>
+            </tr>
+            <tr>
+                <th>Adresserue</th>
+                <td>{{ fournisseur.Adresserue }}</td>
+            </tr>
+            <tr>
+                <th>Telephone</th>
+                <td>{{ fournisseur.telephone }}</td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td>{{ fournisseur.Ville }}</td>
+            </tr>
+            <tr>
+                <th>Pays</th>
+                <td>{{ fournisseur.Pays }}</td>
+            </tr>
+            <tr>
+                <th>Codepostal</th>
+                <td>{{ fournisseur.Codepostal }}</td>
+            </tr>
+            <tr>
+                <th>Mail</th>
+                <td>{{ fournisseur.Mail }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ fournisseur.slug }}</td>
+            </tr>
+            <tr>
+                <th>CreatedOn</th>
+                <td>{{ fournisseur.createdOn ? fournisseur.createdOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EditedOn</th>
+                <td>{{ fournisseur.editedOn ? fournisseur.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('fournisseur_index') }}">back to list</a>
+
+    <a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+
+    {{ include('fournisseur/_delete_form.html.twig') }}
+{% endblock %}

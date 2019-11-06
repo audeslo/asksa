@@ -1,0 +1,62 @@
+<a type="button" class="btn  btn-sm" data-toggle="modal" data-target="#{{ article.slug }}">
+    <i class="glyphicon glyphicon-list"></i>
+</a>
+
+<!-- Modal -->
+<div class="modal fade " id="{{ article.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+    <div class="modal-dialog modal-lg" role="document"  >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Détails Catégorie</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table-bordered table">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ article.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Libellé</th>
+                        <td>{{ article.libelle }}</td>
+                    </tr>
+                    <tr>
+                        <th>Catégorie</th>
+                        <td>{{ article.categorie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ article.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Enregistré le</th>
+                        <td>
+                            {{ article.createdOn ? article.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ article.createdBy }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Modifié le </th>
+                        <td>
+                            {{ article.editedOn ? article.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ article.editedBy }}
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <div class="row" >
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        Retour à la liste
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary">Imprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
