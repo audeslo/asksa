@@ -39,6 +39,7 @@ class ClientController extends AbstractController
             $entityManager->persist($client);
             $entityManager->flush();
 
+            $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('client_index');
         }
 
@@ -49,7 +50,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="client_show", methods={"GET"})
+     * @Route("/{slug}", name="client_show", methods={"GET"})
      */
     public function show(Client $client): Response
     {
@@ -59,7 +60,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="client_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="client_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Client $client): Response
     {
@@ -68,6 +69,8 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');
 
             return $this->redirectToRoute('client_index');
         }
@@ -79,7 +82,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="client_delete", methods={"DELETE"})
+     * @Route("/{slug}", name="client_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Client $client): Response
     {
@@ -87,6 +90,7 @@ class ClientController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($client);
             $entityManager->flush();
+            $request->getSession()->getFlashBag()->add('warning', 'Suppression bien effectuée.');
         }
 
         return $this->redirectToRoute('client_index');

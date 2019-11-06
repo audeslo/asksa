@@ -1,3 +1,88 @@
+{% extends 'client/client.html.twig' %}
+
+<div class="col-lg-10">
+    <h1>Détail Client</h1>
+
+    <table class="table-bordered table">
+        <tbody>
+        <tr>
+            <th>N°</th>
+            <td>{{ client.id }}</td>
+        </tr>
+        <tr>
+            <th>Réferent</th>
+            <td>{{ client.referent }}</td>
+        </tr>
+        <tr>
+            <th>Nom complet</th>
+            <td>{{ client.nomcomplet }}</td>
+        </tr>
+        <tr>
+            <th>Sexe</th>
+            <td>
+                {{ client.type }}
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>Téléphone</th>
+            <td>{{ client.telephone }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ client.adresserue }}</td>
+        </tr>
+        <tr>
+            <th>E-mail</th>
+            <td>{{ client.mail }}</td>
+        </tr>
+
+        <tr>
+            <th>Enregistré par </th>
+            <td>
+                {{ article.createdBy }}<br> le
+                {{ article.createdOn ? article.createdOn |date('d-m-Y H:i:s') : ''  }}
+            </td>
+        </tr>
+        <tr>
+            <th>Modifié par </th>
+            <td>
+                {{ article.editedBy }} <br>le
+                {{ article.editedOn ? article.editedOn |date('d/m/Y H:i:s') : '' }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <a class="btn btn-default col-md-3" href="{{ path('client_index') }}">
+            <i class="fa fa-chevron-left"></i>
+            Retour à la liste
+
+        </a>
+
+
+        <a class="btn btn-primary col-md-2 col-md-offset-7" href="{{ path('client_edit', { 'slug': client.slug }) }}">
+            <i class="fa fa-pencil"></i>
+            Modifier
+        </a>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Client{% endblock %}

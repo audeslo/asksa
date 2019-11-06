@@ -1,9 +1,9 @@
-<a type="button" class="btn  btn-sm" data-toggle="modal" data-target="#{{ article.slug }}">
+<a type="button" class="btn  btn-sm" data-toggle="modal" data-target="#{{ client.slug }}">
     <i class="glyphicon glyphicon-list"></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ article.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ client.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
@@ -15,32 +15,32 @@
                     <tbody>
                     <tr>
                         <th>Id</th>
-                        <td>{{ article.id }}</td>
+                        <td>{{ client.id }}</td>
                     </tr>
                     <tr>
                         <th>Libellé</th>
-                        <td>{{ article.libelle }}</td>
+                        <td>{{ client.libelle }}</td>
                     </tr>
                     <tr>
                         <th>Catégorie</th>
-                        <td>{{ article.categorie }}</td>
+                        <td>{{ client.categorie }}</td>
                     </tr>
                     <tr>
                         <th>Description</th>
-                        <td>{{ article.description }}</td>
+                        <td>{{ client.description }}</td>
                     </tr>
                     <tr>
                         <th>Enregistré le</th>
                         <td>
-                            {{ article.createdOn ? article.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ article.createdBy }}
+                            {{ client.createdOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ client.createdBy }}
                         </td>
                     </tr>
                     <tr>
                         <th>Modifié le </th>
                         <td>
-                            {{ article.editedOn ? article.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ article.editedBy }}
+                            {{ client.editedOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ client.editedBy }}
                         </td>
                     </tr>
 
