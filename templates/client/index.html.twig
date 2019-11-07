@@ -1,6 +1,6 @@
 {% extends 'client/client.html.twig' %}
 
-
+{# page tableau et recherche #}
 
 {% block content %}
 
@@ -49,12 +49,17 @@
                         <td><a href="{{ path('client_show' , {'slug' :client.slug }) }}"> {{ client.nomcomplet }}</a></td>
                         <td>{{ client.telephone }}</td>
                         <td>{{ client.mail }}</td>
+                        <td>
+                            <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
+                            <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
+
     <div class="card-footer small text-muted">Hier à 11:59 </div>
 
 {% endblock %}

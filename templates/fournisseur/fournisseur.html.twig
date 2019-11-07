@@ -1,32 +1,5 @@
-{% extends 'base.html.twig' %}
-{% use 'bootstrap_3_layout.html.twig' %}
+{% extends'base.html.twig' %}
 
-{% block body %}
-    <div class="container tm-mt-big tm-mb-big">
-        <div class="row">
-            <div class="col-xl-9 col-lg-10 col-md-12 col-sm-12 mx-auto">
-                <div class="tm-bg-primary-dark tm-block tm-block-h-auto">
-                    <h2 class="tm-block-title d-inline-block">Ajout d'un fournisseur</h2>
-                    <a href="{{ path('client.fiche') }}" class="btn btn-dark float-right">Liste des fournisseurs</a>
-                    <hr>
-                    {{ form_start(form) }}
-                    <div class="row">
-                        <div class="col-md-6">
-                            {{ form_row(form.societe) }}
-                            {{ form_row(form.adresserue) }}
-                            {{ form_row(form.ville) }}
-                        </div>
-                        <div class="col-md-6">
-                            {{ form_row(form.pays) }}
-                            {{ form_row(form.codepostal) }}
-                            {{ form_row(form.mail) }}
-                        </div>
-                    </div>
-                    <button class="btn btn-warning" type="submit"><i class="fas fa-save"> </i> Ajouter</button>
-                    <button class="btn btn-primary float-right" type="reset"><i class="fas fa-cut"> </i> Annuler</button>
-                    {{ form_end(form) }}
-                </div>
-            </div>
-        </div>
-    </div>
+{% block content %}
+
 {% endblock %}

@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'fournisseur/fournisseur.html.twig' %}
 
-{% block title %}New Fournisseur{% endblock %}
+{% block title %} {% endblock %}
 
 {% block body %}
     <h1>Create new Fournisseur</h1>
@@ -8,4 +8,21 @@
     {{ include('fournisseur/_form.html.twig') }}
 
     <a href="{{ path('fournisseur_index') }}">back to list</a>
+{% endblock %}#}
+
+{% extends 'fournisseur/fournisseur.html.twig' %}
+
+{% block content %}
+    {# bouton new #}
+    <div class="col-md-7" style="background-color: #cccccc">
+        <h1> Create new Fournisseur</h1>
+
+        {{ include('_form.html.twig') }}
+
+        <a href="{{ path('fournisseur_index') }}" class="btn btn-default">
+            <i class="fa fa-chevron-left"></i>
+            Retour à la Liste
+        </a>
+    </div>
+
 {% endblock %}
