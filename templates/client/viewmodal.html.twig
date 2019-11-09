@@ -1,5 +1,5 @@
-<a type="button" class="btn  btn-sm" data-toggle="modal" data-target="#{{ client.slug }}">
-    <i class="glyphicon glyphicon-list"></i>
+<a   data-toggle="modal" data-target="#{{ client.slug }}">
+    <i class="fa fa-list "></i>
 </a>
 
 <!-- Modal -->
@@ -8,26 +8,26 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails Catégorie</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails client</h4>
             </div>
             <div class="modal-body">
-                <table class="table-bordered table">
+                <table class="table-bordered table" style="background-color: #868e96">
                     <tbody>
                     <tr>
                         <th>Id</th>
                         <td>{{ client.id }}</td>
                     </tr>
                     <tr>
-                        <th>Libellé</th>
-                        <td>{{ client.libelle }}</td>
+                        <th>Réferent</th>
+                        <td>{{ client.referent }}</td>
                     </tr>
                     <tr>
-                        <th>Catégorie</th>
-                        <td>{{ client.categorie }}</td>
+                        <th>Nom complet</th>
+                        <td>{{ client.nomcomplet }}</td>
                     </tr>
                     <tr>
-                        <th>Description</th>
-                        <td>{{ client.description }}</td>
+                        <th>Téléphone</th>
+                        <td>{{ client.telephone }}</td>
                     </tr>
                     <tr>
                         <th>Enregistré le</th>
@@ -48,7 +48,7 @@
                 </table>
                 <div class="row" >
                     <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <i class="glyphicon glyphicon-chevron-left"></i>
+                        <i class="fa fa-chevron-left"></i>
                         Retour à la liste
                     </button>
                 </div>

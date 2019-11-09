@@ -1,0 +1,171 @@
+<div class="" id="home">
+    <nav class="navbar navbar-expand-xl">
+        <div class="container-fluid h-100">
+            <a class="navbar-brand" href="index.html">
+                <h1 class="tm-site-title mb-0">ASK SA</h1>
+            </a>
+            <button class="navbar-toggler ml-auto mr-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars tm-nav-icon"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mx-auto h-100">
+                    <li class="nav-item">
+                        <a
+                                {% if var == 'accueil' %}
+                                class="nav-link active" href="{{ path('default') }}"
+                                    {% else %}
+                                class="nav-link " href="{{ path('default') }}"
+                                {%  endif %}
+                                >
+
+                            <i class="fas fa-tachometer-alt"></i>
+                            Tableau de bord
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a
+                                {% if var == 'clients' %}
+                                    class="nav-link dropdown-toggle active"
+                                {% else %}
+                                    class="nav-link dropdown-toggle"
+                                {%  endif %}
+
+
+
+
+                           href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-child fa-3x"></i>
+                            <span>
+                                    Clients <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
+                            <a class="dropdown-item" href="{{path('client_new')}}">Nouvelle fiche client</a>
+                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Rechercher un fournisseur</a>
+                            <a class="dropdown-item" href="{{path('fournisseur_new')}}">Nouvelle fiche fournisseur</a>
+                            <a class="dropdown-item" href="#">Gérer mon catalogue</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span>
+                                    Produits <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Rechercher un article</a>
+                            <a class="dropdown-item" href="#">Nouvelle fiche article</a>
+                            <a class="dropdown-item" href="#">Mise a jour du catalogue</a>
+                            <a class="dropdown-item" href="#">Stock</a>
+                            <a class="dropdown-item" href="#">Gérer mon catalogue</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-file-alt"></i>
+                            <span>
+                                    Vente <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Nouveau Devis</a>
+                            <a class="dropdown-item" href="#">Suivi des devis</a>
+                            <a class="dropdown-item" href="#">Relance de devis</a>
+                            <a class="dropdown-item" href="#">Nouvelle facture</a>
+                            <a class="dropdown-item" href="#">Nouveau bon de livraison</a>
+                            <a class="dropdown-item" href="#">Importer des commandes clients</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-file-alt"></i>
+                            <span>
+                                    Achat <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Nouvelle commande</a>
+                            <a class="dropdown-item" href="#">Suivi des commandes</a>
+                            <a class="dropdown-item" href="#">Commandes en cours</a>
+                            <a class="dropdown-item" href="#">Réapprovisonnement</a>
+                            <a class="dropdown-item" href="#">Nouveau bon de reception</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-file-alt"></i>
+                            <span>
+                                    Stock <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Tableau de bord</a>
+                            <a class="dropdown-item" href="#">Tableau de bord des expéditions</a>
+                            <a class="dropdown-item" href="#">Suivi des ordres de préparations</a>
+                            <a class="dropdown-item" href="#">Nouveau tranfert de marchandises</a>
+                            <a class="dropdown-item" href="#">Inventaire (Ancien)</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-file-alt"></i>
+                            <span>
+                                    Rapports <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Daily Report</a>
+                            <a class="dropdown-item" href="#">Weekly Report</a>
+                            <a class="dropdown-item" href="#">Yearly Report</a>
+                            <a class="dropdown-item" href="#">Suivi des ordres de préparations</a>
+                            <a class="dropdown-item" href="#">Inventaire (Ancien)</a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-cog"></i>
+                            <span>
+                                    Paramètres <i class="fas fa-angle-down"></i>
+                                </span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="accounts.html">Utilisateus</a>
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="#">Billing</a>
+                            <a class="dropdown-item" href="#">Customize</a>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link d-block" href="login.html">
+                            Admin, <b>Deconnexion</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>

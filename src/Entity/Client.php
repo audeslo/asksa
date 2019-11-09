@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"nomcomplet"}, message="Ce client existe déjà")
+ * @UniqueEntity(fields={"referent"}, message="Ce reférent existe déjà")
  */
 class Client
 {
@@ -25,33 +25,13 @@ class Client
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez saisir le referent !")
      */
-    private $nomcomplet;
+    private $referent;
 
-  /*  /**
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez saisir le nom complet !")
-
-    private $prenom; */
-
-    /**
-     * @ORM\Column(type="string", length=255)
      */
-    private $ville;
-
-/*    /**
-     * @ORM\Column(type="string", length=255)
-
-    private $adresse; */
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $codePostal;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $telephone;
+    private $nomcomplet;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -60,13 +40,7 @@ class Client
     private $adresserue;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     */
-    private $referent;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=false)
      *@Assert\NotBlank(message="Veuillez renseigner le type du client !")
      */
     private $type;
@@ -74,7 +48,17 @@ class Client
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-   /* private $codepostal; */
+    private $telephone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $codepostal;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -123,90 +107,32 @@ class Client
         $this->setEditedOn(new \DateTime('now'));
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
- /*   public function getNom(): ?string
+    public function getReferent(): ?string
     {
-        return $this->nom;
+        return $this->referent;
     }
 
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }  */
-
-    public function getreferent(): ?string
-    {
-        return $this-> referent;
-    }
-
-    public function setreferent(string $referent): self
+    public function setReferent(string $referent): self
     {
         $this->referent = $referent;
 
         return $this;
     }
 
- /*   public function getPrenom(): ?string
+    public function getNomcomplet(): ?string
     {
-        return $this->prenom;
+        return $this->nomcomplet;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setNomcomplet(string $nomcomplet): self
     {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-*/
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
- /*   public function getAdresse(): ?string
-    {
-        return $this->adresse;
-    }
-
-    public function setAdresse(string $adresse): self
-    {
-        $this->adresse = $adresse;
-
-        return $this;
-    }   */
-    public function getCodePostal(): ?string
-    {
-        return $this->codePostal;
-    }
-
-    public function setCodePostal(string $codePostal): self
-    {
-        $this->codePostal = $codePostal;
-
-        return $this;
-    }
-
-    public function gettelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function settelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
+        $this->nomcomplet = $nomcomplet;
 
         return $this;
     }
@@ -223,18 +149,6 @@ class Client
         return $this;
     }
 
-    public function getnomcomplet(): ?string
-    {
-        return $this->nomcomplet;
-    }
-
-    public function setnomcomplet(?string $nomcomplet): self
-    {
-        $this->nomcomplet = $nomcomplet;
-
-        return $this;
-    }
-
     public function getType(): ?string
     {
         return $this->type;
@@ -247,7 +161,41 @@ class Client
         return $this;
     }
 
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
 
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(?string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getCodepostal(): ?string
+    {
+        return $this->codepostal;
+    }
+
+    public function setCodepostal(?string $codepostal): self
+    {
+        $this->codepostal = $codepostal;
+
+        return $this;
+    }
 
     public function getMail(): ?string
     {
@@ -320,4 +268,11 @@ class Client
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nomcomplet;
+        // TODO: Implement __toString() method.
+    }
+
 }

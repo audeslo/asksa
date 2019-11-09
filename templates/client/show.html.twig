@@ -1,5 +1,6 @@
 {% extends 'client/client.html.twig' %}
 
+{% block content %}
 <div class="col-lg-10">
     <h1>Détail Client</h1>
 
@@ -18,7 +19,7 @@
             <td>{{ client.nomcomplet }}</td>
         </tr>
         <tr>
-            <th>Sexe</th>
+            <th>Type</th>
             <td>
                 {{ client.type }}
 
@@ -41,15 +42,15 @@
         <tr>
             <th>Enregistré par </th>
             <td>
-                {{ article.createdBy }}<br> le
-                {{ article.createdOn ? article.createdOn |date('d-m-Y H:i:s') : ''  }}
+                {{ client.createdBy }}<br> le
+                {{ client.createdOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }}
             </td>
         </tr>
         <tr>
             <th>Modifié par </th>
             <td>
-                {{ article.editedBy }} <br>le
-                {{ article.editedOn ? article.editedOn |date('d/m/Y H:i:s') : '' }}
+                {{ client.editedBy }} <br>le
+                {{ client.editedOn ? client.editedOn |date('d/m/Y H:i:s') : '' }}
             </td>
         </tr>
         </tbody>
@@ -62,13 +63,14 @@
         </a>
 
 
-        <a class="btn btn-primary col-md-2 col-md-offset-7" href="{{ path('client_edit', { 'slug': client.slug }) }}">
+        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('client_edit', { 'slug': client.slug }) }}">
             <i class="fa fa-pencil"></i>
             Modifier
         </a>
     </div>
 </div>
 
+{% endblock %}
 
 
 
@@ -81,8 +83,7 @@
 
 
 
-
-
+{#
 {% extends 'base.html.twig' %}
 
 {% block title %}Client{% endblock %}
@@ -148,4 +149,4 @@
     <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
 
     {{ include('client/_delete_form.html.twig') }}
-{% endblock %}
+{% endblock %}#}

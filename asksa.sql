@@ -24,14 +24,25 @@ DROP TABLE IF EXISTS `client`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `client` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `nom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `prenom` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ville` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `adresse` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code_postal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telephone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `created_by_id` int(11) DEFAULT NULL,
+  `edited_by_id` int(11) DEFAULT NULL,
+  `referent` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomcomplet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresserue` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `telephone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ville` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codepostal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_on` datetime NOT NULL,
+  `edited_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_C7440455B03A8386` (`created_by_id`),
+  KEY `IDX_C7440455DD7B2EBC` (`edited_by_id`),
+  CONSTRAINT `FK_C7440455B03A8386` FOREIGN KEY (`created_by_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_C7440455DD7B2EBC` FOREIGN KEY (`edited_by_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +51,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
-INSERT INTO `client` VALUES (1,'AZERTY','Clavier','Gbamè','06','41252','415263'),(2,'ANB','Voila','jbjkb','06','41252','415263');
+INSERT INTO `client` VALUES (1,NULL,NULL,'009RF','Tagnon & Fils','Jéricho','Personne Morale','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','tagnon-fils','2019-11-09 11:07:00',NULL),(2,NULL,NULL,'010RF','SONAGNON ET FILS','Midombo','Personne Morale','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','sonagnon-et-fils','2019-11-09 11:14:34',NULL),(3,NULL,NULL,'0011','BOCO & FILS','SACRE COEUR','Personne Physique','97678789','SAVALOU','01 BP 2343','tagnon@yahoo.fr','boco-fils','2019-11-09 11:16:30',NULL),(4,NULL,NULL,'0012','MIKA & FILS','Ayélawadjè','Personne Morale','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','mika-fils','2019-11-09 11:17:56','2019-11-09 12:34:51'),(5,NULL,NULL,'014RF','BODJRENOU & FILS','Ayélawadjè','Personne Physique','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','bodjrenou-fils','2019-11-09 11:19:25',NULL),(6,NULL,NULL,'015RF','BOCO & FILS','Ayélawadjè','Personne Morale','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','boco-fils-1','2019-11-09 11:20:09',NULL),(7,NULL,NULL,'0014','BOV & FILS','Ayélawadjè','Personne Physique','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','bov-fils','2019-11-09 11:21:05',NULL),(8,NULL,NULL,'0017','BOC & FILS','Ayélawadjè','Personne Morale','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','boc-fils','2019-11-09 11:21:45',NULL),(9,NULL,NULL,'0018','MIKAS & FILS','Ayélawadjè','Personne Morale','97678789','SAVALOU','01 BP 2343','tagnon@yahoo.fr','mikas-fils','2019-11-09 11:22:26',NULL),(10,NULL,NULL,'014REF','BODJRENOU & FILSS','Ayélawadjè','Personne Morale','97678789','Cotonou','01 BP 2343','tagnon@yahoo.fr','bodjrenou-filss','2019-11-09 11:23:31',NULL),(11,NULL,NULL,'009RFS','Tagnon & Fils','Midombo','Personne Physique','97678789','SAVALOU','01 BP 2343','tagnon@yahoo.fr','tagnon-fils-1','2019-11-09 11:24:20',NULL),(12,NULL,NULL,'0011S','BOCOS RENE','Jéricho','Personne Physique','97678789','SAVALOU','01 BP 2343','tagnon@yahoo.fr','bocos-rene','2019-11-09 11:25:08',NULL),(13,NULL,NULL,'0056','GBEDINHESSI','Germai','Personne Physique','97678789','ABOMEY-CALAVI','01 BP 2343','germ@hotmail.com','gbedinhessi','2019-11-09 12:33:45',NULL);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -53,13 +64,26 @@ DROP TABLE IF EXISTS `fournisseur`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `fournisseur` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `societe` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `adresserue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ville` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pays` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codepostal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mail` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
+  `nomcourt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adresserue` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ville` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `pays` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `codepostal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `mail` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_by_id` int(11) DEFAULT NULL,
+  `edited_by_id` int(11) DEFAULT NULL,
+  `nomcomplet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `representant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `telephone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_on` datetime NOT NULL,
+  `edited_on` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_369ECA32B03A8386` (`created_by_id`),
+  KEY `IDX_369ECA32DD7B2EBC` (`edited_by_id`),
+  CONSTRAINT `FK_369ECA32B03A8386` FOREIGN KEY (`created_by_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_369ECA32DD7B2EBC` FOREIGN KEY (`edited_by_id`) REFERENCES `user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,8 +116,30 @@ CREATE TABLE `migration_versions` (
 
 LOCK TABLES `migration_versions` WRITE;
 /*!40000 ALTER TABLE `migration_versions` DISABLE KEYS */;
-INSERT INTO `migration_versions` VALUES ('20191105121529','2019-11-05 13:38:40'),('20191105180022','2019-11-05 18:40:45');
+INSERT INTO `migration_versions` VALUES ('20191105180022','2019-11-06 15:22:16'),('20191106104541','2019-11-06 15:22:30'),('20191106113135','2019-11-06 15:22:39');
 /*!40000 ALTER TABLE `migration_versions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `user`
+--
+
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user`
+--
+
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -105,4 +151,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-05 21:52:03
+-- Dump completed on 2019-11-09 22:34:16

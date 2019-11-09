@@ -30,12 +30,11 @@ class ClientType extends AbstractType
                 'attr'      =>['placeholder'    =>  'Saisissez le sigle']
             ))
             ->add('type', ChoiceType::class, array(
-                'choices'     => array(['Personne Morale' => 'Personne Morale'],
-                    ['Personne Physique' => 'Personne Physique']
-                ),
+                'choices'     =>['Personne Morale' => 'Personne Morale',
+                    'Personne Physique' => 'Personne Physique']
+                ,
                 'label'     => 'Type du client :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le type client']
             ))
             ->add('telephone', TextType::class, array(
                 'label'     => 'Téléphone :',

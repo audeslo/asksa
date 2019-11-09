@@ -13,10 +13,26 @@
     <link rel="stylesheet" href="{{ asset('templates/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/css/templatemo-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/css/erreur.css') }}">
 
 </head>
 
 <body id="reportsPage">
+
+<div class=" row">
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class=" col-md-1"></div>
+            <div class=" col-md-6 offset-3 alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+</div>
+
+
+{% block nav %}
+
 <div class="" id="home">
     <nav class="navbar navbar-expand-xl">
         <div class="container-fluid h-100">
@@ -47,7 +63,7 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('client_index') }}">Rechercher un client</a>
+                            <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
                             <a class="dropdown-item" href="{{path('client_new')}}">Nouvelle fiche client</a>
                             <a class="dropdown-item" href="{{path('fournisseur_index')}}">Rechercher un fournisseur</a>
                             <a class="dropdown-item" href="{{path('fournisseur_new')}}">Nouvelle fiche fournisseur</a>
@@ -75,7 +91,7 @@
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-credit-card"></i>
+                            <i class="far fa-file-alt"></i>
                             <span>
                                     Vente <i class="fas fa-angle-down"></i>
                                 </span>
@@ -94,7 +110,7 @@
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-drum-steelpan"></i>
+                            <i class="far fa-file-alt"></i>
                             <span>
                                     Achat <i class="fas fa-angle-down"></i>
                                 </span>
@@ -112,7 +128,7 @@
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-shopping-basket"></i>
+                            <i class="far fa-file-alt"></i>
                             <span>
                                     Stock <i class="fas fa-angle-down"></i>
                                 </span>
@@ -171,6 +187,8 @@
         </div>
 
     </nav>
+
+    {% endblock %}
     <div class="container">
         {% block content %}
             <div class="row">
@@ -438,9 +456,9 @@
     <footer class="tm-footer row tm-mt-small">
         <div class="col-12 font-weight-light">
             <p class="text-center text-white mb-0 px-4 small">
-                Copyright &copy; <b>2018</b> All rights reserved.
+                Copyright &copy; <b>2019</b> All rights reserved.
 
-                Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">Template Mo</a>
+                Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">ASKSA</a>
             </p>
         </div>
     </footer>

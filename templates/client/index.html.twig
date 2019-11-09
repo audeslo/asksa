@@ -18,7 +18,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-offset-4 col-md-2 ">
+                <div class="offset-8 col-md-2 ">
                     <a href="#" class="btn btn-success ">
                         <i class="fa fa-print"></i>
                         Imprimer
@@ -31,25 +31,32 @@
 
                 <thead>
                 <tr>
-                    <th>Vue</th>
-                    <th>Referent</th>
+                   {# <th>Vue</th>#}
+                    <th>Réferent</th>
                     <th>Nom complet</th>
                     <th>Tel</th>
                     <th>Email</th>
-                    <th>actions</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for client in clients %}
                     <tr>
-                        <td>
-{#                            {% include('client/viewmodal.html.twig') %}#}
-                        </td>
+{#                        <td>#}
+{#                          {% include('client/viewmodal.html.twig') %}#}
+{#                        </td>#}
                         <td>{{ client.referent }}</td>
-                        <td><a href="{{ path('client_show' , {'slug' :client.slug }) }}"> {{ client.nomcomplet }}</a></td>
+                        <td>{#<a class="" href="{{ path('client_show' , {'slug' :client.slug }) }}"> #}{{ client.nomcomplet }}</a></td>
                         <td>{{ client.telephone }}</td>
                         <td>{{ client.mail }}</td>
+                        <td>
+                            {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}
+                            {% include('client/viewmodal.html.twig') %}
 
+                            <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
+                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                            </a>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>
