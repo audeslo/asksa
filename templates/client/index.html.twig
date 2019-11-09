@@ -49,10 +49,7 @@
                         <td><a href="{{ path('client_show' , {'slug' :client.slug }) }}"> {{ client.nomcomplet }}</a></td>
                         <td>{{ client.telephone }}</td>
                         <td>{{ client.mail }}</td>
-                        <td>
-                            <a href="{{ path('client_show', {'id': client.id}) }}">show</a>
-                            <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
-                        </td>
+
                     </tr>
                 {% endfor %}
                 </tbody>

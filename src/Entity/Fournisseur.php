@@ -226,12 +226,12 @@ class Fournisseur
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function gettelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): self
+    public function settelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 

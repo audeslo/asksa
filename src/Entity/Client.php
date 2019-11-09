@@ -25,23 +25,23 @@ class Client
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez saisir le referent !")
      */
-    private $nom;
+    private $nomcomplet;
 
-    /**
+  /*  /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez saisir le nom complet !")
-     */
-    private $prenom;
+
+    private $prenom; */
 
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $ville;
 
-    /**
+/*    /**
      * @ORM\Column(type="string", length=255)
-     */
-    private $adresse;
+
+    private $adresse; */
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -61,6 +61,12 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $referent;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      *@Assert\NotBlank(message="Veuillez renseigner le type du client !")
      */
     private $type;
@@ -68,17 +74,7 @@ class Client
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $telephone;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $ville;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $codepostal;
+   /* private $codepostal; */
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -127,13 +123,12 @@ class Client
         $this->setEditedOn(new \DateTime('now'));
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+ /*   public function getNom(): ?string
     {
         return $this->nom;
     }
@@ -143,9 +138,21 @@ class Client
         $this->nom = $nom;
 
         return $this;
+    }  */
+
+    public function getreferent(): ?string
+    {
+        return $this-> referent;
     }
 
-    public function getPrenom(): ?string
+    public function setreferent(string $referent): self
+    {
+        $this->referent = $referent;
+
+        return $this;
+    }
+
+ /*   public function getPrenom(): ?string
     {
         return $this->prenom;
     }
@@ -156,7 +163,7 @@ class Client
 
         return $this;
     }
-
+*/
     public function getVille(): ?string
     {
         return $this->ville;
@@ -169,7 +176,7 @@ class Client
         return $this;
     }
 
-    public function getAdresse(): ?string
+ /*   public function getAdresse(): ?string
     {
         return $this->adresse;
     }
@@ -179,8 +186,7 @@ class Client
         $this->adresse = $adresse;
 
         return $this;
-    }
-
+    }   */
     public function getCodePostal(): ?string
     {
         return $this->codePostal;
@@ -193,12 +199,12 @@ class Client
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function gettelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function setTelephone(string $telephone): self
+    public function settelephone(string $telephone): self
     {
         $this->telephone = $telephone;
 
@@ -217,6 +223,18 @@ class Client
         return $this;
     }
 
+    public function getnomcomplet(): ?string
+    {
+        return $this->nomcomplet;
+    }
+
+    public function setnomcomplet(?string $nomcomplet): self
+    {
+        $this->nomcomplet = $nomcomplet;
+
+        return $this;
+    }
+
     public function getType(): ?string
     {
         return $this->type;
@@ -229,41 +247,7 @@ class Client
         return $this;
     }
 
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
 
-    public function setTelephone(?string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(?string $ville): self
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getCodepostal(): ?string
-    {
-        return $this->codepostal;
-    }
-
-    public function setCodepostal(?string $codepostal): self
-    {
-        $this->codepostal = $codepostal;
-
-        return $this;
-    }
 
     public function getMail(): ?string
     {
