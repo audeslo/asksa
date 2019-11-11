@@ -24,9 +24,9 @@
 
                 <h5> Etes-vous certain de vouloir supprimer le client " <em class="green">{{ fournisseur.nomcomplet }}</em>" ? </h5>
 
-                <form method="post" action="{{ path('fournisseur_delete', {'id': fournisseur.id}) }}" {#onsubmit="return confirm('Are you sure you want to delete this item?');"#}>
+                <form method="post" action="{{ path('fournisseur_delete', {'slug': fournisseur.slug}) }}" {#onsubmit="return confirm('Are you sure you want to delete this item?');"#}>
                     <input type="hidden" name="_method" value="DELETE">
-                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fournisseur.id) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ fournisseur.slug) }}">
                     <button class="btn btn-danger">Supprimer</button>
                 </form>
             </div>

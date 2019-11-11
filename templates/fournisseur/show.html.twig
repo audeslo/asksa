@@ -4,6 +4,7 @@
 
 {#{% block body %}#}
 <div class="col-lg-10">
+
     <h1>Detail Fournisseur</h1>
 
     <table class="table-bordered table">
@@ -70,7 +71,7 @@
         </a>
 
 
-        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('fournisseur_edit', { 'id': fournisseur.id }) }}">
+        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('fournisseur_edit', { 'slug': fournisseur.slug }) }}">
             <i class="fa fa-pencil"></i>
             Modifier
         </a>

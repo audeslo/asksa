@@ -49,7 +49,7 @@ class FournisseurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="fournisseur_show", methods={"GET"})
+     * @Route("/{slug}", name="fournisseur_show", methods={"GET"})
      */
     public function show(Fournisseur $fournisseur): Response
     {
@@ -59,7 +59,7 @@ class FournisseurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="fournisseur_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="fournisseur_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Fournisseur $fournisseur): Response
     {
@@ -79,7 +79,7 @@ class FournisseurController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="fournisseur_delete", methods={"DELETE"})
+     * @Route("/{slug}", name="fournisseur_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Fournisseur $fournisseur): Response
     {
