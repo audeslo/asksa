@@ -28,33 +28,36 @@
 
                     <li class="nav-item dropdown">
                         <a
-                                {% if var == 'clients' %}
+                                {% if var == 'clients' or var =='fournisseurs' %}
                                     class="nav-link dropdown-toggle active"
                                 {% else %}
                                     class="nav-link dropdown-toggle"
                                 {%  endif %}
 
-
-
-
                            href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-child fa-3x"></i>
                             <span>
-                                    Clients <i class="fas fa-angle-down"></i>
+                                    Annuaires <i class="fas fa-angle-down"></i>
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
                             <a class="dropdown-item" href="{{path('client_new')}}">Nouvelle fiche client</a>
-                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Rechercher un fournisseur</a>
+                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche fournisseur</a>
                             <a class="dropdown-item" href="{{path('fournisseur_new')}}">Nouvelle fiche fournisseur</a>
                             <a class="dropdown-item" href="#">Gérer mon catalogue</a>
                         </div>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        <a
+                                {% if var == 'produits' %}
+                                    class="nav-link dropdown-toggle active"
+                                {% else %}
+                                    class="nav-link dropdown-toggle"
+                                {%  endif %}
+                                {#class="nav-link dropdown-toggle"#} href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-shopping-cart"></i>
                             <span>
@@ -62,10 +65,10 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Rechercher un article</a>
-                            <a class="dropdown-item" href="#">Nouvelle fiche article</a>
-                            <a class="dropdown-item" href="#">Mise a jour du catalogue</a>
-                            <a class="dropdown-item" href="#">Stock</a>
+                            <a class="dropdown-item" href="{{ path('produit_index') }}">Fiche produit</a>
+                            <a class="dropdown-item" href="{{ path('produit_new') }}">Nouvelle fiche produit</a>
+                            <a class="dropdown-item" href="#">Fiche d'entrée des produits (showrooms)</a>
+                            <a class="dropdown-item" href="#">Entrée des produits (showrooms)</a>
                             <a class="dropdown-item" href="#">Gérer mon catalogue</a>
                         </div>
                     </li>
@@ -73,7 +76,7 @@
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-file-alt"></i>
+                            <i class="fas fa-credit-card"></i>
                             <span>
                                     Vente <i class="fas fa-angle-down"></i>
                                 </span>
@@ -92,7 +95,7 @@
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-file-alt"></i>
+                            <i class="fa fa-shopping-basket"></i>
                             <span>
                                     Achat <i class="fas fa-angle-down"></i>
                                 </span>
@@ -101,7 +104,6 @@
                             <a class="dropdown-item" href="#">Nouvelle commande</a>
                             <a class="dropdown-item" href="#">Suivi des commandes</a>
                             <a class="dropdown-item" href="#">Commandes en cours</a>
-                            <a class="dropdown-item" href="#">Réapprovisonnement</a>
                             <a class="dropdown-item" href="#">Nouveau bon de reception</a>
                         </div>
                     </li>
@@ -110,7 +112,7 @@
 
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-file-alt"></i>
+                            <i class="fas fa-drum-steelpan"></i>
                             <span>
                                     Stock <i class="fas fa-angle-down"></i>
                                 </span>
@@ -119,8 +121,9 @@
                             <a class="dropdown-item" href="#">Tableau de bord</a>
                             <a class="dropdown-item" href="#">Tableau de bord des expéditions</a>
                             <a class="dropdown-item" href="#">Suivi des ordres de préparations</a>
+                            <a class="dropdown-item" href="#">Nouvelle entrée de marchandise</a>
                             <a class="dropdown-item" href="#">Nouveau tranfert de marchandises</a>
-                            <a class="dropdown-item" href="#">Inventaire (Ancien)</a>
+
                         </div>
                     </li>
 
@@ -137,7 +140,6 @@
                             <a class="dropdown-item" href="#">Daily Report</a>
                             <a class="dropdown-item" href="#">Weekly Report</a>
                             <a class="dropdown-item" href="#">Yearly Report</a>
-                            <a class="dropdown-item" href="#">Suivi des ordres de préparations</a>
                             <a class="dropdown-item" href="#">Inventaire (Ancien)</a>
                         </div>
                     </li>

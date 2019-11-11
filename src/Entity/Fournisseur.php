@@ -116,78 +116,9 @@ class Fournisseur
         $this->setEditedOn(new \DateTime('now'));
     }
 
-
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-
-    public function getAdresserue(): ?string
-    {
-        return $this->adresserue;
-    }
-
-    public function setAdresserue(string $Adresserue): self
-    {
-        $this->Adresserue = $Adresserue;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $Ville): self
-    {
-        $this->Ville = $Ville;
-
-        return $this;
-    }
-
-    public function getPays(): ?string
-    {
-        return $this->pays;
-    }
-
-    public function setPays(string $Pays): self
-    {
-        $this->Pays = $Pays;
-
-        return $this;
-    }
-
-    public function getCodepostal(): ?string
-    {
-        return $this->codepostal;
-    }
-
-    public function setCodepostal(string $Codepostal): self
-    {
-        $this->Codepostal = $Codepostal;
-
-        return $this;
-    }
-
-    public function getMail(): ?string
-    {
-        return $this->mail;
-    }
-
-    public function setMail(string $Mail): self
-    {
-        $this->Mail = $Mail;
-
-        return $this;
-    }
-
-    public function __toString()
-    {
-        return $this->nomcourt;
-        // TODO: Implement __toString() method.
     }
 
     public function getNomcourt(): ?string
@@ -226,14 +157,87 @@ class Fournisseur
         return $this;
     }
 
-    public function gettelephone(): ?string
+    public function getTelephone(): ?string
     {
         return $this->telephone;
     }
 
-    public function settelephone(string $telephone): self
+    public function setTelephone(string $telephone): self
     {
         $this->telephone = $telephone;
+
+        return $this;
+    }
+
+
+    public function getAdresserue(): ?string
+    {
+        return $this->adresserue;
+    }
+
+    public function setAdresserue(string $adresserue): self
+    {
+        $this->adresserue = $adresserue;
+
+        return $this;
+    }
+
+    public function getVille(): ?string
+    {
+        return $this->ville;
+    }
+
+    public function setVille(string $ville): self
+    {
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(string $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getCodepostal(): ?string
+    {
+        return $this->codepostal;
+    }
+
+    public function setCodepostal(string $codepostal): self
+    {
+        $this->codepostal = $codepostal;
+
+        return $this;
+    }
+
+    public function getMail(): ?string
+    {
+        return $this->mail;
+    }
+
+    public function setMail(string $mail): self
+    {
+        $this->mail = $mail;
 
         return $this;
     }
@@ -298,15 +302,10 @@ class Fournisseur
         return $this;
     }
 
-    public function getDescription(): ?string
+    public function __toString()
     {
-        return $this->description;
+        return $this->nomcourt;
+        // TODO: Implement __toString() method.
     }
 
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
 }

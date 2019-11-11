@@ -1,46 +1,46 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ client.slug }}">
+<a  style="cursor: pointer"  data-toggle="modal" data-target="#{{ produit.slug }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ client.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ produit.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails client</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails produit</h4>
             </div>
             <div class="modal-body">
                 <table class="table-bordered table" style="background-color: #868e96">
                     <tbody>
                     <tr>
                         <th>Id</th>
-                        <td>{{ client.id }}</td>
+                        <td>{{ produit.id }}</td>
                     </tr>
                     <tr>
-                        <th>Réferent</th>
-                        <td>{{ client.referent }}</td>
+                        <th>Réference</th>
+                        <td>{{ produit.reference }}</td>
                     </tr>
                     <tr>
-                        <th>Nom complet</th>
-                        <td>{{ client.nomcomplet }}</td>
+                        <th>Désignation</th>
+                        <td>{{ produit.designation }}</td>
                     </tr>
                     <tr>
-                        <th>Téléphone</th>
-                        <td>{{ client.telephone }}</td>
+                        <th>Prix unitaire</th>
+                        <td>{{ produit.prixU }}</td>
                     </tr>
                     <tr>
                         <th>Enregistré le</th>
                         <td>
-                            {{ client.createdOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ client.createdBy }}
+                            {{ produit.createdOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ produit.createdBy }}
                         </td>
                     </tr>
                     <tr>
                         <th>Modifié le </th>
                         <td>
-                            {{ client.editedOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ client.editedBy }}
+                            {{ produit.editedOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ produit.editedBy }}
                         </td>
                     </tr>
 

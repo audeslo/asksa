@@ -1,70 +1,61 @@
-
-{% extends 'client/client.html.twig' %}
+{% extends 'produit/produit.html.twig' %}
 
 {% block content %}
 <div class="col-lg-10">
-    <h1>Détail Client</h1>
+    <h1>Détail produit</h1>
 
     <table class="table-bordered table">
         <tbody>
         <tr>
             <th>N°</th>
-            <td>{{ client.id }}</td>
+            <td>{{ produit.id }}</td>
         </tr>
         <tr>
-            <th>Réferent</th>
-            <td>{{ client.referent }}</td>
+            <th>Réference</th>
+            <td>{{ produit.reference }}</td>
         </tr>
         <tr>
-            <th>Nom complet</th>
-            <td>{{ client.nomcomplet }}</td>
+            <th>Désignation</th>
+            <td>{{ produit.description }}</td>
         </tr>
         <tr>
-            <th>Type</th>
+            <th>Prix unitaire</th>
             <td>
-                {{ client.type }}
+                {{ produit.prixU }}
 
             </td>
         </tr>
 
         <tr>
-            <th>Téléphone</th>
-            <td>{{ client.telephone }}</td>
-        </tr>
-        <tr>
-            <th>Adresse</th>
-            <td>{{ client.adresserue }}</td>
-        </tr>
-        <tr>
-            <th>E-mail</th>
-            <td>{{ client.mail }}</td>
+            <th>Description</th>
+            <td>{{ produit.description }}</td>
         </tr>
 
         <tr>
             <th>Enregistré par </th>
             <td>
-                {{ client.createdBy }}<br> le
-                {{ client.createdOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }}
+                {{ produit.createdBy }}<br> le
+                {{ produit.createdOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }}
             </td>
         </tr>
         <tr>
             <th>Modifié par </th>
             <td>
-                {{ client.editedBy }} <br>le
-                {{ client.editedOn ? client.editedOn |date('d/m/Y H:i:s') : '' }}
+                {{ produit.editedBy }} <br>le
+                {{ produit.editedOn ? produit.editedOn |date('d/m/Y H:i:s') : '' }}
             </td>
         </tr>
         </tbody>
     </table>
     <div class="row">
-        <a class="btn btn-default col-md-3" href="{{ path('client_index') }}">
+        <a class="btn btn-default col-md-3" href="{{ path('produit_index') }}">
             <i class="fa fa-chevron-left"></i>
             Retour à la liste
 
         </a>
 
 
-        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('client_edit', { 'slug': client.slug }) }}">
+        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('produit_edit', { 'slug': produit.slug }) }}">
             <i class="fa fa-pencil"></i>
             Modifier
         </a>

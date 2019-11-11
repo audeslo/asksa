@@ -1,4 +1,4 @@
-{% extends 'client/client.html.twig' %}
+{% extends 'produit/produit.html.twig' %}
 
 {# page tableau et recherche #}
 
@@ -8,11 +8,11 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des clients</h2></div>
+                Liste des produits</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    <a href="{{ path('client_new') }}" class="btn btn-primary ">
+                    <a href="{{ path('produit_new') }}" class="btn btn-primary ">
                         <i class="fa fa-chevron-right"></i>
                         Nouveau
                     </a>
@@ -32,32 +32,31 @@
                 <thead>
                 <tr>
                    {# <th>Vue</th>#}
-                    <th>Réferent</th>
-                    <th>Nom complet</th>
-                    <th>Tel</th>
-                    <th>Adresse</th>
+                    <th>Réference</th>
+                    <th>Désignation</th>
+                    <th>Prix unitaire</th>
+                    <th>Description</th>
                     <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for client in clients %}
+                {% for produit in produits %}
                     <tr>
 {#                        <td>#}
 {#                          {% include('client/viewmodal.html.twig') %}#}
 {#                        </td>#}
-                        <td>{{ client.referent }}</td>
-                        <td>{#<a class="" href="{{ path('client_show' , {'slug' :client.slug }) }}"> #}{{ client.nomcomplet }}</a></td>
-
-                        <td>{{ client.telephone }}</td>
-                        <td>{{ client.adresserue }}</td>
-                      {#  <td>{{ client.mail }}</td>#}
+                        <td>{{ produit.reference }}</td>
+                  {#      <td>#}{#<a class="" href="{{ path('client_show' , {'slug' :client.slug }) }}"> #}{#{{ client.nomcomplet }}</a></td>#}
+                        <td>{{ produit.designation}}</td>
+                        <td>{{ produit.prixU }}</td>
+                        <td>{{ produit.description }}</td>
                         <td>
                             {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}
-                              {% include('client/viewmodal.html.twig') %}
+                            {% include('produit/viewmodal.html.twig') %}
                         </td>
                         <td>
-                            <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
+                            <a  class="" href="{{ path('produit_show', {'slug': produit.slug}) }}">
                                 <i class="fa fa-edit tm-product-delete-icon"></i>
                             </a>
                         </td>

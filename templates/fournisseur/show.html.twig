@@ -1,11 +1,12 @@
-{% extends 'base.html.twig' %}
+{% extends 'fournisseur/fournisseur.html.twig' %}
 
-{% block title %}Fournisseur{% endblock %}
+{% block content %}
 
-{% block body %}
-    <h1>Fournisseur</h1>
+{#{% block body %}#}
+<div class="col-lg-10">
+    <h1>Detail Fournisseur</h1>
 
-    <table class="table">
+    <table class="table-bordered table">
         <tbody>
             <tr>
                 <th>Id</th>
@@ -25,7 +26,7 @@
             </tr>
             <tr>
                 <th>Adresserue</th>
-                <td>{{ fournisseur.Adresserue }}</td>
+                <td>{{ fournisseur.adresserue }}</td>
             </tr>
             <tr>
                 <th>Telephone</th>
@@ -33,19 +34,19 @@
             </tr>
             <tr>
                 <th>Ville</th>
-                <td>{{ fournisseur.Ville }}</td>
+                <td>{{ fournisseur.ville }}</td>
             </tr>
             <tr>
                 <th>Pays</th>
-                <td>{{ fournisseur.Pays }}</td>
+                <td>{{ fournisseur.pays }}</td>
             </tr>
             <tr>
                 <th>Codepostal</th>
-                <td>{{ fournisseur.Codepostal }}</td>
+                <td>{{ fournisseur.codepostal}}</td>
             </tr>
             <tr>
                 <th>Mail</th>
-                <td>{{ fournisseur.Mail }}</td>
+                <td>{{ fournisseur.mail }}</td>
             </tr>
             <tr>
                 <th>Slug</th>
@@ -62,9 +63,23 @@
         </tbody>
     </table>
 
-    <a href="{{ path('fournisseur_index') }}">back to list</a>
+    <div class="row">
+        <a class="btn btn-default col-md-3" href="{{ path('fournisseur_index') }}">
+            <i class="fa fa-chevron-left"></i>
+            Retour à la liste
+        </a>
+
+
+        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('fournisseur_edit', { 'id': fournisseur.id }) }}">
+            <i class="fa fa-pencil"></i>
+            Modifier
+        </a>
+
+    {#<a href="{{ path('fournisseur_index') }}">back to list</a>
 
     <a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
 
-    {{ include('fournisseur/_delete_form.html.twig') }}
+    {{ include('fournisseur/_delete_form.html.twig') }}#}
+    </div>
+</div>
 {% endblock %}
