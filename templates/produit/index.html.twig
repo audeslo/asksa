@@ -36,23 +36,19 @@
                     <th>Désignation</th>
                     <th>Prix unitaire</th>
                     <th>Description</th>
-                    <th></th>
+                    <th>Vue</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for produit in produits %}
                     <tr>
-{#                        <td>#}
-{#                          {% include('client/viewmodal.html.twig') %}#}
-{#                        </td>#}
+
                         <td>{{ produit.reference }}</td>
-                  {#      <td>#}{#<a class="" href="{{ path('client_show' , {'slug' :client.slug }) }}"> #}{#{{ client.nomcomplet }}</a></td>#}
                         <td>{{ produit.designation}}</td>
                         <td>{{ produit.prixU }}</td>
                         <td>{{ produit.description }}</td>
                         <td>
-                            {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}
                             {% include('produit/viewmodal.html.twig') %}
                         </td>
                         <td>
