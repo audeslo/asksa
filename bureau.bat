@@ -1,3 +1,3 @@
 ﻿@echo on
 
-mysqldump -u root --password  asksa > E:\asksadb\asksa.sql
+mysqldump -u root --password  asksa > C:\Users\wanvoegbe\OneDrive\web\asksa\asksa.sql

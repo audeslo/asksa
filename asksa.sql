@@ -29,7 +29,7 @@ CREATE TABLE `client` (
   `referent` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nomcomplet` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `adresserue` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `telephone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ville` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `codepostal` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -116,8 +116,44 @@ CREATE TABLE `migration_versions` (
 
 LOCK TABLES `migration_versions` WRITE;
 /*!40000 ALTER TABLE `migration_versions` DISABLE KEYS */;
-INSERT INTO `migration_versions` VALUES ('20191105180022','2019-11-06 15:22:16'),('20191106104541','2019-11-06 15:22:30'),('20191106113135','2019-11-06 15:22:39');
+INSERT INTO `migration_versions` VALUES ('20191105180022','2019-11-06 15:22:16'),('20191106104541','2019-11-06 15:22:30'),('20191106113135','2019-11-06 15:22:39'),('20191111140211','2019-11-11 14:02:30'),('20191111141951','2019-11-11 14:19:56');
 /*!40000 ALTER TABLE `migration_versions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `produit`
+--
+
+DROP TABLE IF EXISTS `produit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `produit` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_by_id` int(11) DEFAULT NULL,
+  `edited_by_id` int(11) DEFAULT NULL,
+  `reference` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `designation` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prix_u` int(11) NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `created_on` datetime NOT NULL,
+  `edited_on` datetime DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_29A5EC27B03A8386` (`created_by_id`),
+  KEY `IDX_29A5EC27DD7B2EBC` (`edited_by_id`),
+  CONSTRAINT `FK_29A5EC27B03A8386` FOREIGN KEY (`created_by_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_29A5EC27DD7B2EBC` FOREIGN KEY (`edited_by_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `produit`
+--
+
+LOCK TABLES `produit` WRITE;
+/*!40000 ALTER TABLE `produit` DISABLE KEYS */;
+INSERT INTO `produit` VALUES (1,NULL,NULL,'001','HX5',4500,'4 litres','2019-11-11 15:20:04',NULL,'hx5'),(2,NULL,NULL,'002','HX7 (4)',7500,'10w-40','2019-11-11 15:22:03',NULL,'hx7-4');
+/*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -151,4 +187,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-11-09 22:34:16
+-- Dump completed on 2019-11-11 17:22:25
