@@ -65,8 +65,8 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
                             <a class="dropdown-item" href="{{path('client_new')}}">Nouvelle fiche client</a>
-                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Rechercher un fournisseur</a>
-                            <a class="dropdown-item" href="{{path('fournisseur_new')}}">Fiche fiche fournisseur</a>
+                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche fournisseur</a>
+                            <a class="dropdown-item" href="{{path('fournisseur_new')}}">Nouvelle fiche fournisseur</a>
                             <a class="dropdown-item" href="#">Gérer mon catalogue</a>
                         </div>
                     </li>
@@ -116,7 +116,7 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Nouvelle commande</a>
+                            <a class="dropdown-item" href="{{ path('commande_index') }}">Nouvelle commande</a>
                             <a class="dropdown-item" href="#">Suivi des commandes</a>
                             <a class="dropdown-item" href="#">Commandes en cours</a>
                             <a class="dropdown-item" href="#">Nouveau bon de reception</a>

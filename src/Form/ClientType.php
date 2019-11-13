@@ -19,15 +19,25 @@ class ClientType extends AbstractType
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le referent']
             ))
+
+
+            ->add('civilite', ChoiceType::class, array(
+                'choices'     =>['Mr' => 'Mr',
+                    'Mme' => 'Mme'],
+                'label'     => 'Civilité :',
+                'required'  => false,
+            ))
+
+
             ->add('nomcomplet', TextType::class, array(
                 'label'     => 'Nom complet :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom complet']
             ))
             ->add('adresserue', TextType::class, array(
-                'label'     => 'Adresse rue :',
+                'label'     => 'Réseaux sociaux (twitter, facebook,skype... ) :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez la ville']
             ))
             ->add('type', ChoiceType::class, array(
                 'choices'     =>['Personne Morale' => 'Personne Morale',
@@ -37,7 +47,7 @@ class ClientType extends AbstractType
                 'required'  => false,
             ))
             ->add('telephone', TextType::class, array(
-                'label'     => 'Téléphone :',
+                'label'     => 'Tél.Portable :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le sigle']
             ))
@@ -56,6 +66,37 @@ class ClientType extends AbstractType
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le sigle']
             ))
+
+            ->add('pays', TextType::class, array(
+                'label'     => 'Pays :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez le pays']
+            ))
+
+            ->add('telfixe', TextType::class, array(
+                'label'     => 'Téléphone fixe :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez le telephone']
+            ))
+
+            ->add('personnecontact', TextType::class, array(
+                'label'     => 'Personne à contacter :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne']
+            ))
+
+            ->add('vue', TextType::class, array(
+                'label'     => 'Numero bancaire :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez un bancaire valide']
+            ))
+
+            ->add('description', TextType::class, array(
+                'label'     => 'Description du client :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez une bref description']
+            ))
+
 
         ;
     }

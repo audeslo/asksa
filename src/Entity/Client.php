@@ -92,6 +92,41 @@ class Client
     private $editedBy;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $civilite;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $pays;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telfixe;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $personnecontact;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $vue;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie")
+     */
+    private $relation;
+
+    /**
      * @ORM\PrePersist()
      */
     public function datecreated()
@@ -269,10 +304,93 @@ class Client
         return $this;
     }
 
+
+    public function getCivilite(): ?string
+    {
+        return $this->civilite;
+    }
+
+    public function setCivilite(string $civilite): self
+    {
+        $this->civilite = $civilite;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->pays;
+    }
+
+    public function setPays(string $pays): self
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    public function getTelfixe(): ?string
+    {
+        return $this->telfixe;
+    }
+
+    public function setTelfixe(?string $telfixe): self
+    {
+        $this->telfixe = $telfixe;
+
+        return $this;
+    }
+
+    public function getPersonnecontact(): ?string
+    {
+        return $this->personnecontact;
+    }
+
+    public function setPersonnecontact(string $personnecontact): self
+    {
+        $this->personnecontact = $personnecontact;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function getVue(): ?string
+    {
+        return $this->vue;
+    }
+
+    public function setVue(?string $vue): self
+    {
+        $this->vue = $vue;
+
+        return $this;
+    }
     public function __toString()
     {
         return $this->nomcomplet;
         // TODO: Implement __toString() method.
     }
 
+    public function getRelation(): ?Categorie
+    {
+        return $this->relation;
+    }
+
+    public function setRelation(?Categorie $relation): self
+    {
+        $this->relation = $relation;
+
+        return $this;
+    }
 }

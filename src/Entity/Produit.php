@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -95,6 +97,7 @@ class Produit
      * @Gedmo\Slug(fields={"designation"})
      */
     private $slug;
+
 
     public function getId(): ?int
     {
@@ -213,4 +216,6 @@ class Produit
         return $this->reference;
         // TODO: Implement __toString() method.
     }
+
+
 }

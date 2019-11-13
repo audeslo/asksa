@@ -1,3 +1,5 @@
+
+<hr>
 <div class="row">
 
     <div class="col-md-5 ">
@@ -5,35 +7,75 @@
         {{ form_widget(form.referent) }}
         {{ form_errors(form.referent) }}
 
+        {{ form_label(form.civilite) }}
+        {{ form_widget(form.civilite) }}
+        {{ form_errors(form.civilite) }}
+
         {{ form_label(form.nomcomplet) }}
         {{ form_widget(form.nomcomplet) }}
         {{ form_errors(form.nomcomplet) }}
+
+        {{ form_label(form.ville) }}
+        {{ form_widget(form.ville) }}
+        {{ form_errors(form.ville) }}
+    </div>
+
+    <div class="col-md-5 offset-2">
+
+        {{ form_label(form.pays) }}
+        {{ form_widget(form.pays) }}
+        {{ form_errors(form.pays) }}
+
+        {{ form_label(form.telephone) }}
+        {{ form_widget(form.telephone) }}
+        {{ form_errors(form.telephone) }}
+
+        {{ form_label(form.telfixe) }}
+        {{ form_widget(form.telfixe) }}
+        {{ form_errors(form.telfixe) }}
+
+        {{ form_label(form.codepostal) }}
+        {{ form_widget(form.codepostal) }}
+        {{ form_errors(form.codepostal) }}
+    </div>
+</div>
+<br>
+Information complémentaire
+<hr>
+
+    <div class="row">
+         <div class="col-md-5 ">
+              {{ form_label(form.type) }}
+              {{ form_widget(form.type) }}
+              {{ form_errors(form.type) }}
+
+             {{ form_label(form.vue) }}
+             {{ form_widget(form.vue) }}
+             {{ form_errors(form.vue) }}
+         </div>
+    </div>
+<hr>
+<div class="row">
+    <div class="col-md-5 ">
+
+        {{ form_label(form.personnecontact) }}
+        {{ form_widget(form.personnecontact) }}
+        {{ form_errors(form.personnecontact) }}
+
+        {{ form_label(form.mail) }}
+        {{ form_widget(form.mail) }}
+        {{ form_errors(form.mail) }}
+
+    </div>
+        <div class="col-md-5 offset-2">
 
         {{ form_label(form.adresserue) }}
         {{ form_widget(form.adresserue) }}
         {{ form_errors(form.adresserue) }}
 
-        {{ form_label(form.type) }}
-        {{ form_widget(form.type) }}
-        {{ form_errors(form.type) }}
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
+
     </div>
-
-    <div class="col-md-5 offset-2">
-        {{ form_label(form.telephone) }}
-        {{ form_widget(form.telephone) }}
-        {{ form_errors(form.telephone) }}
-
-        {{ form_label(form.ville) }}
-        {{ form_widget(form.ville) }}
-        {{ form_errors(form.ville) }}
-
-        {{ form_label(form.codepostal) }}
-        {{ form_widget(form.codepostal) }}
-        {{ form_errors(form.codepostal) }}
-
-        {{ form_label(form.mail) }}
-        {{ form_widget(form.mail) }}
-        {{ form_errors(form.mail) }}
-    </div>
-
 </div>

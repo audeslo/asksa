@@ -52,7 +52,7 @@
 
                     <li class="nav-item dropdown">
                         <a
-                                {% if var == 'produits' %}
+                                {% if var == 'produits' or var == 'commandes' %}
                                     class="nav-link dropdown-toggle active"
                                 {% else %}
                                     class="nav-link dropdown-toggle"
@@ -67,7 +67,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('produit_index') }}">Fiche produit</a>
                             <a class="dropdown-item" href="{{ path('produit_new') }}">Nouvelle fiche produit</a>
-                            <a class="dropdown-item" href="#">Fiche d'entrée des produits (showrooms)</a>
+                            <a class="dropdown-item" href="{{ path('commande_index') }}">Fiche d'entrée des produits (showrooms)</a>
                             <a class="dropdown-item" href="#">Entrée des produits (showrooms)</a>
                             <a class="dropdown-item" href="#">Gérer mon catalogue</a>
                         </div>
@@ -93,11 +93,18 @@
 
                     <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                          <a
+                                  {#      {% if var == 'commandes' %}
+                                            class="nav-link dropdown-toggle active"
+                                        {% else %}
+                                            class="nav-link dropdown-toggle"
+                                        {%  endif %}#}
+
+                                class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-shopping-basket"></i>
                             <span>
-                                    Achat <i class="fas fa-angle-down"></i>
+                                    Achats <i class="fas fa-angle-down"></i>
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">

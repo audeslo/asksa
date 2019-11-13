@@ -1,4 +1,5 @@
-{% extends 'client/client.html.twig' %}
+
+{% extends 'commande/commande.html.twig' %}
 
 {# page tableau et recherche #}
 
@@ -12,7 +13,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    <a href="{{ path('client_new') }}" class="btn btn-primary ">
+                    <a href="{{ path('commande_new') }}" class="btn btn-primary ">
                         <i class="fa fa-chevron-right"></i>
                         Nouveau
                     </a>
@@ -27,13 +28,12 @@
             </div>
             <hr>
 
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+         {#   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
                 <thead>
                 <tr>
-
+                   #}{# <th>Vue</th>#}{#
                     <th>Réferent</th>
-                    <th>Civilité</th>
                     <th>Nom complet</th>
                     <th>Tel</th>
                     <th>Adresse</th>
@@ -42,22 +42,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for client in clients %}
+                {% for commande in commandes %}
                     <tr>
-{#                        <td>#}
-{#                          {% include('client/viewmodal.html.twig') %}#}
-{#                        </td>#}
+#}{#                        <td>#}{#
+#}{#                          {% include('client/viewmodal.html.twig') %}#}{#
+#}{#                        </td>#}{#
                         <td>{{ client.referent }}</td>
-
-                        <td> {{ client.civilite ~ " " ~ client.nomcomplet  }}</a></td>
+                        <td>#}{#<a class="" href="{{ path('client_show' , {'slug' :client.slug }) }}"> #}{#{{ client.nomcomplet }}</a></td>
 
                         <td>{{ client.telephone }}</td>
                         <td>{{ client.adresserue }}</td>
-
-                        <td>{{ client.telephone }}</td>
-                      {#  <td>{{ client.mail }}</td>#}
+                      #}{#  <td>{{ client.mail }}</td>#}{#
                         <td>
-                            {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}
+                            #}{#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}{#
                               {% include('client/viewmodal.html.twig') %}
                         </td>
                         <td>
@@ -68,7 +65,7 @@
                     </tr>
                 {% endfor %}
                 </tbody>
-            </table>
+            </table>#}
         </div>
     </div>
 
