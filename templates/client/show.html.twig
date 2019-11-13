@@ -4,6 +4,11 @@
 {% block content %}
 <div class="col-lg-10">
     <h1>Détail Client</h1>
+    <div class="row">
+        <div class="col-xs-6 col-md-3 col-md-offset-9">
+            <img width="80%" height="80%" src="{{ asset('uploads/images/clients/'~client.id~'.'~client.url) }}" alt="{{ client.slug }}" class="img-circle">
+        </div>
+    </div>
 
     <table class="table-bordered table">
         <tbody>

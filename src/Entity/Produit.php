@@ -98,6 +98,16 @@ class Produit
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tarifcategorieclt", mappedBy="produit", orphanRemoval=true)
+     */
+    private $tarifcategorieclts;
+
+    public function __construct()
+    {
+        $this->tarifcategorieclts = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -215,6 +225,37 @@ class Produit
     {
         return $this->reference;
         // TODO: Implement __toString() method.
+    }
+
+    /**
+     * @return Collection|Tarifcategorieclt[]
+     */
+    public function getTarifcategorieclts(): Collection
+    {
+        return $this->tarifcategorieclts;
+    }
+
+    public function addTarifcategorieclt(Tarifcategorieclt $tarifcategorieclt): self
+    {
+        if (!$this->tarifcategorieclts->contains($tarifcategorieclt)) {
+            $this->tarifcategorieclts[] = $tarifcategorieclt;
+            $tarifcategorieclt->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarifcategorieclt(Tarifcategorieclt $tarifcategorieclt): self
+    {
+        if ($this->tarifcategorieclts->contains($tarifcategorieclt)) {
+            $this->tarifcategorieclts->removeElement($tarifcategorieclt);
+            // set the owning side to null (unless already changed)
+            if ($tarifcategorieclt->getProduit() === $this) {
+                $tarifcategorieclt->setProduit(null);
+            }
+        }
+
+        return $this;
     }
 
 
