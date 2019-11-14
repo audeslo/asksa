@@ -30,7 +30,7 @@ class Categorie
     private $libelle;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=false)
      */
     private $description;
 
@@ -74,12 +74,6 @@ class Categorie
      */
     private $tarifcategorieclts;
 
-    public function __construct()
-    {
-        $this->clients = new ArrayCollection();
-        $this->tarifcategorieclts = new ArrayCollection();
-    }
-
     /**
      * @ORM\PrePersist()
      */
@@ -94,6 +88,12 @@ class Categorie
     public function dateupdated()
     {
         $this->setEditedOn(new \DateTime('now'));
+    }
+
+    public function __construct()
+    {
+        $this->clients = new ArrayCollection();
+        $this->tarifcategorieclts = new ArrayCollection();
     }
 
 

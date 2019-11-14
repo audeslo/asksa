@@ -7,9 +7,13 @@
 
 {#        {{ include('_form.html.twig') }}#}
 
-        {{ form_start(form) }}
+        {% if type is same as ('pp') %}
+            {{ include('client/_form.html.twig') }}
+        {% else %}
+            {{ include('client/_formpm.html.twig') }}
+        {% endif %}
 
-       {{ include('client/_form.html.twig') }}
+       {#{{ include('client/_form.html.twig') }}#}
         <hr>
         <div class="row">
             <div class="col-md-2">

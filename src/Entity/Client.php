@@ -30,10 +30,46 @@ class Client
     private $referent;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir le nom complet !")
+     * @ORM\Column(type="string", length=10, nullable=true)
+     *
      */
-    private $nomcomplet;
+    private $civilite;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $raisonsociale;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $ifu;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $numerocompte;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     */
+    private $description;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -69,7 +105,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Gedmo\Slug(fields={"nomcomplet"})
+     * @Gedmo\Slug(fields={"referent"})
      */
     private $slug;
 
@@ -93,10 +129,6 @@ class Client
      */
     private $editedBy;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $civilite;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -112,12 +144,6 @@ class Client
      * @ORM\Column(type="string", length=255)
      */
     private $personnecontact;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $description;
-
 
     /**
      * @Assert\NotBlank(message="Veuillez Renseigner la catégorie du client")
@@ -185,14 +211,14 @@ class Client
         return $this;
     }
 
-    public function getNomcomplet(): ?string
+    public function getNom(): ?string
     {
-        return $this->nomcomplet;
+        return $this->nom;
     }
 
-    public function setNomcomplet(string $nomcomplet): self
+    public function setNom(string $nom): self
     {
-        $this->nomcomplet = $nomcomplet;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -403,7 +429,7 @@ class Client
     }*/
     public function __toString()
     {
-        return $this->nomcomplet;
+        return $this->nom;
         // TODO: Implement __toString() method.
     }
 
@@ -558,6 +584,54 @@ class Client
     public function getWebPath()
     {
         return $this->getUploadDir().'/'.$this->getSlug().'.'.$this->getUrl();
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getRaisonsociale(): ?string
+    {
+        return $this->raisonsociale;
+    }
+
+    public function setRaisonsociale(?string $raisonsociale): self
+    {
+        $this->raisonsociale = $raisonsociale;
+
+        return $this;
+    }
+
+    public function getIfu(): ?string
+    {
+        return $this->ifu;
+    }
+
+    public function setIfu(?string $ifu): self
+    {
+        $this->ifu = $ifu;
+
+        return $this;
+    }
+
+    public function getNumerocompte(): ?string
+    {
+        return $this->numerocompte;
+    }
+
+    public function setNumerocompte(?string $numerocompte): self
+    {
+        $this->numerocompte = $numerocompte;
+
+        return $this;
     }
 
 }

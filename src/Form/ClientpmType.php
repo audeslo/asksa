@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ClientType extends AbstractType
+class ClientpmType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -25,26 +25,18 @@ class ClientType extends AbstractType
                 'attr'      =>['placeholder'    =>  'Saisissez le referent']
             ))
 
-
-            ->add('civilite', ChoiceType::class, array(
-                'choices'     =>['M.' => 'M.',
-                    'Mme' => 'Mme'],
-                'label'     => 'Civilité :',
-                'required'  => false,
-            ))
-
-
-            ->add('nom', TextType::class, array(
-                'label'     => 'Nom :',
+            ->add('raisonsociale', TextType::class, array(
+                'label'     => 'Raison sociale :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom ']
             ))
 
-            ->add('prenom', TextType::class, array(
-                'label'     => 'Nom :',
+            ->add('ifu', TextType::class, array(
+                'label'     => 'N° IFU:',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom ']
             ))
+
 
             ->add('adresserue', TextType::class, array(
                 'label'     => 'Adresse rue :',
@@ -91,6 +83,11 @@ class ClientType extends AbstractType
                 'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne']
             ))
 
+            ->add('numerocompte', TextType::class, array(
+                'label'     => 'Numero bancaire :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez un bancaire valide']
+            ))
 
             ->add('description', TextType::class, array(
                 'label'     => 'Description du client :',
@@ -98,7 +95,6 @@ class ClientType extends AbstractType
                 'attr'      =>['placeholder'    =>  'Saisissez une bref description']
             ))
         ;
-
 
 
     }

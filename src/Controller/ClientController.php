@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Client;
+use App\Form\ClientpmType;
 use App\Form\ClientType;
 use App\Repository\ClientRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +27,7 @@ class ClientController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="client_new", methods={"GET","POST"})
+     * @Route("/nouvelle-personne-physyque", name="client_newph", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -46,6 +47,32 @@ class ClientController extends AbstractController
         return $this->render('client/new.html.twig', [
             'client' => $client,
             'form' => $form->createView(),
+            'type' => 'pp'
+        ]);
+    }
+
+    /**
+     * @Route("/nouvelle-personne-morale", name="client_newpm", methods={"GET","POST"})
+     */
+    public function newpm(Request $request): Response
+    {
+        $client = new Client();
+        $form = $this->createForm(ClientpmType::class, $client);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($client);
+            $entityManager->flush();
+
+            $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
+            return $this->redirectToRoute('client_index');
+        }
+
+        return $this->render('client/new.html.twig', [
+            'client' => $client,
+            'form' => $form->createView(),
+            'type'  => 'pm'
         ]);
     }
 
@@ -53,6 +80,15 @@ class ClientController extends AbstractController
      * @Route("/{slug}", name="client_show", methods={"GET"})
      */
     public function show(Client $client): Response
+    {
+        return $this->render('client/show.html.twig', [
+            'client' => $client,
+        ]);
+    }
+    /**
+     * @Route("/{slug}", name="client_showpm", methods={"GET"})
+     */
+    public function showpm(Client $client): Response
     {
         return $this->render('client/show.html.twig', [
             'client' => $client,
