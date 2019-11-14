@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategorieRepository")
+ * @ORM\HasLifecycleCallbacks()
  * @UniqueEntity(fields={"libelle"}, message="Ce libellé existe déjà")
  */
 class Categorie
@@ -77,6 +78,22 @@ class Categorie
     {
         $this->clients = new ArrayCollection();
         $this->tarifcategorieclts = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function datecreated()
+    {
+        $this->setCreatedOn(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function dateupdated()
+    {
+        $this->setEditedOn(new \DateTime('now'));
     }
 
 
@@ -230,6 +247,10 @@ class Categorie
 
         return $this;
     }
-
+    public function __toString()
+    {
+        return $this->libelle;
+        // TODO: Implement __toString() method.
+    }
 
 }

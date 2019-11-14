@@ -8,7 +8,7 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des produits</h2></div>
+                Liste des categories</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
@@ -31,12 +31,12 @@
 
                 <thead>
                 <tr>
-                   {# <th>Vue</th>#}
-                    <th>Réference</th>
-                    <th>Désignation</th>
+
+                    <th>Reference</th>
+                    <th>designation</th>
                     <th>Prix unitaire</th>
-                    <th>Description</th>
-                    <th>Vue</th>
+
+                    <th></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -45,11 +45,13 @@
                     <tr>
 
                         <td>{{ produit.reference }}</td>
-                        <td>{{ produit.designation}}</td>
+
+                        <td> {{produit.description }}</a></td>
+
                         <td>{{ produit.prixU }}</td>
-                        <td>{{ produit.description }}</td>
+
                         <td>
-                            {% include('produit/viewmodal.html.twig') %}
+                              {% include('produit/viewmodal.html.twig') %}
                         </td>
                         <td>
                             <a  class="" href="{{ path('produit_show', {'slug': produit.slug}) }}">

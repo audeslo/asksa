@@ -390,7 +390,7 @@ class Client
         return $this;
     }
 
-    public function getVue(): ?string
+   /* public function getVue(): ?string
     {
         return $this->vue;
     }
@@ -400,7 +400,7 @@ class Client
         $this->vue = $vue;
 
         return $this;
-    }
+    }*/
     public function __toString()
     {
         return $this->nomcomplet;

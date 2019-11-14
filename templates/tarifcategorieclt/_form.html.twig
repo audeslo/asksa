@@ -1,0 +1,37 @@
+
+<hr>
+<div class="row">
+
+    <div class="col-md-5 ">
+        {{ form_label(form.categorie) }}
+        {{ form_widget(form.categorie) }}
+        {{ form_errors(form.categorie) }}
+
+        {{ form_label(form.produit) }}
+        {{ form_widget(form.produit) }}
+        {{ form_errors(form.produit) }}
+
+        {{ form_label(form.montant) }}
+        {{ form_widget(form.montant) }}
+        {{ form_errors(form.montant) }}
+
+
+    </div>
+
+    <div class="col-md-5 offset-2">
+        {{ form_label(form.bornesupperieur) }}
+        {{ form_widget(form.bornesupperieur) }}
+        {{ form_errors(form.bornesupperieur) }}
+
+        {{ form_label(form.borneinferieure) }}
+        {{ form_widget(form.borneinferieure) }}
+        {{ form_errors(form.borneinferieure) }}
+
+        {{ form_label(form.observation) }}
+        {{ form_widget(form.observation) }}
+        {{ form_errors(form.observation) }}
+
+
+    </div>
+
+</div>

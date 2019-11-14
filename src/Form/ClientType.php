@@ -26,6 +26,7 @@ class ClientType extends AbstractType
                     'Mme' => 'Mme'],
                 'label'     => 'Civilité :',
                 'required'  => false,
+                'placeholder' => 'Sélectionnez un client',
             ))
 
 
@@ -85,11 +86,11 @@ class ClientType extends AbstractType
                 'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne']
             ))
 
-            ->add('vue', TextType::class, array(
+          /*  ->add('vue', TextType::class, array(
                 'label'     => 'Numero bancaire :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez un bancaire valide']
-            ))
+            ))*/
 
             ->add('description', TextType::class, array(
                 'label'     => 'Description du client :',

@@ -65,9 +65,11 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
                             <a class="dropdown-item" href="{{path('client_new')}}">Nouvelle fiche client</a>
+                            <a class="dropdown-item" href="{{path('categorie_index')}}">Fiche categorie</a>
+                            <a class="dropdown-item" href="{{path('categorie_new')}}">Nouvelle fiche categorie</a>
                             <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche fournisseur</a>
                             <a class="dropdown-item" href="{{path('fournisseur_new')}}">Nouvelle fiche fournisseur</a>
-                            <a class="dropdown-item" href="#">Gérer mon catalogue</a>
+
                         </div>
                     </li>
 
@@ -81,10 +83,11 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('produit_index') }}">Fiche produit</a>
-                            <a class="dropdown-item" href="{{ path('produit_new') }}">Nouvelle fiche produit</a>
+                            <a class="dropdown-item" href="{{path('produit_new')}}">Nouvelle fiche produit</a>
+                            <a class="dropdown-item" href="{{ path('tarifcategorieclt_index') }}">Fiche de tarif des clients</a>
+                            <a class="dropdown-item" href="{{ path('tarifcategorieclt_new') }}">Nouvelle fiche de tarif des clients</a>
                             <a class="dropdown-item" href="#">Fiche d'entrée des produits (showrooms)</a>
-                            <a class="dropdown-item" href="#">Entrée des produits(showrooms) </a>
-                            <a class="dropdown-item" href="#">Gérer mon catalogue</a>
+                            <a class="dropdown-item" href="#">Entrée des produits (showrooms)</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

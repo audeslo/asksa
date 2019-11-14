@@ -1,46 +1,46 @@
-{% extends 'produit/produit.html.twig' %}
+{% extends 'categorie/categorie.html.twig' %}
 
 {% block content %}
 
     {#{% block body %}#}
     <div class="col-lg-10">
 
-        <h1>Detail produit</h1>
+        <h1>Detail categorie</h1>
 
         <table class="table-bordered table">
             <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ produit.id }}</td>
+                <td>{{ categorie.id }}</td>
             </tr>
             <tr>
                 <th>Libelle</th>
-                <td>{{ produit.reference }}</td>
+                <td>{{ categorie.libelle }}</td>
             </tr>
             <tr>
-                <th>Prix unitaire</th>
-                <td>{{ produit.prixU }}</td>
+                <th>Description</th>
+                <td>{{ categorie.description }}</td>
             </tr>
 
             <tr>
                 <th>CreatedOn</th>
-                <td>{{ produit.createdOn ? produit.createdOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ categorie.createdOn ? categorie.createdOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>EditedOn</th>
-                <td>{{ produit.editedOn ? produit.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ categorie.editedOn ? categorie.editedOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             </tbody>
         </table>
 
         <div class="row">
-            <a class="btn btn-default col-md-3" href="{{ path('produit_index') }}">
+            <a class="btn btn-default col-md-3" href="{{ path('categorie_index') }}">
                 <i class="fa fa-chevron-left"></i>
                 Retour à la liste
             </a>
 
 
-            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('produit_edit', { 'slug': produit.slug }) }}">
+            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('categorie_edit', { 'slug': categorie.slug }) }}">
                 <i class="fa fa-pencil"></i>
                 Modifier
             </a>

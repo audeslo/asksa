@@ -13,8 +13,10 @@ class CategorieType extends AbstractType
     {
         $builder
             ->add('libelle')
+            ->add('description')
         ;
     }
+
 
     public function configureOptions(OptionsResolver $resolver)
     {

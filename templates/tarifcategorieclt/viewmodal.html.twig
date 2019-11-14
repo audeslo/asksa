@@ -1,49 +1,40 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ produit.slug }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ tarifcategorieclt.id }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ produit.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ tarifcategorieclt.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails produit</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails categorie</h4>
             </div>
             <div class="modal-body">
                 <table class="table-bordered table" style="background-color: #868e96">
                     <tbody>
+
                     <tr>
                         <th>Id</th>
-                        <td>{{ produit.id }}</td>
+                        <td>{{ tarifcategorieclt.categorie }}</td>
+                    </tr>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ tarifcategorieclt.produit }}</td>
+                    </tr>
+                    <tr>
+                        <td>{{ tarifcategorieclt.montant }}</td>
                     </tr>
                     <tr>
                         <th>Libelle</th>
-                        <td>{{ produit.reference }}</td>
+                        <td>{{tarifcategorieclt.bornesupperieur }}</td>
+                    </tr>
+                        <th>Libelle</th>
+                        <td>{{tarifcategorieclt.borneinferieure }}</td>
                     </tr>
                     <tr>
-                        <th>Prix unitaire</th>
-                        <td>{{ produit.prixU }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>description</th>
-                        <td>{{ produit.description }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Enregistré le</th>
-                        <td>
-                            {{ produit.createdOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ produit.createdBy }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>Modifié le </th>
-                        <td>
-                            {{ produit.editedOn ? produit.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ produit.editedBy }}
-                        </td>
+                        <th>Description</th>
+                        <td>{{ tarifcategorieclt.observation }}</td>
                     </tr>
 
                     </tbody>

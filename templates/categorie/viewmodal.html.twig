@@ -1,48 +1,43 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ produit.slug }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ categorie.slug }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ produit.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ categorie.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails produit</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails categorie</h4>
             </div>
             <div class="modal-body">
                 <table class="table-bordered table" style="background-color: #868e96">
                     <tbody>
                     <tr>
                         <th>Id</th>
-                        <td>{{ produit.id }}</td>
+                        <td>{{ categorie.id }}</td>
                     </tr>
                     <tr>
                         <th>Libelle</th>
-                        <td>{{ produit.reference }}</td>
+                        <td>{{ categorie.libelle }}</td>
                     </tr>
                     <tr>
-                        <th>Prix unitaire</th>
-                        <td>{{ produit.prixU }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>description</th>
-                        <td>{{ produit.description }}</td>
+                        <th>Description</th>
+                        <td>{{ categorie.description }}</td>
                     </tr>
 
                     <tr>
                         <th>Enregistré le</th>
                         <td>
-                            {{ produit.createdOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ produit.createdBy }}
+                            {{ categorie.createdOn ? categorie.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ categorie.createdBy }}
                         </td>
                     </tr>
                     <tr>
                         <th>Modifié le </th>
                         <td>
-                            {{ produit.editedOn ? produit.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ produit.editedBy }}
+                            {{ categorie.editedOn ? categorie.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ categorie.editedBy }}
                         </td>
                     </tr>
 
