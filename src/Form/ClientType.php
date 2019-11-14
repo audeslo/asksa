@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Client;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -90,6 +92,15 @@ class ClientType extends AbstractType
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne']
             ))
+
+
+
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'libelle',
+                'required'  => false,
+                'placeholder' => 'Sélectionnez une categorie',
+            ])
 
 
             ->add('description', TextType::class, array(
