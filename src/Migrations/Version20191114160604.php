@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191113162445 extends AbstractMigration
+final class Version20191114160604 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,7 @@ final class Version20191113162445 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE client ADD CONSTRAINT FK_C7440455BCF5E72D FOREIGN KEY (categorie_id) REFERENCES categorie (id)');
-        $this->addSql('CREATE INDEX IDX_C7440455BCF5E72D ON client (categorie_id)');
+        $this->addSql('ALTER TABLE client ADD nom VARCHAR(255) DEFAULT NULL, ADD prenom VARCHAR(255) DEFAULT NULL, ADD raisonsociale VARCHAR(255) DEFAULT NULL, ADD ifu VARCHAR(255) DEFAULT NULL, ADD numerocompte VARCHAR(255) DEFAULT NULL, DROP nomcomplet, CHANGE civilite civilite VARCHAR(10) DEFAULT NULL, CHANGE description description VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -31,7 +30,6 @@ final class Version20191113162445 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE client DROP FOREIGN KEY FK_C7440455BCF5E72D');
-        $this->addSql('DROP INDEX IDX_C7440455BCF5E72D ON client');
+        $this->addSql('ALTER TABLE client ADD nomcomplet VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, DROP nom, DROP prenom, DROP raisonsociale, DROP ifu, DROP numerocompte, CHANGE civilite civilite VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE description description LONGTEXT CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }

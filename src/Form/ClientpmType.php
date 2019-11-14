@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Client;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -28,41 +30,41 @@ class ClientpmType extends AbstractType
             ->add('raisonsociale', TextType::class, array(
                 'label'     => 'Raison sociale :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le nom ']
+                'attr'      =>['placeholder'    =>  'Saisissez la raison sociale ']
             ))
 
             ->add('ifu', TextType::class, array(
                 'label'     => 'N° IFU:',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le nom ']
+                'attr'      =>['placeholder'    =>  'Saisissez le numero IFU ']
             ))
 
 
             ->add('adresserue', TextType::class, array(
-                'label'     => 'Adresse rue :',
+                'label'     => 'Adresse des réseaux sociaux (Twitter,facebook ) :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez la ville']
+                'attr'      =>['placeholder'    =>  'Saisissez une adresse de reseau']
             ))
 
             ->add('telephone', TextType::class, array(
                 'label'     => 'Tél.Portable :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez le numero de telephone']
             ))
             ->add('ville', TextType::class, array(
                 'label'     => 'Ville :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez la ville']
             ))
             ->add('codepostal', TextType::class, array(
                 'label'     => 'Code postal :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez un code postal']
             ))
             ->add('mail', TextType::class, array(
                 'label'     => 'E-mail :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez une adresse electronique']
             ))
 
             ->add('pays', TextType::class, array(
@@ -90,10 +92,31 @@ class ClientpmType extends AbstractType
             ))
 
             ->add('description', TextType::class, array(
-                'label'     => 'Description du client :',
+                'label'     => 'Description de la société :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une bref description']
             ))
+
+            ->add('society', ChoiceType::class, array(
+                'choices'     =>['Société à responsabilité limitée (SARL)' => 'SARL',
+                    'Société anonyme (SA)' => ' SA',
+                    'Entreprise unipersonnelle à responsabilité limitée (EURL) ' => 'EURL',
+                    'Société d\'exercice libéral à responsabilité limitée (SELARL)' => ' SELARL',
+                    'Société par actions simplifiée (SAS)' => 'SAS',
+                    'Société par actions simplifiée unipersonnelle (SASU)' => 'SASU',
+                    'Société civile professionnelle (SCP)' => 'SCP',
+                    'Société en nom collectif (SNC)' => 'SNC'],
+                    'label'     => 'Société:',
+                     'required'  => false,
+                      'placeholder' => 'Sélectionnez la société',
+            ))
+
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'libelle',
+                'required'  => false,
+                'placeholder' => 'Sélectionnez une categorie',
+            ])
         ;
 
 

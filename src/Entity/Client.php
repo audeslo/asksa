@@ -176,6 +176,11 @@ class Client
      */
     private $tempFilename;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $society;
+
 
     /**
      * @ORM\PrePersist()
@@ -630,6 +635,18 @@ class Client
     public function setNumerocompte(?string $numerocompte): self
     {
         $this->numerocompte = $numerocompte;
+
+        return $this;
+    }
+
+    public function getSociety(): ?string
+    {
+        return $this->society;
+    }
+
+    public function setSociety(string $society): self
+    {
+        $this->society = $society;
 
         return $this;
     }

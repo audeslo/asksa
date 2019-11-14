@@ -19,14 +19,13 @@
         {{ form_widget(form.prenom) }}
         {{ form_errors(form.prenom) }}
 
-        {{ form_label(form.ville) }}
-        {{ form_widget(form.ville) }}
-        {{ form_errors(form.ville) }}
-
     </div>
 
     <div class="col-md-5 offset-2">
 
+        {{ form_label(form.ville) }}
+        {{ form_widget(form.ville) }}
+        {{ form_errors(form.ville) }}
 
         {{ form_label(form.pays) }}
         {{ form_widget(form.pays) }}
@@ -46,18 +45,6 @@
 </div>
 <br>
 <hr>
-<div class="row">
-
-    <div class="col-md-5 ">
-
-        {{ form_label(form.adresserue) }}
-        {{ form_widget(form.adresserue) }}
-        {{ form_errors(form.adresserue) }}
-    </div>
-</div>
-<br>
-<hr>
-
 <div class="row">
 
     <div class="col-md-5 ">
@@ -89,6 +76,10 @@
         {{ form_label(form.mail) }}
         {{ form_widget(form.mail) }}
         {{ form_errors(form.mail) }}
+
+        {{ form_label(form.adresserue) }}
+        {{ form_widget(form.adresserue) }}
+        {{ form_errors(form.adresserue) }}
 
         {{ form_label(form.description) }}
         {{ form_widget(form.description) }}

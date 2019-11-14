@@ -33,6 +33,7 @@ class ClientType extends AbstractType
                     'Mme' => 'Mme'],
                 'label'     => 'Civilité :',
                 'required'  => false,
+                'placeholder'    =>  'Selectionner la civilité '
             ))
 
 
@@ -43,36 +44,36 @@ class ClientType extends AbstractType
             ))
 
             ->add('prenom', TextType::class, array(
-                'label'     => 'Nom :',
+                'label'     => 'Prénoms :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le nom ']
+                'attr'      =>['placeholder'    =>  'Saisissez le prénom ']
             ))
 
             ->add('adresserue', TextType::class, array(
-                'label'     => 'Adresse rue :',
+                'label'     => 'Adresse des réseaux sociaux (Twitter,facebook ) : :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez la ville']
+                'attr'      =>['placeholder'    =>  'Saisissez une adresse de réseau ']
             ))
 
             ->add('telephone', TextType::class, array(
                 'label'     => 'Tél.Portable :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez le numero de telephone']
             ))
             ->add('ville', TextType::class, array(
                 'label'     => 'Ville :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez la ville']
             ))
             ->add('codepostal', TextType::class, array(
                 'label'     => 'Code postal :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez le code postal']
             ))
             ->add('mail', TextType::class, array(
                 'label'     => 'E-mail :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le sigle']
+                'attr'      =>['placeholder'    =>  'Saisissez une adresse electronique']
             ))
 
             ->add('pays', TextType::class, array(
@@ -90,10 +91,8 @@ class ClientType extends AbstractType
             ->add('personnecontact', TextType::class, array(
                 'label'     => 'Personne à contacter :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne']
+                'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne à contacter']
             ))
-
-
 
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
@@ -102,16 +101,12 @@ class ClientType extends AbstractType
                 'placeholder' => 'Sélectionnez une categorie',
             ])
 
-
             ->add('description', TextType::class, array(
                 'label'     => 'Description du client :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une bref description']
             ))
         ;
-
-
-
     }
 
     public function configureOptions(OptionsResolver $resolver)
