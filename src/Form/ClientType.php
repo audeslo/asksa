@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Client;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -86,11 +88,12 @@ class ClientType extends AbstractType
                 'attr'      =>['placeholder'    =>  'Saisissez le nom de la personne']
             ))
 
-          /*  ->add('vue', TextType::class, array(
-                'label'     => 'Numero bancaire :',
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'libelle',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez un bancaire valide']
-            ))*/
+                'placeholder' => 'Sélectionnez une categorie',
+            ])
 
             ->add('description', TextType::class, array(
                 'label'     => 'Description du client :',

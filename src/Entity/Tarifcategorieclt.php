@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TarifcategoriecltRepository")
+ * @ORM\HasLifecycleCallbacks()
+ *
  */
 class Tarifcategorieclt
 {
@@ -18,33 +21,39 @@ class Tarifcategorieclt
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Veuillez saisir le montant  !")
      */
     private $montant;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Veuillez saisir la borne supérieure  !")
      */
     private $bornesupperieur;
 
     /**
      * @ORM\Column(type="text", nullable=true)
+     * @Assert\NotBlank(message="Veuillez saisir une observation  !")
      */
     private $observation;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotBlank(message="Veuillez saisir la borne inférieure !")
      */
     private $borneinferieure;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="tarifcategorieclts")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Veuillez choisir une categorie  !")
      */
     private $categorie;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="tarifcategorieclts")
      * @ORM\JoinColumn(nullable=false)
+     * * @Assert\NotBlank(message="Veuillez choisir un produit  !")
      */
     private $produit;
 
