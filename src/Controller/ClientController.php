@@ -118,6 +118,29 @@ class ClientController extends AbstractController
     }
 
     /**
+     * @Route("/{slug}/modification-de-personne-morale", name="client_editpm", methods={"GET","POST"})
+     */
+    public function editpm(Request $request, Client $client): Response
+    {
+        $form = $this->createForm(ClientpmType::class, $client);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');
+
+            return $this->redirectToRoute('client_index');
+        }
+
+        return $this->render('client/edit.html.twig', [
+            'client' => $client,
+            'form' => $form->createView(),
+            'type'  => 'pm'
+        ]);
+    }
+
+    /**
      * @Route("/{slug}", name="client_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Client $client): Response

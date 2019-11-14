@@ -5,7 +5,11 @@
     <h1>Modification Client</h1>
     <div class="col-md-10" style="background-color: #cccccc">
         {{ form_start(form) }}
-        {{ include('client/_form.html.twig') }}
+        {% if type is same as ('pp') %}
+            {{ include('client/_form.html.twig') }}
+        {% else %}
+            {{ include('client/_formpm.html.twig') }}
+        {% endif %}
         <hr>
         <div class="row">
             <div class="col-md-2">
