@@ -41,11 +41,6 @@ class Commande
     private $description;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Produit")
-     */
-    private $produit;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Fournisseur")
      */
     private $fournisseur;
@@ -75,6 +70,7 @@ class Commande
     {
         $this->datecommande=new \DateTime('now');
         $this->produit = new ArrayCollection();
+        $this->commanders = new ArrayCollection();
     }
 
     /**
@@ -101,6 +97,11 @@ class Commande
      * @Gedmo\Slug(fields={"intitule"})
      */
     private $slug;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commander", mappedBy="commande", orphanRemoval=true)
+     */
+    private $commanders;
 
 
     public function getId(): ?int
@@ -180,31 +181,7 @@ class Commande
         return $this;
     }
 
-    /**
-     * @return Collection|Produit[]
-     */
-    public function getProduit(): Collection
-    {
-        return $this->produit;
-    }
 
-    public function addProduit(Produit $produit): self
-    {
-        if (!$this->produit->contains($produit)) {
-            $this->produit[] = $produit;
-        }
-
-        return $this;
-    }
-
-    public function removeProduit(Produit $produit): self
-    {
-        if ($this->produit->contains($produit)) {
-            $this->produit->removeElement($produit);
-        }
-
-        return $this;
-    }
 
     public function getFournisseur(): ?Fournisseur
     {
@@ -246,5 +223,36 @@ class Commande
     {
         return $this->intitule;
         // TODO: Implement __toString() method.
+    }
+
+    /**
+     * @return Collection|Commander[]
+     */
+    public function getCommanders(): Collection
+    {
+        return $this->commanders;
+    }
+
+    public function addCommander(Commander $commander): self
+    {
+        if (!$this->commanders->contains($commander)) {
+            $this->commanders[] = $commander;
+            $commander->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commander $commander): self
+    {
+        if ($this->commanders->contains($commander)) {
+            $this->commanders->removeElement($commander);
+            // set the owning side to null (unless already changed)
+            if ($commander->getCommande() === $this) {
+                $commander->setCommande(null);
+            }
+        }
+
+        return $this;
     }
 }

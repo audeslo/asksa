@@ -1,3 +1,4 @@
+
 <div class="row">
 
     <div class="col-md-5 ">
@@ -9,16 +10,18 @@
         {{ form_widget(form.datecommande) }}
         {{ form_errors(form.datecommande) }}
 
+
     </div>
 
     <div class="col-md-5 offset-2">
+
+        {{ form_label(form.fournisseur) }}
+        {{ form_widget(form.fournisseur) }}
+        {{ form_errors(form.fournisseur) }}
+
         {{ form_label(form.description) }}
         {{ form_widget(form.description) }}
         {{ form_errors(form.description) }}
-
-        {{ form_label(form.fournisseur_id) }}
-        {{ form_widget(form.fournisseur_id) }}
-        {{ form_errors(form.fournisseur_id) }}
 
     </div>
 

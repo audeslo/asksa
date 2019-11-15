@@ -103,9 +103,30 @@ class Produit
      */
     private $tarifcategorieclts;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $categprod;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $marque;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $prixventeconseiller;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commander", mappedBy="produit")
+     */
+    private $commanders;
+
     public function __construct()
     {
         $this->tarifcategorieclts = new ArrayCollection();
+        $this->commanders = new ArrayCollection();
     }
 
 
@@ -252,6 +273,73 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($tarifcategorieclt->getProduit() === $this) {
                 $tarifcategorieclt->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategprod(): ?string
+    {
+        return $this->categprod;
+    }
+
+    public function setCategprod(string $categprod): self
+    {
+        $this->categprod = $categprod;
+
+        return $this;
+    }
+
+    public function getMarque(): ?string
+    {
+        return $this->marque;
+    }
+
+    public function setMarque(string $marque): self
+    {
+        $this->marque = $marque;
+
+        return $this;
+    }
+
+    public function getPrixventeconseiller(): ?string
+    {
+        return $this->prixventeconseiller;
+    }
+
+    public function setPrixventeconseiller(string $prixventeconseiller): self
+    {
+        $this->prixventeconseiller = $prixventeconseiller;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commander[]
+     */
+    public function getCommanders(): Collection
+    {
+        return $this->commanders;
+    }
+
+    public function addCommander(Commander $commander): self
+    {
+        if (!$this->commanders->contains($commander)) {
+            $this->commanders[] = $commander;
+            $commander->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commander $commander): self
+    {
+        if ($this->commanders->contains($commander)) {
+            $this->commanders->removeElement($commander);
+            // set the owning side to null (unless already changed)
+            if ($commander->getProduit() === $this) {
+                $commander->setProduit(null);
             }
         }
 

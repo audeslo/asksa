@@ -110,19 +110,20 @@
                     </li>
 
                     <li class="nav-item dropdown">
-
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-shopping-basket"></i>
+                            <i class="fas fa-shopping-basket"></i>
                             <span>
-                                    Achat <i class="fas fa-angle-down"></i>
+                                    Achats <i class="fas fa-angle-down"></i>
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('commande_index') }}">Nouvelle commande</a>
+                            <a class="dropdown-item" href="{{ path('commande_index') }}">Fiche de commande</a>
+                            <a class="dropdown-item" href="{{path('commande_new')}}">Nouvelle fiche de commandes</a>
                             <a class="dropdown-item" href="#">Suivi des commandes</a>
                             <a class="dropdown-item" href="#">Commandes en cours</a>
                             <a class="dropdown-item" href="#">Nouveau bon de reception</a>
+
                         </div>
                     </li>
 

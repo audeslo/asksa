@@ -10,13 +10,25 @@
         {{ form_widget(form.designation) }}
         {{ form_errors(form.designation) }}
 
+        {{ form_label(form.prixU) }}
+        {{ form_widget(form.prixU) }}
+        {{ form_errors(form.prixU) }}
+
+        {{ form_label(form.prixventeconseiller) }}
+        {{ form_widget(form.prixventeconseiller) }}
+        {{ form_errors(form.prixventeconseiller) }}
+
     </div>
 
     <div class="col-md-5 offset-2">
 
-        {{ form_label(form.prixU) }}
-        {{ form_widget(form.prixU) }}
-        {{ form_errors(form.prixU) }}
+        {{ form_label(form.marque) }}
+        {{ form_widget(form.marque) }}
+        {{ form_errors(form.marque) }}
+
+        {{ form_label(form.categprod) }}
+        {{ form_widget(form.categprod) }}
+        {{ form_errors(form.categprod) }}
 
         {{ form_label(form.description) }}
         {{ form_widget(form.description) }}

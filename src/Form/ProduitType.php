@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Produit;
 use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,15 +35,28 @@ class ProduitType extends AbstractType
                 'label' => 'Description :',
                 'required' => false,
                 'attr'   =>['placeholder'  =>   'Saisissez la description']
-
-
-
     ))
 
-           /* ->add('createdOn')
-            ->add('editedOn')
-            ->add('createdById')
-            ->add('editedById')
+            ->add('categprod', ChoiceType::class, array(
+                'choices'     =>['lubrifiant' => 'lubrifiant',
+                    'Graisse' => 'Graisse'],
+                     'label'     => 'Catégorie de produit :',
+                     'required'  => false,
+                     'placeholder'    =>  'Selectionner une catégorie '
+            ))
+            ->add('prixventeconseiller',TextType::class,array(
+                'label' => 'Prix de vente conseillé :',
+                'required' => false,
+                'attr'   =>['placeholder'  =>   'Saisissez le prix de vente conseille']
+    ))
+            ->add('marque', ChoiceType::class, array(
+                'choices'     =>['lubrifiant' => 'lubrifiant',
+                    'Graisse' => 'Graisse'],
+                'label'     => 'Marque de produit :',
+                'required'  => false,
+                'placeholder'    =>  'Selectionner une marque '
+            ))
+            /*->add('editedById')
             ->add('slug')*/
         ;
     }

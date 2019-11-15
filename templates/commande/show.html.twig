@@ -1,153 +1,60 @@
-
-{% extends 'client/client.html.twig' %}
+{% extends 'commande/commande.html.twig' %}
 
 {% block content %}
-<div class="col-lg-10">
-    <h1>Détail Client</h1>
 
-    <table class="table-bordered table">
-        <tbody>
-        <tr>
-            <th>N°</th>
-            <td>{{ client.id }}</td>
-        </tr>
-        <tr>
-            <th>Réferent</th>
-            <td>{{ client.referent }}</td>
-        </tr>
-        <tr>
-            <th>Nom complet</th>
-            <td>{{ client.nomcomplet }}</td>
-        </tr>
-        <tr>
-            <th>Type</th>
-            <td>
-                {{ client.type }}
+    {#{% block body %}#}
+    <div class="col-lg-10">
 
-            </td>
-        </tr>
+        <h1>Detail commande</h1>
 
-        <tr>
-            <th>Téléphone</th>
-            <td>{{ client.telephone }}</td>
-        </tr>
-        <tr>
-            <th>Adresse</th>
-            <td>{{ client.adresserue }}</td>
-        </tr>
-        <tr>
-            <th>E-mail</th>
-            <td>{{ client.mail }}</td>
-        </tr>
-
-        <tr>
-            <th>Enregistré par </th>
-            <td>
-                {{ client.createdBy }}<br> le
-                {{ client.createdOn ? client.createdOn |date('d-m-Y H:i:s') : ''  }}
-            </td>
-        </tr>
-        <tr>
-            <th>Modifié par </th>
-            <td>
-                {{ client.editedBy }} <br>le
-                {{ client.editedOn ? client.editedOn |date('d/m/Y H:i:s') : '' }}
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="row">
-        <a class="btn btn-default col-md-3" href="{{ path('client_index') }}">
-            <i class="fa fa-chevron-left"></i>
-            Retour à la liste
-
-        </a>
-
-
-        <a class="btn btn-primary col-md-2 offset-6" href="{{ path('client_edit', { 'slug': client.slug }) }}">
-            <i class="fa fa-pencil"></i>
-            Modifier
-        </a>
-    </div>
-</div>
-
-{% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-
-{#
-{% extends 'base.html.twig' %}
-
-{% block title %}Client{% endblock %}
-
-{% block body %}
-    <h1>Client </h1>
-
-    <table class="table">
-        <tbody>
+        <table class="table-bordered table">
+            <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ client.id }}</td>
+                <td>{{ commande.id }}</td>
             </tr>
             <tr>
-                <th>Referent</th>
-                <td>{{ client.referent }}</td>
+                <th>Intitule</th>
+                <td>{{ commande.intitule }}</td>
             </tr>
             <tr>
-                <th>Nomcomplet</th>
-                <td>{{ client.nomcomplet }}</td>
+                <th>Fournisseur</th>
+                <td>{{ commande.fournisseur }}</td>
             </tr>
+
             <tr>
-                <th>Adresserue</th>
-                <td>{{ client.adresserue }}</td>
+                <th>Date de commande</th>
+                <td>{{ commande.datecommande }}</td>
             </tr>
+
             <tr>
-                <th>Type</th>
-                <td>{{ client.type }}</td>
+                <th>Description</th>
+                <td>{{ commande.description }}</td>
             </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ client.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Ville</th>
-                <td>{{ client.ville }}</td>
-            </tr>
-            <tr>
-                <th>Codepostal</th>
-                <td>{{ client.codepostal }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ client.mail }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ client.slug }}</td>
-            </tr>
+
             <tr>
                 <th>CreatedOn</th>
-                <td>{{ client.createdOn ? client.createdOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commande.createdOn ? commande.createdOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>EditedOn</th>
-                <td>{{ client.editedOn ? client.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ commande.editedOn ? commande.editedOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('client_index') }}">back to list</a>
+        <div class="row">
+            <a class="btn btn-default col-md-3" href="{{ path('commande_index') }}">
+                <i class="fa fa-chevron-left"></i>
+                Retour à la liste
+            </a>
 
-    <a href="{{ path('client_edit', {'id': client.id}) }}">edit</a>
 
-    {{ include('client/_delete_form.html.twig') }}
-{% endblock %}#}
+            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('commande_edit', { 'slug': commande.slug }) }}">
+                <i class="fa fa-pencil"></i>
+                Modifier
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

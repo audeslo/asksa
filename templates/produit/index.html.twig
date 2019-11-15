@@ -35,6 +35,9 @@
                     <th>Reference</th>
                     <th>designation</th>
                     <th>Prix unitaire</th>
+                    <th>Prix conseiller</th>
+                    <th>catégorie</th>
+                    <th>Marque</th>
 
                     <th></th>
                     <th></th>
@@ -46,9 +49,15 @@
 
                         <td>{{ produit.reference }}</td>
 
-                        <td> {{produit.description }}</a></td>
+                        <td> {{produit.designation }}</a></td>
 
                         <td>{{ produit.prixU }}</td>
+
+                        <td>{{ produit.prixventeconseiller }}</td>
+
+                        <td> {{produit.categprod}}</a></td>
+
+                        <td>{{ produit.marque }}</td>
 
                         <td>
                               {% include('produit/viewmodal.html.twig') %}
