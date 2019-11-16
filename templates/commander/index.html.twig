@@ -1,4 +1,4 @@
-{% extends 'commande/commande.html.twig' %}
+{% extends 'commander/commander.html.twig' %}
 
 {# page tableau et recherche #}
 
@@ -8,11 +8,11 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des commandes</h2></div>
+                Liste des produits commander</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    <a href="{{ path('commande_new') }}" class="btn btn-primary ">
+                    <a href="{{ path('commander_new') }}" class="btn btn-primary ">
                         <i class="fa fa-chevron-right"></i>
                         Nouveau
                     </a>
@@ -31,28 +31,39 @@
 
                 <thead>
                 <tr>
-                    <th>Intitule</th>
-                    <th>Date de commande</th>
-                    <th>Fournisseur</th>
-                    <th>Description</th>
+
+                    <th>Produit</th>
+                    <th>commande</th>
+                    <th>Capacite</th>
+                    <th>Capacite carton</th>
+                    <th>code bar produit</th>
+                    <th>code bar carton</th>
+
                     <th></th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for commande in commandes %}
+                {% for commander in commanders %}
                     <tr>
 
-                        <td><a cass="" href="{{ path('commander_new') }}">{{ commande.intitule }}</a></td>
-                        <td> {{ commande.datecommande ? commande.datecommande | date('d-M-Y') : ''}}</td>
-                        <td>{{ commande.fournisseur }}</td>
-                        <td>{{ commande.description }}</td>
+                        <td>{{ commander.id }}</td>
+
+                        <td> {{commander.produit }}</a></td>
+
+                        <td>{{ commander.capacite }}</td>
+
+                        <td>{{ commander.capacitecarton }}</td>
+
+                        <td> {{commander.codebarecaton}}</a></td>
+
+                        <td>{{ commander.codebareproduit }}</td>
 
                         <td>
-                            {% include('commande/viewmodal.html.twig') %}
+{#                              {% include('commande/viewmodal.html.twig') %}#}
                         </td>
                         <td>
-                            <a  class="" href="{{ path('commande_show', {'slug': commande.slug}) }}">
+                            <a  class="" href="{{ path('commander_show', {'id': commander.id}) }}">
                                 <i class="fa fa-edit tm-product-delete-icon"></i>
                             </a>
                         </td>

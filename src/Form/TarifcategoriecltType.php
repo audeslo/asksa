@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,10 +24,24 @@ class TarifcategoriecltType extends AbstractType
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le montant']
             ))
-            ->add('bornesupperieur')
-            ->add('observation')
-            ->add('borneinferieure')
-           ->add('categorie')
+            ->add('observation',TextareaType::class,array(
+                'label'     => 'Observation :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Aviez vous une observation']
+            ))
+
+            ->add('bornesupperieur',TextType::class,array(
+                'label'     => 'Borne suppérieure :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez la borne supérieure']
+            ))
+
+            ->add('borneinferieure',TextType::class,array(
+                'label'     => 'Borne inférieure :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez la borne inférieure']
+            ))
+
 
             ->add('categorie', EntityType::class, [
                 'class' => Categorie::class,
