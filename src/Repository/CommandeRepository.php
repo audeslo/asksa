@@ -34,17 +34,16 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
-    public function updateLastReference($value)
+    public function updateLastReferent($id,$value)
     {
         return $this->createQueryBuilder('c')
+            ->update()
             ->set('c.reference','?1')
-            ->andWhere('c.
-             = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.id = :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
             ->getQuery()
-            ->getResult()
+            ->execute()
             ;
     }
 
