@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Commande;
 use App\Entity\Commander;
 use App\Entity\Fournisseur;
 use App\Form\CommanderType;
 use App\Form\FournisseurType;
+use App\Repository\CommandeRepository;
 use App\Repository\CommanderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,12 +21,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommanderController extends AbstractController
 {
     /**
-     * @Route("/", name="commander_index", methods={"GET"})
+     * @Route("/Liste-des-produits-commandes/{slug}", name="commander_index", methods={"GET"})
+     * @param CommanderRepository $commanderRepository
+     * @param Commande $commande
+     * @return Response
      */
-    public function index(CommanderRepository $commanderRepository): Response
+    public function index(CommanderRepository $commanderRepository, Commande $commande): Response
     {
+        $this->get('session')->set('commande',$commande);
+
         return $this->render('commander/index.html.twig', [
-            'commanders' => $commanderRepository->findAll(),
+            'commanders' => $commanderRepository->findBy(['commande' => $commande->getId()]),
+            'commande'  =>  $commande,
         ]);
     }
 
@@ -33,21 +41,37 @@ class CommanderController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $commande=$this->get('session')->get('commande');
+
         $commander = new Commander();
         $form = $this->createForm(CommanderType::class, $commander);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $commande= $entityManager->getRepository('App:Commande')->find($commande->getId());
+            $commander->setCommande($commande);
+            $commander->setQuantiteenstock($form['quantitecommandee']->getData());
+
+            // Récupération de la reférence produit
+            $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
+            $refproduit=$produit->getReference();
+
+            //refernce commande
+            $refcommande=$commande->getReference();
+
+            $commander->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'B-'.$form['capacitebidon']->getData().'L');
+
             $entityManager->persist($commander);
             $entityManager->flush();
 
-            return $this->redirectToRoute('commander_index');
+            return $this->redirectToRoute('commander_index',['slug' => $commande->getSlug()]);
         }
 
         return $this->render('commander/new.html.twig', [
             'commander' => $commander,
             'form' => $form->createView(),
+            'commande'  => $commande
         ]);
     }
 
@@ -94,4 +118,8 @@ class CommanderController extends AbstractController
 
         return $this->redirectToRoute('commander_index');
     }
+
+
 }
+
+

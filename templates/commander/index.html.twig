@@ -8,7 +8,7 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des produits commander</h2></div>
+                Liste des produits: {{ commande.intitule }}</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
@@ -27,7 +27,7 @@
             </div>
             <hr>
 
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" >
 
                 <thead>
                 <tr>
@@ -51,13 +51,13 @@
 
                         <td> {{commander.produit }}</a></td>
 
-                        <td>{{ commander.capacite }}</td>
+                        <td>{{ commander.quantitecommandee}}</td>
 
                         <td>{{ commander.capacitecarton }}</td>
 
-                        <td> {{commander.codebarecaton}}</a></td>
+                        <td> </td>
 
-                        <td>{{ commander.codebareproduit }}</td>
+                        <td></td>
 
                         <td>
 {#                              {% include('commande/viewmodal.html.twig') %}#}
@@ -73,6 +73,11 @@
             </table>
         </div>
     </div>
+    <hr>
+    <a class="btn btn-default col-md-3" href="{{ path('commande_index') }}">
+        <i class="fa fa-chevron-left"></i>
+        Retour à la liste
+    </a>
 
     <div class="card-footer small text-muted">Hier à 11:59 </div>
 

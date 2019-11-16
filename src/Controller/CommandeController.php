@@ -37,6 +37,7 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $commande->setReference('CD-'.getValeur($entityManager->getRepository('App:Commande')->findLastId()));
             $entityManager->persist($commande);
             $entityManager->flush();
 
@@ -69,6 +70,7 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');
@@ -95,5 +97,26 @@ class CommandeController extends AbstractController
         }
 
         return $this->redirectToRoute('commande_index');
+    }
+}
+
+function getValeur(int $valeur)
+{
+    $valeur++;
+
+    if($valeur<10)
+    {
+        return '0000'.$valeur;
+    }elseif ($valeur<100)
+    {
+        return '000'.$valeur;
+    }elseif ($valeur<1000)
+    {
+        return '00'.$valeur;
+    }elseif ($valeur<10000)
+    {
+        return '0'.$valeur;
+    }else{
+        return $valeur;
     }
 }

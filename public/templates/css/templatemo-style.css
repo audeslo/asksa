@@ -500,7 +500,7 @@ input[type="checkbox"]:focus {
   box-shadow: 0 -3px 5px 0 rgba(69, 92, 113, 0.59);
 }
 .custom-select {
-  height: 50px;
+  height: 60px;
   border-radius: 0;
 }
 .tm-product-img-dummy {

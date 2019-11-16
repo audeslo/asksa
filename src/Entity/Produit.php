@@ -43,6 +43,12 @@ class Produit
     private $prixU;
 
     /**
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Veuillez saisir le stock d'alerte !")
+     */
+    private $stockalerte;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      * @Assert\NotBlank(message="Veuillez saisir la description !")
      */
@@ -342,6 +348,18 @@ class Produit
                 $commander->setProduit(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getStockalerte(): ?int
+    {
+        return $this->stockalerte;
+    }
+
+    public function setStockalerte(int $stockalerte): self
+    {
+        $this->stockalerte = $stockalerte;
 
         return $this;
     }

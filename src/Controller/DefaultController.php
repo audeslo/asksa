@@ -20,7 +20,7 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-
+/*
         $qrCode = new QrCode();
         $qrCode
             ->setText('QR code by codeitnow.in')
@@ -39,7 +39,7 @@ class DefaultController extends AbstractController
 
 
 
-            return null;
+            return null;*/
 
         return $this->render('default/index.html.twig', [
             'controller_name' => 'DefaultController',

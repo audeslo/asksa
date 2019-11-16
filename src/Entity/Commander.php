@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommanderRepository")
+ * @ORM\HasLifecycleCallbacks()
+ * @UniqueEntity(fields={"produit","capacitebidon","capacitecarton"}, message="Ce produit existe déjà dans cette commande, veuillez modifier la quantité au besoin")
  */
 class Commander
 {
@@ -29,19 +34,14 @@ class Commander
     private $commande;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="integer")
      */
-    private $codebarecaton;
-
-    /**
-     * @ORM\Column(type="blob")
-     */
-    private $codebareproduit;
+    private $quantitecommandee;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $capacite;
+    private $capacitebidon;
 
     /**
      * @ORM\Column(type="integer")
@@ -49,14 +49,72 @@ class Commander
     private $capacitecarton;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $reference;
-
-    /**
      * @ORM\Column(type="integer")
      */
-    private $capacitebidon;
+    private $quantiteenstock;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $etat;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $sousreference;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Gedmo\Slug(fields={"sousreference"})
+     */
+    private $slug;
+
+    /**
+
+     * @ORM\Column(type="datetime")
+     */
+    private $createdOn;
+
+    /**
+
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $editedOn;
+
+    /**
+
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $createdBy;
+
+    /**
+
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+
+     */
+    private $editedBy;
+
+    public function __construct()
+    {
+        $this->setEtat(1);
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function datecreated()
+    {
+        $this->setCreatedOn(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function dateupdated()
+    {
+        $this->setEditedOn(new \DateTime('now'));
+    }
+
 
     public function getId(): ?int
     {
@@ -87,41 +145,7 @@ class Commander
         return $this;
     }
 
-    public function getCodebarecaton()
-    {
-        return $this->codebarecaton;
-    }
 
-    public function setCodebarecaton($codebarecaton): self
-    {
-        $this->codebarecaton = $codebarecaton;
-
-        return $this;
-    }
-
-    public function getCodebareproduit()
-    {
-        return $this->codebareproduit;
-    }
-
-    public function setCodebareproduit($codebareproduit): self
-    {
-        $this->codebareproduit = $codebareproduit;
-
-        return $this;
-    }
-
-    public function getCapacite(): ?int
-    {
-        return $this->capacite;
-    }
-
-    public function setCapacite(int $capacite): self
-    {
-        $this->capacite = $capacite;
-
-        return $this;
-    }
 
     public function getCapacitecarton(): ?int
     {
@@ -135,17 +159,7 @@ class Commander
         return $this;
     }
 
-    public function getReference(): ?string
-    {
-        return $this->reference;
-    }
 
-    public function setReference(string $reference): self
-    {
-        $this->reference = $reference;
-
-        return $this;
-    }
 
     public function getCapacitebidon(): ?int
     {
@@ -158,4 +172,119 @@ class Commander
 
         return $this;
     }
+
+    public function getQuantitecommandee(): ?int
+    {
+        return $this->quantitecommandee;
+    }
+
+    public function setQuantitecommandee(int $quantitecommandee): self
+    {
+        $this->quantitecommandee = $quantitecommandee;
+
+        return $this;
+    }
+
+    public function getQuantiteenstock(): ?int
+    {
+        return $this->quantiteenstock;
+    }
+
+    public function setQuantiteenstock(int $quantiteenstock): self
+    {
+        $this->quantiteenstock = $quantiteenstock;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getSousreference(): ?string
+    {
+        return $this->sousreference;
+    }
+
+    public function setSousreference(string $sousreference): self
+    {
+        $this->sousreference = $sousreference;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCreatedOn(): ?\DateTimeInterface
+    {
+        return $this->createdOn;
+    }
+
+    public function setCreatedOn(\DateTimeInterface $createdOn): self
+    {
+        $this->createdOn = $createdOn;
+
+        return $this;
+    }
+
+    public function getEditedOn(): ?\DateTimeInterface
+    {
+        return $this->editedOn;
+    }
+
+    public function setEditedOn(?\DateTimeInterface $editedOn): self
+    {
+        $this->editedOn = $editedOn;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?User
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?User $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getEditedBy(): ?User
+    {
+        return $this->editedBy;
+    }
+
+    public function setEditedBy(?User $editedBy): self
+    {
+        $this->editedBy = $editedBy;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->produit.'/'.$this->capacitecarton.'/'.$this->capacitebidon;
+        // TODO: Implement __toString() method.
+    }
+
 }

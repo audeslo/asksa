@@ -24,6 +24,11 @@ class Commande
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $reference;
+
+    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Veuillez saisir l'intitulé de la commande' !")
      */
@@ -252,6 +257,18 @@ class Commande
                 $commander->setCommande(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

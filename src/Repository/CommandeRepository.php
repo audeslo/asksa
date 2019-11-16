@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Commande;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * @method Commande|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +20,20 @@ class CommandeRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commande::class);
     }
+
+    public function findLastId()
+    {
+        try {
+            return $this->createQueryBuilder('c')
+                ->select('c.id')
+                ->orderBy('c.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
 
     // /**
     //  * @return Commande[] Returns an array of Commande objects

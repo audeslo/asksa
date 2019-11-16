@@ -43,7 +43,7 @@
                 {% for commande in commandes %}
                     <tr>
 
-                        <td><a cass="" href="{{ path('commander_new') }}">{{ commande.intitule }}</a></td>
+                        <td><a  href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule }}</a></td>
                         <td> {{ commande.datecommande ? commande.datecommande | date('d-M-Y') : ''}}</td>
                         <td>{{ commande.fournisseur }}</td>
                         <td>{{ commande.description }}</td>
