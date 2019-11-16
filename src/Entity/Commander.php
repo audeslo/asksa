@@ -48,6 +48,16 @@ class Commander
      */
     private $capacitecarton;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capacitebidon;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +131,30 @@ class Commander
     public function setCapacitecarton(int $capacitecarton): self
     {
         $this->capacitecarton = $capacitecarton;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getCapacitebidon(): ?int
+    {
+        return $this->capacitebidon;
+    }
+
+    public function setCapacitebidon(int $capacitebidon): self
+    {
+        $this->capacitebidon = $capacitebidon;
 
         return $this;
     }
