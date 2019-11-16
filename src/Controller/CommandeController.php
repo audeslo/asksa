@@ -37,10 +37,13 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $commande->setReference('CD-'.getValeur($entityManager->getRepository('App:Commande')->findLastId()));
             $entityManager->persist($commande);
             $entityManager->flush();
 
+            $lastid=$entityManager->getRepository('App:Commande')->findLastId();
+
+            $entityManager->getRepository('App:Commande')->updateLastReferent($lastid,'CD-'.getValeur($lastid));
+           // ;
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('commande_index');
         }
@@ -102,7 +105,6 @@ class CommandeController extends AbstractController
 
 function getValeur(int $valeur)
 {
-    $valeur++;
 
     if($valeur<10)
     {

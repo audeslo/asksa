@@ -34,6 +34,18 @@ class CommandeRepository extends ServiceEntityRepository
         }
     }
 
+    public function updateLastReferent($id,$value)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.reference','?1')
+            ->andWhere('c.id = :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }
 
     // /**
     //  * @return Commande[] Returns an array of Commande objects
