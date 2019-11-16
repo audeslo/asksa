@@ -6,6 +6,7 @@ use App\Entity\Produit;
 use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,7 +32,7 @@ class ProduitType extends AbstractType
                          'attr'   =>['placeholder'  => 'Saisissez le prix unitaire']
 
             ))
-            ->add('description',TextType::class,array(
+            ->add('description',TextareaType::class,array(
                 'label' => 'Description :',
                 'required' => false,
                 'attr'   =>['placeholder'  =>   'Saisissez la description']

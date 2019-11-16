@@ -1,0 +1,41 @@
+
+<div class="row">
+
+    <div class="col-md-5 ">
+        {{ form_label(form.commande) }}
+        {{ form_widget(form.commande) }}
+        {{ form_errors(form.commande) }}
+
+        {{ form_label(form.produit) }}
+        {{ form_widget(form.produit) }}
+        {{ form_errors(form.produit) }}
+
+
+
+        {{ form_label(form.capacite) }}
+        {{ form_widget(form.capacite) }}
+        {{ form_errors(form.capacite) }}
+
+
+
+    </div>
+
+    <div class="col-md-5 offset-2">
+
+        {{ form_label(form.capacitecarton) }}
+        {{ form_widget(form.capacitecarton) }}
+        {{ form_errors(form.capacitecarton) }}
+
+        {{ form_label(form.codebareproduit) }}
+        {{ form_widget(form.codebareproduit) }}
+        {{ form_errors(form.codebareproduit) }}
+
+        {{ form_label(form.codebarecaton) }}
+        {{ form_widget(form.codebarecaton) }}
+        {{ form_errors(form.codebarecaton) }}
+
+
+
+    </div>
+
+</div>
