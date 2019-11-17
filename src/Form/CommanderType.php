@@ -18,7 +18,7 @@ class CommanderType extends AbstractType
     {
         $builder
             ->add('capacitecarton',IntegerType::class,array(
-        'label'     => 'Bidon/carton:',
+        'label'     => 'Bidon/carton :',
         'required'  => false,
         'attr'      =>['placeholder'    =>  'Saisissez la capacite du carton']
     ))
@@ -28,7 +28,7 @@ class CommanderType extends AbstractType
         'attr'      =>['placeholder'    =>  'Saisissez la capacite du bidon']
     ))
             ->add('quantitecommandee',IntegerType::class,array(
-                'label'=> 'Quantité de carton',
+                'label'=> 'Quantité de carton :',
                 'required' => false ,
             ))
 
@@ -36,7 +36,7 @@ class CommanderType extends AbstractType
             ->add('produit', EntityType::class, [
                 'class' => Produit::class,
                 'choice_label'  => 'designation',
-                'label'         =>  'Produit',
+                'label'         =>  'Produit :',
                 'required'      => false,
                 'placeholder'   => 'Sélectionnez un produit',
             ])

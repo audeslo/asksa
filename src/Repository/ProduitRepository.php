@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Produit;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Produit|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,36 @@ class ProduitRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Produit::class);
     }
+
+   /* public function findLastId()
+    {
+        try {
+            return $this->createQueryBuilder('p')
+                ->select('p.id')
+                ->orderBy('p.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    public function updateLastReferent($id,$value)
+    {
+        return $this->createQueryBuilder('p')
+            ->update()
+            ->set('p.reference','?1')
+            ->andWhere('p.id = :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }*/
+
+
+
+
 
     // /**
     //  * @return Produit[] Returns an array of Produit objects

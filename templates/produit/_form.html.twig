@@ -1,4 +1,5 @@
 
+<hr>
 <div class="row">
 
     <div class="col-md-5 ">
@@ -19,9 +20,7 @@
         {{ form_errors(form.prixventeconseiller) }}
 
     </div>
-
     <div class="col-md-5 offset-2">
-
         {{ form_label(form.marque) }}
         {{ form_widget(form.marque) }}
         {{ form_errors(form.marque) }}
@@ -33,6 +32,10 @@
         {{ form_label(form.description) }}
         {{ form_widget(form.description) }}
         {{ form_errors(form.description) }}
+
+        {{ form_label(form.stockalerte) }}
+        {{ form_widget(form.stockalerte) }}
+        {{ form_errors(form.stockalerte) }}
 
     </div>
 

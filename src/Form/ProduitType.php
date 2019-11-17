@@ -6,6 +6,7 @@ use App\Entity\Produit;
 use phpDocumentor\Reflection\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -16,20 +17,19 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('reference',TextType::class,array(
+           ->add('reference',TextType::class,array(
                         'label'     => 'Reference:',
                         'required'  => false,
                         'attr'      =>['placeholder'    =>  'Saisissez la référence']
             ))
             ->add('designation',TextType::class,array(
-                'label' => 'Designation :',
+                'label' => 'Désignation :',
                 'required' => false,
                 'attr'   =>['placeholder'  => 'Saisissez la désignation']
             ))
-            ->add('prixU',TextType ::class,array(
+            ->add('prixU',IntegerType ::class,array(
                          'label' => 'Prix unitaire :',
                          'required' => false,
-                         'attr'   =>['placeholder'  => 'Saisissez le prix unitaire']
 
             ))
             ->add('description',TextareaType::class,array(
@@ -45,7 +45,7 @@ class ProduitType extends AbstractType
                      'required'  => false,
                      'placeholder'    =>  'Selectionner une catégorie '
             ))
-            ->add('prixventeconseiller',TextType::class,array(
+            ->add('prixventeconseiller',IntegerType::class,array(
                 'label' => 'Prix de vente conseillé :',
                 'required' => false,
                 'attr'   =>['placeholder'  =>   'Saisissez le prix de vente conseille']
@@ -56,6 +56,11 @@ class ProduitType extends AbstractType
                 'label'     => 'Marque de produit :',
                 'required'  => false,
                 'placeholder'    =>  'Selectionner une marque '
+            ))
+
+            ->add('stockalerte', IntegerType::class, array(
+                'label'     => 'Stock d\'alerte :',
+                'required'  => false,
             ))
             /*->add('editedById')
             ->add('slug')*/

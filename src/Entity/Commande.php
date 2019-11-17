@@ -94,9 +94,6 @@ class Commande
         $this->setEditedOn(new \DateTime('now'));
     }
 
-
-
-
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Gedmo\Slug(fields={"intitule"})
@@ -185,8 +182,6 @@ class Commande
 
         return $this;
     }
-
-
 
     public function getFournisseur(): ?Fournisseur
     {

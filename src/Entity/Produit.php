@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"reference"}, message="Cette reférence existe déjà")
+ *@UniqueEntity(fields={"reference"}, message="Cette reférence existe déjà")
  */
 
 class Produit
@@ -25,8 +25,8 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir la reference !")
+     * @ORM\Column(type="string", length=255, )
+     * @Assert\NotBlank(message="Veuillez saisir la refernce !")
      */
     private $reference;
 
@@ -95,9 +95,6 @@ class Produit
         $this->setEditedOn(new \DateTime('now'));
     }
 
-
-
-
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      * @Gedmo\Slug(fields={"designation"})
@@ -146,12 +143,24 @@ class Produit
         return $this->reference;
     }
 
-    public function setReference(string $reference): self
+    public function setReference(?string $reference): self
     {
         $this->reference = $reference;
 
         return $this;
     }
+
+   /* public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(?string $reference): self
+    {
+        $this->reference = $reference;
+
+        return $this;
+    }*/
 
     public function getDesignation(): ?string
     {
