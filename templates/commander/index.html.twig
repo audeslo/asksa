@@ -14,7 +14,7 @@
                 <div class="col-md-2">
                     <a href="{{ path('commander_new') }}" class="btn btn-primary ">
                         <i class="fa fa-chevron-right"></i>
-                        Nouveau
+                      Ajouter
                     </a>
                 </div>
 
@@ -32,13 +32,11 @@
                 <thead>
                 <tr>
 
-                    <th>Produit</th>
                     <th>commande</th>
-                    <th>Capacite</th>
-                    <th>Capacite carton</th>
-                    <th>code bar produit</th>
-                    <th>code bar carton</th>
-
+                    <th>Produit</th>
+                    <th>Qté commandée</th>
+                    <th>Bidon/carton</th>
+                    <th>Qté bidon/Litre</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -55,13 +53,11 @@
 
                         <td>{{ commander.capacitecarton }}</td>
 
-                        <td> </td>
+                        <td>{{ commander.capacitebidon }}</td>
 
-                        <td></td>
-
-                        <td>
-{#                              {% include('commande/viewmodal.html.twig') %}#}
-                        </td>
+                      {#  <td>
+#}{#                              {% include('commande/viewmodal.html.twig') %}#}{#
+                        </td>#}
                         <td>
                             <a  class="" href="{{ path('commander_show', {'id': commander.id}) }}">
                                 <i class="fa fa-edit tm-product-delete-icon"></i>
@@ -71,13 +67,22 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="row">
+                <div class="col-md-2">
+                    <a class="btn btn-default col-md-3" href="{{ path('commande_index') }}">
+                        <i class="fa fa-chevron-left"></i>
+                        Retour à la liste
+                    </a>
+                </div>
+            </div>
+
+
         </div>
     </div>
     <hr>
-    <a class="btn btn-default col-md-3" href="{{ path('commande_index') }}">
-        <i class="fa fa-chevron-left"></i>
-        Retour à la liste
-    </a>
+
+
+
 
     <div class="card-footer small text-muted">Hier à 11:59 </div>
 

@@ -8,7 +8,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails produit</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails categorie</h4>
             </div>
             <div class="modal-body">
                 <table class="table-bordered table" style="background-color: #868e96">
@@ -17,10 +17,7 @@
                         <th>Id</th>
                         <td>{{ produit.id }}</td>
                     </tr>
-                    <tr>
-                        <th>Libelle</th>
-                        <td>{{ produit.reference }}</td>
-                    </tr>
+
                     <tr>
                         <th>Désignation</th>
                         <td>{{ produit.designation }}</td>
@@ -50,7 +47,6 @@
                         <th>Description</th>
                         <td>{{ produit.description }}</td>
                     </tr>
-
                     <tr>
                         <th>Enregistré le</th>
                         <td>

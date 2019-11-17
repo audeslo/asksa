@@ -321,9 +321,9 @@ thead {
   margin-bottom: 20px;
 }
 .form-control {
-  padding: 19px 18px;
+  /*padding: 19px 18px;*/
   border-radius: 0;
-  height: 50px;
+  height: 40px;
 }
 .form-group {
   margin-bottom: 15px;

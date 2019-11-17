@@ -48,10 +48,11 @@ class ProduitController extends AbstractController
         }
 
         return $this->render('produit/new.html.twig', [
-            'client' => $produit,
+            'produit' => $produit,
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/{slug}", name="produit_show", methods={"GET"})
@@ -100,3 +101,23 @@ class ProduitController extends AbstractController
         return $this->redirectToRoute('produit_index');
     }
 }
+
+/*function getIncrement(int $automa)
+{
+
+    if($automa<10)
+    {
+        return '0000'.$automa;
+    }elseif ($automa<100)
+    {
+        return '000'.$automa;
+    }elseif ($automa<1000)
+    {
+        return '00'.$automa;
+    }elseif ($automa<10000)
+    {
+        return '0'.$automa;
+    }else{
+        return $automa;
+    }
+}*/
