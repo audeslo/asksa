@@ -21,11 +21,7 @@ class ClientType extends AbstractType
     {
 
         $builder
-            ->add('referent', TextType::class, array(
-                'label'     => 'Réferent :',
-                'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le referent']
-            ))
+
 
 
             ->add('civilite', ChoiceType::class, array(
@@ -37,13 +33,13 @@ class ClientType extends AbstractType
             ))
 
 
-            ->add('nom', TextType::class, array(
+            ->add('identifiant1', TextType::class, array(
                 'label'     => 'Nom :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom ']
             ))
 
-            ->add('prenom', TextType::class, array(
+            ->add('identifiant2', TextType::class, array(
                 'label'     => 'Prénoms :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le prénom ']
@@ -101,7 +97,7 @@ class ClientType extends AbstractType
                 'placeholder' => 'Sélectionnez une categorie',
             ])
 
-            ->add('description', TextType::class, array(
+            ->add('description', TextareaType::class, array(
                 'label'     => 'Description du client :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une bref description']

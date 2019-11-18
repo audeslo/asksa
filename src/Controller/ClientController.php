@@ -37,9 +37,12 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $client->setType('Personne physique');
             $entityManager->persist($client);
             $entityManager->flush();
+            $lastid=$entityManager->getRepository('App:Client')->findLastId();
 
+            $entityManager->getRepository('App:Client')->updateLastReferent($lastid,'CL-'.getAugmente($lastid));
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('client_index');
         }
@@ -62,8 +65,14 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $client->setType('Personne morale');
             $entityManager->persist($client);
             $entityManager->flush();
+
+
+            $lastid=$entityManager->getRepository('App:Client')->findLastId();
+
+            $entityManager->getRepository('App:Client')->updateLastReferent($lastid,'CL-'.getAugmente($lastid));
 
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('client_index');
@@ -153,5 +162,25 @@ class ClientController extends AbstractController
         }
 
         return $this->redirectToRoute('client_index');
+    }
+}
+
+function getAugmente(int $autom)
+{
+
+    if($autom<10)
+    {
+        return '0000'.$autom;
+    }elseif ($autom<100)
+    {
+        return '000'.$autom;
+    }elseif ($autom<1000)
+    {
+        return '00'.$autom;
+    }elseif ($autom<10000)
+    {
+        return '0'.$autom;
+    }else{
+        return $autom;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Client;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Client|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,6 +21,31 @@ class ClientRepository extends ServiceEntityRepository
     }
 
 
+    public function findLastId()
+    {
+        try {
+            return $this->createQueryBuilder('cl')
+                ->select('cl.id')
+                ->orderBy('cl.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    public function updateLastReferent($id,$value)
+    {
+        return $this->createQueryBuilder('cl')
+            ->update()
+            ->set('cl.referent','?1')
+            ->andWhere('cl.id= :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }
 
     // /**
     //  * @return Client[] Returns an array of Client objects

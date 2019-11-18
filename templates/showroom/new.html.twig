@@ -1,0 +1,27 @@
+{% extends 'showroom/showroom.html.twig' %}
+
+{% block content %}
+    <div class="col-md-10" style="background-color: #cccccc">
+        <h1> Ajout d'une nouvelle agence</h1>
+
+        {{ form_start(form) }}
+
+       {{ include('showroom/_form.html.twig') }}
+        <hr>
+        <div class="row">
+            <div class="col-md-2">
+                <a href="{{ path('showroom_index') }}" class="btn btn-default">
+                    <i class="fa fa-chevron-left"></i>
+                    Retour à la Liste
+                </a>
+            </div>
+            <div class="col-md-2 offset-7">
+                <button class="btn btn-primary">{{ button_label|default('Ajouter') }}</button>
+                {{ form_end(form) }}
+            </div>
+
+        </div>
+        <hr>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ showroom.id }}">
+    <i style="font-size: 20px" class="fa fa-eye "></i>
+</a>
+
+<!-- Modal -->
+<div class="modal fade " id="{{ showroom.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+    <div class="modal-dialog modal-lg" role="document"  >
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Détails showrooms</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table-bordered table" style="background-color: #868e96">
+                    <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ showroom.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Réference</th>
+                        <td>{{ showroom.code }}</td>
+                    </tr>
+                    <tr>
+                        <th>Show rooms</th>
+                        <td>{{ showroom.nomshow }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Quartier/Ville</th>
+                        <td>{{ showroom.quartier }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Téléphone</th>
+                        <td>{{ showroom.telephone }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Représentant</th>
+                        <td>{{ showroom.representant }}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Télépnone_2</th>
+                        <td>{{ showroom.tel}}</td>
+                    </tr>
+
+                    <tr>
+                        <th>Mail</th>
+                        <td>{{ showroom.mail }}</td>
+                    </tr>
+
+                    {#<tr>
+                        <th>Enregistré le</th>
+                        <td>
+                            {{ produit.createdOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ produit.createdBy }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Modifié le </th>
+                        <td>
+                            {{ produit.editedOn ? produit.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ produit.editedBy }}
+                        </td>
+                    </tr>#}
+
+                    </tbody>
+                </table>
+                <div class="row" >
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-chevron-left"></i>
+                        Retour à la liste
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-primary">Imprimer</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,22 +11,20 @@
         {{ form_widget(form.nomcourt) }}
         {{ form_errors(form.nomcourt) }}
 
-        {{ form_label(form.adresserue) }}
-        {{ form_widget(form.adresserue) }}
-        {{ form_errors(form.adresserue) }}
-
-        {{ form_label(form.pays) }}
-        {{ form_widget(form.pays) }}
-        {{ form_errors(form.pays) }}
-
-
-    </div>
-
-    <div class="col-md-5 offset-2">
+        {{ form_label(form.nomcomplet) }}
+        {{ form_widget(form.nomcomplet) }}
+        {{ form_errors(form.nomcomplet) }}
 
         {{ form_label(form.ville) }}
         {{ form_widget(form.ville) }}
         {{ form_errors(form.ville) }}
+    </div>
+
+    <div class="col-md-5 offset-2">
+
+        {{ form_label(form.pays) }}
+        {{ form_widget(form.pays) }}
+        {{ form_errors(form.pays) }}
 
         {{ form_label(form.codepostal) }}
         {{ form_widget(form.codepostal) }}
@@ -43,16 +41,15 @@
 <div class="row">
 
     <div class="col-md-5 ">
-        {{ form_label(form.nomcomplet) }}
-        {{ form_widget(form.nomcomplet) }}
-        {{ form_errors(form.nomcomplet) }}
 
         {{ form_label(form.representant) }}
         {{ form_widget(form.representant) }}
         {{ form_errors(form.representant) }}
 
 
-
+        {{ form_label(form.adresserue) }}
+        {{ form_widget(form.adresserue) }}
+        {{ form_errors(form.adresserue) }}
 
     </div>
 

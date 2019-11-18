@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Fournisseur;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,50 +16,50 @@ class FournisseurType extends AbstractType
     {
         $builder
             ->add('nomcourt',TextType::class,array(
-                'label'     => 'Nomcourt :',
+                'label'     => 'Nom court :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom court']
             ))
 
             ->add('nomcomplet',TextType::class,array(
-                       'label'     => 'Nomcomplet :',
+                       'label'     => 'Nom complet :',
                        'required'  => false,
                        'attr'      =>['placeholder'    =>  'Saisissez le nom complet']
     ))
             ->add('representant',TextType::class,array(
-        'label'     => 'Representant :',
+        'label'     => 'Représentant :',
         'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez le nom du representant']
+        'attr'      =>['placeholder'    =>  'Saisissez le nom du représentant']
     ))
             ->add('adresserue',TextType::class,array(
-                'label'     => 'Adresserue :',
+                'label'     => 'Adresse rue :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une adresse valide']
             ))
 
 
             ->add('ville',TextType::class,array(
-                'label'     => 'Ville:',
+                'label'     => 'Ville :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une ville']
             ))
             ->add('pays',TextType::class,array(
-                'label'     => 'Pays:',
+                'label'     => 'Pays :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez un pays']
             ))
             ->add('telephone',TextType::class,array(
-                'label'     => 'Telephone:',
+                'label'     => 'Téléphone :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez un numero de telephone']
             ))
-            ->add('description',TextType::class,array(
-                'label'     => 'Description:',
+            ->add('description',TextareaType::class,array(
+                'label'     => 'Description :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une description']
             ))
             ->add('codepostal',TextType::class,array(
-                'label'     => 'Code postal:',
+                'label'     => 'Code postal :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez un code postal']
             ))

@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ClientRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"referent"}, message="Ce reférent existe déjà")
+
  */
 class Client
 {
@@ -24,8 +24,8 @@ class Client
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Veuillez saisir le referent !")
+     * @ORM\Column(type="string", length=255,nullable=true)
+     *
      */
     private $referent;
 
@@ -37,27 +37,17 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
+     *@Assert\NotBlank(message="Veuillez renseigner ce champ !")
      */
-    private $nom;
+    private $identifiant1;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      *
      */
-    private $prenom;
+    private $identifiant2;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     */
-    private $raisonsociale;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     *
-     */
-    private $ifu;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -79,7 +69,6 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     *@Assert\NotBlank(message="Veuillez renseigner le type du client !")
      */
     private $type;
 
@@ -105,7 +94,7 @@ class Client
 
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
-     * @Gedmo\Slug(fields={"referent"})
+     * @Gedmo\Slug(fields={"identifiant1","identifiant2"})
      */
     private $slug;
 
@@ -177,7 +166,7 @@ class Client
     private $tempFilename;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $society;
 
@@ -216,17 +205,7 @@ class Client
         return $this;
     }
 
-    public function getNom(): ?string
-    {
-        return $this->nom;
-    }
 
-    public function setNom(string $nom): self
-    {
-        $this->nom = $nom;
-
-        return $this;
-    }
 
     public function getAdresserue(): ?string
     {
@@ -434,7 +413,7 @@ class Client
     }*/
     public function __toString()
     {
-        return $this->nom;
+        return $this->identifiant1;
         // TODO: Implement __toString() method.
     }
 
@@ -591,41 +570,6 @@ class Client
         return $this->getUploadDir().'/'.$this->getSlug().'.'.$this->getUrl();
     }
 
-    public function getPrenom(): ?string
-    {
-        return $this->prenom;
-    }
-
-    public function setPrenom(?string $prenom): self
-    {
-        $this->prenom = $prenom;
-
-        return $this;
-    }
-
-    public function getRaisonsociale(): ?string
-    {
-        return $this->raisonsociale;
-    }
-
-    public function setRaisonsociale(?string $raisonsociale): self
-    {
-        $this->raisonsociale = $raisonsociale;
-
-        return $this;
-    }
-
-    public function getIfu(): ?string
-    {
-        return $this->ifu;
-    }
-
-    public function setIfu(?string $ifu): self
-    {
-        $this->ifu = $ifu;
-
-        return $this;
-    }
 
     public function getNumerocompte(): ?string
     {
@@ -647,6 +591,30 @@ class Client
     public function setSociety(string $society): self
     {
         $this->society = $society;
+
+        return $this;
+    }
+
+    public function getIdentifiant1(): ?string
+    {
+        return $this->identifiant1;
+    }
+
+    public function setIdentifiant1(?string $identifiant1): self
+    {
+        $this->identifiant1 = $identifiant1;
+
+        return $this;
+    }
+
+    public function getIdentifiant2(): ?string
+    {
+        return $this->identifiant2;
+    }
+
+    public function setIdentifiant2(?string $identifiant2): self
+    {
+        $this->identifiant2 = $identifiant2;
 
         return $this;
     }

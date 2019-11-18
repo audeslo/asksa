@@ -17,11 +17,7 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-           ->add('reference',TextType::class,array(
-                        'label'     => 'Reference:',
-                        'required'  => false,
-                        'attr'      =>['placeholder'    =>  'Saisissez la référence']
-            ))
+
             ->add('designation',TextType::class,array(
                 'label' => 'Désignation :',
                 'required' => false,

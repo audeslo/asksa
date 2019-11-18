@@ -57,6 +57,12 @@ class TarifcategoriecltType extends AbstractType
                          'required'  => false,
                          'placeholder' => 'Sélectionnez un produit',
             ])
+
+            ->add('litre', TextType::class, [
+                'label' => 'Quantité en litre',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez la quantite']
+            ])
         ;
     }
 

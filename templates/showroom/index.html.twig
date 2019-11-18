@@ -1,0 +1,84 @@
+{% extends 'showroom/showroom.html.twig' %}
+
+{# page tableau et recherche #}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2>
+                <i class="fa fa-table" ></i>
+                Liste des show rooms</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="{{ path('showroom_new') }}" class="btn btn-primary ">
+                        <i class="fa fa-chevron-right"></i>
+                        Nouveau
+                    </a>
+                </div>
+
+                <div class="offset-8 col-md-2 ">
+                    <a href="#" class="btn btn-success ">
+                        <i class="fa fa-print"></i>
+                        Imprimer
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                <tr>
+
+                   <th>Réference</th>
+                    <th>Show rooms</th>
+                    <th>Quartier/Ville</th>
+                    <th>Téléphone</th>
+                    <th>Représentant</th>
+                    <th>Téléphone_2</th>
+                    <th>Mail</th>
+
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for showroom in showrooms %}
+                    <tr>
+
+                       {# <td>{{ produit.reference }}</td>#}
+
+                        <td> {{showroom.code }}</a></td>
+
+                        <td>{{ showroom.nomshow }}</td>
+
+                        <td>{{ showroom.quartier }}</td>
+
+                        <td> {{showroom.telephone}}</a></td>
+
+                        <td>{{ showroom.representant }}</td>
+
+                        <td>{{ showroom.tel }}</td>
+
+                        <td>{{ showroom.mail }}</td>
+
+                        <td>
+                              {% include('showroom/viewmodal.html.twig') %}
+                        </td>
+                        <td>
+                            <a  class="" href="{{ path('showroom_show', {'id': showroom.id}) }}">
+                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer small text-muted">Hier à 11:59 </div>
+
+{% endblock %}
