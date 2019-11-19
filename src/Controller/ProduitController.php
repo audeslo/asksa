@@ -43,6 +43,11 @@ class ProduitController extends AbstractController
             $entityManager->persist($produit);
             $entityManager->flush();
 
+            $lastid=$entityManager->getRepository('App:Produit')->findLastId();
+
+            $entityManager->getRepository('App:Produit')->updateLastReferent($lastid,'PD-'.getRegenere($lastid));
+
+
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('produit_index');
         }
@@ -102,7 +107,7 @@ class ProduitController extends AbstractController
     }
 }
 
-/*function getIncrement(int $automa)
+function getRegenere(int $automa)
 {
 
     if($automa<10)
@@ -120,4 +125,4 @@ class ProduitController extends AbstractController
     }else{
         return $automa;
     }
-}*/
+}

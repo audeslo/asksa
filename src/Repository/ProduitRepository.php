@@ -46,7 +46,31 @@ class ProduitRepository extends ServiceEntityRepository
             ;
     }*/
 
+    public function findLastId()
+    {
+        try {
+            return $this->createQueryBuilder('p')
+                ->select('p.id')
+                ->orderBy('p.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
 
+    public function updateLastReferent($id,$value)
+    {
+        return $this->createQueryBuilder('p')
+            ->update()
+            ->set('p.reference','?1')
+            ->andWhere('p.id= :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }
 
 
 

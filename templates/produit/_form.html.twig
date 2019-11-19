@@ -3,9 +3,9 @@
 <div class="row">
 
     <div class="col-md-5 ">
-        {{ form_label(form.reference) }}
+      {#  {{ form_label(form.reference) }}
         {{ form_widget(form.reference) }}
-        {{ form_errors(form.reference) }}
+        {{ form_errors(form.reference) }}#}
 
         {{ form_label(form.designation) }}
         {{ form_widget(form.designation) }}
@@ -19,23 +19,26 @@
         {{ form_widget(form.prixventeconseiller) }}
         {{ form_errors(form.prixventeconseiller) }}
 
-    </div>
-    <div class="col-md-5 offset-2">
         {{ form_label(form.marque) }}
         {{ form_widget(form.marque) }}
         {{ form_errors(form.marque) }}
+
+    </div>
+    <div class="col-md-5 offset-2">
+
 
         {{ form_label(form.categprod) }}
         {{ form_widget(form.categprod) }}
         {{ form_errors(form.categprod) }}
 
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description) }}
-        {{ form_errors(form.description) }}
 
         {{ form_label(form.stockalerte) }}
         {{ form_widget(form.stockalerte) }}
         {{ form_errors(form.stockalerte) }}
+
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description) }}
+        {{ form_errors(form.description) }}
 
     </div>
 

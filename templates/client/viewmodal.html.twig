@@ -23,7 +23,13 @@
                     </tr>
                     <tr>
                         <th>Nom complet</th>
-                        <td>{{ client.nom }}</td>
+                        <td>{% if client.type == "Personne morale" %}
+                            {{client.identifiant1  }}
+
+                        {% else %}
+                            {{client.identifiant1 ~ " " ~ client.identifiant2  }}
+                        {% endif %}
+                        </td>
                     </tr>
                     <tr>
                         <th>Téléphone</th>

@@ -34,8 +34,9 @@
                     <th>Référence du produit</th>
                     <th>borne supérieure</th>
                     <th>Borne inférieure</th>
+                    <th>Quantité(litre)</th>
                     <th>Montant</th>
-                    <th>Observation</th>
+
                     <th></th>
                     <th></th>
                 </tr>
@@ -48,8 +49,9 @@
                         <td>{{ tarifcategorieclt.produit }}</td>
                         <td>{{ tarifcategorieclt.bornesupperieur }}</td>
                         <td>{{ tarifcategorieclt.borneinferieure }}</td>
+                        <td>{{ tarifcategorieclt.litre }}</td>
                         <td>{{ tarifcategorieclt.montant }}</td>
-                        <td>{{ tarifcategorieclt.observation }}</td>
+
 
                         <td>
                             {% include('tarifcategorieclt/viewmodal.html.twig') %}

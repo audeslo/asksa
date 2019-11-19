@@ -11,17 +11,22 @@
         {{ form_widget(form.produit) }}
         {{ form_errors(form.produit) }}
 
-        {{ form_label(form.montant) }}
-        {{ form_widget(form.montant) }}
-        {{ form_errors(form.montant) }}
+        {{ form_label(form.bornesupperieur) }}
+        {{ form_widget(form.bornesupperieur) }}
+        {{ form_errors(form.bornesupperieur) }}
 
+        {{ form_label(form.litre) }}
+        {{ form_widget(form.litre) }}
+        {{ form_errors(form.litre) }}
 
     </div>
 
     <div class="col-md-5 offset-2">
-        {{ form_label(form.bornesupperieur) }}
-        {{ form_widget(form.bornesupperieur) }}
-        {{ form_errors(form.bornesupperieur) }}
+
+
+        {{ form_label(form.montant) }}
+        {{ form_widget(form.montant) }}
+        {{ form_errors(form.montant) }}
 
         {{ form_label(form.borneinferieure) }}
         {{ form_widget(form.borneinferieure) }}

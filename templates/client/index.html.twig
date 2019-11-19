@@ -11,14 +11,9 @@
                 Liste des clients</h2></div>
         <div class="card-body">
             <div class="row">
-
-
                 <div class="col-md-2">
-
                     {% include('client/viewmodalnew.html.twig') %}
-
                 </div>
-
                 <div class="offset-8 col-md-2 ">
                     <a href="#" class="btn btn-success ">
                         <i class="fa fa-print"></i>
@@ -29,13 +24,11 @@
             <hr>
 
             <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
-
                 <thead>
                 <tr>
-
                     <th>Réferent</th>
-                    <th>Civilité</th>
                     <th>Nom complet</th>
+                    {#<th>Nom complet</th>#}
                     <th>Tel</th>
                     <th>Adresse</th>
                     <th></th>
@@ -50,12 +43,19 @@
 {#                        </td>#}
                         <td>{{ client.referent }}</td>
 
-                        <td> {{ client.civilite ~ " " ~ client.nom  }}</a></td>
+                        <td>
+                            {% if client.type == "Personne morale" %}
+                            {{client.identifiant1  }}
 
-                        <td>{{ client.telephone }}</td>
-                        <td>{{ client.adresserue }}</td>
+                            {% else %}
+                                {{client.identifiant1 ~ " " ~ client.identifiant2  }}
+                            {% endif %}
 
+                        </td>
                         <td>{{ client.telephone }}</td>
+                        <td>{{ client.type }}</td>
+
+
                       {#  <td>{{ client.mail }}</td>#}
                         <td>
                             {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}

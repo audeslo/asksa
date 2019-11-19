@@ -64,11 +64,10 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
-                            <a class="dropdown-item" href="{{path('client_newpm')}}">Nouvelle fiche client</a>
                             <a class="dropdown-item" href="{{path('categorie_index')}}">Fiche categorie</a>
-                            <a class="dropdown-item" href="{{path('categorie_new')}}">Nouvelle fiche categorie</a>
                             <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche fournisseur</a>
-                            <a class="dropdown-item" href="{{path('fournisseur_new')}}">Nouvelle fiche fournisseur</a>
+                            <a class="dropdown-item" href="{{ path('showroom_index') }}">Fiche show rooms</a>
+
 
                         </div>
                     </li>
@@ -120,7 +119,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('commande_index') }}">Fiche de commande</a>
                             <a class="dropdown-item" href="{{path('commande_new')}}">Nouvelle fiche de commandes</a>
-
+                            <a class="dropdown-item" href="{{ path('commandeshow_index') }}">Fiche de commande Showrooms</a>
                             <a class="dropdown-item" href="#">Nouveau bon de reception</a>
 
                         </div>

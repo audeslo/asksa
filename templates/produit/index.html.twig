@@ -32,12 +32,13 @@
                 <thead>
                 <tr>
 
-                    <th>Reference</th>
-                    <th>désignation</th>
+                    <th>Réference</th>
+                    <th>Désignation</th>
                     <th>Prix unitaire</th>
                     <th>Prix conseiller</th>
                     <th>catégorie</th>
                     <th>Marque</th>
+                    <th>Alerte</th>
 
                     <th></th>
                     <th></th>
@@ -46,6 +47,7 @@
                 <tbody>
                 {% for produit in produits %}
                     <tr>
+                        <td> {{produit.reference }}</a></td>
 
                         <td> {{produit.designation }}</a></td>
 
@@ -56,6 +58,8 @@
                         <td> {{produit.categprod}}</a></td>
 
                         <td>{{ produit.marque }}</td>
+
+                        <td>{{ produit.stockalerte }}</td>
 
                         <td>
                               {% include('produit/viewmodal.html.twig') %}

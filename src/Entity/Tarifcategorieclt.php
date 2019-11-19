@@ -57,6 +57,11 @@ class Tarifcategorieclt
      */
     private $produit;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $litre;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -130,6 +135,18 @@ class Tarifcategorieclt
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getLitre(): ?string
+    {
+        return $this->litre;
+    }
+
+    public function setLitre(string $litre): self
+    {
+        $this->litre = $litre;
 
         return $this;
     }

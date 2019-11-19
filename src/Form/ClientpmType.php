@@ -21,19 +21,14 @@ class ClientpmType extends AbstractType
     {
 
         $builder
-            ->add('referent', TextType::class, array(
-                'label'     => 'Réferent :',
-                'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le referent']
-            ))
 
-            ->add('raisonsociale', TextType::class, array(
+            ->add('identifiant1', TextType::class, array(
                 'label'     => 'Raison sociale :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez la raison sociale ']
             ))
 
-            ->add('ifu', TextType::class, array(
+            ->add('identifiant2', TextType::class, array(
                 'label'     => 'N° IFU:',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le numero IFU ']

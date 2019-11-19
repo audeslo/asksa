@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProduitRepository")
  * @ORM\HasLifecycleCallbacks()
- *@UniqueEntity(fields={"reference"}, message="Cette reférence existe déjà")
+
  */
 
 class Produit
@@ -25,8 +25,8 @@ class Produit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, )
-     * @Assert\NotBlank(message="Veuillez saisir la refernce !")
+    @ORM\Column(type="string", length=255, nullable=true)
+
      */
     private $reference;
 

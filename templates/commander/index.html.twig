@@ -32,11 +32,12 @@
                 <thead>
                 <tr>
 
-                    <th>commande</th>
+                    {#<th>commande</th>#}
                     <th>Produit</th>
                     <th>Qté commandée</th>
                     <th>Bidon/carton</th>
                     <th>Qté bidon/Litre</th>
+                    <th>Etat</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -45,8 +46,8 @@
                 {% for commander in commanders %}
                     <tr>
 
-                        <td>{{ commander.id }}</td>
-
+                       {# <td>{{ commander.id }}</td>
+#}
                         <td> {{commander.produit }}</a></td>
 
                         <td>{{ commander.quantitecommandee}}</td>
@@ -55,9 +56,12 @@
 
                         <td>{{ commander.capacitebidon }}</td>
 
-                      {#  <td>
-#}{#                              {% include('commande/viewmodal.html.twig') %}#}{#
-                        </td>#}
+                        <td>{{ commander.etat }}</td>
+
+
+                        {#  <td>
+  #}{#                              {% include('commande/viewmodal.html.twig') %}#}{#
+                          </td>#}
                         <td>
                             <a  class="" href="{{ path('commander_show', {'id': commander.id}) }}">
                                 <i class="fa fa-edit tm-product-delete-icon"></i>
