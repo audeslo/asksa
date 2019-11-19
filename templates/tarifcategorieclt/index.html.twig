@@ -34,7 +34,7 @@
                     <th>Référence du produit</th>
                     <th>borne supérieure</th>
                     <th>Borne inférieure</th>
-                    <th>Quantité(litre)</th>
+                    <th>Capacité bidon</th>
                     <th>Montant</th>
 
                     <th></th>
@@ -50,7 +50,7 @@
                         <td>{{ tarifcategorieclt.bornesupperieur }}</td>
                         <td>{{ tarifcategorieclt.borneinferieure }}</td>
                         <td>{{ tarifcategorieclt.litre }}</td>
-                        <td>{{ tarifcategorieclt.montant }}</td>
+                        <td>{{ tarifcategorieclt.montant | number_format(0,0,' ')}}</td>
 
 
                         <td>
