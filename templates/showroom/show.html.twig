@@ -49,14 +49,14 @@
                 <td>{{ showroom.mail }}</td>
             </tr>
 
-            {#<tr>
+            <tr>
                 <th>CreatedOn</th>
-                <td>{{ produit.createdOn ? produit.createdOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ showroom.createdOn ? showroom.createdOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>EditedOn</th>
-                <td>{{ produit.editedOn ? produit.editedOn|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>#}
+                <td>{{ showroom.editedOn ? showroom.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
             </tbody>
         </table>
 
@@ -67,7 +67,7 @@
             </a>
 
 
-            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('showroom_edit', { 'id': showroom.id }) }}">
+            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('showroom_edit', { 'slug': showroom.slug }) }}">
                 <i class="fa fa-pencil"></i>
                 Modifier
             </a>

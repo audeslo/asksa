@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowroomRepository")
@@ -54,12 +55,13 @@ class Showroom
     private $mail;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Gedmo\Slug(fields={"nomshow"})
      */
     private $slug;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $editedOn;
 
@@ -72,6 +74,25 @@ class Showroom
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $editedBy;
+
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function datecreated()
+    {
+        $this->setCreatedOn(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function dateupdated()
+    {
+        $this->setEditedOn(new \DateTime('now'));
+    }
+
+
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
@@ -226,4 +247,10 @@ class Showroom
 
         return $this;
     }
+    public function __toString()
+    {
+        return $this->nomshow;
+        // TODO: Implement __toString() method.
+    }
+
 }

@@ -46,7 +46,7 @@ class ShowroomController extends AbstractController
 
             $lastid=$entityManager->getRepository('App:Showroom')->findLastId();
 
-            $entityManager->getRepository('App:Showroom')->updateLastReferent($lastid,'SHROOMS-'.getIncrementation($lastid));
+            $entityManager->getRepository('App:Showroom')->updateLastReferent($lastid,'SR-'.getIncrementation($lastid));
 
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('showroom_index');
@@ -59,7 +59,7 @@ class ShowroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="showroom_show", methods={"GET"})
+     * @Route("/{slug}", name="showroom_show", methods={"GET"})
      */
     public function show(Showroom $showroom): Response
     {
@@ -69,7 +69,7 @@ class ShowroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="showroom_edit", methods={"GET","POST"})
+     * @Route("/{slug}/edit", name="showroom_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Showroom $showroom): Response
     {
@@ -91,7 +91,7 @@ class ShowroomController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="showroom_delete", methods={"DELETE"})
+     * @Route("/{slug}", name="showroom_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Showroom $showroom): Response
     {

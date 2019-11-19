@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommanderRepository")
  * @ORM\HasLifecycleCallbacks()
- * @UniqueEntity(fields={"produit","capacitebidon","capacitecarton"}, message="Ce produit existe déjà dans cette commande, veuillez modifier la quantité au besoin")
+ * @UniqueEntity(fields={"produit","capacitebidon","capacitecarton","commande"}, message="Ce produit existe déjà dans cette commande, veuillez modifier la quantité au besoin")
  */
 class Commander
 {
@@ -24,6 +24,7 @@ class Commander
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="commanders")
      * @ORM\JoinColumn(nullable=false)
+     *  @Assert\NotBlank(message="Veuillez choisir un produit !")
      */
     private $produit;
 
@@ -35,16 +36,19 @@ class Commander
 
     /**
      * @ORM\Column(type="integer")
+     *  @Assert\NotBlank(message="Veuillez saisir la quantite commandée !")
      */
     private $quantitecommandee;
 
     /**
      * @ORM\Column(type="integer")
+     *  @Assert\NotBlank(message="Veuillez saisir la capacité du bidon !")
      */
     private $capacitebidon;
 
     /**
      * @ORM\Column(type="integer")
+     *  @Assert\NotBlank(message="Veuillez saisir la capacité du carton !")
      */
     private $capacitecarton;
 

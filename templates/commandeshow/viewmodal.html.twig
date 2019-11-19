@@ -1,68 +1,48 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ showroom.id }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ commandeshow.slug }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ showroom.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ commandeshow.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails showrooms</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails commande</h4>
             </div>
             <div class="modal-body">
                 <table class="table-bordered table" style="background-color: #868e96">
                     <tbody>
                     <tr>
                         <th>Id</th>
-                        <td>{{ showroom.id }}</td>
+                        <td>{{ commandeshow.id }}</td>
                     </tr>
                     <tr>
-                        <th>Réference</th>
-                        <td>{{ showroom.code }}</td>
+                        <th>Intitule</th>
+                        <td>{{ commandeshow.intituleshow }}</td>
                     </tr>
                     <tr>
-                        <th>Show rooms</th>
-                        <td>{{ showroom.nomshow }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Quartier/Ville</th>
-                        <td>{{ showroom.quartier }}</td>
+                        <th>Fournisseur</th>
+                        <td>{{ commandeshow.fournisseurshow }}</td>
                     </tr>
 
-                    <tr>
-                        <th>Téléphone</th>
-                        <td>{{ showroom.telephone }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Représentant</th>
-                        <td>{{ showroom.representant }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Télépnone_2</th>
-                        <td>{{ showroom.tel}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Mail</th>
-                        <td>{{ showroom.mail }}</td>
+                   <tr>
+                        <th>Date de commande</th>
+                        <td>{{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-m-Y') : ''}}</td>
                     </tr>
 
                     <tr>
                         <th>Enregistré le</th>
                         <td>
-                            {{ showroom.createdOn ? showroom.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ showroom.createdBy }}
+                            {{ commandeshow.creditedOn ? commandeshow.creditedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ commandeshow.createdBy }}
                         </td>
                     </tr>
                     <tr>
                         <th>Modifié le </th>
                         <td>
-                            {{ showroom.editedOn ? showroom.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ showroom.editedBy }}
+                            {{ commandeshow.editedOn ? commandeshow.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ commandeshow.editedBy }}
                         </td>
                     </tr>
 

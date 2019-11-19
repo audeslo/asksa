@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191118154602 extends AbstractMigration
+final class Version20191118221621 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,11 +22,9 @@ final class Version20191118154602 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE showroom ADD edited_by_id INT DEFAULT NULL, ADD created_by_id INT DEFAULT NULL, ADD slug VARCHAR(255) NOT NULL, ADD edited_on DATETIME NOT NULL, ADD created_on DATETIME NOT NULL');
+        $this->addSql('CREATE TABLE showroom (id INT AUTO_INCREMENT NOT NULL, edited_by_id INT DEFAULT NULL, created_by_id INT DEFAULT NULL, code VARCHAR(255) DEFAULT NULL, nomshow VARCHAR(255) NOT NULL, quartier VARCHAR(255) NOT NULL, telephone VARCHAR(255) NOT NULL, representant VARCHAR(255) NOT NULL, tel VARCHAR(255) NOT NULL, mail VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, edited_on DATETIME DEFAULT NULL, created_on DATETIME NOT NULL, INDEX IDX_1E2F444FDD7B2EBC (edited_by_id), INDEX IDX_1E2F444FB03A8386 (created_by_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE showroom ADD CONSTRAINT FK_1E2F444FDD7B2EBC FOREIGN KEY (edited_by_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE showroom ADD CONSTRAINT FK_1E2F444FB03A8386 FOREIGN KEY (created_by_id) REFERENCES user (id)');
-        $this->addSql('CREATE INDEX IDX_1E2F444FDD7B2EBC ON showroom (edited_by_id)');
-        $this->addSql('CREATE INDEX IDX_1E2F444FB03A8386 ON showroom (created_by_id)');
     }
 
     public function down(Schema $schema) : void
@@ -34,10 +32,6 @@ final class Version20191118154602 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE showroom DROP FOREIGN KEY FK_1E2F444FDD7B2EBC');
-        $this->addSql('ALTER TABLE showroom DROP FOREIGN KEY FK_1E2F444FB03A8386');
-        $this->addSql('DROP INDEX IDX_1E2F444FDD7B2EBC ON showroom');
-        $this->addSql('DROP INDEX IDX_1E2F444FB03A8386 ON showroom');
-        $this->addSql('ALTER TABLE showroom DROP edited_by_id, DROP created_by_id, DROP slug, DROP edited_on, DROP created_on');
+        $this->addSql('DROP TABLE showroom');
     }
 }
