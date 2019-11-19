@@ -1,0 +1,57 @@
+{% extends 'commandeshow/commandeShow.html.twig' %}
+
+{% block content %}
+
+    {#{% block body %}#}
+    <div class="col-lg-10">
+
+        <h1>Detail commande</h1>
+
+        <table class="table-bordered table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ commandeshow.id }}</td>
+            </tr>
+            <tr>
+                <th>Intitule</th>
+                <td>{{ commandeshow.intituleshow }}</td>
+            </tr>
+            <tr>
+                <th>Fournisseur</th>
+                <td>{{ commandeshow.fournisseurshow }}</td>
+            </tr>
+
+            <tr>
+                <th>Date de commande</th>
+                <td>{{ commandeshow.datecomshow }}</td>
+            </tr>
+
+
+
+            <tr>
+                <th>CreatedOn</th>
+                <td>{{ commandeshow.creditedOn ? commandeshow.creditedOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EditedOn</th>
+                <td>{{ commandeshow.editedOn ? commandeshow.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <a class="btn btn-default col-md-3" href="{{ path('commandeshow_index') }}">
+                <i class="fa fa-chevron-left"></i>
+                Retour à la liste
+            </a>
+
+
+            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('commandeshow_edit', { 'slug': commandeshow.slug }) }}">
+                <i class="fa fa-pencil"></i>
+                Modifier
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

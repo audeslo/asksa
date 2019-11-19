@@ -1,0 +1,77 @@
+{% extends 'showroom/showroom.html.twig' %}
+
+{% block content %}
+
+    {#{% block body %}#}
+    <div class="col-lg-10">
+
+        <h1>Detail de show rooms</h1>
+
+        <table class="table-bordered table">
+            <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ showroom.id }}</td>
+            </tr>
+
+            <tr>
+                <th>Réference</th>
+                <td>{{ showroom.code }}</td>
+            </tr>
+
+            <tr>
+                <th>Show rooms</th>
+                <td>{{ showroom.nomshow }}</td>
+            </tr>
+
+            <tr>
+                <th>Quartier/Ville</th>
+                <td>{{ showroom.quartier }}</td>
+            </tr>
+
+            <tr>
+                <th>Téléphone</th>
+                <td>{{ showroom.telephone }}</td>
+            </tr>
+
+            <tr>
+                <th>Représentant</th>
+                <td>{{ showroom.representant }}</td>
+            </tr>
+
+            <tr>
+                <th>Téléphone_2</th>
+                <td>{{ showroom.tel}}</td>
+            </tr>
+
+            <tr>
+                <th>Mail</th>
+                <td>{{ showroom.mail }}</td>
+            </tr>
+
+            <tr>
+                <th>CreatedOn</th>
+                <td>{{ showroom.createdOn ? showroom.createdOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>EditedOn</th>
+                <td>{{ showroom.editedOn ? showroom.editedOn|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row">
+            <a class="btn btn-default col-md-3" href="{{ path('showroom_index') }}">
+                <i class="fa fa-chevron-left"></i>
+                Retour à la liste
+            </a>
+
+
+            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('showroom_edit', { 'slug': showroom.slug }) }}">
+                <i class="fa fa-pencil"></i>
+                Modifier
+            </a>
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'commandeshow/commandeShow.html.twig' %}
+
+{# page tableau et recherche #}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2>
+                <i class="fa fa-table" ></i>
+                Liste des commandes</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="{{ path('commandeshow_new') }}" class="btn btn-primary ">
+                        <i class="fa fa-chevron-right"></i>
+                        Nouveau
+                    </a>
+                </div>
+
+                <div class="offset-8 col-md-2 ">
+                    <a href="#" class="btn btn-success ">
+                        <i class="fa fa-print"></i>
+                        Imprimer
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                <tr>
+                    <th>Référence</th>
+                    <th>Intitule de la commande</th>
+                    <th>Date de commande</th>
+                    <th>Representant</th>
+
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commandeshow in commandeshows %}
+                    <tr>
+                        <td>{{ commandeshow.reference }}</td>
+                        <td><a  href="{{ path('commandeshow_index', {'slug' : commandeshow.slug}) }}">{{ commandeshow.intituleshow }}</a></td>
+                        <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
+                        <td>{{ commandeshow.fournisseurshow }}</td>
+
+
+                        <td>
+                            {% include('commandeshow/viewmodal.html.twig') %}
+                        </td>
+                        <td>
+                            <a  class="" href="{{ path('commandeshow_show', {'slug': commandeshow.slug}) }}">
+                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer small text-muted">Hier à 11:59 </div>
+
+{% endblock %}

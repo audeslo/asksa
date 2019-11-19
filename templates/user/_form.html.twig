@@ -1,0 +1,35 @@
+
+<div class="row">
+
+    <div class="col-md-5 ">
+
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom) }}
+        {{ form_errors(form.nom) }}
+
+        {{ form_label(form.prenom) }}
+        {{ form_widget(form.prenom) }}
+        {{ form_errors(form.prenom) }}
+
+        {{ form_label(form.mail) }}
+        {{ form_widget(form.mail) }}
+        {{ form_errors(form.mail) }}
+    </div>
+
+    <div class="col-md-5 offset-2">
+
+        {{ form_label(form.telephone) }}
+        {{ form_widget(form.telephone) }}
+        {{ form_errors(form.telephone) }}
+
+        {{ form_label(form.mdp) }}
+        {{ form_widget(form.mdp) }}
+        {{ form_errors(form.mdp) }}
+
+        {{ form_label(form.mdpconfirm) }}
+        {{ form_widget(form.mdpconfirm) }}
+        {{ form_errors(form.mdpconfirm) }}
+
+    </div>
+
+</div>
