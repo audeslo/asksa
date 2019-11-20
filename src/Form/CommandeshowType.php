@@ -2,7 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\Commandeshow;
+use App\Entity\Showroom;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
@@ -31,7 +35,14 @@ class CommandeshowType extends AbstractType
               'required'  => false,
               'attr'      =>['placeholder'    =>  'Saisissez le distributeur de Ask SA']
           ))
-          /*  ->add('slug')
+
+            ->add('showroom', EntityType::class, [
+                'class' => Showroom::class,
+                'choice_label' => 'nomshow',
+                'required'  => false,
+                'placeholder' => 'Sélectionnez une showroom',
+            ])
+            /*  ->add('slug')
             ->add('editedOn')
             ->add('creditedOn')
             ->add('editedBy')

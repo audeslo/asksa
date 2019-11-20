@@ -33,6 +33,7 @@
                 <tr>
                     <th>Référence</th>
                     <th>Intitule de la commande</th>
+                    <th>Type de showroom</th>
                     <th>Date de commande</th>
                     <th>Representant</th>
 
@@ -44,7 +45,8 @@
                 {% for commandeshow in commandeshows %}
                     <tr>
                         <td>{{ commandeshow.reference }}</td>
-                        <td><a  href="{{ path('commandeshow_index', {'slug' : commandeshow.slug}) }}">{{ commandeshow.intituleshow }}</a></td>
+                        <td><a  href="{{ path('commandershow_index', {'slug' : commandeshow.slug}) }}">{{ commandeshow.intituleshow }}</a></td>
+                        <td>{{ commandeshow.showroom }}</td>
                         <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
                         <td>{{ commandeshow.fournisseurshow }}</td>
 

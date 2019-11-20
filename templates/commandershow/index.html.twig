@@ -1,0 +1,93 @@
+{% extends 'commandershow/commandershow.html.twig' %}
+
+{# page tableau et recherche #}
+
+{% block content %}
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2>
+                <i class="fa fa-table" ></i>
+                Liste des produits: {{ commandeshow.intituleshow }}</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="{{ path('commandershow_new') }}" class="btn btn-primary ">
+                        <i class="fa fa-chevron-right"></i>
+                      Ajouter
+                    </a>
+                </div>
+
+                <div class="offset-8 col-md-2 ">
+                    <a href="#" class="btn btn-success ">
+                        <i class="fa fa-print"></i>
+                        Imprimer
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" >
+
+                <thead>
+                <tr>
+
+                    {#<th>commande</th>#}
+                    <th>Produit</th>
+                    <th>Qté commandée</th>
+                    <th>Bidon/carton</th>
+                    <th>Qté bidon/Litre</th>
+                    <th>Etat</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commandershow in commandershows %}
+                    <tr>
+
+                       {# <td>{{ commander.id }}</td>
+#}
+                        <td> {{commandershow.produit }}</a></td>
+
+                        <td>{{ commandershow.quantitecommandeshow}}</td>
+
+                        <td>{{ commandershow.capacitecartonshow }}</td>
+
+                        <td>{{ commandershow.capacitebidonshow }}</td>
+
+                        <td>{{ commandershow.etat }}</td>
+
+
+                        {#  <td>
+  #}{#                              {% include('commande/viewmodal.html.twig') %}#}{#
+                          </td>#}
+                        <td>
+                            <a  class="" href="{{ path('commandershow_show_show', {'id': commandershow.id}) }}">
+                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="row">
+                <div class="col-md-2">
+                    <a class="btn btn-default col-md-3" href="{{ path('commandeshow_index') }}">
+                        <i class="fa fa-chevron-left"></i>
+                        Retour à la liste
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <hr>
+
+
+
+
+    <div class="card-footer small text-muted">Hier à 11:59 </div>
+
+{% endblock %}

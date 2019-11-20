@@ -81,6 +81,12 @@ class Commandeshow
      */
     private $createdBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Showroom")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $showroom;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -200,36 +206,48 @@ class Commandeshow
         // TODO: Implement __toString() method.
     }
 
+    public function getShowroom(): ?Showroom
+    {
+        return $this->showroom;
+    }
 
-    /**
+    public function setShowroom(?Showroom $showroom): self
+    {
+        $this->showroom = $showroom;
+
+        return $this;
+    }
+
+
+    /*
      * @return Collection|Commandershow[]
      */
-    public function getCommandershows(): Collection
-    {
-        return $this->commandershows;
-    }
+    /*   public function getCommandershows(): Collection
+       {
+           return $this->commandershows;
+       }
 
-    public function addCommander(Commandershow $commandershow): self
-    {
-        if (!$this->commandershows->contains($commandershow)) {
-            $this->commandershows[] = $commandershow;
-            $commandershow->setCommande($this);
-        }
+       public function addCommander(Commandershow $commandershow): self
+       {
+           if (!$this->commandershows->contains($commandershow)) {
+               $this->commandershows[] = $commandershow;
+               $commandershow->setCommande($this);
+           }
 
-        return $this;
-    }
+           return $this;
+       }
 
-    public function removeCommandershow(Commandershow $commandershow): self
-    {
-        if ($this->commandershows->contains($commandershow)) {
-            $this->commandershows->removeElement($commandershow);
-            // set the owning side to null (unless already changed)
-            if ($commandershow->getCommande() === $this) {
-                $commandershow->setCommande(NULL);
-            }
-        }
+       public function removeCommandershow(Commandershow $commandershow): self
+       {
+           if ($this->commandershows->contains($commandershow)) {
+               $this->commandershows->removeElement($commandershow);
+               // set the owning side to null (unless already changed)
+               if ($commandershow->getCommande() === $this) {
+                   $commandershow->setCommande(NULL);
+               }
+           }
 
-        return $this;
-    }
+           return $this;
+       }*/
 
 }

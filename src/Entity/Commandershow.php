@@ -74,7 +74,7 @@ class Commandershow
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commandeshow")
      */
-    private $commande;
+    private $commandeshow;
 
     public function getId(): ?int
     {
@@ -213,15 +213,17 @@ class Commandershow
         return $this;
     }
 
-    public function getCommande(): ?Commandeshow
+    public function getCommandeshow(): ?Commandeshow
     {
-        return $this->commande;
+        return $this->commandeshow;
     }
 
-    public function setCommande(?Commandeshow $commande): self
+    public function setCommandeshow(?Commandeshow $commandeshow): self
     {
-        $this->commande = $commande;
+        $this->commandeshow = $commandeshow;
 
         return $this;
     }
+
+
 }

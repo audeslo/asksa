@@ -1,4 +1,4 @@
-{% extends 'commander/commander.html.twig' %}
+{% extends 'commandershow/commandershow.html.twig' %}
 
 {% block content %}
 
@@ -11,48 +11,39 @@
             <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ commander.id }}</td>
+                <td>{{ commandershow.id }}</td>
             </tr>
             <tr>
                 <th>commande</th>
-                <td>{{ commander.commande }}</td>
+                <td>{{ commandershow.commande }}</td>
             </tr>
             <tr>
                 <th>Produit</th>
-                <td>{{ commander.produit }}</td>
+                <td>{{ commandershow.produit }}</td>
             </tr>
 
-           {# <tr>
+            <tr>
                 <th>capacite</th>
-                <td>{{ commander.capacite }}</td>
+                <td>{{ commandershow.capacitecartonshow }}</td>
             </tr>
 
             <tr>
                 <th>code bar carton</th>
-                <td>{{ commander.codebarecaton }}</td>
+                <td>{{ commandershow.capacitebidonshow }}</td>
             </tr>
 
-            <tr>
-                <th>code bar produit</th>
-                <td>{{ commander.codebareproduit }}</td>
-            </tr>#}
-
-            <tr>
-                <th>Capacite carton</th>
-                <td>{{ commander.capacitecarton}}</td>
-            </tr>
 
             </tbody>
         </table>
 
         <div class="row">
-            <a class="btn btn-default col-md-3" href="{{ path('commander_index') }}">
+            <a class="btn btn-default col-md-3" href="{{ path('commandershow_index') }}">
                 <i class="fa fa-chevron-left"></i>
                 Retour à la liste
             </a>
 
 
-            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('commander_edit', { 'id': commander.id }) }}">
+            <a class="btn btn-primary col-md-2 offset-6" href="{{ path('commandershow_edit', { 'id': commandershow.id }) }}">
                 <i class="fa fa-pencil"></i>
                 Modifier
             </a>
