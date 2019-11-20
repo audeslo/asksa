@@ -33,7 +33,7 @@ class Tarifcategorieclt
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank(message="Veuillez saisir une observation  !")
+     *
      */
     private $observation;
 
