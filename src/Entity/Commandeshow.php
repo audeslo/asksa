@@ -227,6 +227,7 @@ class Commandeshow
            return $this->commandershows;
        }
 
+
        public function addCommander(Commandershow $commandershow): self
        {
            if (!$this->commandershows->contains($commandershow)) {

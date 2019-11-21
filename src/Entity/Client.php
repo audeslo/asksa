@@ -171,6 +171,8 @@ class Client
     private $society;
 
 
+
+
     /**
      * @ORM\PrePersist()
      */
@@ -618,5 +620,6 @@ class Client
 
         return $this;
     }
+
 
 }

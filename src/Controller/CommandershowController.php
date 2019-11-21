@@ -47,12 +47,12 @@ class CommandershowController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $commandeshow= $entityManager->getRepository('App:Commandeshow')->find($commandeshow->getId());
-            $commandershow->setCommande($commandeshow);
+            $commandershow->setCommandeshow($commandeshow);
             $commandershow->setQuantitestock($form['quantitecommandeshow']->getData());
 
             // Récupération de la reférence produit
-            $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
-            $refproduit=$produit->getReference();
+           $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
+           $refproduit=$produit->getReference();
 
             //refernce commande
             $refcommande=$commandeshow->getReference();
