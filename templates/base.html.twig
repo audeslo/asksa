@@ -34,7 +34,7 @@
 {% block nav %}
 
 <div class="" id="home">
-    <nav class="navbar navbar-expand-xl">
+    <nav class="navbar navbar-expand-xl fixed-custom">
         <div class="container-fluid h-100">
             <a class="navbar-brand" href="index.html">
                 <h1 class="tm-site-title mb-0">ASK SA</h1>
@@ -99,7 +99,7 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Nouveau Devis</a>
+                            <a class="dropdown-item" href="{{ path('commandeclient_index') }}">Nouveau Devis</a>
                             <a class="dropdown-item" href="#">Suivi des devis</a>
                             <a class="dropdown-item" href="#">Relance de devis</a>
                             <a class="dropdown-item" href="#">Nouvelle facture</a>

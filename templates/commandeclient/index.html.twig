@@ -1,4 +1,4 @@
-{% extends 'client/client.html.twig' %}
+{% extends 'commande/commande.html.twig' %}
 
 {# page tableau et recherche #}
 
@@ -8,12 +8,16 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des clients</h2></div>
+                Liste des commandes</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    {% include('client/viewmodalnew.html.twig') %}
+                    <a href="" class="btn btn-primary ">
+                        <i class="fa fa-chevron-right"></i>
+                        Nouveau
+                    </a>
                 </div>
+
                 <div class="offset-8 col-md-2 ">
                     <a href="#" class="btn btn-success ">
                         <i class="fa fa-print"></i>
@@ -22,6 +26,7 @@
                 </div>
             </div>
             <hr>
+
             <table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                 <tr>
@@ -29,17 +34,13 @@
                     <th>Nom complet</th>
                     {#<th>Nom complet</th>#}
                     <th>Tel</th>
-                    <th>Adresse</th>
-                    <th></th>
-                    <th></th>
+                    <th>Type</th>
+                    <th>Lancer une commande</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for client in clients %}
                     <tr>
-                        {#                        <td>#}
-                        {#                          {% include('client/viewmodal.html.twig') %}#}
-                        {#                        </td>#}
                         <td>{{ client.referent }}</td>
 
                         <td>
@@ -53,16 +54,9 @@
                         </td>
                         <td>{{ client.telephone }}</td>
                         <td>{{ client.type }}</td>
-
-
-                        {#  <td>{{ client.mail }}</td>#}
-                        <td>
-                            {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}
-                            {% include('client/viewmodal.html.twig') %}
-                        </td>
-                        <td>
-                            <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
-                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                        <td class="text-center">
+                            <a  class="btn btn-dark btn-small" href="{{ path('commandeclient_new', {'id': client.id}) }}">
+                                <i class="fas fa-shopping-cart"> </i> Lancer une commande
                             </a>
                         </td>
                     </tr>
@@ -72,7 +66,5 @@
 
         </div>
     </div>
-
-    <div class="card-footer small text-muted">Hier à 11:59 </div>
 
 {% endblock %}

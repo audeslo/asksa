@@ -1,0 +1,48 @@
+<table class="table table-bordered display" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+    <tr>
+        <th>Réferent</th>
+        <th>Nom complet</th>
+        {#<th>Nom complet</th>#}
+        <th>Tel</th>
+        <th>Adresse</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for client in clients %}
+        <tr>
+            {#                        <td>#}
+            {#                          {% include('client/viewmodal.html.twig') %}#}
+            {#                        </td>#}
+            <td>{{ client.referent }}</td>
+
+            <td>
+                {% if client.type == "Personne morale" %}
+                    {{client.identifiant1  }}
+
+                {% else %}
+                    {{client.identifiant1 ~ " " ~ client.identifiant2  }}
+                {% endif %}
+
+            </td>
+            <td>{{ client.telephone }}</td>
+            <td>{{ client.type }}</td>
+
+
+            {#  <td>{{ client.mail }}</td>#}
+            <td>
+                {#<a href="{{ path('client_show', {'slug': client.slug}) }}">show</a>#}
+                {% include('client/viewmodal.html.twig') %}
+            </td>
+            <td>
+                <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
+                    <i class="fa fa-edit tm-product-delete-icon"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
