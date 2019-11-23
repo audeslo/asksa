@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Vente;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Vente|null find($id, $lockMode = null, $lockVersion = null)
@@ -18,6 +19,34 @@ class VenteRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Vente::class);
     }
+
+    public function findLastId()
+    {
+        try {
+            return $this->createQueryBuilder('f')
+                ->select('f.id')
+                ->orderBy('f.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    public function updateLastReferent($id,$value)
+    {
+        return $this->createQueryBuilder('f')
+            ->update()
+            ->set('f.reference','?1')
+            ->andWhere('f.id = :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
+
 
     // /**
     //  * @return Vente[] Returns an array of Vente objects

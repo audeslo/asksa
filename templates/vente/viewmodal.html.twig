@@ -1,68 +1,50 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ produit.slug }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ commandeshow.slug }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ produit.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ commandeshow.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Détails produit</h4>
+                <h4 class="modal-title" id="myModalLabel">Détails commande</h4>
             </div>
             <div class="modal-body">
                 <table class="table-bordered table" style="background-color: #868e96">
                     <tbody>
                     <tr>
                         <th>Id</th>
-                        <td>{{ produit.id }}</td>
+                        <td>{{ vente.id }}</td>
                     </tr>
                     <tr>
-                        <th>Libelle</th>
-                        <td>{{ produit.reference }}</td>
-                    </tr>
-                    <tr>
-                        <th>Désignation</th>
-                        <td>{{ produit.designation }}</td>
+                        <th>Intitule</th>
+                        <td>{{ vente.reference }}</td>
                     </tr>
 
                     <tr>
-                        <th>Prix unitaire</th>
-                        <td>{{ produit.prixU }}</td>
+                        <th>Type de showroom</th>
+                        <td>{{ vente.client }}</td>
                     </tr>
 
-                    <tr>
-                        <th>Prix conseiller</th>
-                        <td>{{ produit.prixventeconseiller }}</td>
-                    </tr>
 
-                    <tr>
-                        <th>Marque</th>
-                        <td>{{ produit.marque }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Categorie</th>
-                        <td>{{ produit.categprod}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Description</th>
-                        <td>{{ produit.description }}</td>
+                   <tr>
+                        <th>Date de commande</th>
+                        <td>{{ vente.datevente ? vente.datevente | date('d-m-Y') : ''}}</td>
                     </tr>
 
                     <tr>
                         <th>Enregistré le</th>
                         <td>
-                            {{ produit.createdOn ? produit.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ produit.createdBy }}
+                            {{ vente.creditedOn ? vente.creditedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ vente.createdBy }}
                         </td>
                     </tr>
                     <tr>
                         <th>Modifié le </th>
                         <td>
-                            {{ produit.editedOn ? produit.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
-                            Par {{ produit.editedBy }}
+                            {{ vente.editedOn ? vente.editedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            Par {{ vente.editedBy }}
                         </td>
                     </tr>
 
