@@ -37,7 +37,7 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $client->setType('Personne physique');
+            $client->setType(1);
             $entityManager->persist($client);
             $entityManager->flush();
             $lastid=$entityManager->getRepository('App:Client')->findLastId();
@@ -65,7 +65,7 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
-            $client->setType('Personne morale');
+            $client->setType(0);
             $entityManager->persist($client);
             $entityManager->flush();
 

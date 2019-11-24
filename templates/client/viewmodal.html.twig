@@ -23,15 +23,14 @@
                     </tr>
                     <tr>
                         <th>Nom complet</th>
-                        <td>{% if client.type == "Personne morale" %}
-                            {{client.identifiant1  }}
-
-                        {% else %}
-                            {{client.identifiant1 ~ " " ~ client.identifiant2  }}
-                        {% endif %}
+                        <td> {{ client.type ? client.identifiant1 ~ " " ~ client.identifiant2
+                            : client.identifiant1  }}
                         </td>
                     </tr>
                     <tr>
+                        <th>Type</th>
+                        <td>{{ client.type ? "P. Physique":"P. Morale" }}</td>
+                    </tr><tr>
                         <th>Téléphone</th>
                         <td>{{ client.telephone }}</td>
                     </tr>

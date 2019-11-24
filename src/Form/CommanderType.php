@@ -20,12 +20,11 @@ class CommanderType extends AbstractType
             ->add('capacitecarton',IntegerType::class,array(
         'label'     => 'Bidon/carton :',
         'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez la capacite du carton']
     ))
             ->add('capacitebidon',IntegerType::class,array(
         'label'     => 'Quantite/Bidon (Litre) :',
         'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez la capacite du bidon']
+
     ))
             ->add('quantitecommandee',IntegerType::class,array(
                 'label'=> 'Quantité de carton :',

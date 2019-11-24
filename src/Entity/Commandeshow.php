@@ -59,6 +59,11 @@ class Commandeshow
      */
     private $editedBy;
 
+    public function __construct()
+    {
+        $this->setDatecomshow(new \DateTime('now'));
+    }
+
     /**
      * @ORM\PrePersist()
      */

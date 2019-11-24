@@ -68,7 +68,7 @@ class Client
     private $adresserue;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="boolean", nullable=false)
      */
     private $type;
 
