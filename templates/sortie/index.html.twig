@@ -34,10 +34,10 @@
 
                     {#<th>commande</th>#}
                     <th>Produit</th>
-                    <th>Qté commandée</th>
+                    <th>Qté achetee</th>
                     <th>Bidon/carton</th>
                     <th>Qté bidon/Litre</th>
-                    <th>Etat</th>
+                   {# <th>Etat</th>#}
                     <th></th>
                     <th></th>
                 </tr>
@@ -48,13 +48,13 @@
 
                        {# <td>{{ commander.id }}</td>
 #}
-                        <td> {{sortie.produit }}</a></td>
+                        <td> {{vente.produit }}</a></td>
 
-                        <td>{{ sortie.quantiteachete}}</td>
+                        <td>{{ vente.quantiteachete}}</td>
 
-                        <td>{{ sortie.quantitecarton }}</td>
+                        <td>{{ vente.capacitecartonshow }}</td>
 
-                        <td>{{ sortie.capacitebidon }}</td>
+                        <td>{{ vente.capacitebidonshow }}</td>
 
 
                         {#  <td>

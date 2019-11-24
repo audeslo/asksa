@@ -21,14 +21,14 @@ class SortieController extends AbstractController
     /**
      * @Route("/Liste-des-produits-commandes/{slug}", name="sortie_index", methods={"GET"})
      * @param SortieRepository $sortieRepository
-     * @param Vente $vente
+     * @param Sortie $sortie
      * @return Response
      */
     public function index(SortieRepository $sortieRepository, Vente $vente): Response
     {
         $this->get('session')->set('vente',$vente);
 
-        return $this->render('sortie/index.html.twig', [
+        return $this->render('vente/index.html.twig', [
             'sorties' => $sortieRepository->findBy(['vente' => $vente->getId()]),
             'vente'  =>  $vente,
         ]);
@@ -48,15 +48,17 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $vente= $entityManager->getRepository('App:Vente')->find($vente->getId());
-
-          /*  $sortie->setVente($vente);
-            $sortie->setQuantiteenstock($form['quantiteachete']->getData());*/
+            $sortie->setCommandeshow($vente);
+          /*  $sortie->setQuantitestock($form['quantite']->getData());*/
 
             // Récupération de la reférence produit
             $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
             $refproduit=$produit->getReference();
 
+            //refernce commande
+            $refvente=$vente->getReference();
 
+            //  $commandershow->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'C-'.$form['capacitebidon']->getData().'S');
 
             $entityManager->persist($sortie);
             $entityManager->flush();
@@ -117,6 +119,5 @@ class SortieController extends AbstractController
 
 
 }
-
 
 

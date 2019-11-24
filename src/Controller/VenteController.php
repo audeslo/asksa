@@ -41,7 +41,7 @@ class VenteController extends AbstractController
 
             $lastid=$entityManager->getRepository('App:Vente')->findLastId();
 
-            $entityManager->getRepository('App:Vente')->updateLastReferent($lastid,'FA-'.getVale($lastid));
+            $entityManager->getRepository('App:Vente')->updateLastReferent($lastid,'FA-'.getVal($lastid));
             // ;
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
             return $this->redirectToRoute('vente_index');
@@ -102,7 +102,7 @@ class VenteController extends AbstractController
     }
 }
 
-function getVale(int $valeu)
+function getVal(int $valeu)
 {
 
     if($valeu<10)

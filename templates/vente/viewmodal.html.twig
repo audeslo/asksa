@@ -1,9 +1,9 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ commandeshow.slug }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ vente.slug }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ commandeshow.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ vente.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
@@ -26,7 +26,10 @@
                         <th>Type de showroom</th>
                         <td>{{ vente.client }}</td>
                     </tr>
-
+                    <tr>
+                        <th>Fournisseur</th>
+                        <td>{{ vente.datevente }}</td>
+                    </tr>
 
                    <tr>
                         <th>Date de commande</th>

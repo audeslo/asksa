@@ -15,24 +15,22 @@
             </tr>
             <tr>
                 <th>Intitule</th>
-                <td>{{ vente.reference}}</td>
+                <td>{{ vente.datevente }}</td>
             </tr>
 
             <tr>
                 <th>Type de magasin</th>
                 <td>{{ vente.client }}</td>
             </tr>
-
             <tr>
-                <th>Date de commande</th>
-                <td>{{ vente.datevente }}</td>
+                <th>Fournisseur</th>
+                <td>{{ vente.reference }}</td>
             </tr>
-
 
 
             <tr>
                 <th>CreatedOn</th>
-                <td>{{ vente.createdOn ? vente.creditedOn|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ vente.createdOn ? vente.createdOn|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
                 <th>EditedOn</th>

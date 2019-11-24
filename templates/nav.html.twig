@@ -70,8 +70,7 @@
                             <a class="dropdown-item" href="{{path('produit_new')}}">Nouvelle fiche produit</a>
                             <a class="dropdown-item" href="{{ path('tarifcategorieclt_index') }}">Fiche de tarif des clients</a>
                             <a class="dropdown-item" href="{{ path('tarifcategorieclt_new') }}">Nouvelle fiche de tarif des clients</a>
-                            <a class="dropdown-item" href="#">Fiche d'entrée des produits (showrooms)</a>
-                            <a class="dropdown-item" href="#">Entrée des produits (showrooms)</a>
+
 
                         </div>
                     </li>
@@ -92,11 +91,9 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('vente_index') }}">Nouveau Devis</a>
+                            <a class="dropdown-item" href="{{ path('vente_index') }}">Nouvelle facture</a>
+                            <a class="dropdown-item" href="#">Nouveau devis</a>
                             <a class="dropdown-item" href="#">Suivi des devis</a>
-                            <a class="dropdown-item" href="#">Relance de devis</a>
-                            <a class="dropdown-item" href="#">Nouvelle facture</a>
-                            <a class="dropdown-item" href="#">Nouveau bon de livraison</a>
                             <a class="dropdown-item" href="#">Importer des commandes clients</a>
                         </div>
                     </li>
@@ -104,7 +101,7 @@
 
                     <li class="nav-item dropdown">
                         <a
-                                {% if var == 'commandes' or var=='commanders' %}
+                                {% if var == 'commandes' %}
                                     class="nav-link dropdown-toggle active"
                                 {% else %}
                                     class="nav-link dropdown-toggle"
@@ -120,7 +117,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('commande_index') }}">Fiche de commande Ask SA</a>
                             <a class="dropdown-item" href="{{path('commande_new')}}">Nouvelle fiche de commandes</a>
-                            <a class="dropdown-item" href="{{ path('commandeshow_index') }}">Fiche de commande Showrooms</a>
+
 
                             <a class="dropdown-item" href="#">Nouveau bon de reception</a>
 
@@ -129,8 +126,14 @@
 
                     <li class="nav-item dropdown">
 
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
+                        <a
+                                {% if var == 'commanders'or var=='commande' %}
+                                    class="nav-link dropdown-toggle active"
+                                {% else %}
+                                    class="nav-link dropdown-toggle"
+                                {%  endif %}
+
+                                {#class="nav-link dropdown-toggle"#} href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-drum-steelpan"></i>
                             <span>
                                     Stock <i class="fas fa-angle-down"></i>
@@ -140,8 +143,8 @@
                             <a class="dropdown-item" href="#">Tableau de bord</a>
                             <a class="dropdown-item" href="#">Tableau de bord des expéditions</a>
                             <a class="dropdown-item" href="#">Suivi des ordres de préparations</a>
-                            <a class="dropdown-item" href="#">Nouvelle entrée de marchandise</a>
-                            <a class="dropdown-item" href="#">Nouveau tranfert de marchandises</a>
+                            <a class="dropdown-item" href="{{ path('commandeshow_index') }}">Nouvelle entrée de marchandise</a>
+
 
                         </div>
                     </li>

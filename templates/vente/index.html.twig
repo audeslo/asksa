@@ -32,10 +32,8 @@
                 <thead>
                 <tr>
                     <th>Référence</th>
-                    <th>Intitule de la commande</th>
-                    <th>Type de showroom</th>
-
-
+                    <th>Date de vente</th>
+                    <th>Client</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -43,10 +41,9 @@
                 <tbody>
                 {% for vente in ventes %}
                     <tr>
-                        <td>{{ vente.reference}}</td>
-                        <td><a  href="{{ path('sortie_index', {'slug' : vente.slug}) }}">{{ vente.reference}}</a></td>
-                        <td>{{ vente.client}}</td>
                         <td> {{ vente.datevente ? vente.datevente | date('d-M-Y') : ''}}</td>
+                        <td><a  href="{{ path('sortie_index', {'slug' : vente.slug}) }}">{{ vente.reference }}</a></td>
+                        <td>{{ vente.client }}</td>
 
                         <td>
                             {% include('vente/viewmodal.html.twig') %}

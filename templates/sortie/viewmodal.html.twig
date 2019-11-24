@@ -1,4 +1,4 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ sortie.id }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ commandershow.id }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
@@ -19,26 +19,21 @@
                     </tr>
                     <tr>
                         <th>commande</th>
-                        <td>{{ sortie.vente}}</td>
+                        <td>{{ sortie.reference }}</td>
                     </tr>
                     <tr>
                         <th>Produit</th>
-                        <td>{{sortie.produit }}</td>
+                        <td>{{ sortie.produit }}</td>
                     </tr>
 
                     <tr>
                         <th>capacite</th>
-                        <td>{{ sortie.quantitecarton}}</td>
-                    </tr>
-
-                    <tr>
-                        <th>code bar carton</th>
                         <td>{{ sortie.capacitebidon }}</td>
                     </tr>
 
                     <tr>
                         <th>Capacite carton</th>
-                        <td>{{ sortie.quantiteachete}}</td>
+                        <td>{{ sortie.quantitecarton}}</td>
                     </tr>
 
 
