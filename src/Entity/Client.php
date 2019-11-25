@@ -170,6 +170,11 @@ class Client
      */
     private $society;
 
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $img;
+
 
 
 
@@ -617,6 +622,18 @@ class Client
     public function setIdentifiant2(?string $identifiant2): self
     {
         $this->identifiant2 = $identifiant2;
+
+        return $this;
+    }
+
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    public function setImg($img): self
+    {
+        $this->img = $img;
 
         return $this;
     }

@@ -31,7 +31,7 @@ class CommandershowType extends AbstractType
 
             ))
             /* ->add('quantitestock')
-           ->add('etat')
+
             ->add('slug')
             ->add('editedOn')
             ->add('createdOn')

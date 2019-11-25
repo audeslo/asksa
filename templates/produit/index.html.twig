@@ -31,7 +31,7 @@
 
                 <thead>
                 <tr>
-
+                    <th>Image</th>
                     <th>Réference</th>
                     <th>Désignation</th>
                     <th>Prix unitaire</th>
@@ -60,6 +60,8 @@
                         <td>{{ produit.marque }}</td>
 
                         <td>{{ produit.stockalerte }}</td>
+
+                        <td>{{ produit.img }}</td>
 
                         <td>
                               {% include('produit/viewmodal.html.twig') %}

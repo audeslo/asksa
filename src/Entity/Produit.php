@@ -50,7 +50,7 @@ class Produit
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @Assert\NotBlank(message="Veuillez saisir la description !")
+
      */
     private $description;
 
@@ -125,6 +125,11 @@ class Produit
      * @ORM\OneToMany(targetEntity="App\Entity\Commander", mappedBy="produit")
      */
     private $commanders;
+
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $img;
 
     public function __construct()
     {
@@ -369,6 +374,18 @@ class Produit
     public function setStockalerte(int $stockalerte): self
     {
         $this->stockalerte = $stockalerte;
+
+        return $this;
+    }
+
+    public function getImg()
+    {
+        return $this->img;
+    }
+
+    public function setImg($img): self
+    {
+        $this->img = $img;
 
         return $this;
     }

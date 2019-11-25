@@ -36,15 +36,9 @@
                 <th>Nomcourt</th>
                 <th>Nom complet</th>
                 <th>Représentant</th>
-                <th>Adresse rue</th>
                 <th>Téléphone</th>
                 <th>Mail</th>
-
-                {#    <th>Codepostal</th>
-                   <th>Email</th>
-                  <th>Slug</th>
-                   <th>CreatedOn</th>
-                   <th>EditedOn</th>#}
+                <th></th>
                 <th></th>
             </tr>
         </thead>
@@ -55,14 +49,9 @@
                 <td>{{ fournisseur.nomcourt }}</td>
                 <td>{{ fournisseur.nomcomplet }}</td>
                 <td>{{ fournisseur.representant }}</td>
-                <td>{{ fournisseur.Adresserue }}</td>
                 <td>{{ fournisseur.telephone }}</td>
-
-               {# <td>{{ fournisseur.Codepostal }}</td>#}
                 <td>{{ fournisseur.Mail }}</td>
-                {#<td>{{ fournisseur.slug }}</td>
-                <td>{{ fournisseur.createdOn ? fournisseur.createdOn|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ fournisseur.editedOn ? fournisseur.editedOn|date('Y-m-d H:i:s') : '' }}</td>#}
+
                <td>
                    {% include('fournisseur/viewmodal.html.twig') %}
 

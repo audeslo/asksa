@@ -19,6 +19,10 @@ class CommandeshowRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Commandeshow::class);
     }
+
+    /**
+     * @return mixed
+     */
     public function findLastId()
     {
         try {
@@ -32,7 +36,12 @@ class CommandeshowRepository extends ServiceEntityRepository
         }
     }
 
-    public function updateLastReferent($id,$value)
+    /**
+     * @param $id
+     * @param $value
+     * @return mixed
+     */
+    public function updateLastReferent($id, $value)
     {
         return $this->createQueryBuilder('cs')
             ->update()
@@ -44,6 +53,21 @@ class CommandeshowRepository extends ServiceEntityRepository
             ->execute()
             ;
     }
+
+
+    public function findAllProducts($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.commandershow','cshow')
+            ->join('cshow.produit','p')
+            ->andWhere('c.id = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Commandeshow[] Returns an array of Commandeshow objects
     //  */

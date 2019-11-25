@@ -24,7 +24,7 @@ class VenteType extends AbstractType
               'placeholder' => 'Sélectionnez le client',
           ])
             ->add('datevente',DateType::class,array(
-                'label'     => 'date de la vente :',
+                'label'     => 'Date de la facture :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez la date '],
 

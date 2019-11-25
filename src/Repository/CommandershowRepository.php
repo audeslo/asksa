@@ -19,6 +19,18 @@ class CommandershowRepository extends ServiceEntityRepository
         parent::__construct($registry, Commandershow::class);
     }
 
+    public function findAllProducts($value)
+    {
+        return $this->createQueryBuilder('c')
+            ->join('c.produit','p')
+            ->join('c.commandeshow','sh')
+            ->andWhere('sh.id = :val')
+            ->setParameter('val', $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Commandershow[] Returns an array of Commandershow objects
     //  */

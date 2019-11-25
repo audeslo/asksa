@@ -55,9 +55,9 @@ class CommandershowController extends AbstractController
            $refproduit=$produit->getReference();
 
             //refernce commande
-            $refcommande=$commandeshow->getReference();
+            $refcommandeshow=$commandeshow->getReference();
 
-          //  $commandershow->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'C-'.$form['capacitebidon']->getData().'S');
+            $commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$form['capacitecartonshow']->getData().'C-'.$form['capacitebidonshow']->getData().'B');
 
             $entityManager->persist($commandershow);
             $entityManager->flush();
@@ -114,6 +114,27 @@ class CommandershowController extends AbstractController
         }
 
         return $this->redirectToRoute('commandershow_index');
+    }
+
+
+    /**
+     * @Route("/commandershow_approuver/{id}", name="commandershow_approuver", methods={"GET","POST"})
+     */
+    public function approvisionnement_showroom(Request $request, Commandershow $commandershow): Response
+    {
+        $em= $this->getDoctrine()->getManager();
+
+        $commandershows=$em->getRepository('App:Commandershow')->findAllProducts(1);
+
+        foreach ($commandershows as $key => $commandershow) {
+            $list[$key] = $commandershow;
+        }
+
+        dump($list);
+        return  null;
+
+
+        return $this->redirectToRoute();
     }
 
 

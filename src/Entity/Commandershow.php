@@ -39,13 +39,11 @@ class Commandershow
      */
     private $quantitestock;
 
-    /**
-     * @ORM\Column(type="smallint")
-     */
-    private $etat;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=false)
+     * @Gedmo\Slug(fields={"reference"})
      */
     private $slug;
 
@@ -76,9 +74,32 @@ class Commandershow
     private $produit;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Commandeshow")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Commandeshow", inversedBy="commandershow")
      */
     private $commandeshow;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $reference;
+
+
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function datecreated()
+    {
+        $this->setCreatedOn(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function dateupdated()
+    {
+        $this->setEditedOn(new \DateTime('now'));
+    }
 
     public function getId(): ?int
     {
@@ -133,17 +154,7 @@ class Commandershow
         return $this;
     }
 
-    public function getEtat(): ?int
-    {
-        return $this->etat;
-    }
 
-    public function setEtat(int $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {
@@ -225,6 +236,18 @@ class Commandershow
     public function setCommandeshow(?Commandeshow $commandeshow): self
     {
         $this->commandeshow = $commandeshow;
+
+        return $this;
+    }
+
+    public function getReference(): ?string
+    {
+        return $this->reference;
+    }
+
+    public function setReference(string $reference): self
+    {
+        $this->reference = $reference;
 
         return $this;
     }

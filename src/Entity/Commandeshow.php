@@ -62,6 +62,7 @@ class Commandeshow
     public function __construct()
     {
         $this->setDatecomshow(new \DateTime('now'));
+        $this->commandershow = new ArrayCollection();
     }
 
     /**
@@ -91,6 +92,16 @@ class Commandeshow
      * @ORM\JoinColumn(nullable=false)
      */
     private $showroom;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $statut;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commandershow", mappedBy="commandeshow")
+     */
+    private $commandershow;
 
     public function getId(): ?int
     {
@@ -219,6 +230,49 @@ class Commandeshow
     public function setShowroom(?Showroom $showroom): self
     {
         $this->showroom = $showroom;
+
+        return $this;
+    }
+
+    public function getStatut(): ?int
+    {
+        return $this->statut;
+    }
+
+    public function setStatut(int $statut): self
+    {
+        $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commandershow[]
+     */
+    public function getCommandershow(): Collection
+    {
+        return $this->commandershow;
+    }
+
+    public function addCommandershow(Commandershow $commandershow): self
+    {
+        if (!$this->commandershow->contains($commandershow)) {
+            $this->commandershow[] = $commandershow;
+            $commandershow->setCommandeshow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandershow(Commandershow $commandershow): self
+    {
+        if ($this->commandershow->contains($commandershow)) {
+            $this->commandershow->removeElement($commandershow);
+            // set the owning side to null (unless already changed)
+            if ($commandershow->getCommandeshow() === $this) {
+                $commandershow->setCommandeshow(null);
+            }
+        }
 
         return $this;
     }

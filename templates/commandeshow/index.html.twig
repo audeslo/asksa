@@ -8,7 +8,7 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des commandes</h2></div>
+                Liste commandes showrooms</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
@@ -35,6 +35,7 @@
                     <th>Intitule de la commande</th>
                     <th>Showroom</th>
                     <th>Date de commande</th>
+                    <th>Valider</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -46,7 +47,9 @@
                         <td ><a style="color: white" href="{{ path('commandershow_index', {'slug' : commandeshow.slug}) }}">{{ commandeshow.intituleshow | upper }}</a></td>
                         <td>{{ commandeshow.showroom }}</td>
                         <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
-
+                        <td>
+                            {{ commandeshow.statut ? "En cours":"Approuvé"  }}
+                        </td>
 
                         <td>
                             {% include('commandeshow/viewmodal.html.twig') %}

@@ -67,7 +67,10 @@ class Vente
     {
         return $this->id;
     }
-
+    public function __construct()
+    {
+        $this->setDatevente(new \DateTime('now'));
+    }
     /**
      * @ORM\PrePersist()
      */
