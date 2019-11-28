@@ -32,7 +32,7 @@
                 <thead>
                 <tr>
 
-                    {#<th>commande</th>#}
+                    <th>Réference</th>
                     <th>Produit</th>
                     <th>Qté commandée</th>
                     <th>Bidon/carton</th>
@@ -46,9 +46,9 @@
                 {% for commandershow in commandershows %}
                     <tr>
 
-                       {# <td>{{ commander.id }}</td>
-#}
-                        <td> {{commandershow.produit }}</a></td>
+                        <td>{{ commandershow.reference }}</td>
+
+                        <td> {{commandershow.produit.designation }}</a></td>
 
                         <td>{{ commandershow.quantitecommandeshow}}</td>
 
@@ -75,9 +75,17 @@
             <div class="row">
 
                 <div class="col-md-2 offset-9">
-                    <a class="btn btn-danger col-md-3" href="{{ path('commandershow_approuver',{'id':1}) }}"> Approuver
-                        <i class="fa fa-chevron-right"></i>
-                    </a>
+                    {% if commandeshow.statut == 0 %}
+                        <a class="btn btn-danger col-md-3" href="{{ path('commandershow_approuver',{'id':commandeshow.id}) }}"> Approuver
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                    {% else %}
+                        <a class="btn btn-success col-md-3" href="#">
+                            <i class="fa fa-qrcode"></i>
+                            Imp. Code QR
+                        </a>
+                    {% endif %}
+
                 </div>
             </div>
 

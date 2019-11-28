@@ -24,8 +24,21 @@ class CommandershowRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->join('c.produit','p')
             ->join('c.commandeshow','sh')
-            ->andWhere('sh.id = :val')
-            ->setParameter('val', $value)
+            ->andWhere('sh.id = ?1')
+            ->setParameter(1, $value)
+            ->orderBy('c.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function UpdateCommandershow($commander, $valeur)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.quantiteenstock','?1')
+            ->andWhere('c.id =?2')
+            ->setParameter(1, $valeur)
+            ->setParameter(2, $commander)
             ->orderBy('c.id', 'ASC')
             ->getQuery()
             ->getResult()

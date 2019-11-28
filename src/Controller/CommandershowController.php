@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Commandershow;
 use App\Entity\Commandeshow;
+use App\Entity\Stockshowroom;
 use App\Form\CommandershowType;
 use App\Repository\CommandershowRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -119,25 +120,112 @@ class CommandershowController extends AbstractController
 
     /**
      * @Route("/commandershow_approuver/{id}", name="commandershow_approuver", methods={"GET","POST"})
+     * @param Request $request
+     * @param Commandeshow $commandeshow
+     * @return Response
      */
-    public function approvisionnement_showroom(Request $request, Commandershow $commandershow): Response
+    public function approvisionnement_showroom(Request $request, Commandeshow $commandeshow): Response
     {
         $em= $this->getDoctrine()->getManager();
 
-        $commandershows=$em->getRepository('App:Commandershow')->findAllProducts(1);
-
+        // Recuperer tous les produits (commandershow) contenus sur la commande showroom
+        $commandershows=$em->getRepository('App:Commandershow')
+                            ->findAllProducts($commandeshow->getId());
         foreach ($commandershows as $key => $commandershow) {
-            $list[$key] = $commandershow;
+            // recuperer la quantité disponible de chaque produit (en entier, cast)
+            $quantiteStock= (int)$em->getRepository('App:Commander')
+                ->findQuantityInStock($commandershow->getProduit()->getId(),
+                    $commandershow->getCapacitecartonshow(),
+                    $commandershow->getCapacitebidonshow());
+                // comparaison de la quantite commandée et celle disponible
+           if ($quantiteStock < (int) $commandershow->getQuantitecommandeshow()) {
+              // si un des produit est en quantité insuffisante ou inexistant, le traitement s'arrête
+               $request->getSession()->getFlashBag()->add('danger',
+                   'Le produit ' . $commandershow->getProduit()->getDesignation() . ' de carton de ' .
+                   $commandershow->getCapacitecartonshow() . ' et de ' . $commandershow->getCapacitebidonshow() .
+                   ' L par bidon n\'existe pas ou est en quantité insuffisante');
+
+               return $this->redirectToRoute('commandershow_index', ['slug'
+               => $commandershow->getCommandeshow()->getSlug()]);
+           }
         }
 
-        dump($list);
-        return  null;
+        // tous les produit étant disponible, le traitement passe à la validation
+
+        foreach ($commandershows as $key => $commandershow){
+            $quantiteCommandee= (int) $commandershow->getQuantitecommandeshow();
+
+            // recuperer tous les commandes de au magazin dont la quantité en stock est >0
 
 
-        return $this->redirectToRoute();
+            $commanders=$em->getRepository('App:Commander')
+                ->findListCommanderDispo($commandershow->getProduit()->getId(),
+                    $commandershow->getCapacitecartonshow(),
+                    $commandershow->getCapacitebidonshow());
+
+
+            // Parcour de chaque commande
+            foreach ($commanders as $commander ){
+
+                    $qteStock= (int) $commander->getQuantiteenstock();
+                if ($qteStock<$quantiteCommandee){// quantité en stock inferieur,
+
+                    $em->getRepository('App:Commander')
+                        ->UpdateCommander($commander->getId(),0);
+                    $quantiteCommandee=-$qteStock;
+                }else{
+                    $qteStock=-$quantiteCommandee;
+                    $em->getRepository('App:Commander')
+                        ->UpdateCommander($commander->getId(),$qteStock);
+                    break;
+
+                }
+
+            }
+
+            // on continue l'enregistrement dans le stock de sow room
+
+            for ($i=0; $i<$quantiteCommandee; $i++){// Enregistrement carton
+                  $nbrebidon = (int) $commandershow->getCapacitecartonshow();
+
+                  // Enregistrement de chaque Bidon
+                  for ($cpt=0; $cpt<$nbrebidon; $cpt++){
+                      $stockshowroom = new Stockshowroom();
+                      $stockshowroom->setCommandershow($commandershow);
+                      $stockshowroom->setReferencecarton($commandershow
+                                    ->getReference().'/'.($i+1));
+                      $stockshowroom->setReferencebidon($commandershow
+                                    ->getReference().'/'.($i+1).'-'.($cpt+1));
+                      $stockshowroom->setOuvert(false);
+                      $stockshowroom->setVendu(false);
+                      $stockshowroom->setPrixdevente(0);
+
+                      // Persistence
+                      $em->persist($stockshowroom);
+                      $em->flush();
+
+                  }
+
+            }
+
+
+        }
+
+        // mise à jour de commandeShow
+        $em->getRepository('App:Commandeshow')
+            ->updateCommandeshow($commandershow
+                ->getCommandeshow()->getId());
+
+        return $this->render('commandershow/index.html.twig', [
+            'commandershows' => $em->getRepository('App:Commandershow')->findBy(['commandeshow' => $commandeshow->getId()]),
+            'commandeshow'  =>  $commandeshow,
+        ]);
     }
 
 
 }
 
+function etatStockProduit(int $produit, int $carton, int $bidon, int $stock){
 
+
+}

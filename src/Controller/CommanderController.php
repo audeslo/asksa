@@ -118,7 +118,40 @@ class CommanderController extends AbstractController
 
         return $this->redirectToRoute('commander_index');
     }
-
+///*
+//
+//    /**
+//     * @Route("/Liste-des-produits-commandes/{slug}/Valider", name="commander_valider", methods={"GET"})
+//     * @param CommanderRepository $commanderRepository
+//     * @param Commande $commande
+//     * @return Response
+//     */
+//    public function valider(CommanderRepository $commanderRepository, Commande $commande): Response
+//    {
+//        $em= $this->getDoctrine()->getManager();
+//
+//        $em->getRepository('App:Commande')->updateCommande($commande->getId());
+//        $commanders=$commanderRepository->findBy(['commande' => $commande->getId()]);
+//
+//        foreach ($commanders as $key => $commander){
+//            $qtestock= (int) $em->getRepository('App:Produit')
+//                ->findBy([''])
+//                ($commander->getProduit()->getId())->getStockdisponible();
+//
+//            $qtestock+=$commander->getQuantitecommandee();
+//            $em->getRepository('App:Produit')->updateStockProduit()
+//            return null;
+//
+//        }
+//
+//
+//
+//
+//        return $this->render('commander/index.html.twig', [
+//            'commanders' => $commanderRepository->findBy(['commande' => $commande->getId()]),
+//            'commande'  =>  $commande,
+//        ]);
+//    }*/
 
 }
 

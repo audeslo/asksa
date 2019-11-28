@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Commander;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Commander|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,6 +20,63 @@ class CommanderRepository extends ServiceEntityRepository
         parent::__construct($registry, Commander::class);
     }
 
+
+    /**
+     * @param $produit
+     * @param $carton
+     * @param $bidon
+     * @return mixed
+     */
+    public function findQuantityInStock($produit, $carton, $bidon)
+    {
+        try {
+            return $this->createQueryBuilder('c')
+                ->select('SUM(c.quantiteenstock) AS quantite')
+                ->Where('c.produit =?1')
+                ->andWhere('c.capacitebidon =?2')
+                ->andWhere('c.capacitecarton =?3')
+                ->andWhere('c.etat =?4')
+                ->setParameter(1, $produit)
+                ->setParameter(2, $bidon)
+                ->setParameter(3, $carton)
+                ->setParameter(4, 2)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+
+    public function findListCommanderDispo($produit, $carton, $bidon)
+    {
+        return $this->createQueryBuilder('c')
+            ->Where('c.produit =?1')
+            ->andWhere('c.capacitebidon =?2')
+            ->andWhere('c.capacitecarton =?3')
+            ->andWhere('c.quantiteenstock >?4')
+            ->andWhere('c.etat =?5')
+            ->setParameter(1, $produit)
+            ->setParameter(2, $bidon)
+            ->setParameter(3, $carton)
+            ->setParameter(4, 0)
+            ->setParameter(5, 2)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function UpdateCommander($commander, $valeur)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.quantiteenstock','?1')
+            ->andWhere('c.id =?2')
+            ->setParameter(1, $valeur)
+            ->setParameter(2, $commander)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Commander[] Returns an array of Commander objects
     //  */

@@ -20,6 +20,20 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, Produit::class);
     }
 
+    public function updateStockProduit($id,$value)
+    {
+        return $this->createQueryBuilder('p')
+            ->update()
+            ->set('p.stockdisponible','?1')
+            ->andWhere('p.id = :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
+
    /* public function findLastId()
     {
         try {

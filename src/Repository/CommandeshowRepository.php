@@ -68,6 +68,19 @@ class CommandeshowRepository extends ServiceEntityRepository
             ;
     }
 
+    public function updateCommandeshow($id)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.statut','?1')
+            ->andWhere('c.id =?2')
+            ->setParameter(1, 1)
+            ->setParameter(2, $id)
+            ->getQuery()
+            ->execute()
+            ;
+    }
+
     // /**
     //  * @return Commandeshow[] Returns an array of Commandeshow objects
     //  */

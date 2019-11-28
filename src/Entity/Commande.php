@@ -51,10 +51,14 @@ class Commande
     private $fournisseur;
 
     /**
-
      * @ORM\Column(type="datetime")
      */
     private $createdOn;
+
+    /**
+     * @ORM\Column(type="smallint")
+     */
+    private $etat;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -264,6 +268,18 @@ class Commande
     public function setReference(?string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getEtat(): ?int
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(int $etat): self
+    {
+        $this->etat = $etat;
 
         return $this;
     }

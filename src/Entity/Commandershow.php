@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -9,6 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommandershowRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Commandershow
 {
@@ -48,7 +51,7 @@ class Commandershow
     private $slug;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $editedOn;
 
@@ -82,6 +85,16 @@ class Commandershow
      * @ORM\Column(type="string", length=255)
      */
     private $reference;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Stockshowroom", mappedBy="Commandershow", orphanRemoval=true)
+     */
+    private $stockshowrooms;
+
+    public function __construct()
+    {
+        $this->stockshowrooms = new ArrayCollection();
+    }
 
 
 
@@ -248,6 +261,37 @@ class Commandershow
     public function setReference(string $reference): self
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stockshowroom[]
+     */
+    public function getStockshowrooms(): Collection
+    {
+        return $this->stockshowrooms;
+    }
+
+    public function addStockshowroom(Stockshowroom $stockshowroom): self
+    {
+        if (!$this->stockshowrooms->contains($stockshowroom)) {
+            $this->stockshowrooms[] = $stockshowroom;
+            $stockshowroom->setCommandershow($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockshowroom(Stockshowroom $stockshowroom): self
+    {
+        if ($this->stockshowrooms->contains($stockshowroom)) {
+            $this->stockshowrooms->removeElement($stockshowroom);
+            // set the owning side to null (unless already changed)
+            if ($stockshowroom->getCommandershow() === $this) {
+                $stockshowroom->setCommandershow(null);
+            }
+        }
 
         return $this;
     }

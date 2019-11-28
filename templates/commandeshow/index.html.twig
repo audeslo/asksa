@@ -48,7 +48,12 @@
                         <td>{{ commandeshow.showroom }}</td>
                         <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
                         <td>
-                            {{ commandeshow.statut ? "En cours":"Approuvé"  }}
+                            {% if commandeshow.statut == 0 %}
+                            {#{{ commandeshow.statut ? "En cours":"Approuvé"  }}#}
+                                En cours
+                            {% else %}
+                                Approuvée
+                            {% endif %}
                         </td>
 
                         <td>
