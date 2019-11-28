@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SortieRepository")
  */
@@ -85,9 +86,10 @@ class Sortie
     private $reference;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Vente")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Vente", inversedBy="sortie")
+
      */
+/* @ORM\JoinColumn(nullable=false) */
     private $vente;
 
     public function getId(): ?int

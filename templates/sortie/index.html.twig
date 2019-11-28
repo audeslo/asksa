@@ -8,7 +8,7 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste des produits: {{ vente.reference }}</h2></div>
+                Liste des produits: {{ vente.client}}</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
@@ -48,13 +48,13 @@
 
                        {# <td>{{ commander.id }}</td>
 #}
-                        <td> {{vente.produit }}</a></td>
+                        <td> {{sortie.produit }}</a></td>
 
-                        <td>{{ vente.quantiteachete}}</td>
+                        <td>{{ sortie.quantiteachete}}</td>
 
-                        <td>{{ vente.capacitecartonshow }}</td>
+                        <td>{{ sortie.capacitebidon }}</td>
 
-                        <td>{{ vente.capacitebidonshow }}</td>
+                        <td>{{ sortie.quantitecarton }}</td>
 
 
                         {#  <td>

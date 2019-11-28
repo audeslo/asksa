@@ -32,8 +32,10 @@
                 <thead>
                 <tr>
                     <th>Référence</th>
-                    <th>Date de vente</th>
                     <th>Client</th>
+                    <th>Date de vente</th>
+
+
                     <th></th>
                     <th></th>
                 </tr>
@@ -41,15 +43,17 @@
                 <tbody>
                 {% for vente in ventes %}
                     <tr>
+                        <td>{{ vente.reference }}</td>
+                      {#  <td><a  href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule }}</a></td>#}
+                         <td><a style="color: white"  href="{{ path('sortie_index', {'slug' : vente.slug}) }}"> {{ vente.client | upper}} </a></td>
+                       {#  <td><a  href="{{ path('sortie_index', {'slug' : vente.slug}) }}"> {{ vente.datevente ? vente.datevente | date('d-M-Y') : ''}}</a></td>#}
                         <td> {{ vente.datevente ? vente.datevente | date('d-M-Y') : ''}}</td>
-                        <td><a  href="{{ path('sortie_index', {'slug' : vente.slug}) }}">{{ vente.reference }}</a></td>
-                        <td>{{ vente.client }}</td>
 
                         <td>
                             {% include('vente/viewmodal.html.twig') %}
                         </td>
                         <td>
-                            <a  class="" href="{{ path('vente_show', {'slug': vente.slug}) }}">
+                            <a  class="" href="{{ path('vente_show', {'id': vente.id}) }}">
                                 <i class="fa fa-edit tm-product-delete-icon"></i>
                             </a>
                         </td>

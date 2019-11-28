@@ -17,23 +17,24 @@
                         <th>Id</th>
                         <td>{{ commandeshow.id }}</td>
                     </tr>
+
+                    <tr>
+                        <th>Date de commande</th>
+                        <td>{{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-m-Y') : ''}}</td>
+                    </tr>
+
                     <tr>
                         <th>Intitule</th>
                         <td>{{ commandeshow.intituleshow }}</td>
                     </tr>
 
                     <tr>
-                        <th>Type de showroom</th>
+                        <th>Showroom</th>
                         <td>{{ commandeshow.showroom }}</td>
                     </tr>
                     <tr>
-                        <th>Fournisseur</th>
+                        <th>Fournisseur interne</th>
                         <td>{{ commandeshow.fournisseurshow }}</td>
-                    </tr>
-
-                   <tr>
-                        <th>Date de commande</th>
-                        <td>{{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-m-Y') : ''}}</td>
                     </tr>
 
                     <tr>

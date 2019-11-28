@@ -35,7 +35,6 @@
                     <th>Intitule de la commande</th>
                     <th>Date de commande</th>
                     <th>Fournisseur</th>
-                    <th>Description</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -44,10 +43,9 @@
                 {% for commande in commandes %}
                     <tr>
                         <td>{{ commande.reference }}</td>
-                        <td><a  href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule }}</a></td>
+                        <td><a style="color: white" href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule | upper }}</a></td>
                         <td> {{ commande.datecommande ? commande.datecommande | date('d-M-Y') : ''}}</td>
                         <td>{{ commande.fournisseur }}</td>
-                        <td>{{ commande.description }}</td>
 
                         <td>
                             {% include('commande/viewmodal.html.twig') %}

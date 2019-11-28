@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -52,6 +54,12 @@ class Vente
      */
     private $client;
 
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="vente")
+     */
+    private $sortie;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
@@ -70,6 +78,7 @@ class Vente
     public function __construct()
     {
         $this->setDatevente(new \DateTime('now'));
+        $this->sortie = new ArrayCollection();
     }
     /**
      * @ORM\PrePersist()
@@ -177,6 +186,37 @@ class Vente
         return $this->editedBy;
     }
 
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSortie(): Collection
+    {
+        return $this->sortie;
+    }
+
+    public function addSortie(Sortie $sortie): self
+    {
+        if (!$this->sortie->contains($sortie)) {
+            $this->sortie[] = $sortie;
+            $sortie->setVente($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortie(Sortie $sortie): self
+    {
+        if ($this->sortie->contains($sortie)) {
+            $this->sortie->removeElement($sortie);
+            // set the owning side to null (unless already changed)
+            if ($sortie->getVente() === $this) {
+                $sortie->setVente(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function setEditedBy(?User $editedBy): self
     {
         $this->editedBy = $editedBy;
@@ -187,7 +227,7 @@ class Vente
 
     public function __toString()
     {
-        return $this->reference;
+        return $this->client;
         // TODO: Implement __toString() method.
     }
 

@@ -19,16 +19,16 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortieController extends AbstractController
 {
     /**
-     * @Route("/Liste-des-produits-commandes/{slug}", name="sortie_index", methods={"GET"})
+     * @Route("/Liste-des-produits-commandes/{slug/sortie}", name="sortie_index", methods={"GET"})
      * @param SortieRepository $sortieRepository
-     * @param Sortie $sortie
+     * @param Vente $vente
      * @return Response
      */
     public function index(SortieRepository $sortieRepository, Vente $vente): Response
     {
         $this->get('session')->set('vente',$vente);
 
-        return $this->render('vente/index.html.twig', [
+        return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findBy(['vente' => $vente->getId()]),
             'vente'  =>  $vente,
         ]);
@@ -48,7 +48,7 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $vente= $entityManager->getRepository('App:Vente')->find($vente->getId());
-            $sortie->setCommandeshow($vente);
+            $sortie->setVente($vente);
           /*  $sortie->setQuantitestock($form['quantite']->getData());*/
 
             // Récupération de la reférence produit

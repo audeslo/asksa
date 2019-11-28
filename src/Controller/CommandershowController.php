@@ -137,6 +137,7 @@ class CommandershowController extends AbstractController
                 ->findQuantityInStock($commandershow->getProduit()->getId(),
                     $commandershow->getCapacitecartonshow(),
                     $commandershow->getCapacitebidonshow());
+
                 // comparaison de la quantite commandée et celle disponible
            if ($quantiteStock < (int) $commandershow->getQuantitecommandeshow()) {
               // si un des produit est en quantité insuffisante ou inexistant, le traitement s'arrête
