@@ -73,6 +73,22 @@ class Venteshowroom
     private $produit;
 
     /**
+     * @ORM\PrePersist()
+     */
+    public function datecreated()
+    {
+        $this->setCreatedOn(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function dateupdated()
+    {
+        $this->setEditedOn(new \DateTime('now'));
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Client")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -242,5 +258,10 @@ class Venteshowroom
         $this->stockshowroom = $stockshowroom;
 
         return $this;
+    }
+    public function __toString()
+    {
+        return $this->reference;
+        // TODO: Implement __toString() method.
     }
 }

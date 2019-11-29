@@ -1,0 +1,49 @@
+<hr>
+<div class="row">
+
+    <div class="col-md-5 ">
+
+        {{ form_label(form.client) }}
+        {{ form_widget(form.client) }}
+        {{ form_errors(form.client) }}
+    </div>
+
+    <div class="col-md-5 offset-2">
+
+        {{ form_label(form.datevente) }}
+        {{ form_widget(form.datevente) }}
+        {{ form_errors(form.datevente) }}
+
+    </div>
+
+</div>
+<hr>
+
+<div class="row">
+
+    <div class="col-md-5 ">
+
+        {{ form_label(form.produit) }}
+        {{ form_widget(form.produit) }}
+        {{ form_errors(form.produit) }}
+
+        {{ form_label(form.quantiteachete) }}
+        {{ form_widget(form.quantiteachete) }}
+        {{ form_errors(form.quantiteachete) }}
+
+    </div>
+
+    <div class="col-md-5 offset-2">
+        {{ form_label(form.quantitecarton) }}
+        {{ form_widget(form.quantitecarton) }}
+        {{ form_errors(form.quantitecarton) }}
+
+        {{ form_label(form.capacitebidon) }}
+        {{ form_widget(form.capacitebidon) }}
+        {{ form_errors(form.capacitebidon) }}
+
+
+    </div>
+
+</div>
+

@@ -1,20 +1,81 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
+{% extends 'venteshowroom/venteshowroom.html.twig' %}
+{# {% block title %}Fournisseur index{% endblock %}#}
+{% block content %}
+    {#  {% block body %}#}
+    {# <h1>Liste des fournisseurs</h1>#}
 
-{% block title %}Hello VenteshowroomController!{% endblock %}
+<div class="card mb-3">
+    <div class="card-header">
+        <h2>
+            <i class="fa fa-table" ></i>
+            Ventes</h2></div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-2">
+                <a href="{{ path('venteshowroom_new') }}" class="btn btn-primary ">
+                    <i class="fa fa-chevron-right"></i>
+                    Nouveau
+                </a>
+            </div>
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+            <div class="offset-8 col-md-2 ">
+{#                col-md-offset-4 col-md-2#}
+                <a href="#" class="btn btn-success ">
+                    <i class="fa fa-print"></i>
+                    Imprimer
+                </a>
+            </div>
+        </div>
+        <hr>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+               {# <th>Id</th>#}
+                <th>Référence</th>
+                <th>Date de vente</th>
+                <th>Client</th>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Déhouénou/web/asksa/src/Controller/VenteshowroomController.php'|file_link(0) }}">src/Controller/VenteshowroomController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Déhouénou/web/asksa/templates/venteshowroom/index.html.twig'|file_link(0) }}">templates/venteshowroom/index.html.twig</a></code></li>
-    </ul>
-</div>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for venteshowroom in venteshowrooms %}
+            <tr>
+                {#<td>{{ fournisseur.id }}</td>#}
+                <td>{{ venteshowroom.reference }}</td>
+                <td>{{ venteshowroom.datevente }}</td>
+                <td>{{ venteshowroom.client }}</td>
+
+
+               <td>
+                   {% include('venteshowroom/viewmodal.html.twig') %}
+
+               </td>
+                <td>
+
+                   <a class="" href="{{ path('venteshowroom_show', {'slug': venteshowroom.slug}) }}">
+                        <i class="fa fa-edit tm-product-delete-icon"></i>
+                    </a>
+                   {# <a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+
+                    <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
+                        <i class="fa fa-edit tm-product-delete-icon"></i>
+                    </a>#}
+                </td>
+                  </tr>
+                  {% else %}
+                <tr>
+                      <td colspan="14">no records found</td>
+                        </tr>
+                  {% endfor %}
+                     </tbody>
+                    </table>
+            {#    <a href="{{ path('fournisseur_new') }}" class="btn btn-primary btn-sm">
+                    <i class="fa fa-chevron-right"></i>Create new</a> #}
+
+               </div>
+       </div>
 {% endblock %}

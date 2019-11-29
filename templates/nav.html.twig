@@ -78,7 +78,7 @@
                     <li class="nav-item dropdown">
 
                         <a
-                                {% if var == 'ventes'  %}
+                                {% if var == 'venteshowrooms'  %}
                                     class="nav-link dropdown-toggle active"
                                 {% else %}
                                     class="nav-link dropdown-toggle"
@@ -92,7 +92,7 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Nouvelle facture</a>
+                            <a class="dropdown-item" href="{{path('venteshowroom_index')}}">Nouvelle facture</a>
                             <a class="dropdown-item" href="#">Nouveau devis</a>
                             <a class="dropdown-item" href="#">Suivi des devis</a>
                             <a class="dropdown-item" href="#">Importer des commandes clients</a>
