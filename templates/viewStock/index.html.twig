@@ -1,0 +1,51 @@
+{% extends 'viewStock/stockActuel.html.twig' %}
+
+{# page tableau et recherche #}
+
+{% block content %}
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2>
+                <i class="fa fa-table" ></i>
+                Liste des produits en stock chez ASK SA</h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-success ">
+                        <i class="fa fa-print"></i>
+                        Imprimer
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                <tr>
+                    <th>Désignations</th>
+                    <th>Capacité carton</th>
+                    <th>Capacité bidon (litre)</th>
+                    <th>Stock actuel</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for cmd in cmds %}
+                    <tr>
+
+                        <td>{{ cmd.designation }}</td>
+                     <td>{{ cmd.capacitecarton }}</td>
+                        <td>{{ cmd.capacitebidon }}</td>
+                        <td>{{ cmd.stock }}</td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer small text-muted">Hier à 11:59 </div>
+{% endblock %}

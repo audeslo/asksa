@@ -65,6 +65,17 @@ class CommanderRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findProduitIdentic()
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.produit', 'p')
+            ->select('p.designation as designation, c.capacitebidon as capacitebidon, c.capacitecarton as capacitecarton, SUM(c.quantiteenstock) as stock')
+            ->groupBy('c.produit', 'c.capacitebidon', 'c.capacitecarton')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     public function UpdateCommander($commander, $valeur)
     {
         return $this->createQueryBuilder('c')

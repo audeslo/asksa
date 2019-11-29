@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -54,12 +52,6 @@ class Vente
      */
     private $client;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Sortie", mappedBy="vente")
-     */
-    private $sortie;
-
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
@@ -71,6 +63,32 @@ class Vente
      */
     private $createdBy;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantiteachetee;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capacitecartonvente;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capacitebidonvente;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produit")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $produit;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Stockshowroom")
+     */
+    private $stockshowroom;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -78,7 +96,6 @@ class Vente
     public function __construct()
     {
         $this->setDatevente(new \DateTime('now'));
-        $this->sortie = new ArrayCollection();
     }
     /**
      * @ORM\PrePersist()
@@ -186,37 +203,6 @@ class Vente
         return $this->editedBy;
     }
 
-    /**
-     * @return Collection|Sortie[]
-     */
-    public function getSortie(): Collection
-    {
-        return $this->sortie;
-    }
-
-    public function addSortie(Sortie $sortie): self
-    {
-        if (!$this->sortie->contains($sortie)) {
-            $this->sortie[] = $sortie;
-            $sortie->setVente($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSortie(Sortie $sortie): self
-    {
-        if ($this->sortie->contains($sortie)) {
-            $this->sortie->removeElement($sortie);
-            // set the owning side to null (unless already changed)
-            if ($sortie->getVente() === $this) {
-                $sortie->setVente(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function setEditedBy(?User $editedBy): self
     {
         $this->editedBy = $editedBy;
@@ -227,8 +213,68 @@ class Vente
 
     public function __toString()
     {
-        return $this->client;
+        return $this->reference;
         // TODO: Implement __toString() method.
+    }
+
+    public function getQuantiteachetee(): ?int
+    {
+        return $this->quantiteachetee;
+    }
+
+    public function setQuantiteachetee(int $quantiteachetee): self
+    {
+        $this->quantiteachetee = $quantiteachetee;
+
+        return $this;
+    }
+
+    public function getCapacitecartonvente(): ?int
+    {
+        return $this->capacitecartonvente;
+    }
+
+    public function setCapacitecartonvente(int $capacitecartonvente): self
+    {
+        $this->capacitecartonvente = $capacitecartonvente;
+
+        return $this;
+    }
+
+    public function getCapacitebidonvente(): ?int
+    {
+        return $this->capacitebidonvente;
+    }
+
+    public function setCapacitebidonvente(int $capacitebidonvente): self
+    {
+        $this->capacitebidonvente = $capacitebidonvente;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getStockshowroom(): ?Stockshowroom
+    {
+        return $this->stockshowroom;
+    }
+
+    public function setStockshowroom(?Stockshowroom $stockshowroom): self
+    {
+        $this->stockshowroom = $stockshowroom;
+
+        return $this;
     }
 
 }

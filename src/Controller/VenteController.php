@@ -54,9 +54,7 @@ class VenteController extends AbstractController
     }
 
     /**
-     * @Route("/venteproduit/{id}", name="vente_show", methods={"GET"})
-     * @param Vente $vente
-     * @return Response
+     * @Route("/{slug}", name="vente_show", methods={"GET"})
      */
     public function show(Vente $vente): Response
     {

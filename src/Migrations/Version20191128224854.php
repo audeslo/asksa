@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191127211606 extends AbstractMigration
+final class Version20191128224854 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,10 +22,8 @@ final class Version20191127211606 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE client ADD img LONGBLOB DEFAULT NULL');
-        $this->addSql('ALTER TABLE commandershow ADD reference VARCHAR(255) NOT NULL, DROP etat');
-        $this->addSql('ALTER TABLE commandeshow ADD statut SMALLINT NOT NULL');
-        $this->addSql('ALTER TABLE produit ADD img LONGBLOB DEFAULT NULL');
+        $this->addSql('ALTER TABLE sortie CHANGE vente_id vente_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE vente CHANGE edited_by_id edited_by_id INT NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -33,9 +31,7 @@ final class Version20191127211606 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE client DROP img');
-        $this->addSql('ALTER TABLE commandershow ADD etat SMALLINT NOT NULL, DROP reference');
-        $this->addSql('ALTER TABLE commandeshow DROP statut');
-        $this->addSql('ALTER TABLE produit DROP img');
+        $this->addSql('ALTER TABLE sortie CHANGE vente_id vente_id INT NOT NULL');
+        $this->addSql('ALTER TABLE vente CHANGE edited_by_id edited_by_id INT DEFAULT NULL');
     }
 }

@@ -32,13 +32,13 @@
                         <td>{{ vente.datevente ? vente.datevente | date('d-m-Y') : ''}}</td>
                     </tr>
 
-                   {# <tr>
+                    <tr>
                         <th>Enregistré le</th>
                         <td>
-                            {{ vente.creditedOn ? vente.creditedOn |date('d-m-Y H:i:s') : ''  }} <br>
+                            {{ vente.createdOn ? vente.createdOn |date('d-m-Y H:i:s') : ''  }} <br>
                             Par {{ vente.createdBy }}
                         </td>
-                    </tr>#}
+                    </tr>
                     <tr>
                         <th>Modifié le </th>
                         <td>

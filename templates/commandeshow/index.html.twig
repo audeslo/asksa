@@ -50,9 +50,13 @@
                         <td>
                             {% if commandeshow.statut == 0 %}
                             {#{{ commandeshow.statut ? "En cours":"Approuvé"  }}#}
-                                En cours
+                                <div class="tm-status-circle pending">
+                                </div>En cours
+
                             {% else %}
-                                Approuvée
+                                <div class="tm-status-circle moving">
+                                </div>Approuvée
+
                             {% endif %}
                         </td>
 

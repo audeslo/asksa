@@ -102,7 +102,7 @@
 
                     <li class="nav-item dropdown">
                         <a
-                                {% if var == 'commandes' or var=='commanders' %}
+                                {% if var == 'commandes' or var=='commanders' or var=='stock_actuel' %}
                                     class="nav-link dropdown-toggle active"
                                 {% else %}
                                     class="nav-link dropdown-toggle"
@@ -118,9 +118,7 @@
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('commande_index') }}">Fiche de commande Ask SA</a>
                             <a class="dropdown-item" href="{{path('commande_new')}}">Nouvelle fiche de commandes</a>
-
-
-                            <a class="dropdown-item" href="#">Nouveau bon de reception</a>
+                            <a class="dropdown-item" href="{{ path('stock_actuel') }}">Consulter le stock actuel</a>
 
                         </div>
                     </li>
