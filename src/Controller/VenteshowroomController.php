@@ -39,7 +39,9 @@ class VenteshowroomController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($venteshowroom);
             $entityManager->flush();
+            $lastid=$entityManager->getRepository('App:Venteshowroom')->findLastId();
 
+            $entityManager->getRepository('App:Venteshowroom')->updateLastReferent($lastid,'BL-'.getAugmentons($lastid));
             return $this->redirectToRoute('venteshowroom_index');
         }
 
@@ -91,5 +93,25 @@ class VenteshowroomController extends AbstractController
         }
 
         return $this->redirectToRoute('fournisseur_index');
+    }
+
+    function getAugmentons(int $autom)
+    {
+
+        if($autom<10)
+        {
+            return '0000'.$autom;
+        }elseif ($autom<100)
+        {
+            return '000'.$autom;
+        }elseif ($autom<1000)
+        {
+            return '00'.$autom;
+        }elseif ($autom<10000)
+        {
+            return '0'.$autom;
+        }else{
+            return $autom;
+        }
     }
 }

@@ -303,9 +303,9 @@ class Fournisseur
     }
 
     public function __toString()
-    {
-        return $this->nomcourt;
-        // TODO: Implement __toString() method.
-    }
+{
+    return $this->nomcourt;
+    // TODO: Implement __toString() method.
+}
 
 }

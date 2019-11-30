@@ -78,7 +78,7 @@
                     <li class="nav-item dropdown">
 
                         <a
-                                {% if var == 'venteshowrooms'  %}
+                                {% if var == 'venteshowrooms' or var=='modereglements' %}
                                     class="nav-link dropdown-toggle active"
                                 {% else %}
                                     class="nav-link dropdown-toggle"
@@ -95,7 +95,7 @@
                             <a class="dropdown-item" href="{{path('venteshowroom_index')}}">Nouvelle facture</a>
                             <a class="dropdown-item" href="#">Nouveau devis</a>
                             <a class="dropdown-item" href="#">Suivi des devis</a>
-                            <a class="dropdown-item" href="#">Importer des commandes clients</a>
+                            <a class="dropdown-item" href="{{ path('modereglement_index') }}">Fiche mode de reglèment</a>
                         </div>
                     </li>
 

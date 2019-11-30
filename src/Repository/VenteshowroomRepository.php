@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Venteshowroom;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\NonUniqueResultException;
 
 /**
  * @method Venteshowroom|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +18,31 @@ class VenteshowroomRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Venteshowroom::class);
+    }
+    public function findLastId()
+    {
+        try {
+            return $this->createQueryBuilder('bl')
+                ->select('bl.id')
+                ->orderBy('bl.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    public function updateLastReferent($id,$value)
+    {
+        return $this->createQueryBuilder('bl')
+            ->update()
+            ->set('bl.referent','?1')
+            ->andWhere('bl.id= :val')
+            ->setParameter(1, $value)
+            ->setParameter('val', $id)
+            ->getQuery()
+            ->execute()
+            ;
     }
 
     // /**

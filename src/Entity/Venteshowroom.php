@@ -47,7 +47,7 @@ class Venteshowroom
     private $slug;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $editedOn;
 
@@ -80,6 +80,11 @@ class Venteshowroom
         $this->setCreatedOn(new \DateTime('now'));
     }
 
+    public function editedOn()
+    {
+        $this->setEditedOn()(new \DateTime('now'));
+    }
+
     /**
      * @ORM\PreUpdate()
      */
@@ -98,6 +103,22 @@ class Venteshowroom
      * @ORM\ManyToOne(targetEntity="App\Entity\Stockshowroom")
      */
     private $stockshowroom;
+
+    /**
+     * @ORM\Column(type="smallint", nullable=true)
+     */
+    private $payer;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $Grosdetail;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Modereglement")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $modereglement;
 
     public function getId(): ?int
     {
@@ -263,5 +284,41 @@ class Venteshowroom
     {
         return $this->reference;
         // TODO: Implement __toString() method.
+    }
+
+    public function getPayer(): ?int
+    {
+        return $this->payer;
+    }
+
+    public function setPayer(?int $payer): self
+    {
+        $this->payer = $payer;
+
+        return $this;
+    }
+
+    public function getGrosdetail(): ?string
+    {
+        return $this->Grosdetail;
+    }
+
+    public function setGrosdetail(string $Grosdetail): self
+    {
+        $this->Grosdetail = $Grosdetail;
+
+        return $this;
+    }
+
+    public function getModereglement(): ?Modereglement
+    {
+        return $this->modereglement;
+    }
+
+    public function setModereglement(?Modereglement $modereglement): self
+    {
+        $this->modereglement = $modereglement;
+
+        return $this;
     }
 }
