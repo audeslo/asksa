@@ -1,0 +1,53 @@
+{% extends 'user/layout.html.twig' %}
+
+{% block content %}
+<div class="card card-login mx-auto mt-5">
+    <div class="card-header">Connexion</div>
+    <div class="card-body">
+        <div>
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <form action="{{ path("app_login") }}" method="post">
+                {% if csrf_token %}
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="username" class="form-label">Login</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" id="password" name="_password" required="required" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                    <label for="remember_me" class="form-label">Me souvenir</label>
+                </div>
+
+                <input type="submit" id="_submit" name="_submit" value="Connexion" class="btn btn-success"/>
+            </form>
+
+            <p>
+                <br>
+                {#<a href="{{ path('fos_user_resetting_request') }}" class="btn-link">
+                    <i class="fa fa-warning"></i>
+                    Mot de passe oublié?
+                </a>#}
+            </p>
+
+            <p>
+                {#<a href="{{ path('fos_user_registration_register') }}" class="btn-link">
+                    <i class="fa fa-user"></i>
+                    Créer un compte utilisateur!
+                </a>#}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

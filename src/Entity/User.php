@@ -3,13 +3,17 @@
 namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Gedmo\Mapping\Annotation as Gedmo;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
- */
-class User
+    /**
+     * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+     * @ORM\HasLifecycleCallbacks()
+     * @UniqueEntity(fields={"username"}, message="Cet utilisateur existe déjà")
+     */
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -29,30 +33,164 @@ class User
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=1, nullable=true)
      */
-    private $mail;
+    private $sexe;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"prenom","nom"})
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $mdp;
+    private $username;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $usernameCanonical;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $mdpconfirm;
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $emailCanonical;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $enabled;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $salt;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $slug;
+    private $password;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $plainPassword;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $lastLogin;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $passwordRequestedAt;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $groups = [];
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $roles = [];
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdOn;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $createdBy;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $editedOn;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     */
+    private $editedBy;
+
+    public function __construct()
+    {
+        $this->configurations = new ArrayCollection();
+    }
+
+    /**
+     * @ORM\PrePersist()
+     */
+    public function datecreated()
+    {
+        $this->setCreatedOn(new \DateTime('now'));
+    }
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function dateupdated()
+    {
+        $this->setEditedOn(new \DateTime('now'));
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->password,
+            $this->salt,
+            $this->usernameCanonical,
+            $this->username,
+            $this->enabled,
+            $this->id,
+            $this->email,
+            $this->emailCanonical,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized): void
+    {
+        $data = unserialize($serialized,['allowed_classes' => false]);
+
+
+        [
+            $this->password,
+            $this->salt,
+            $this->usernameCanonical,
+            $this->username,
+            $this->enabled,
+            $this->id,
+            $this->email,
+            $this->emailCanonical
+        ] = $data;
+    }
 
     public function getId(): ?int
     {
@@ -83,50 +221,14 @@ class User
         return $this;
     }
 
-    public function getMail(): ?string
+    public function getSexe(): ?string
     {
-        return $this->mail;
+        return $this->sexe;
     }
 
-    public function setMail(string $mail): self
+    public function setSexe(?string $sexe): self
     {
-        $this->mail = $mail;
-
-        return $this;
-    }
-
-    public function getTelephone(): ?string
-    {
-        return $this->telephone;
-    }
-
-    public function setTelephone(string $telephone): self
-    {
-        $this->telephone = $telephone;
-
-        return $this;
-    }
-
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
-
-    public function setMdp(string $mdp): self
-    {
-        $this->mdp = $mdp;
-
-        return $this;
-    }
-
-    public function getMdpconfirm(): ?string
-    {
-        return $this->mdpconfirm;
-    }
-
-    public function setMdpconfirm(string $mdpconfirm): self
-    {
-        $this->mdpconfirm = $mdpconfirm;
+        $this->sexe = $sexe;
 
         return $this;
     }
@@ -141,6 +243,238 @@ class User
         $this->slug = $slug;
 
         return $this;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function setTelephone(?string $telephone): self
+    {
+        $this->telephone = $telephone;
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getUsernameCanonical(): ?string
+    {
+        return $this->usernameCanonical;
+    }
+
+    public function setUsernameCanonical(?string $usernameCanonical): self
+    {
+        $this->usernameCanonical = $usernameCanonical;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getEmailCanonical(): ?string
+    {
+        return $this->emailCanonical;
+    }
+
+    public function setEmailCanonical(?string $emailCanonical): self
+    {
+        $this->emailCanonical = $emailCanonical;
+
+        return $this;
+    }
+
+    public function getEnabled(): ?bool
+    {
+        return $this->enabled;
+    }
+
+    public function setEnabled(?bool $enabled): self
+    {
+        $this->enabled = $enabled;
+
+        return $this;
+    }
+
+    public function getSalt(): ?string
+    {
+        return $this->salt;
+    }
+
+    public function setSalt(?string $salt): self
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getLastLogin(): ?\DateTimeInterface
+    {
+        return $this->lastLogin;
+    }
+
+    public function setLastLogin(?\DateTimeInterface $lastLogin): self
+    {
+        $this->lastLogin = $lastLogin;
+
+        return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
+
+        return $this;
+    }
+
+    public function getPasswordRequestedAt(): ?\DateTimeInterface
+    {
+        return $this->passwordRequestedAt;
+    }
+
+    public function setPasswordRequestedAt(?\DateTimeInterface $passwordRequestedAt): self
+    {
+        $this->passwordRequestedAt = $passwordRequestedAt;
+
+        return $this;
+    }
+
+    public function getGroups(): ?array
+    {
+        return $this->groups;
+    }
+
+    public function setGroups(?array $groups): self
+    {
+        $this->groups = $groups;
+
+        return $this;
+    }
+
+    public function getRoles(): ?array
+    {
+        return $this->roles;
+    }
+
+    public function setRoles(?array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
+    public function getCreatedOn(): ?\DateTimeInterface
+    {
+        return $this->createdOn;
+    }
+
+    public function setCreatedOn(\DateTimeInterface $createdOn): self
+    {
+        $this->createdOn = $createdOn;
+
+        return $this;
+    }
+
+    public function getEditedOn(): ?\DateTimeInterface
+    {
+        return $this->editedOn;
+    }
+
+    public function setEditedOn(?\DateTimeInterface $editedOn): self
+    {
+        $this->editedOn = $editedOn;
+
+        return $this;
+    }
+
+    public function getCreatedBy(): ?self
+    {
+        return $this->createdBy;
+    }
+
+    public function setCreatedBy(?self $createdBy): self
+    {
+        $this->createdBy = $createdBy;
+
+        return $this;
+    }
+
+    public function getEditedBy(): ?self
+    {
+        return $this->editedBy;
+    }
+
+    public function setEditedBy(?self $editedBy): self
+    {
+        $this->editedBy = $editedBy;
+
+        return $this;
+    }
+
+    /**
+     * Removes sensitive data from the user.
+     *
+     * This is important if, at any given point, sensitive information like
+     * the plain-text password is stored on this object.
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function __toString()
+    {
+        return $this->getUsername();
     }
 
 }

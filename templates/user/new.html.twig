@@ -1,0 +1,16 @@
+{% extends 'user/user.html.twig' %}
+
+{% block content %}
+
+    <div class="col-md-7">
+        <h1> Ajout de nouvel utilisateur</h1>
+
+        {{ include('_form.html.twig') }}
+
+        <a href="{{ path('user_index') }}" class="btn btn-default">
+            <i class="glyphicon glyphicon-chevron-left"></i>
+            Retour à la Liste
+        </a>
+    </div>
+
+{% endblock %}

@@ -9,11 +9,12 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class RegisterType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -31,7 +32,7 @@ class UserType extends AbstractType
             ->add('sexe', ChoiceType::class, array(
                 'choices'   => ['Masculin' => 'M', 'Féminin'   =>  'F'],
                 'expanded'  => true,
-                'label'     => 'Sexe: ',
+                'label'     => 'Sexe: '
             ))
             ->add('telephone', TextType::class, array(
                 'label'     => 'Téléphone :',
@@ -43,6 +44,10 @@ class UserType extends AbstractType
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez votre mail']
             ))
+            ->add('enabled', CheckboxType::class, array(
+                'label'     => 'Activé :',
+                'required'  => false,
+            ))
             ->add('username', TextType::class, array(
                 'label'     => 'login/nom utilisateur :',
                 'required'  => false,
@@ -53,11 +58,10 @@ class UserType extends AbstractType
                 'first_options'         => array('label'   => 'Password'),
                 'second_options'        =>['label'    =>  'Répéter le mot de Password']
             ))
-            ->add('roles', ChoiceType::class, array(
-                'label'     => 'Roles :',
+            ->add('roles', TextType::class, array(
+                'label'     => 'Titre :',
                 'required'  => false,
-                'choices'   => ['Utilisateur' =>'ROLE_USER' ,'Administrateur' => 'ROLE_ADMIN' ],
-                'multiple'  => true
+                'attr'      =>['placeholder'    =>  'Saisissez le titre']
             ))
         ;
     }
