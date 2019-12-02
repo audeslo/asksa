@@ -1,53 +1,140 @@
 {% extends 'user/layout.html.twig' %}
 
 {% block content %}
-<div class="card card-login mx-auto mt-5">
-    <div class="card-header">Connexion</div>
-    <div class="card-body">
-        <div>
-
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
-
-            <form action="{{ path("app_login") }}" method="post">
-                {% if csrf_token %}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-                {% endif %}
-
-                <div class="form-group">
-                    <label for="username" class="form-label">Login</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control"/>
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:400,700"
+    />
+    <!-- https://fonts.google.com/specimen/Open+Sans -->
+    <link rel="stylesheet" href="{{ asset('templates/css/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/css/templatemo-style.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/css/test.css') }}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="d-flex justify-content-center h-100">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Sign In</h3>
+                    <div class="d-flex justify-content-end social_icon">
+                        <span><i class="fab fa-facebook-square"></i></span>
+                        <span><i class="fab fa-google-plus-square"></i></span>
+                        <span><i class="fab fa-twitter-square"></i></span>
+                    </div>
                 </div>
+                <div class="card-body">
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                    <form action="{{ path("app_login") }}" method="post">
+                        {% if csrf_token %}
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                        {% endif %}
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                            </div>
+                            {# <label for="username" class="form-label">Login</label>#}
+                            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="username" class="form-control"/>
 
-                <div class="form-group">
-                    <label for="password" class="form-label">Mot de passe</label>
-                    <input type="password" id="password" name="_password" required="required" class="form-control" />
+                            {# <input type="text" class="form-control" placeholder="username">#}
+
+                        </div>
+                        <div class="input-group form-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            </div>
+                            <input type="password" id="password" name="_password" required="required"  placeholder="password" class="form-control" />
+                            {# <input type="password" class="form-control" placeholder="password">#}
+                        </div>
+                        <div class="row align-items-center remember">
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />Remember Me
+                            {# <input type="checkbox">Remember Me#}
+                        </div>
+                        <div class="form-group">
+                            {#  <input type="submit" value="Login" class="btn float-right login_btn">#}
+                            <input type="submit" id="_submit" name="_submit" value="Valider" class="btn float-right login_btn"/>
+                            {# <input type="submit" id="_submit" name="_submit" value="Connexion" class="btn btn-success"/>#}
+                        </div>
+                    </form>
                 </div>
-
-                <div class="form-group">
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                    <label for="remember_me" class="form-label">Me souvenir</label>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-center links">
+                        Don't have an account?<a href="#">Sign Up</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="#">Forgot your password?</a>
+                    </div>
                 </div>
-
-                <input type="submit" id="_submit" name="_submit" value="Connexion" class="btn btn-success"/>
-            </form>
-
-            <p>
-                <br>
-                {#<a href="{{ path('fos_user_resetting_request') }}" class="btn-link">
-                    <i class="fa fa-warning"></i>
-                    Mot de passe oublié?
-                </a>#}
-            </p>
-
-            <p>
-                {#<a href="{{ path('fos_user_registration_register') }}" class="btn-link">
-                    <i class="fa fa-user"></i>
-                    Créer un compte utilisateur!
-                </a>#}
-            </p>
+            </div>
         </div>
     </div>
-</div>
+
+
+
+
+    {#
+    <div class="card card-login mx-auto mt-5">
+        <div class="card-header">Se connecter a votre compte</div>
+        <div class="card-body">
+            <div>
+
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+
+                <form action="{{ path("app_login") }}" method="post">
+                    {% if csrf_token %}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="username" class="form-label">Login</label>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" id="password" name="_password" required="required" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                        <label for="remember_me" class="form-label">Me souvenir</label>
+                    </div>
+
+                    <input type="submit" id="_submit" name="_submit" value="Connexion" class="btn btn-success"/>
+                </form>
+
+                <p>
+                    <br>
+                    #}
+{#<a href="{{ path('fos_user_resetting_request') }}" class="btn-link">
+                        <i class="fa fa-warning"></i>
+                        Mot de passe oublié?
+                    </a>#}{#
+#}
+{#
+                </p>
+
+                <p>
+                    #}{#
+#}
+{#<a href="{{ path('fos_user_registration_register') }}" class="btn-link">
+                        <i class="fa fa-user"></i>
+                        Créer un compte utilisateur!
+                    </a>#}{#
+
+                </p>
+            </div>
+        </div>
+    </div>
+
+#}
+
+
 {% endblock %}

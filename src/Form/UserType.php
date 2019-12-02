@@ -54,11 +54,13 @@ class UserType extends AbstractType
                 'second_options'        =>['label'    =>  'Répéter le mot de Password']
             ))
             ->add('roles', ChoiceType::class, array(
+                'choices'   => ['Utilisateur' =>'ROLE_USER' ,'Administrateur' => 'ROLE_ADMIN' ],
                 'label'     => 'Roles :',
                 'required'  => false,
-                'choices'   => ['Utilisateur' =>'ROLE_USER' ,'Administrateur' => 'ROLE_ADMIN' ],
-                'multiple'  => true
+
+                'multiple'  => true,
             ))
+
         ;
     }
 

@@ -40,8 +40,8 @@ class VenteshowroomType extends AbstractType
 
             ->add('grosdetail',ChoiceType::class,array(
                 'choices'  => array(
-                    'En gros' => 1,
-                    'En détail' => 0,
+                    'Carton' => 1,
+                    'Bidon' => 0,
                 ),
                 'label'     => 'Veuillez choisir l\'option:',
                 'expanded' => true,

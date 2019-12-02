@@ -166,7 +166,14 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        <a
+                                {% if var == 'users' %}
+                            class="nav-link dropdown-toggle active"
+                        {% else %}
+                            class="nav-link dropdown-toggle"
+                        {%  endif %}
+
+                                {#class="nav-link dropdown-toggle"#} href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-cog"></i>
                             <span>
@@ -174,8 +181,7 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="accounts.html">Utilisateus</a>
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{{ path('user_index') }}">Utilisateurs</a>
                             <a class="dropdown-item" href="#">Billing</a>
                             <a class="dropdown-item" href="#">Customize</a>
                         </div>

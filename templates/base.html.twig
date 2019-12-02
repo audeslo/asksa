@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ asset('templates/css/templatemo-style.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/css/erreur.css') }}">
 
+
 </head>
 
 <body id="reportsPage">
@@ -167,8 +168,7 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="accounts.html">Utilisateus</a>
-                            <a class="dropdown-item" href="#">Profile</a>
+                            <a class="dropdown-item" href="{{ path('user_index') }}">Utilisateurs</a>
                             <a class="dropdown-item" href="#">Billing</a>
                             <a class="dropdown-item" href="#">Customize</a>
                         </div>

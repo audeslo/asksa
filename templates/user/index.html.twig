@@ -5,7 +5,7 @@
     <div class="card mb-3">
         <div class="card-header">
             <h2> <i class="glyphicon glyphicon-table" ></i>
-                Liste des utilisateur</h2></div>
+                Liste des utilisateurs</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
@@ -15,7 +15,7 @@
                     </a>
                 </div>
 
-                <div class="col-md-1 col-md-offset-8">
+                <div class="offset-8 col-md-2 ">
                     <a href="#" class="btn btn-success ">
                         <i class="glyphicon glyphicon-print"></i>
                         Imprimer
@@ -40,7 +40,7 @@
                                 <td>
                                     {% include('user/viewmodal.html.twig') %}
                                 </td>
-                                <td><a href="{{ path('user_show' , {'slug' :user.slug }) }}"> {{ user.nom }}</a>  </td>
+                                <td><a style="color: white"  href="{{ path('user_show' , {'slug' :user.slug }) }}"> {{ user.nom  | upper}} </a> </td>
                                 <td>{{ user.prenom }}</td>
                                 <td>{{ user.username }}</td>
                                 {#<td>
