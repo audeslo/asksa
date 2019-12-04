@@ -21,6 +21,8 @@ class Venteshowroom
      */
     private $reference;
 
+
+
     /**
      * @ORM\Column(type="date")
      */
@@ -115,10 +117,11 @@ class Venteshowroom
     private $Grosdetail;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Modereglement")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length=255)
      */
     private $modereglement;
+
+
 
     public function getId(): ?int
     {
@@ -136,6 +139,8 @@ class Venteshowroom
 
         return $this;
     }
+
+
 
     public function getDatevente(): ?\DateTimeInterface
     {
@@ -310,15 +315,17 @@ class Venteshowroom
         return $this;
     }
 
-    public function getModereglement(): ?Modereglement
+    public function getModereglement(): ?string
     {
         return $this->modereglement;
     }
 
-    public function setModereglement(?Modereglement $modereglement): self
+    public function setModereglement(string $modereglement): self
     {
         $this->modereglement = $modereglement;
 
         return $this;
     }
+
+
 }
