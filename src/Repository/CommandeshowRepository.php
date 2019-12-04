@@ -80,7 +80,21 @@ class CommandeshowRepository extends ServiceEntityRepository
             ->execute()
             ;
     }
-
+    // Nouvelle requete pour les showrooms
+    public function findCommanderByShowroom($showroom)
+    {
+        return $this->createQueryBuilder('c')
+            ->innerJoin('c.commandershow', 'r')
+            ->innerJoin('r.produit','p')
+            ->innerJoin('c.showroom','s')
+            ->select('p.designation as designation, r.capacitebidonshow as capacitebidon, r.capacitecartonshow as capacitecarton, SUM(r.quantitestock) as stock')
+            ->where('s.id = :showroom')
+            ->setParameter('showroom', $showroom)
+            ->groupBy('r.produit', 'r.capacitebidonshow', 'r.capacitecartonshow')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
     // /**
     //  * @return Commandeshow[] Returns an array of Commandeshow objects
     //  */

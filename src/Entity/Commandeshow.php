@@ -51,7 +51,7 @@ class Commandeshow
     private $editedOn;
 
     /**
-     * @ORM\Column(type="datetime",nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $creditedOn;
 
@@ -69,9 +69,9 @@ class Commandeshow
     /**
      * @ORM\PrePersist()
      */
-    public function datecreated()
+    public function datecredited()
     {
-        $this->setCreditedOn(new \DateTime('now'));
+        $this->setCreditedOn()(new \DateTime('now'));
     }
 
     /**
