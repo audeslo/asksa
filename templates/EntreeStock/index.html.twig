@@ -1,0 +1,56 @@
+{% extends 'EntreeStock/entreestock.html.twig' %}
+
+{# page tableau et recherche #}
+
+{% block content %}
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2>
+                <i class="fa fa-table" ></i>
+                Liste des produits entrées en stock chez <strong>ASK SA</strong></h2></div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="#" class="btn btn-success ">
+                        <i class="fa fa-print"></i>
+                        Imprimer
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                <tr>
+                    <th>Date de commande</th>
+                    <th>Intitulé du commande</th>
+                    <th>Désignations</th>
+                    <th>Bidon/carton</th>
+                    <th>Qté bidon/Litre</th>
+                    <th>Qté entrée</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for commander in commanders %}
+                    <tr>
+                        <td>{{ commander.commande.datecommande|date('d-m-Y ') }}</td>
+                        <td>{{ commander.commande.intitule }}</td>
+                        <td>{{ commander.produit.designation }}</td>
+                        <td>{{ commander.capacitecarton }}</td>
+                        <td>{{ commander.capacitebidon }}</td>
+                        <td>
+                            {{ commander.quantitecommandee    }}
+                            <i  style="color:darkblue" class="fa fa-long-arrow-alt-down"></i></td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card-footer small text-muted">Hier à 11:59 </div>
+{% endblock %}
