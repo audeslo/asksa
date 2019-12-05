@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Client;
-use App\Entity\Modereglement;
+
 use App\Entity\Produit;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Venteshowroom;
@@ -30,13 +30,14 @@ class VenteshowroomType extends AbstractType
         'required'  => false,
         'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
     ))
-            /*->add('civilite', ChoiceType::class, array(
-                'choices'     =>['C' => 'Ca',
-                    'Mme' => 'Mme'],
-                'label'     => 'Civilité :',
+            ->add('modereglement', ChoiceType::class, array(
+                'choices'     =>['Par espèce' => '1',
+                                 'Par chèque' => '2',
+                                  'Par virement'=> '3'],
+                'label'     => 'modereglement :',
                 'required'  => false,
-                'placeholder'    =>  'Selectionner la civilité '
-            ))*/
+                'placeholder'    =>  'Selectionner le mode de règlement '
+            ))
 
             ->add('grosdetail',ChoiceType::class,array(
                 'choices'  => array(
@@ -67,15 +68,6 @@ class VenteshowroomType extends AbstractType
                 'required'  => false,
                 'placeholder' => 'Sélectionnez un client',
             ])
-
-            ->add('modereglement',EntityType::class, [
-                'class' => Modereglement::class,
-                'choice_label' => 'libelle',
-                'label'     => 'Mode de reglement:',
-                'required'  => false,
-                'placeholder' => 'Sélectionnez le mode de paiement',
-            ])
-
 
             /* ->add('stockshowroom')
                  ->add('slug')

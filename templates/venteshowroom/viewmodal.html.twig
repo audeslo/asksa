@@ -18,15 +18,15 @@
                         <td>{{ venteshowroom.id }}</td>
                     </tr>
                     <tr>
-                        <th>Nom court</th>
+                        <th>Référence</th>
                         <td>{{ venteshowroom.reference }}</td>
                     </tr>
                     <tr>
-                        <th>Nom complet</th>
-                        <td>{{ venteshowroom.datevente }}</td>
+                        <th>Date vente</th>
+                        <td>{{ venteshowroom.datevente |date('d-m-Y ')}}</td>
                     </tr>
                     <tr>
-                        <th>Telephone</th>
+                        <th>Client</th>
                         <td>{{ venteshowroom.client }}</td>
                     </tr>
                     <tr>

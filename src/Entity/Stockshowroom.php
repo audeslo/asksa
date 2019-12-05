@@ -76,6 +76,11 @@ class Stockshowroom
     private $editedBy;
 
     /**
+     * @ORM\Column(type="boolean")
+     */
+    private $sync;
+
+    /**
      * @ORM\PrePersist()
      */
     public function datecreated()
@@ -225,6 +230,18 @@ class Stockshowroom
     public function setEditedBy(?User $editedBy): self
     {
         $this->editedBy = $editedBy;
+
+        return $this;
+    }
+
+    public function getSync(): ?bool
+    {
+        return $this->sync;
+    }
+
+    public function setSync(bool $sync): self
+    {
+        $this->sync = $sync;
 
         return $this;
     }
