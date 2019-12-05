@@ -84,7 +84,7 @@ class Venteshowroom
 
     public function editedOn()
     {
-        $this->setEditedOn()(new \DateTime('now'));
+        $this->setEditedOn(new \DateTime('now'));
     }
 
     /**

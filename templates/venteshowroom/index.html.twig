@@ -46,7 +46,7 @@
             <tr>
                 {#<td>{{ fournisseur.id }}</td>#}
                 <td>{{ venteshowroom.reference }}</td>
-                <td>{{ venteshowroom.datevente }}</td>
+                <td>{{ venteshowroom.datevente |date('d-m-Y ')}}</td>
                 <td>{{ venteshowroom.client }}</td>
 
 
