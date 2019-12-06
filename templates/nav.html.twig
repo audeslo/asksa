@@ -39,15 +39,14 @@
                            aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-child fa-3x"></i>
                             <span>
-                                    Annuaires <i class="fas fa-angle-down"></i>
+                                    Agenda <i class="fas fa-angle-down"></i>
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ path('client_index') }}">Fiche client</a>
-                            <a class="dropdown-item" href="{{path('categorie_index')}}">Fiche categorie</a>
-                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche fournisseur</a>
-                            <a class="dropdown-item" href="{{ path('showroom_index') }}">Fiche show rooms</a>
-
+                            <a class="dropdown-item" href="{{ path('client_index') }}">Fiche Client</a>
+                            <a class="dropdown-item" href="{{path('categorie_index')}}">Fiche Categorie</a>
+                            <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche Fournisseur</a>
+                            <a class="dropdown-item" href="{{ path('showroom_index') }}">Fiche Showroom</a>
                         </div>
                     </li>
 
@@ -67,12 +66,9 @@
                                 </span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
                             <a class="dropdown-item" href="{{ path('produit_index') }}">Fiche produit</a>
-                            <a class="dropdown-item" href="{{path('produit_new')}}">Nouvelle fiche produit</a>
                             <a class="dropdown-item" href="{{ path('tarifcategorieclt_index') }}">Fiche de tarif des clients</a>
-                            <a class="dropdown-item" href="{{ path('tarifcategorieclt_new') }}">Nouvelle fiche de tarif des clients</a>
-
-
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -93,9 +89,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{path('venteshowroom_index')}}">Nouvelle facture</a>
-                            <a class="dropdown-item" href="#">Nouveau devis</a>
                             <a class="dropdown-item" href="#">Suivi des devis</a>
-                            <a class="dropdown-item" href="#">Fiche mode de reglèment</a>
+
                         </div>
                     </li>
 
@@ -117,7 +112,6 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('commande_index') }}">Fiche de commande Ask SA</a>
-                            <a class="dropdown-item" href="{{path('commande_new')}}">Nouvelle fiche de commandes</a>
                             <a class="dropdown-item" href="{{path('entree_index')}}">Liste des produits entrées en stock</a>
                             <a class="dropdown-item" href="{{ path('stock_actuel') }}">Consulter le stock actuel</a>
                             <a class="dropdown-item" href="{{ path('commande.showroom') }}">Consulter le stock actuel des showrooms</a>
@@ -189,7 +183,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link d-block" href="{{ path('app_logout') }}">
-                            {{app.user.username}}, <b>Deconnexion</b>
+                            {{app.user.username}}, <b>Déconnexion</b>
                         </a>
                     </li>
                 </ul>

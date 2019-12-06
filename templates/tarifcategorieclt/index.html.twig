@@ -31,10 +31,10 @@
                 <tr>
                     {# <th>Id</th>#}
                     <th>Catégorie</th>
-                    <th>Référence du produit</th>
-                    <th>borne supérieure</th>
-                    <th>Borne inférieure</th>
-                    <th>Capacité bidon</th>
+                    <th>Désignation</th>
+                    <th>B. supérieure</th>
+                    <th>B. inférieure</th>
+                    <th>C. bidon</th>
                     <th>Montant</th>
 
                     <th></th>
@@ -46,7 +46,7 @@
                     <tr>
 
                         <td>{{ tarifcategorieclt.categorie }}</td>
-                        <td>{{ tarifcategorieclt.produit }}</td>
+                        <td>{{ tarifcategorieclt.produit.designation }}</td>
                         <td>{{ tarifcategorieclt.bornesupperieur }}</td>
                         <td>{{ tarifcategorieclt.borneinferieure }}</td>
                         <td>{{ tarifcategorieclt.litre }}</td>

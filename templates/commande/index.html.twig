@@ -32,8 +32,8 @@
                 <thead>
                 <tr>
                     <th>Référence</th>
-                    <th>Intitule de la commande</th>
-                    <th>Date de commande</th>
+                    <th>Date</th>
+                    <th>Intitulé</th>
                     <th>Fournisseur</th>
                     <th></th>
                     <th></th>
@@ -43,8 +43,8 @@
                 {% for commande in commandes %}
                     <tr>
                         <td>{{ commande.reference }}</td>
-                        <td><a style="color: white" href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule | upper }}</a></td>
                         <td> {{ commande.datecommande ? commande.datecommande | date('d-M-Y') : ''}}</td>
+                        <td><a style="color: white" href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule | upper }}</a></td>
                         <td>{{ commande.fournisseur }}</td>
 
                         <td>

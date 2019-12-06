@@ -18,7 +18,7 @@ class TarifcategoriecltType extends AbstractType
     {
         $builder
             ->add('montant',IntegerType::class,array(
-                'label'     => 'montant :',
+                'label'     => 'Montant :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le montant']
             ))

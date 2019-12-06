@@ -51,9 +51,9 @@
 
                         <td> {{produit.designation }}</a></td>
 
-                        <td>{{ produit.prixU }}</td>
+                        <td>{{ produit.prixU | number_format(0,0,' ')}}</td>
 
-                        <td>{{ produit.prixventeconseiller }}</td>
+                        <td>{{ produit.prixventeconseiller | number_format(0,0,' ')}}</td>
 
                        {# <td> {{produit.categprod}}</a></td>#}
 

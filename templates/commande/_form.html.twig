@@ -2,19 +2,16 @@
 <div class="row">
 
     <div class="col-md-5 ">
-        {{ form_label(form.intitule) }}
-        {{ form_widget(form.intitule) }}
-        {{ form_errors(form.intitule) }}
-
         {{ form_label(form.datecommande) }}
         {{ form_widget(form.datecommande) }}
         {{ form_errors(form.datecommande) }}
 
-
+        {{ form_label(form.intitule) }}
+        {{ form_widget(form.intitule) }}
+        {{ form_errors(form.intitule) }}
     </div>
 
     <div class="col-md-5 offset-2">
-
         {{ form_label(form.fournisseur) }}
         {{ form_widget(form.fournisseur) }}
         {{ form_errors(form.fournisseur) }}
@@ -22,7 +19,6 @@
         {{ form_label(form.description) }}
         {{ form_widget(form.description) }}
         {{ form_errors(form.description) }}
-
     </div>
 
 </div>

@@ -15,7 +15,7 @@ class ShowroomType extends AbstractType
         $builder
 
             ->add('nomshow',TextType::class,array(
-                'label'=>'Nom du show rooms :',
+                'label'=>'Nom du showroom :',
                 'required' => false,
                 'attr'   =>['placeholder'  => 'Saisissez le nom du show rooms']
             ))

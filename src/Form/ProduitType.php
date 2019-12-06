@@ -57,6 +57,7 @@ class ProduitType extends AbstractType
             ->add('stockalerte', IntegerType::class, array(
                 'label'     => 'Stock d\'alerte :',
                 'required'  => false,
+
             ))
             /*->add('editedById')
             ->add('slug')*/

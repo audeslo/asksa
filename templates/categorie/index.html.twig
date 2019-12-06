@@ -31,8 +31,8 @@
 
                 <thead>
                 <tr>
-
-                    <th>Libelle</th>
+                    <th>N°</th>
+                    <th>Libellé</th>
                     <th>description</th>
 
                     <th></th>
@@ -42,6 +42,7 @@
                 <tbody>
                 {% for categorie in categories %}
                     <tr>
+                        <td>{{ categorie.id }}</td>
 
                         <td>{{ categorie.libelle }}</td>
 

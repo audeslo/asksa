@@ -16,7 +16,7 @@ class FournisseurType extends AbstractType
     {
         $builder
             ->add('nomcourt',TextType::class,array(
-                'label'     => 'Nom court :',
+                'label'     => 'Société :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez le nom court']
             ))
