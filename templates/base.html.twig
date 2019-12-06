@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="{{ asset('templates/css/templatemo-style.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/css/erreur.css') }}">
 
+    <link rel="stylesheet" href="{{ asset('templates/css/select2.css') }}">
+    <link rel="stylesheet" href="{{ asset('templates/js/jquery.js') }}">
+
+
+
 
 </head>
 
@@ -489,7 +494,7 @@
 <script src="{{ asset('templates/js/autocompleteForm.js') }}"></script>
 
 {#Autocomplete#}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+<script src="{{ asset('templates/js/select2.js') }}"></script>
 
 {#CheckEditor#}
 <script src="{{ asset('templates/js/ckeditor/adapters/jquery.js') }}" type="text/javascript"></script>
@@ -525,6 +530,15 @@
 <script type="text/javascript">
     $(function() {
         $('textarea.ckeditor').ckeditor();
+    });
+</script>
+<script>
+
+    $(document).ready(function() {
+     // Autocomplete
+        // language=JQuery-CSS
+        $('select[data-select="true"]').select2();
+
     });
 </script>
 

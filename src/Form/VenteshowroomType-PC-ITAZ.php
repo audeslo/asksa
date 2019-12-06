@@ -67,7 +67,6 @@ class VenteshowroomType extends AbstractType
                 'choice_label' => 'identifiant1',
                 'required'  => false,
                 'placeholder' => 'Sélectionnez un client',
-                'attr' => ['data-select' => 'true']
             ])
 
             /* ->add('stockshowroom')

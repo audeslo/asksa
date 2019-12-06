@@ -21,6 +21,8 @@ class Venteshowroom
      */
     private $reference;
 
+
+
     /**
      * @ORM\Column(type="date")
      */
@@ -72,11 +74,6 @@ class Venteshowroom
      */
     private $produit;
 
-    public function __construct()
-    {
-        $this->setDatevente(new \DateTime('now'));
-    }
-
     /**
      * @ORM\PrePersist()
      */
@@ -85,6 +82,10 @@ class Venteshowroom
         $this->setCreatedOn(new \DateTime('now'));
     }
 
+    public function editedOn()
+    {
+        $this->setEditedOn(new \DateTime('now'));
+    }
 
     /**
      * @ORM\PreUpdate()
@@ -100,6 +101,10 @@ class Venteshowroom
      */
     private $client;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Stockshowroom")
+     */
+    private $stockshowroom;
 
     /**
      * @ORM\Column(type="smallint", nullable=true)
