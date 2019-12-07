@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Venteshowroom;
+use App\Form\VenteshowroomEditType;
 use App\Form\VenteshowroomType;
 use App\Repository\VenteshowroomRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -42,7 +43,7 @@ class VenteshowroomController extends AbstractController
             $lastid=$entityManager->getRepository('App:Venteshowroom')->findLastId();
 
             $entityManager->getRepository('App:Venteshowroom')->updateLastReferent($lastid,'BL-'.getAugmentons($lastid));
-            return $this->redirectToRoute('venteshowroom_index');
+            //return $this->redirectToRoute('venteshowroom_index');
         }
 
         return $this->render('venteshowroom/new.html.twig', [
@@ -66,7 +67,7 @@ class VenteshowroomController extends AbstractController
      */
     public function edit(Request $request, Venteshowroom $venteshowroom): Response
     {
-        $form = $this->createForm(VenteshowroomType::class, $venteshowroom);
+        $form = $this->createForm(VenteshowroomEditType::class, $venteshowroom);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -75,7 +76,7 @@ class VenteshowroomController extends AbstractController
             return $this->redirectToRoute('fournisseur_index');
         }
 
-        return $this->render('fournisseur/edit.html.twig', [
+        return $this->render('venteshowroom/new.html.twig', [
             'venteshowroom' => $venteshowroom,
             'form' => $form->createView(),
         ]);
@@ -95,23 +96,24 @@ class VenteshowroomController extends AbstractController
         return $this->redirectToRoute('fournisseur_index');
     }
 
-    function getAugmentons(int $autom)
-    {
+}
 
-        if($autom<10)
-        {
-            return '0000'.$autom;
-        }elseif ($autom<100)
-        {
-            return '000'.$autom;
-        }elseif ($autom<1000)
-        {
-            return '00'.$autom;
-        }elseif ($autom<10000)
-        {
-            return '0'.$autom;
-        }else{
-            return $autom;
-        }
+function getAugmentons(int $autom)
+{
+
+    if($autom<10)
+    {
+        return '0000'.$autom;
+    }elseif ($autom<100)
+    {
+        return '000'.$autom;
+    }elseif ($autom<1000)
+    {
+        return '00'.$autom;
+    }elseif ($autom<10000)
+    {
+        return '0'.$autom;
+    }else{
+        return $autom;
     }
 }

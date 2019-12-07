@@ -45,7 +45,7 @@
         {% for venteshowroom in venteshowrooms %}
             <tr>
                 {#<td>{{ fournisseur.id }}</td>#}
-                <td>{{ venteshowroom.reference }}</td>
+                <td><a href="{{ path('venteshowroom_edit', {'slug': venteshowroom.slug}) }}">{{ venteshowroom.reference }}</a></td>
                 <td>{{ venteshowroom.datevente |date('d-m-Y ')}}</td>
                 <td>{{ venteshowroom.client }}</td>
 

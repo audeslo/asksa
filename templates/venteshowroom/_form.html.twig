@@ -1,15 +1,18 @@
+{% if( form.client is defined) %}
 <hr>
 <div class="row">
 
     <div class="col-md-5">
         <div class="row">
             <div class="col-md-11 ">
+
                 {{ form_label(form.client) }}
                 {{ form_widget(form.client) }}
                 {{ form_errors(form.client) }}
+
             </div>
             <div class="col-md-1" style="margin-left: -50px; padding-top: 20px">
-                <a type="button" class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fa fa-address-card"> </i> </a>
+                <a  class="btn" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><i class="fa fa-address-card"> </i> </a>
 
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -21,7 +24,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                               {# <form>
                                     <div class="form-group">
                                         <label for="recipient-name" class="col-form-label">Recipient:</label>
                                         <input type="text" class="form-control" id="recipient-name">
@@ -30,7 +33,7 @@
                                         <label for="message-text" class="col-form-label">Message:</label>
                                         <textarea class="form-control" id="message-text"></textarea>
                                     </div>
-                                </form>
+                                </form>#}
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
@@ -50,22 +53,28 @@
         {{ form_widget(form.datevente) }}
         {{ form_errors(form.datevente) }}
 
+
     </div>
 
 </div>
 <hr>
+{% endif %}
 <div class="row">
 
     <div class="col-md-5 ">
+        {% if(form.grosdetail is defined) %}
         {{ form_label(form.grosdetail) }}
         {{ form_widget(form.grosdetail) }}
         {{ form_errors(form.grosdetail) }}
+        {% endif %}
     </div>
 
     <div class="col-md-5 offset-2">
+        {% if (form.modereglement is defined) %}
         {{ form_label(form.modereglement) }}
         {{ form_widget(form.modereglement) }}
         {{ form_errors(form.modereglement) }}
+        {% endif %}
 
 
     </div>

@@ -14,17 +14,12 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VenteshowroomType extends AbstractType
+class VenteshowroomEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          /*  ->add('reference')*/
-            ->add('datevente',DateType::class,array(
-        'label' => 'Date de facture',
-        'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez la date de commande']
-    ))
+
 
             ->add('quantitecarton',IntegerType::class,array(
         'label'     => 'Capacite carton :',
@@ -36,24 +31,8 @@ class VenteshowroomType extends AbstractType
         'required'  => true,
         'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
     ))
-            ->add('modereglement', ChoiceType::class, array(
-                'choices'     =>['Par espèce' => '1',
-                                 'Par chèque' => '2',
-                                  'Par virement'=> '3'],
-                'label'     => 'Mode de règlement :',
-                'required'  => true,
-                'placeholder'    =>  'Sélectionner le mode de règlement '
-            ))
 
-            ->add('grosdetail',ChoiceType::class,array(
-                'choices'  => array(
-                    'Carton' => 1,
-                    'Bidon' => 0,
-                ),
-                'label'     => 'Veuillez choisir l\'option:',
-                'expanded' => true,
-                'multiple' => false,
-            ))
+
 
             ->add('quantiteachete',IntegerType::class,array(
         'label'     => 'Quantité a acheté :',
@@ -68,13 +47,6 @@ class VenteshowroomType extends AbstractType
         'placeholder' => 'Sélectionnez le produit',
     ])
 
-            ->add('client',EntityType::class, [
-                'class' => Client::class,
-                'choice_label' => 'identifiant1',
-                'required'  => false,
-                'placeholder' => 'Sélectionnez un client',
-                'attr' => ['data-select' => 'true']
-            ])
         ;
     }
 

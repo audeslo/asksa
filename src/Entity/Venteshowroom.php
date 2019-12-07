@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VenteshowroomRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Venteshowroom
 {
@@ -17,7 +19,7 @@ class Venteshowroom
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reference;
 
@@ -43,6 +45,7 @@ class Venteshowroom
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Gedmo\Slug(fields={"id","createdOn"})
      */
     private $slug;
 
