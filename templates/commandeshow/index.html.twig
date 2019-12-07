@@ -8,7 +8,7 @@
         <div class="card-header">
             <h2>
                 <i class="fa fa-table" ></i>
-                Liste commandes showrooms</h2></div>
+                Liste des commandes de showrooms</h2></div>
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
@@ -32,9 +32,9 @@
                 <thead>
                 <tr>
                     <th>Référence</th>
-                    <th>Intitule de la commande</th>
+                    <th>Date</th>
+                    <th>Intitulé </th>
                     <th>Showroom</th>
-                    <th>Date de commande</th>
                     <th>Valider</th>
                     <th></th>
                     <th></th>
@@ -44,9 +44,9 @@
                 {% for commandeshow in commandeshows %}
                     <tr>
                         <td>{{ commandeshow.reference }}</td>
+                        <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
                         <td ><a style="color: white" href="{{ path('commandershow_index', {'slug' : commandeshow.slug}) }}">{{ commandeshow.intituleshow | upper }}</a></td>
                         <td>{{ commandeshow.showroom }}</td>
-                        <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
                         <td>
                             {% if commandeshow.statut == 0 %}
                             {#{{ commandeshow.statut ? "En cours":"Approuvé"  }}#}

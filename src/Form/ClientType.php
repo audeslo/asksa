@@ -94,7 +94,7 @@ class ClientType extends AbstractType
                 'class' => Categorie::class,
                 'choice_label' => 'libelle',
                 'required'  => false,
-                'placeholder' => 'Sélectionnez une categorie',
+                'placeholder' => 'Sélectionnez une catégorie',
             ])
 
             ->add('description', TextareaType::class, array(

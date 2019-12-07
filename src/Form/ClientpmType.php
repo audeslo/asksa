@@ -44,7 +44,7 @@ class ClientpmType extends AbstractType
             ->add('telephone', TextType::class, array(
                 'label'     => 'Tél.Portable :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le numero de telephone']
+                'attr'      =>['placeholder'    =>  'Saisissez le numero de télephone']
             ))
             ->add('ville', TextType::class, array(
                 'label'     => 'Ville :',
@@ -59,7 +59,7 @@ class ClientpmType extends AbstractType
             ->add('mail', TextType::class, array(
                 'label'     => 'E-mail :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez une adresse electronique']
+                'attr'      =>['placeholder'    =>  'Saisissez une adresse électronique']
             ))
 
             ->add('pays', TextType::class, array(
@@ -71,7 +71,7 @@ class ClientpmType extends AbstractType
             ->add('telfixe', TextType::class, array(
                 'label'     => 'Téléphone fixe :',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez le telephone']
+                'attr'      =>['placeholder'    =>  'Saisissez le téléphone']
             ))
 
             ->add('personnecontact', TextType::class, array(
@@ -81,12 +81,12 @@ class ClientpmType extends AbstractType
             ))
 
             ->add('numerocompte', TextType::class, array(
-                'label'     => 'Numero bancaire :',
+                'label'     => 'Numéro bancaire :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez un bancaire valide']
             ))
 
-            ->add('description', TextType::class, array(
+            ->add('description', TextareaType::class, array(
                 'label'     => 'Description de la société :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez une bref description']
@@ -110,7 +110,8 @@ class ClientpmType extends AbstractType
                 'class' => Categorie::class,
                 'choice_label' => 'libelle',
                 'required'  => false,
-                'placeholder' => 'Sélectionnez une categorie',
+                'label'     => 'Catégorie :',
+                'placeholder' => 'Sélectionnez une catégorie',
             ])
         ;
 

@@ -35,8 +35,7 @@
                     <th>Réference</th>
                     <th>Désignation</th>
                     <th>Prix unitaire</th>
-                    <th>Prix conseiller</th>
-                  {#  <th>catégorie</th>#}
+                    <th>Prix conseillé</th>
                     <th>Marque</th>
                     <th>Alerte</th>
 
@@ -48,21 +47,11 @@
                 {% for produit in produits %}
                     <tr>
                         <td> {{produit.reference }}</a></td>
-
                         <td> {{produit.designation }}</a></td>
-
                         <td>{{ produit.prixU | number_format(0,0,' ')}}</td>
-
                         <td>{{ produit.prixventeconseiller | number_format(0,0,' ')}}</td>
-
-                       {# <td> {{produit.categprod}}</a></td>#}
-
                         <td>{{ produit.marque }}</td>
-
                         <td>{{ produit.stockalerte }}</td>
-
-
-
                         <td>
                               {% include('produit/viewmodal.html.twig') %}
                         </td>

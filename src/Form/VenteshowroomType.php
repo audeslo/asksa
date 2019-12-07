@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Venteshowroom;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,14 +20,19 @@ class VenteshowroomType extends AbstractType
     {
         $builder
           /*  ->add('reference')*/
-            ->add('datevente')
-            ->add('quantitecarton',IntegerType::class,array(
-        'label'     => 'capacite carton :',
+            ->add('datevente',DateType::class,array(
+        'label' => 'Date de facture',
         'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez la capacité du carton']
+        'attr'      =>['placeholder'    =>  'Saisissez la date de commande']
+    ))
+
+            ->add('quantitecarton',IntegerType::class,array(
+        'label'     => 'Capacite carton :',
+        'required'  => false,
+
     ))
             ->add('capacitebidon',IntegerType::class,array(
-        'label'     => 'capacaité bidon:',
+        'label'     => 'Capacité bidon:',
         'required'  => false,
         'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
     ))
@@ -34,9 +40,9 @@ class VenteshowroomType extends AbstractType
                 'choices'     =>['Par espèce' => '1',
                                  'Par chèque' => '2',
                                   'Par virement'=> '3'],
-                'label'     => 'modereglement :',
+                'label'     => 'Mode de règlement :',
                 'required'  => false,
-                'placeholder'    =>  'Selectionner le mode de règlement '
+                'placeholder'    =>  'Sélectionner le mode de règlement '
             ))
 
             ->add('grosdetail',ChoiceType::class,array(
@@ -69,13 +75,6 @@ class VenteshowroomType extends AbstractType
                 'placeholder' => 'Sélectionnez un client',
                 'attr' => ['data-select' => 'true']
             ])
-
-            /* ->add('stockshowroom')
-                 ->add('slug')
-             ->add('editedOn')
-             ->add('createdOn')
-             ->add('editedBy')
-             ->add('createdBy')*/
         ;
     }
 

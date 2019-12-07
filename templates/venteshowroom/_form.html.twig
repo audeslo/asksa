@@ -56,10 +56,18 @@
 <hr>
 <div class="row">
 
-    <div class="col-md-12 ">
+    <div class="col-md-5 ">
         {{ form_label(form.grosdetail) }}
         {{ form_widget(form.grosdetail) }}
         {{ form_errors(form.grosdetail) }}
+    </div>
+
+    <div class="col-md-5 offset-2">
+        {{ form_label(form.modereglement) }}
+        {{ form_widget(form.modereglement) }}
+        {{ form_errors(form.modereglement) }}
+
+
     </div>
 </div>
 <hr>
@@ -88,22 +96,6 @@
         {{ form_errors(form.capacitebidon) }}
     </div>
 </div>
-<hr>
-<div class="row">
 
-    <div class="col-md-5 ">
-
-        {{ form_label(form.modereglement) }}
-        {{ form_widget(form.modereglement) }}
-        {{ form_errors(form.modereglement) }}
-    </div>
-
-    <div class="col-md-5 offset-2">
-
-
-
-    </div>
-
-</div>
 
 
