@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -78,6 +80,7 @@ class Venteshowroom
     public function __construct()
     {
         $this->setDatevente(new \DateTime('now'));
+        $this->venteStocks = new ArrayCollection();
     }
 
     /**
@@ -118,6 +121,11 @@ class Venteshowroom
      * @ORM\Column(type="string", length=255)
      */
     private $modereglement;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\VenteStock", mappedBy="venteshowroom", orphanRemoval=true)
+     */
+    private $venteStocks;
 
 
 
@@ -321,6 +329,37 @@ class Venteshowroom
     public function setModereglement(string $modereglement): self
     {
         $this->modereglement = $modereglement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|VenteStock[]
+     */
+    public function getVenteStocks(): Collection
+    {
+        return $this->venteStocks;
+    }
+
+    public function addVenteStock(VenteStock $venteStock): self
+    {
+        if (!$this->venteStocks->contains($venteStock)) {
+            $this->venteStocks[] = $venteStock;
+            $venteStock->setVenteshowroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVenteStock(VenteStock $venteStock): self
+    {
+        if ($this->venteStocks->contains($venteStock)) {
+            $this->venteStocks->removeElement($venteStock);
+            // set the owning side to null (unless already changed)
+            if ($venteStock->getVenteshowroom() === $this) {
+                $venteStock->setVenteshowroom(null);
+            }
+        }
 
         return $this;
     }

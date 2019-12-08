@@ -131,10 +131,16 @@ class Produit
      */
     private $img;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\VenteStock", mappedBy="produit")
+     */
+    private $venteStocks;
+
     public function __construct()
     {
         $this->tarifcategorieclts = new ArrayCollection();
         $this->commanders = new ArrayCollection();
+        $this->venteStocks = new ArrayCollection();
     }
 
 
@@ -264,7 +270,7 @@ class Produit
     }
     public function __toString()
     {
-        return $this->reference;
+        return $this->designation;
         // TODO: Implement __toString() method.
     }
 
@@ -386,6 +392,37 @@ class Produit
     public function setImg($img): self
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|VenteStock[]
+     */
+    public function getVenteStocks(): Collection
+    {
+        return $this->venteStocks;
+    }
+
+    public function addVenteStock(VenteStock $venteStock): self
+    {
+        if (!$this->venteStocks->contains($venteStock)) {
+            $this->venteStocks[] = $venteStock;
+            $venteStock->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVenteStock(VenteStock $venteStock): self
+    {
+        if ($this->venteStocks->contains($venteStock)) {
+            $this->venteStocks->removeElement($venteStock);
+            // set the owning side to null (unless already changed)
+            if ($venteStock->getProduit() === $this) {
+                $venteStock->setProduit(null);
+            }
+        }
 
         return $this;
     }

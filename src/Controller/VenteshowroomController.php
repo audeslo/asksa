@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Venteshowroom;
+use App\Entity\VenteStock;
 use App\Form\VenteshowroomEditType;
 use App\Form\VenteshowroomType;
 use App\Repository\VenteshowroomRepository;
@@ -35,22 +36,79 @@ class VenteshowroomController extends AbstractController
         $venteshowroom = new Venteshowroom();
         $form = $this->createForm(VenteshowroomType::class, $venteshowroom);
         $form->handleRequest($request);
+        $ventes=null;
+        $entityManager = $this->getDoctrine()->getManager();
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($venteshowroom);
-            $entityManager->flush();
-            $lastid=$entityManager->getRepository('App:Venteshowroom')->findLastId();
 
-            $entityManager->getRepository('App:Venteshowroom')->updateLastReferent($lastid,'BL-'.getAugmentons($lastid));
-            //return $this->redirectToRoute('venteshowroom_index');
+            $isset = $this->get('session')->get('venteshowroom');
+            $ventestock = new VenteStock();
+            $entityManager->persist($venteshowroom);
+
+            $entityManager->flush();
+
+            $lastid = $entityManager->getRepository('App:Venteshowroom')->findLastId();
+
+            $entityManager->getRepository('App:Venteshowroom')->updateLastReferent($lastid, 'BL-' . getAugmentons($lastid));
+
+            $this->get('session')->set('venteshowroom', $lastid);
+
+            $ventestock->setBidon($form->get('capacitebidon')->getData());
+            $ventestock->setCarton($form->get('quantitecarton')->getData());
+            $ventestock->setContenant($form->get('grosdetail')->getData());
+            $ventestock->setProduit($entityManager->getRepository('App:Produit')
+                ->find($form->get('produit')->getData()));
+            $ventestock->setQuantite($form->get('quantiteachete')->getData());
+
+            $ventestock->setVenteshowroom($entityManager->getRepository('App:Venteshowroom')
+                ->findLastObjet()
+            );
+            $entityManager->persist($ventestock);
+            $entityManager->flush();
+
+
+            return $this->render('venteshowroom/new.html.twig', [
+                'venteshowroom' => $venteshowroom,
+                'form' => $form->createView(),
+                'ventes' => $ventes
+            ]);
         }
+    }
+
+    /**
+     * @Route("/{slug}", name="venteshowroom_add", methods={"GET"})
+     */
+    public function add(Venteshowroom $venteshowroom, Request $request): Response
+    {
+
+        $form = $this->createForm(VenteshowroomEditType::class, $venteshowroom);
+        $form->handleRequest($request);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $isset=$this->get('session')->get('venteshowroom');
+            $ventes=$entityManager->getRepository('App:VenteStock')->findBy(
+                ['venteshowroom' => $this->get('session')->get('venteshowroom')]);
+
+                  $ventestock = new VenteStock();
+        $ventestock->setBidon($form->get('capacitebidon')->getData());
+        $ventestock->setCarton($form->get('quantitecarton')->getData());
+        $ventestock->setContenant($form->get('grosdetail')->getData());
+        $ventestock->setProduit($entityManager->getRepository('App:Produit')
+            ->find($form->get('produit')->getData()));
+        $ventestock->setQuantite($form->get('quantiteachete')->getData());
+        $ventestock->setVenteshowroom($entityManager->getRepository('App:Venteshowroom')
+            ->findLastObjet());
+        $entityManager->persist($ventestock);
+        $entityManager->flush();
+
 
         return $this->render('venteshowroom/new.html.twig', [
             'venteshowroom' => $venteshowroom,
             'form' => $form->createView(),
+            'ventes' => $ventes
         ]);
     }
+
 
     /**
      * @Route("/{slug}", name="venteshowroom_show", methods={"GET"})

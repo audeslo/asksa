@@ -31,12 +31,23 @@ class VenteshowroomRepository extends ServiceEntityRepository
         } catch (NonUniqueResultException $e) {
         }
     }
+    public function findLastObjet()
+    {
+        try {
+            return $this->createQueryBuilder('bl')
+                ->orderBy('bl.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
 
     public function updateLastReferent($id,$value)
     {
         return $this->createQueryBuilder('bl')
             ->update()
-            ->set('bl.referent','?1')
+            ->set('bl.reference','?1')
             ->andWhere('bl.id= :val')
             ->setParameter(1, $value)
             ->setParameter('val', $id)

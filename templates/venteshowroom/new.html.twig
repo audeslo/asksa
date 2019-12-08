@@ -30,6 +30,12 @@
                        <th width="5%">Supp</th>
                    </tr>
                    </thead>
+                   {% for vente in ventes %}
+                       <tr>
+                           <th> {{ vente.produit}} </th>
+                           <th>{{ vente.quantite }}</th>
+                       </tr>
+                   {% endfor %}
                </table>
 
                </div>
