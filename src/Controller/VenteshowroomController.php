@@ -65,14 +65,14 @@ class VenteshowroomController extends AbstractController
             );
             $entityManager->persist($ventestock);
             $entityManager->flush();
-
-
-            return $this->render('venteshowroom/new.html.twig', [
-                'venteshowroom' => $venteshowroom,
-                'form' => $form->createView(),
-                'ventes' => $ventes
-            ]);
         }
+
+        return $this->render('venteshowroom/new.html.twig', [
+            'venteshowroom' => $venteshowroom,
+            'form' => $form->createView(),
+            'ventes' => $ventes
+        ]);
+
     }
 
     /**
@@ -137,6 +137,7 @@ class VenteshowroomController extends AbstractController
         return $this->render('venteshowroom/new.html.twig', [
             'venteshowroom' => $venteshowroom,
             'form' => $form->createView(),
+            'ventes'    => $ventes=null
         ]);
     }
 

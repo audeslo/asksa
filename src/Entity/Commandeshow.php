@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CommandeshowRepository")
+ *  @ORM\HasLifecycleCallbacks()
  */
 class Commandeshow
 {
@@ -71,7 +72,7 @@ class Commandeshow
      */
     public function datecredited()
     {
-        $this->setCreditedOn()(new \DateTime('now'));
+        $this->setCreditedOn(new \DateTime('now'));
     }
 
     /**
@@ -98,7 +99,7 @@ class Commandeshow
     /**
      * @ORM\Column(type="smallint")
      */
-    private $statut;
+    private $statut = 0;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Commandershow", mappedBy="commandeshow")

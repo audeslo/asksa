@@ -70,7 +70,9 @@ class VenteshowroomType extends AbstractType
 
             ->add('client',EntityType::class, [
                 'class' => Client::class,
-                'choice_label' => 'identifiant1',
+                'choice_label' => function($client){
+                    return $client->getIdentifiant1(). ' ' . $client->getIdentifiant2();
+                },
                 'required'  => false,
                 'placeholder' => 'Sélectionnez un client',
                 'attr' => ['data-select' => 'true']

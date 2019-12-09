@@ -12,10 +12,16 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-md-2">
-                    <a href="{{ path('commandershow_new') }}" class="btn btn-primary ">
+
+
+
+
+                    {% if commandeshow.statut == 0 %}
+                    <a href="{{ path('commandershow_new') }}" class="btn btn-primary " >
                         <i class="fa fa-chevron-right"></i>
                       Ajouter
                     </a>
+                    {% endif %}
                 </div>
 
                 <div class="offset-8 col-md-2 ">
@@ -47,17 +53,10 @@
                     <tr>
 
                         <td>{{ commandershow.reference }}</td>
-
                         <td> {{commandershow.produit.designation }}</a></td>
-
                         <td>{{ commandershow.quantitecommandeshow}}</td>
-
                         <td>{{ commandershow.capacitecartonshow }}</td>
-
                         <td>{{ commandershow.capacitebidonshow }}</td>
-
-
-
 
                         {#  <td>
   #}{#                              {% include('commande/viewmodal.html.twig') %}#}{#
@@ -76,14 +75,16 @@
 
                 <div class="col-md-2 offset-9">
                     {% if commandeshow.statut == 0 %}
-                        <a class="btn btn-danger col-md-3" href="{{ path('commandershow_approuver',{'id':commandeshow.id}) }}"> Approuver
+                        <a class="btn btn-danger col-md-3" href="{{ path('commandershow_approuver',{'id':commandeshow.id}) }}"  > Approuver
                             <i class="fa fa-chevron-right"></i>
                         </a>
+
                     {% else %}
                         <a class="btn btn-success col-md-3" href="#">
                             <i class="fa fa-qrcode"></i>
                             Imp. Code QR
                         </a>
+
                     {% endif %}
 
                 </div>

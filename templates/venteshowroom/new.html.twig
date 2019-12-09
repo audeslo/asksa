@@ -2,7 +2,7 @@
 {% extends 'venteshowroom/venteshowroom.html.twig' %}
 
 {% block content %}
-    {# bouton new #}
+    {# bouton new #}PRIMARY
     <div class="col-md-10" style="background-color: #cccccc">
         <h1> Gestion de vente</h1>
 
@@ -66,6 +66,7 @@
                if (e.target.className === "btn btn-success add vente"){
                    //fetch('/venteshowroom/new')
                    form = document.getElementsByName("venteshowroom");
+                   $('#div1').hide();
                    $.ajax({
                        url:"/venteshowroom/new",
                        method:"POST",
@@ -81,8 +82,5 @@
         }
 
     </script>
-
-
-
 {% endblock %}
 
