@@ -8,7 +8,11 @@ use App\Repository\CategorieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @Route("/categorie")
@@ -16,6 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategorieController extends AbstractController
 {
+
+
     /**
      * @Route("/", name="categorie_index", methods={"GET"})
      */
@@ -29,7 +35,7 @@ class CategorieController extends AbstractController
     /**
      * @Route("/new", name="categorie_new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, UserInterface $user): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
@@ -47,6 +53,7 @@ class CategorieController extends AbstractController
         return $this->render('categorie/new.html.twig', [
             'categorie' => $categorie,
             'form' => $form->createView(),
+            'id'    => $user->getId()
         ]);
     }
 
@@ -96,4 +103,6 @@ class CategorieController extends AbstractController
 
         return $this->redirectToRoute('categorie_index');
     }
+
 }
+

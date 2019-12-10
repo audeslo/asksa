@@ -477,4 +477,8 @@ class User implements UserInterface, \Serializable
         return $this->getUsername();
     }
 
+
+
+
+
 }

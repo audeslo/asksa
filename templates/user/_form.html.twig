@@ -35,9 +35,9 @@
     <div class="col-md-5 offset-2">
 
         {{ form_label(form.sexe) }}
-        {{ form_widget(form.sexe) }}
-        {{ form_errors(form.sexe) }}
-
+        {{ form_widget(form.sexe, {attr:{class:'d-inline-block'}})  }}
+        {{ form_errors(form.sexe, {attr:{class:'d-inline-block'}})  }}
+        <br><br>
         {{ form_label(form.email) }}
         {{ form_widget(form.email) }}
         {{ form_errors(form.email) }}
