@@ -43,6 +43,7 @@ class VenteshowroomController extends AbstractController
 
             $isset = $this->get('session')->get('venteshowroom');
             $ventestock = new VenteStock();
+            $venteshowroom->setCreatedBy($this->getUser());
             $entityManager->persist($venteshowroom);
 
             $entityManager->flush();
@@ -76,30 +77,34 @@ class VenteshowroomController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", name="venteshowroom_add", methods={"GET"})
+     * @Route("/{slug}", name="venteshowroom_add", methods={"GET","POST"})
      */
     public function add(Venteshowroom $venteshowroom, Request $request): Response
     {
 
-        $form = $this->createForm(VenteshowroomEditType::class, $venteshowroom);
+
+        $form = $this->createForm(VenteshowroomEditType::class);
         $form->handleRequest($request);
         $entityManager = $this->getDoctrine()->getManager();
 
-        $isset=$this->get('session')->get('venteshowroom');
-            $ventes=$entityManager->getRepository('App:VenteStock')->findBy(
-                ['venteshowroom' => $this->get('session')->get('venteshowroom')]);
+        //$isset=$this->get('session')->get('venteshowroom');
 
-                  $ventestock = new VenteStock();
-        $ventestock->setBidon($form->get('capacitebidon')->getData());
-        $ventestock->setCarton($form->get('quantitecarton')->getData());
-        $ventestock->setContenant($form->get('grosdetail')->getData());
-        $ventestock->setProduit($entityManager->getRepository('App:Produit')
-            ->find($form->get('produit')->getData()));
-        $ventestock->setQuantite($form->get('quantiteachete')->getData());
-        $ventestock->setVenteshowroom($entityManager->getRepository('App:Venteshowroom')
-            ->findLastObjet());
-        $entityManager->persist($ventestock);
-        $entityManager->flush();
+        if ($form->isSubmitted()&& $form->isValid()) {
+
+            $ventestock = new VenteStock();
+            $ventestock->setBidon($form->get('capacitebidon')->getData());
+            $ventestock->setCarton($form->get('quantitecarton')->getData());
+            $ventestock->setContenant($form->get('grosdetail')->getData());
+            $ventestock->setProduit($entityManager->getRepository('App:Produit')
+                ->find($form->get('produit')->getData()));
+            $ventestock->setQuantite($form->get('quantiteachete')->getData());
+            $ventestock->setVenteshowroom($venteshowroom);
+            $ventestock->setCreatedBy($this->getUser());
+            $entityManager->persist($ventestock);
+            $entityManager->flush();
+        }
+        $ventes=$entityManager->getRepository('App:VenteStock')->findBy(
+            ['venteshowroom' => $venteshowroom]);
 
 
         return $this->render('venteshowroom/new.html.twig', [
@@ -129,6 +134,7 @@ class VenteshowroomController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $venteshowroom->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('fournisseur_index');

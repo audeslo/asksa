@@ -48,7 +48,7 @@ class Categorie
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-     * @ORM\JoinColumn(nullable=false)
+     *
      */
     private $createdBy;
 
@@ -62,10 +62,6 @@ class Categorie
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $editedBy;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Client", mappedBy="categorie")

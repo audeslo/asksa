@@ -40,6 +40,7 @@ class ShowroomController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $showroom->setCreatedBy($this->getUser());
             $entityManager->persist($showroom);
             $entityManager->flush();
 
@@ -77,6 +78,7 @@ class ShowroomController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $showroom->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');

@@ -37,6 +37,7 @@ class CommandeshowController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $commandeshow->setCreatedBy($this->getUser());
             $entityManager->persist($commandeshow);
             $entityManager->flush();
 
@@ -73,7 +74,7 @@ class CommandeshowController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $commandeshow->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');

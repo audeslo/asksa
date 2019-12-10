@@ -38,6 +38,7 @@ class ClientController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $client->setType(1);
+            $client->setCreatedBy($this->getUser());
             $entityManager->persist($client);
             $entityManager->flush();
             $lastid=$entityManager->getRepository('App:Client')->findLastId();
@@ -65,6 +66,7 @@ class ClientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $client->setCreatedBy($this->getUser());
             $client->setType(0);
             $entityManager->persist($client);
             $entityManager->flush();
@@ -113,6 +115,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $client->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');
@@ -135,6 +138,7 @@ class ClientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $client->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');

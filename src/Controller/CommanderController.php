@@ -61,7 +61,7 @@ class CommanderController extends AbstractController
             $refcommande=$commande->getReference();
 
             $commander->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'B-'.$form['capacitebidon']->getData().'L');
-
+            $commander->setCreatedBy($this->getUser());
             $entityManager->persist($commander);
             $entityManager->flush();
 
@@ -94,6 +94,7 @@ class CommanderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $commander->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('commander_index');

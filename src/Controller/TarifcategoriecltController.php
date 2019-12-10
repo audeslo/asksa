@@ -37,6 +37,7 @@ class TarifcategoriecltController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $tarifcategorieclt->setCreatedBy($this->getUser());
             $entityManager->persist($tarifcategorieclt);
             $entityManager->flush();
 
@@ -69,6 +70,7 @@ class TarifcategoriecltController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $tarifcategorieclt->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');

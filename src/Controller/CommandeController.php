@@ -37,6 +37,7 @@ class CommandeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $commande->setCreatedBy($this->getUser());
             $entityManager->persist($commande);
             $entityManager->flush();
 
@@ -73,7 +74,7 @@ class CommandeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $commande->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             $request->getSession()->getFlashBag()->add('info', 'Modification bien effectuée.');
