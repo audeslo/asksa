@@ -67,13 +67,14 @@ class VenteshowroomController extends AbstractController
             $entityManager->flush();
 
 
-            return $this->render('venteshowroom/new.html.twig', [
-                'venteshowroom' => $venteshowroom,
-                'form' => $form->createView(),
-                'ventes' => $ventes
-            ]);
         }
+        return $this->render('venteshowroom/new.html.twig', [
+            'venteshowroom' => $venteshowroom,
+            'form' => $form->createView(),
+            'ventes' => $ventes
+        ]);
     }
+
 
     /**
      * @Route("/{slug}", name="venteshowroom_add", methods={"GET"})
