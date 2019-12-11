@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowroomRepository")
@@ -45,12 +46,14 @@ class Showroom
     private $representant;
 
     /**
+     * @Assert\NotBlank(message="Renseigner un numéro de téléphone valide")
      * @ORM\Column(type="string", length=255)
      */
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Renseigner une adresse mail valide")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mail;
 

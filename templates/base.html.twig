@@ -9,6 +9,7 @@
 
     {% endblock %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <link rel="icon" type="image/x-icon" href="{{ asset('templates/img/asksa.ico') }}">
 
     <link rel="stylesheet" href="{{ asset('templates/css/fontawesome.min.css') }}">
     <link rel="stylesheet" href="{{ asset('templates/css/bootstrap.min.css') }}">
@@ -29,7 +30,7 @@
     {% for label, messages in app.flashes %}
         {% for message in messages %}
             <div class=" col-md-1"></div>
-            <div class=" col-md-6 offset-3 alert alert-{{ label }}">
+            <div id="flag" class=" col-md-6 offset-3 alert alert-{{ label }}">
                 {{ message }}
             </div>
         {% endfor %}
@@ -455,7 +456,7 @@
             <p class="text-center text-white mb-0 px-4 small">
                 Copyright &copy; <b>2019</b> All rights reserved.
 
-                Design: <a rel="nofollow noopener" href="https://templatemo.com" class="tm-footer-link">ASKSA &emsp;
+                Design: <a rel="nofollow noopener" href="#" class="tm-footer-link">ASKSA &emsp;
                     &emsp; <img src="{{ asset('templates/img/Ask.jpg') }}" alt="" width="20px"/>&emsp; </a>
 
             </p>
@@ -473,6 +474,7 @@
 <script src="{{ asset('templates/js/bootstrap.min.js') }}"></script>
 <!-- https://getbootstrap.com/ -->
 <script src="{{ asset('templates/js/tooplate-scripts.js') }}"></script>
+<script src="{{ asset('templates/js/flash.js') }}"></script>
 
 <!-- Page level plugin JavaScript-->
 <script src="{{ asset('templates/vendor/datatables/jquery.dataTables.js') }}"></script>

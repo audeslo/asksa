@@ -58,9 +58,7 @@ class UserType extends AbstractType
                 'label'     => 'Roles :',
                 'required'  => false,
                 'multiple'  => true,
-                'attr'  => [
-                    'data-select'   => 'true'
-                ]
+
             ))
 
         ;
