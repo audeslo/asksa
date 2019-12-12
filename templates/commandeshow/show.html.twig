@@ -1,4 +1,4 @@
-{% extends 'commandeshow/commandeShow.html.twig' %}
+{% extends 'commandeshow/commandeshow.html.twig' %}
 
 {% block content %}
 
@@ -19,7 +19,7 @@
             </tr>
 
             <tr>
-                <th>Type de magasin</th>
+                <th>Showroom</th>
                 <td>{{ commandeshow.showroom }}</td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@
 
             <tr>
                 <th>Date de commande</th>
-                <td>{{ commandeshow.datecomshow }}</td>
+                <td>{{ commandeshow.datecomshow |date('d-m-Y ') }}</td>
             </tr>
 
             <tr>

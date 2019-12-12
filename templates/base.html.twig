@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     {% block title %}
-    <title>ASKSA - Système de Gestion</title>
+        <link rel="shortcut icon" href="{{ asset('templates/img/Ask.jpg') }}" alt="" width=39px">
+        <title>ASKSA - Système de Gestion</title>
 
     {% endblock %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
@@ -528,8 +529,9 @@
 <script>
 
     $(document).ready(function() {
-     // Autocomplete
+        // Autocomplete
         // language=JQuery-CSS
+
         $('select[data-select="true"]').select2();
 
     });
