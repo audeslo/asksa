@@ -133,6 +133,11 @@ class User implements UserInterface, \Serializable
      */
     private $editedBy;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Showroom", inversedBy="users")
+     */
+    private $showroom;
+
     public function __construct()
     {
         $this->configurations = new ArrayCollection();
@@ -475,6 +480,18 @@ class User implements UserInterface, \Serializable
     public function __toString()
     {
         return $this->getUsername();
+    }
+
+    public function getShowroom(): ?Showroom
+    {
+        return $this->showroom;
+    }
+
+    public function setShowroom(?Showroom $showroom): self
+    {
+        $this->showroom = $showroom;
+
+        return $this;
     }
 
 

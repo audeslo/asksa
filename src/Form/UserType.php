@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Showroom;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -18,6 +20,13 @@ class UserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('showroom', EntityType::class, [
+                'class' => Showroom::class,
+                'choice_label'  => 'nomshow',
+                'label'         =>  'Showroom :',
+                'required'      => false,
+                'placeholder'   => 'Sélection showroom',
+            ])
             ->add('nom', TextType::class, array(
                 'label'     => 'Nom :',
                 'required'  => false,
