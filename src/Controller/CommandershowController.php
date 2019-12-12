@@ -60,6 +60,7 @@ class CommandershowController extends AbstractController
 
             $commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$form['capacitecartonshow']->getData().'C-'.$form['capacitebidonshow']->getData().'B');
 
+            $commandershow->setCreatedBy($this->getUser());
             $entityManager->persist($commandershow);
             $entityManager->flush();
 
@@ -92,6 +93,7 @@ class CommandershowController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+           $commandershow->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('commandershow_index');

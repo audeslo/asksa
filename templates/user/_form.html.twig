@@ -4,7 +4,14 @@
 {{ form_end(form) }}#}
 <hr>
 <div class="row">
-   <div class="col-md-12">
+   <div class="col-md-6">
+
+    {{ form_label(form.roles) }}
+    {{ form_widget(form.roles) }}
+    {{ form_errors(form.roles) }}
+
+   </div>
+    <div class="col-md-6">
 
     {{ form_label(form.roles) }}
     {{ form_widget(form.roles) }}

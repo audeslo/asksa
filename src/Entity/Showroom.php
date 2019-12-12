@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ShowroomRepository")
@@ -45,12 +48,14 @@ class Showroom
     private $representant;
 
     /**
+     * @Assert\NotBlank(message="Renseigner un numéro de téléphone valide")
      * @ORM\Column(type="string", length=255)
      */
     private $tel;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @Assert\Email(message="Renseigner une adresse mail valide")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $mail;
 
@@ -98,6 +103,16 @@ class Showroom
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $createdBy;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="showroom")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -251,6 +266,37 @@ class Showroom
     {
         return $this->nomshow;
         // TODO: Implement __toString() method.
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->setShowroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            // set the owning side to null (unless already changed)
+            if ($user->getShowroom() === $this) {
+                $user->setShowroom(null);
+            }
+        }
+
+        return $this;
     }
 
 }

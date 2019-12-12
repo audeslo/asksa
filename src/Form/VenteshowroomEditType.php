@@ -5,12 +5,12 @@ namespace App\Form;
 use App\Entity\Client;
 
 use App\Entity\Produit;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use App\Entity\Venteshowroom;
+
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,6 +39,15 @@ class VenteshowroomEditType extends AbstractType
         'required'  => false,
         'attr'      =>['placeholder'    =>  'Saisissez la quantité']
     ))
+            ->add('grosdetail',ChoiceType::class,array(
+                'choices'  => array(
+                    'Carton' => 1,
+                    'Bidon' => 0,
+                ),
+                'label'     => 'Veuillez choisir l\'option:',
+                'expanded' => true,
+                'multiple' => false,
+            ))
 
             ->add('produit',EntityType::class, [
         'class' => Produit::class,
@@ -46,14 +55,18 @@ class VenteshowroomEditType extends AbstractType
         'required'  => false,
         'placeholder' => 'Sélectionnez le produit',
     ])
+            /*->add("submit", SubmitType::class,array(
+                'label' =>  "Ajouter",
+                "attr"  => ["class" => "btn btn-success"]
+            ))*/
 
         ;
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+   /* public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => Venteshowroom::class,
         ]);
-    }
+    }*/
 }
