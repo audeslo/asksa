@@ -78,7 +78,7 @@ class Stockshowroom
     /**
      * @ORM\Column(type="boolean")
      */
-    private $sync;
+    private $sync=0;
 
     /**
      * @ORM\PrePersist()

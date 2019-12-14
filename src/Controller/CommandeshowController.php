@@ -21,8 +21,9 @@ class CommandeshowController extends AbstractController
      */
     public function index(CommandeshowRepository $commandeshowRepository): Response
     {
+        $commandeshows=$commandeshowRepository->getAll();
         return $this->render('commandeshow/index.html.twig', [
-            'commandeshows' => $commandeshowRepository->findAll(),
+            'commandeshows' => $commandeshows,
         ]);
     }
 
@@ -46,7 +47,8 @@ class CommandeshowController extends AbstractController
             $entityManager->getRepository('App:Commandeshow')->updateLastReferent($lastid,'CS-'.getValeu($lastid));
             // ;
             $request->getSession()->getFlashBag()->add('success', 'Enregistrement bien effectué.');
-            return $this->redirectToRoute('commandeshow_index');
+            return $this->redirectToRoute('commandershow_index',["slug" =>
+                $entityManager->getRepository('App:Commandeshow')->findLastSlug()]);
         }
 
         return $this->render('commandeshow/new.html.twig', [

@@ -219,10 +219,8 @@ class CommandershowController extends AbstractController
             ->updateCommandeshow($commandershow
                 ->getCommandeshow()->getId());
 
-        return $this->render('commandershow/index.html.twig', [
-            'commandershows' => $em->getRepository('App:Commandershow')->findBy(['commandeshow' => $commandeshow->getId()]),
-            'commandeshow'  =>  $commandeshow,
-        ]);
+        return $this->redirectToRoute('commandershow_index', ['slug'
+        => $commandershow->getCommandeshow()->getSlug()]);
     }
 
 

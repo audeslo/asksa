@@ -136,11 +136,19 @@ class Produit
      */
     private $venteStocks;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commandershow", mappedBy="produit")
+     */
+    private $commandershows;
+
+
+
     public function __construct()
     {
         $this->tarifcategorieclts = new ArrayCollection();
         $this->commanders = new ArrayCollection();
         $this->venteStocks = new ArrayCollection();
+        $this->commandershows = new ArrayCollection();
     }
 
 
@@ -421,6 +429,37 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($venteStock->getProduit() === $this) {
                 $venteStock->setProduit(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commandershow[]
+     */
+    public function getCommandershows(): Collection
+    {
+        return $this->commandershows;
+    }
+
+    public function addCommandershow(Commandershow $commandershow): self
+    {
+        if (!$this->commandershows->contains($commandershow)) {
+            $this->commandershows[] = $commandershow;
+            $commandershow->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandershow(Commandershow $commandershow): self
+    {
+        if ($this->commandershows->contains($commandershow)) {
+            $this->commandershows->removeElement($commandershow);
+            // set the owning side to null (unless already changed)
+            if ($commandershow->getProduit() === $this) {
+                $commandershow->setProduit(null);
             }
         }
 

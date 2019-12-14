@@ -70,11 +70,6 @@ class Commandershow
      */
     private $createdBy;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Produit")
-     *  @Assert\NotBlank(message="Veuillez choisir un produit !")
-     */
-    private $produit;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Commandeshow", inversedBy="commandershow")
@@ -90,6 +85,12 @@ class Commandershow
      * @ORM\OneToMany(targetEntity="App\Entity\Stockshowroom", mappedBy="Commandershow", orphanRemoval=true)
      */
     private $stockshowrooms;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Produit", inversedBy="commandershows")
+     * @Assert\NotBlank(message="Veuillez choisir un produit !")
+     */
+    private $produit;
 
     public function __construct()
     {
@@ -229,17 +230,6 @@ class Commandershow
         return $this;
     }
 
-    public function getProduit(): ?Produit
-    {
-        return $this->produit;
-    }
-
-    public function setProduit(?Produit $produit): self
-    {
-        $this->produit = $produit;
-
-        return $this;
-    }
 
     public function getCommandeshow(): ?Commandeshow
     {
@@ -292,6 +282,18 @@ class Commandershow
                 $stockshowroom->setCommandershow(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->produit;
+    }
+
+    public function setProduit(?Produit $produit): self
+    {
+        $this->produit = $produit;
 
         return $this;
     }

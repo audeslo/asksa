@@ -67,6 +67,7 @@ class UserType extends AbstractType
                 'label'     => 'Roles :',
                 'required'  => false,
                 'multiple'  => true,
+                'expanded'  => true,
 
             ))
 

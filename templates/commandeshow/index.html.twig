@@ -31,8 +31,9 @@
 
                 <thead>
                 <tr>
-                    <th>Référence</th>
+
                     <th>Date</th>
+                    <th>Réference</th>
                     <th>Intitulé </th>
                     <th>Showroom</th>
                     <th>Valider</th>
@@ -43,8 +44,8 @@
                 <tbody>
                 {% for commandeshow in commandeshows %}
                     <tr>
-                        <td>{{ commandeshow.reference }}</td>
                         <td> {{ commandeshow.datecomshow ? commandeshow.datecomshow | date('d-M-Y') : ''}}</td>
+                        <td>{{ commandeshow.reference }}</td>
                         <td ><a style="color: white" href="{{ path('commandershow_index', {'slug' : commandeshow.slug}) }}">{{ commandeshow.intituleshow | upper }}</a></td>
                         <td>{{ commandeshow.showroom }}</td>
                         <td>

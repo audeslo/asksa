@@ -20,6 +20,16 @@ class CommandeshowRepository extends ServiceEntityRepository
         parent::__construct($registry, Commandeshow::class);
     }
 
+    public function getAll()
+    {
+        return $this->createQueryBuilder('cs')
+            ->join('cs.showroom', 'sh')
+            ->orderBy('cs.reference', 'DESC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     /**
      * @return mixed
      */
@@ -28,6 +38,22 @@ class CommandeshowRepository extends ServiceEntityRepository
         try {
             return $this->createQueryBuilder('cs')
                 ->select('cs.id')
+                ->orderBy('cs.id', 'DESC')
+                ->setMaxResults(1)
+                ->getQuery()
+                ->getSingleScalarResult();
+        } catch (NonUniqueResultException $e) {
+        }
+    }
+
+    /**
+     * @return mixed
+     */
+    public function findLastSlug()
+    {
+        try {
+            return $this->createQueryBuilder('cs')
+                ->select('cs.slug')
                 ->orderBy('cs.id', 'DESC')
                 ->setMaxResults(1)
                 ->getQuery()

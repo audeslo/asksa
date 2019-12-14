@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Client;
 
 use App\Entity\Produit;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Venteshowroom;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -62,16 +63,21 @@ class VenteshowroomType extends AbstractType
     ))
 
             ->add('produit',EntityType::class, [
-        'class' => Produit::class,
-        'choice_label' => 'designation',
-        'required'  => false,
-        'placeholder' => 'Sélectionnez le produit',
-    ])
+                    "class" => Produit::class,
+                    'placeholder' => 'Veuillez sélectionner un produit',
+                    'query_builder' => function (EntityRepository $rp) {
+                        return $rp->createQueryBuilder('p')
+                            ->join('p.commandershows','cs')
+                            //->where('p')
+                            ->orderBy('p.designation', 'ASC');
+                    },
+                    'attr' => ['data-select' => 'true']
+            ])
 
             ->add('client',EntityType::class, [
                 'class' => Client::class,
                 'choice_label' => function($client){
-                    return $client->getIdentifiant1(). ' ' . $client->getIdentifiant2();
+                    return $client->getIdentifiant1().' '. $client->getIdentifiant2();
                 },
                 'required'  => false,
                 'placeholder' => 'Sélectionnez un client',
