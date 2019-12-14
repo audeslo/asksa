@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -89,6 +90,18 @@ class Fournisseur
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $createdBy;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="fournisseur")
+     */
+    private $users;
+
+    public function __construct()
+    {
+
+        $this->users = new ArrayCollection();
+    }
+
 
     /**
      * @ORM\Column(type="datetime", nullable=true)

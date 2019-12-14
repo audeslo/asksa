@@ -36,6 +36,7 @@ class FournisseurController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
+            $fournisseur->setCreatedBy($this->getUser());
             $entityManager->persist($fournisseur);
             $entityManager->flush();
 
