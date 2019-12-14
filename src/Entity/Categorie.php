@@ -31,7 +31,7 @@ class Categorie
     private $libelle;
 
     /**
-     * @ORM\Column(type="text", nullable=false)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -52,6 +52,10 @@ class Categorie
      */
     private $createdBy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="categorie")
+     */
+    private $users;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -93,6 +97,7 @@ class Categorie
     {
         $this->clients = new ArrayCollection();
         $this->tarifcategorieclts = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
 

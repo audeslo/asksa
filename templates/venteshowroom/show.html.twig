@@ -5,7 +5,7 @@
 {#{% block body %}#}
 <div class="col-lg-10">
 
-    <h1>Details Fournisseur</h1>
+    <h1>Detail de la vente</h1>
 
     <table class="table-bordered table">
         <tbody>
@@ -13,18 +13,21 @@
                 <th>Id</th>
                 <td>{{ venteshowroom.id }}</td>
             </tr>
+
             <tr>
-                <th>Nomcourt</th>
+                <th>Date de vente</th>
+                <td>{{ venteshowroom.datevente }}</td>
+            </tr>
+
+            <tr>
+                <th>Référence</th>
                 <td>{{ venteshowroom.reference }}</td>
             </tr>
             <tr>
-                <th>Nomcomplet</th>
+                <th>Nom du client/struture</th>
                 <td>{{ venteshowroom.client }}</td>
             </tr>
-            <tr>
-                <th>Representant</th>
-                <td>{{ venteshowroom.datevente }}</td>
-            </tr>
+
 
             <tr>
                 <th>CreatedOn</th>
@@ -40,7 +43,7 @@
     <div class="row">
         <a class="btn btn-default col-md-3" href="{{ path('venteshowroom_index') }}">
             <i class="fa fa-chevron-left"></i>
-            Retour à la liste
+            Retour
         </a>
 
 
