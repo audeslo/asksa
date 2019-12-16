@@ -46,13 +46,6 @@ class ProduitType extends AbstractType
                 'required' => false,
                 'attr'   =>['placeholder'  =>   'Saisissez le prix de vente conseille']
     ))
-            ->add('marque', ChoiceType::class, array(
-                'choices'     =>['lubrifiant' => 'lubrifiant',
-                    'Graisse' => 'Graisse'],
-                'label'     => 'Marque de produit :',
-                'required'  => false,
-                'placeholder'    =>  'Selectionner une marque '
-            ))
 
             ->add('stockalerte', IntegerType::class, array(
                 'label'     => 'Stock d\'alerte :',
