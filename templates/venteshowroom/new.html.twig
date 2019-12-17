@@ -33,6 +33,16 @@
                        <tr>
                            <th> {{ vente.produit}} </th>
                            <th>{{ vente.quantite }}</th>
+                           <th>{{ vente.carton }}</th>
+                           <th>{{ vente.bidon ~' '~ 'Litres'}}</th>
+                           <th>{{ vente.bidon ~' '~ 'Litres'}}</th>
+                           <th>
+
+                               <a  href="#" >
+                                   <i class="fa fa-trash" aria-hidden="true"></i>
+                               </a>
+                           </th>
+
                        </tr>
                    {% endfor %}
                </table>

@@ -58,7 +58,7 @@ class Commande
     /**
      * @ORM\Column(type="smallint")
      */
-    private $etat;
+    private $etat=0;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)

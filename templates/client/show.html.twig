@@ -27,12 +27,12 @@
         </tr>
         <tr>
             <th>Nom complet</th>
-            <td>{{ client.nom }}</td>
+            <td>{{ client.identifiant1 ~ ' '~ client.identifiant2}}</td>
         </tr>
         <tr>
             <th>Type</th>
             <td>
-                {{ client.type }}
+                {{ client.type ? "P. Physique":"P. Morale"}}
 
             </td>
         </tr>

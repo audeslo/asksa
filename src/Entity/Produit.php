@@ -111,13 +111,11 @@ class Produit
      */
     private $categprod;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $marque;
+
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Veuillez saisir le prix de vente conseiller !")
      */
     private $prixventeconseiller;
 
@@ -325,17 +323,7 @@ class Produit
         return $this;
     }
 
-    public function getMarque(): ?string
-    {
-        return $this->marque;
-    }
 
-    public function setMarque(string $marque): self
-    {
-        $this->marque = $marque;
-
-        return $this;
-    }
 
     public function getPrixventeconseiller(): ?string
     {

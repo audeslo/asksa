@@ -25,17 +25,12 @@
 
                     <tr>
                         <th>Prix unitaire</th>
-                        <td>{{ produit.prixU }}</td>
+                        <td>{{ produit.prixU | number_format(0,0,' ')}}</td>
                     </tr>
 
                     <tr>
                         <th>Prix conseiller</th>
-                        <td>{{ produit.prixventeconseiller }}</td>
-                    </tr>
-
-                    <tr>
-                        <th>Marque</th>
-                        <td>{{ produit.marque }}</td>
+                        <td>{{ produit.prixventeconseiller | number_format(0,0,' ')}}</td>
                     </tr>
 
                     <tr>

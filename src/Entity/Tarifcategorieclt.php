@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -71,6 +72,17 @@ class Tarifcategorieclt
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $createdBy;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="tarifcategorieclt")
+     */
+    private $users;
+
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
+
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
