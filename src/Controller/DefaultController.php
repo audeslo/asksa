@@ -49,22 +49,22 @@ class DefaultController extends AbstractController
     }
 
 
-    /**
-     * @Route("/codebargenerate", name="code_bare_generate")
-     */
-    public function pdfAction(\Knp\Snappy\Pdf $knpSnappy)
-    {
-        $this->knpSnappy = $knpSnappy;
-        $vars=2;
-        $html = $this->renderView('default/codebar.html.twig', array(
-            'some'  => $vars
-        ));
-
-        return new PdfResponse(
-            $this->knpSnappy->getOutputFromHtml($html),
-            'file.pdf'
-        );
-    }
+//   /* /**
+//     * @Route("/codebargenerate", name="code_bare_generate")
+//     */
+//    public function pdfAction(\Knp\Snappy\Pdf $knpSnappy)
+//    {
+//        $this->knpSnappy = $knpSnappy;
+//        $vars=2;
+//        $html = $this->renderView('default/codebar.html.twig', array(
+//            'some'  => $vars
+//        ));
+//
+//        return new PdfResponse(
+//            $this->knpSnappy->getOutputFromHtml($html),
+//            'file.pdf'
+//        );
+//    }*/
 
 
 }
