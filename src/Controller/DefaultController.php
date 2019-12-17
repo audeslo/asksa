@@ -9,9 +9,11 @@ use CodeItNow\BarcodeBundle\Utils\QrCode;
 
 
 use Doctrine\Common\Persistence\ObjectManager;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 
 class DefaultController extends AbstractController
 {
@@ -45,5 +47,24 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+
+
+    /**
+     * @Route("/codebargenerate", name="code_bare_generate")
+     */
+    public function pdfAction(\Knp\Snappy\Pdf $knpSnappy)
+    {
+        $this->knpSnappy = $knpSnappy;
+        $vars=2;
+        $html = $this->renderView('default/codebar.html.twig', array(
+            'some'  => $vars
+        ));
+
+        return new PdfResponse(
+            $this->knpSnappy->getOutputFromHtml($html),
+            'file.pdf'
+        );
+    }
+
 
 }

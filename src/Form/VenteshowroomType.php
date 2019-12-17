@@ -17,8 +17,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class VenteshowroomType extends AbstractType
 {
+
+    private $bidon;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder
           /*  ->add('reference')*/
             ->add('datevente',DateType::class,array(
@@ -27,13 +31,15 @@ class VenteshowroomType extends AbstractType
         'attr'      =>['placeholder'    =>  'Saisissez la date de commande']
     ))
 
-            ->add('quantitecarton',IntegerType::class,array(
-        'label'     => 'Capacite carton :',
-        'required'  => true,
+            ->add('quantitecarton',ChoiceType::class,array(
+            'label'     => 'Capacite carton :',
+            'choices'   => $options['carton'],
+            'required'  => true,
 
     ))
-            ->add('capacitebidon',IntegerType::class,array(
-        'label'     => 'Capacité bidon:',
+            ->add('capacitebidon',ChoiceType::class,array(
+            'label'     => 'Capacité bidon:',
+        'choices'      => $options['bidon'],
         'required'  => true,
         'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
     ))
@@ -63,7 +69,7 @@ class VenteshowroomType extends AbstractType
     ))
 
             ->add('produit',EntityType::class, [
-                    "class" => Produit::class,
+                    'class' => Produit::class,
                     'placeholder' => 'Veuillez sélectionner un produit',
                     'query_builder' => function (EntityRepository $rp) {
                         return $rp->createQueryBuilder('p')
@@ -90,6 +96,8 @@ class VenteshowroomType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Venteshowroom::class,
+            'bidon'     => null,
+            'carton'    => null,
         ]);
     }
 }

@@ -34,7 +34,9 @@ class VenteshowroomController extends AbstractController
     public function new(Request $request): Response
     {
         $venteshowroom = new Venteshowroom();
-        $form = $this->createForm(VenteshowroomType::class, $venteshowroom);
+        $bidon=[2 => 2];
+
+        $form = $this->createForm(VenteshowroomType::class, $venteshowroom,array('bidon' => $bidon));
         $form->handleRequest($request);
         $ventes=null;
         $entityManager = $this->getDoctrine()->getManager();
