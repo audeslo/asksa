@@ -1,11 +1,11 @@
-{% extends 'commandeshow/commandeShow.html.twig' %}
+{% extends 'commandeshow/commandeshow.html.twig' %}
 
 {% block content %}
 
     <h1>Modification de showroom</h1>
     <div class="col-md-10" style="background-color: #cccccc">
         {{ form_start(form) }}
-        {#{{ include('commande/_form.html.twig') }}#}
+        {{ include('commandeshow/_form.html.twig') }}
         <hr>
         <div class="row">
             <div class="col-md-2">
@@ -21,7 +21,7 @@
             <div class="col-md-2"></div>
             {#{% if is_granted('ROLE_ADMIN') and is_granted('ROLE_SUP') %}#}
             <div class="col-md-2 offset-2">
-                {% include('commande/deletemodal.html.twig') %}
+                {% include('commandeshow/deletemodal.html.twig') %}
             </div>
             {# {% endif %}#}
         </div>

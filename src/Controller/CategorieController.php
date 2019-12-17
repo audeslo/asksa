@@ -35,7 +35,8 @@ class CategorieController extends AbstractController
     /**
      * @Route("/new", name="categorie_new", methods={"GET","POST"})
      */
-    public function new(Request $request, UserInterface $user): Response
+  /*  public function new(Request $request, UserInterface $user): Response*/
+    public function new(Request $request): Response
     {
         $categorie = new Categorie();
         $form = $this->createForm(CategorieType::class, $categorie);
@@ -44,6 +45,7 @@ class CategorieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $categorie->setCreatedBy($this->getUser());
+            /*$categorie->setCreatedBy($this->getUser());*/
             $entityManager->persist($categorie);
             $entityManager->flush();
 
@@ -54,7 +56,11 @@ class CategorieController extends AbstractController
         return $this->render('categorie/new.html.twig', [
             'categorie' => $categorie,
             'form' => $form->createView(),
+/*<<<<<<< HEAD*/
 
+/*=======*/
+          /*  'id'    => $user->getId()*/
+/*>>>>>>> cccffef21ab05015167d3fea9954872b3e053207*/
         ]);
     }
 

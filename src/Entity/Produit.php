@@ -114,7 +114,8 @@ class Produit
 
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
+     * @Assert\NotBlank(message="Veuillez saisir le prix de vente conseiller !")
      */
     private $prixventeconseiller;
 
