@@ -56,7 +56,11 @@ class CategorieController extends AbstractController
         return $this->render('categorie/new.html.twig', [
             'categorie' => $categorie,
             'form' => $form->createView(),
+/*<<<<<<< HEAD*/
+
+/*=======*/
           /*  'id'    => $user->getId()*/
+/*>>>>>>> cccffef21ab05015167d3fea9954872b3e053207*/
         ]);
     }
 

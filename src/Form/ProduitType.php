@@ -46,7 +46,10 @@ class ProduitType extends AbstractType
                 'required' => false,
                 'attr'   =>['placeholder'  =>   'Saisissez le prix de vente conseille']
     ))
+/*<<<<<<< HEAD
+=======
 
+>>>>>>> cccffef21ab05015167d3fea9954872b3e053207*/
 
             ->add('stockalerte', IntegerType::class, array(
                 'label'     => 'Stock d\'alerte :',
