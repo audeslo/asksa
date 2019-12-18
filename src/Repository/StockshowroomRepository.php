@@ -19,6 +19,18 @@ class StockshowroomRepository extends ServiceEntityRepository
         parent::__construct($registry, Stockshowroom::class);
     }
 
+    public function findReference($idcommande)
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.Commandershow','cs')
+            ->where('cs.commandeshow = ?1')
+            ->setParameter(1, $idcommande)
+            ->orderBy('s.referencecarton', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Stockshowroom[] Returns an array of Stockshowroom objects
     //  */

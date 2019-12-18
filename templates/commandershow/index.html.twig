@@ -80,7 +80,7 @@
                         </a>
 
                     {% else %}
-                        <a class="btn btn-success col-md-3" href="{{path('code_bare_generate')}}">
+                        <a class="btn btn-success col-md-3" href="{{path('code_bare_generate',{'slug':commandeshow.slug})}}">
                             <i class="fa fa-qrcode"></i>
                             Imp. Code QR
                         </a>
