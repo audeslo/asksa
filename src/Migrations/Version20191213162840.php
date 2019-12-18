@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20191217114718 extends AbstractMigration
+final class Version20191213162840 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -30,10 +30,6 @@ final class Version20191217114718 extends AbstractMigration
         $this->addSql('ALTER TABLE user ADD showroom_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D6492243B88B FOREIGN KEY (showroom_id) REFERENCES showroom (id)');
         $this->addSql('CREATE INDEX IDX_8D93D6492243B88B ON user (showroom_id)');
-        $this->addSql('ALTER TABLE venteshowroom DROP FOREIGN KEY FK_356D39D2EF41BF5F');
-        $this->addSql('DROP INDEX IDX_356D39D25D39DCF4 ON venteshowroom');
-        $this->addSql('DROP INDEX IDX_356D39D2EF41BF5F ON venteshowroom');
-        $this->addSql('ALTER TABLE venteshowroom ADD modereglement VARCHAR(255) NOT NULL, DROP stockshowroom_id, DROP modereglement_id, CHANGE reference reference VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -45,9 +41,5 @@ final class Version20191217114718 extends AbstractMigration
         $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D6492243B88B');
         $this->addSql('DROP INDEX IDX_8D93D6492243B88B ON user');
         $this->addSql('ALTER TABLE user DROP showroom_id');
-        $this->addSql('ALTER TABLE venteshowroom ADD stockshowroom_id INT DEFAULT NULL, ADD modereglement_id INT NOT NULL, DROP modereglement, CHANGE reference reference VARCHAR(255) CHARACTER SET utf8mb4 NOT NULL COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('ALTER TABLE venteshowroom ADD CONSTRAINT FK_356D39D2EF41BF5F FOREIGN KEY (stockshowroom_id) REFERENCES stockshowroom (id)');
-        $this->addSql('CREATE INDEX IDX_356D39D25D39DCF4 ON venteshowroom (modereglement_id)');
-        $this->addSql('CREATE INDEX IDX_356D39D2EF41BF5F ON venteshowroom (stockshowroom_id)');
     }
 }

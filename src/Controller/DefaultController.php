@@ -13,7 +13,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+
 
 class DefaultController extends AbstractController
 {
@@ -49,22 +51,39 @@ class DefaultController extends AbstractController
     }
 
 
-//   /* /**
-//     * @Route("/codebargenerate", name="code_bare_generate")
-//     */
-//    public function pdfAction(\Knp\Snappy\Pdf $knpSnappy)
-//    {
-//        $this->knpSnappy = $knpSnappy;
-//        $vars=2;
-//        $html = $this->renderView('default/codebar.html.twig', array(
-//            'some'  => $vars
-//        ));
-//
-//        return new PdfResponse(
-//            $this->knpSnappy->getOutputFromHtml($html),
-//            'file.pdf'
-//        );
-//    }*/
+    /**
+      * @Route("/codebargenerate", name="code_bare_generate")
+      */
+    public function pdfAction()
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
 
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+
+        $vars=2;
+        // Set some html and get the service
+        $html = $this->renderView('default/codebar.html.twig', array(
+            'some'  => $vars
+        ));
+
+
+
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+
+        // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the HTML as PDF
+        $dompdf->render();
+
+        // Output the generated PDF to Browser (force download)
+        $dompdf->stream('mypdf.pdf', [
+            'Attachment' => false
+        ]);
+    }
 
 }
