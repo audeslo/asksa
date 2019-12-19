@@ -62,9 +62,22 @@ class DefaultController extends AbstractController
 
         $em=$this->getDoctrine()->getManager();
         $references= $em->getRepository('App:Stockshowroom')->findReference($commandeshow);
+            $listes=[];
+        foreach ($references as $key => $reference){
+            $listes[$key]=['referencecarton' => $reference->getReferencecarton(),
+                            'referencebidon' => $reference->getReferencebidon(),
+                            'produit' => $reference->getCommandershow()->getProduit()->getDesignation(),
+                            'capacitecarton' => $reference->getCommandershow()->getCapacitecartonshow(),
+                            'capacitebidon' => $reference->getCommandershow()->getCapacitebidonshow(),
+                            'codecarton' => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
+                                                                $reference->getReferencecarton()),
+                            'codebidon' => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
+                                                                $reference->getReferencebidon())
+            ];
+        }
 
-        dump($references);
-        return null;
+        //dump($tableau);
+        //return null;
 
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -75,10 +88,10 @@ class DefaultController extends AbstractController
 
 
 
-        $vars=2;
+
         // Set some html and get the service
         $html = $this->renderView('default/codebar.html.twig', array(
-            'some'  => $vars
+            'listes'  => $listes
         ));
 
 
@@ -104,7 +117,7 @@ function codebar($label, $text){
     $qrCode = new QrCode();
     $qrCode
         ->setText($text)
-        ->setSize(50)
+        ->setSize(70)
         ->setPadding(10)
         ->setErrorCorrection('high')
         ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
@@ -115,7 +128,7 @@ function codebar($label, $text){
     ;
     //dump($qrCode->generate());
 
-    return $qrCode->generate();
+    return 'data:'.$qrCode->getContentType().';base64,'.$qrCode->generate().'';
 
-    //echo '<img src="data:'.$qrCode->getContentType().';base64,'.$qrCode->generate().'" />';
+   // echo '<img src="data:'.$qrCode->getContentType().';base64,'.$qrCode->generate().'" />';
 }
