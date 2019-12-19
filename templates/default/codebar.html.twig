@@ -1,5 +1,4 @@
 <html>
-<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,8 +7,26 @@
     <title>Code bar</title>
 </head>
 <body>
-ceci est un test de code bar
+{% set current ="" %}
+
+<div class="row">
+    {% for liste in listes %}
+
+        {% if liste.referencecarton == current %}
+            <div class="col-md-2">
+                <img src="{{ liste.codecarton~'png' }}"  alt="{{ liste.produit }}">
+            </div>
+
+        {% else %}
+            <div class="col-md-12">
+                <img src="{{ liste.codebidon~'png' }}"  alt="{{ liste.produit }}">
+            </div>
+
+        {% endif %}
+
+    {% endfor %}
+
+</div>
 
 </body>
-</html>
 </html>

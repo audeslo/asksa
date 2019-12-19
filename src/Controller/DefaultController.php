@@ -62,9 +62,22 @@ class DefaultController extends AbstractController
 
         $em=$this->getDoctrine()->getManager();
         $references= $em->getRepository('App:Stockshowroom')->findReference($commandeshow);
+            $listes=[];
+        foreach ($references as $key => $reference){
+            $listes[$key]=["referencecarton"        => $reference->getReferencecarton(),
+                            "referencebidon"         => $reference->getReferencebidon(),
+                            "produit"                => $reference->getCommandershow()->getProduit()->getDesignation(),
+                            "capacitecarton"         => $reference->getCommandershow()->getCapacitecartonshow(),
+                            "capacitebidon"          => $reference->getCommandershow()->getCapacitebidonshow(),
+                            "codecarton"             => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
+                                                                $reference->getReferencecarton()),
+                            "codebidon"              => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
+                                                                $reference->getReferencebidon())
+            ];
+        }
 
-        dump($references);
-        return null;
+        //dump($tableau);
+        //return null;
 
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -75,10 +88,10 @@ class DefaultController extends AbstractController
 
 
 
-        $vars=2;
+
         // Set some html and get the service
         $html = $this->renderView('default/codebar.html.twig', array(
-            'some'  => $vars
+            'listes'  => $listes
         ));
 
 
