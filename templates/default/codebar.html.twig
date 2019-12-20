@@ -14,7 +14,7 @@
 
 
    {% for carton in cartons %}
-       {% set break = false %}
+
        {% if current != carton.referencecarton %}
 
            <table style="width:100%">
@@ -22,13 +22,13 @@
                    <th><img src="{{carton.codecarton}}"></th>
                </tr>
                <tr>
-                   {% for liste in listes if not break %}
+                   {% for liste in listes  %}
 
                        {% if liste.referencecarton == carton.referencecarton %}
                        <td> <img src="{{liste.codebidon}}"></td>
                            {%  set current = liste.referencecarton %}
                         {% else %}
-                            {% set break = true %}
+
                        {% endif %}
 
                    {% endfor %}
