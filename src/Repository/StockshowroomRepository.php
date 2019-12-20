@@ -26,6 +26,7 @@ class StockshowroomRepository extends ServiceEntityRepository
             ->where('cs.commandeshow = ?1')
             ->setParameter(1, $idcommande)
             ->orderBy('s.referencecarton', 'ASC')
+            //->setMaxResults(8)
             ->getQuery()
             ->getResult()
             ;

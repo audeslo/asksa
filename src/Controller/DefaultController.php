@@ -76,8 +76,9 @@ class DefaultController extends AbstractController
             ];
         }
 
-        //dump($tableau);
-        //return null;
+//        dump($listes);
+//        return null;
+
 
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
@@ -91,13 +92,16 @@ class DefaultController extends AbstractController
 
         // Set some html and get the service
         $html = $this->renderView('default/codebar.html.twig', array(
-            'listes'  => $listes
+            'listes'    => $listes,
+            'cartons'   =>  $listes
         ));
 
 
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
+
+
 
         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
         $dompdf->setPaper('A4', 'portrait');
@@ -117,13 +121,13 @@ function codebar($label, $text){
     $qrCode = new QrCode();
     $qrCode
         ->setText($text)
-        ->setSize(70)
+        ->setSize(65)
         ->setPadding(10)
         ->setErrorCorrection('high')
         ->setForegroundColor(array('r' => 0, 'g' => 0, 'b' => 0, 'a' => 0))
         ->setBackgroundColor(array('r' => 255, 'g' => 255, 'b' => 255, 'a' => 0))
         ->setLabel($label)
-        ->setLabelFontSize(16)
+        ->setLabelFontSize(8)
         ->setImageType(QrCode::IMAGE_TYPE_PNG)
     ;
     //dump($qrCode->generate());
