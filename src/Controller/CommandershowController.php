@@ -175,9 +175,9 @@ class CommandershowController extends AbstractController
 
                     $em->getRepository('App:Commander')
                         ->UpdateCommander($commander->getId(),0);
-                    $quantiteCommandee=($quantiteCommandee-$qteStock);
+                    $quantiteCommandee -= $qteStock;
                 }else{
-                    $qteStock=($qteStock-$quantiteCommandee);
+                    $qteStock -= $quantiteCommandee;
                     $em->getRepository('App:Commander')
                         ->UpdateCommander($commander->getId(),$qteStock);
                     break;
