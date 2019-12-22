@@ -13,7 +13,7 @@
         <div class="card-header">
             <h2 align="center">
                 <i class="fa fa-table" ></i>
-                Liste des catégories</h2></div>
+                Liste des produits</h2></div>
         Imprimé le :
         <br>
         Par : <b> {{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</b>
@@ -24,19 +24,23 @@
 
                 <thead>
                 <tr>
-                    <th width="50%">N°</th>
-                    <th width="50%">Libellé</th>
-                    <th width="50%">description</th>
+                    <th width="50%">Réference</th>
+                    <th  width="50%">Désignation</th>
+                    <th  width="50%">Prix unitaire</th>
+                    <th  width="50%">Prix conseillé</th>
+                    <th  width="50%">Alerte</th>
                     </tr>
                 </thead>
                 <tbody>
-                {% for categorie in categories %}
+                {% for produit in produits %}
                     <tr>
-                        <td>{{ categorie.id }}</td>
+                        <td> {{produit.reference }}</a></td>
+                        <td> {{produit.designation }}</a></td>
+                        <td>{{ produit.prixU | number_format(0,0,' ')}}</td>
 
-                        <td>{{ categorie.libelle }}</td>
+                        <td>{{ produit.prixventeconseiller | number_format(0,0,' ')}}</td>
 
-                        <td> {{categorie.description }}</a></td>
+                        <td>{{ produit.stockalerte }}</td>
 
                        {# <td>
                             {% include('categorie/viewmodal.html.twig') %}

@@ -1,0 +1,193 @@
+<style type="text/css">
+    table{width:100%; border-collapse: collapse}
+    .header td{width: 50%; vertical-align: top}
+    .text-left{text-align: left}
+    .text-right{text-align: right}
+    .text-center {text-align:center}
+    .separator{height: 150px; width: 100%}
+    .content td{border:solid 1px #CFD1D2; padding: 5px;}
+    .content th{border:solid 1px #000000; padding: 5px; background-color: darkorange; color: #ffffff}
+</style>
+
+<div class="row">
+
+    <div class="col-md-2">
+        <img src="{{ asset('templates/img/Ask.jpg') }}" alt="">
+        <img absolute_url alt="">
+    </div>
+
+    <div class="col-md-2 offset-8 ">
+      <h5 class="text-right" align="justify">SOCIETE INDUSTRIELLE D'ACIER DU BENIN<br>
+          S.I.A.B SA<br>
+          Société Anonyme au capital de FCFA 1 Millard<br>
+          RCCM : RC.RB M2-PK/14-9 -N° IFU 3201001434418<br></h5>
+    </div>
+
+</div>
+
+<br>
+<page backtop="20mm" backright="10mm" backbottom="20mm" backleft="10mm">
+    <table class="header">
+        <tr>
+            <td class="text-left">
+                <b>N°Facture:</b>
+                <br>
+                <b>FACTURE DOIT:</b>
+            </td>
+        </tr>
+    </table>
+    <br>
+   {# <div class="separator"></div>#}
+
+    <table class="content">
+        <thead>
+        <tr>
+          {#  <th class="text-left" style="...">Vendeur</th>#}
+            <th class="text-center" style="...">Bon de commande</th>
+            <th class="text-center" style="...">Date d'expédition</th>
+            <th class="text-center" style="...">Expédié par</th>
+            <th class="text-center" style="...">Départ</th>
+            <th class="text-right" style="...">Conditions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for venteshowroom in venteshowrooms %}
+        <tr>
+           {# <td class="text-left">UFI <br/>PAYMENT<br/> SOLUTION <br/>SA</td>#}
+            <td class="text-center">{{ venteshowroom.reference }}</td>
+            <td class="text-center">{{venteshowroom.datevente |date('d-m-Y ')}}</td>
+            <td class="text-center">{{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</td>
+            <td class="text-center">-</td>
+           {# <td class="text-center">-</td>#}
+            <td class="text-right">{{ venteshowroom.modereglement ? "Par espèce":"Par chèque" }}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br/>
+    <table class="content">
+        <thead>
+        <tr>
+            <th class="text-left" style="...">Reference</th>
+            <th class="text-center" style="...">Description</th>
+            <th class="text-center" style="...">Quantité</th>
+            <th class="text-center" style="...">Prix Unitaire</th>
+            <th class="text-right" style="...">Prix Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="text-left"></td>
+            <td class="text-center"></td>
+            <td class="text-center"></td>
+            <td class="text-center"></td>
+            <td class="text-right"></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Total HT</b></td>
+            <td class="text-right"><b> FCFA</b></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Escompte</b></td>
+            <td class="text-right"><b> 0</b></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Montant TTC</b></td>
+            <td class="text-right"><b> FCFA</b></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Acompte</b></td>
+            <td class="text-right"> 0</td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>NET A PAYER</b></td>
+            <td class="text-right"> 0</td>
+        </tr>
+    </table>
+    <p>Arrêté la présente facture à la somme de :</p>
+    <p>Pour toute question concernant cette facture, veuillez nous contacter par mail <a style="color: red" href="mailto:dehouenouboris@gmail.com"></a>dehouenouboris@gmail.com</p>
+
+    <table class="header">
+        <tr>
+            <td class="text-right">
+                <b>Le Directeur Général</b>
+            </td>
+        </tr>
+    </table>
+    </tbody>
+    <div id="pieddepage">
+
+        <div class="separator"></div>
+        <div class="separator"></div>
+
+        <hr>
+        <p>
+            ASK SA, Société Anonyme au Capital de 100 000 000 FCFA, BP  <br/>
+            RC: -Tel +229 97 33 95 86 -mail:dehouenouboris@gmail.com - web:www.ask.net</p>
+    </div>
+</page>
+
+{# page tableau et recherche #}{#
+
+
+    <!-- Grâce aux options définies dans le contrôleur on peut insérer des
+      images à partir de leur url absolue -->
+<img src="{{ asset('templates/img/Ask.jpg') }}" alt="">
+
+
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 align="center">
+                <i class="fa fa-table" ></i>
+                Liste des produits</h2></div>
+        Imprimé le :
+        <br>
+        Par : <b> {{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</b>
+
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                <tr>
+                    <th width="50%">Réference</th>
+                    <th  width="50%">Désignation</th>
+                    <th  width="50%">Prix unitaire</th>
+                    <th  width="50%">Prix conseillé</th>
+                    <th  width="50%">Alerte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td> {{produit.reference }}</a></td>
+                        <td> {{produit.designation }}</a></td>
+                        <td>{{ produit.prixU | number_format(0,0,' ')}}</td>
+
+                        <td>{{ produit.prixventeconseiller | number_format(0,0,' ')}}</td>
+
+                        <td>{{ produit.stockalerte }}</td>
+
+                       #}
+{# <td>
+                            {% include('categorie/viewmodal.html.twig') %}
+                        </td>#}{#
+
+                       #}
+{# <td>
+                            <a  class="" href="{{ path('categorie_show', {'slug': categorie.slug}) }}">
+                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                            </a>
+                        </td>#}{#
+
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>
+#}

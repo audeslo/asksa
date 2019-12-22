@@ -41,6 +41,7 @@ class CategorieController extends AbstractController
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
+
 // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
         $categories = $categorieRepository->findAll();

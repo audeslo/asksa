@@ -33,7 +33,7 @@ class Venteshowroom
     /**
      * @ORM\Column(type="integer")
      */
-    private $quantitecarton;
+    private $quantitecarton=5;
 
     /**
      * @ORM\Column(type="integer")
