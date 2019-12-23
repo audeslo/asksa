@@ -44,7 +44,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('client_index') }}">Fiche Client</a>
-                            {% if is_granted('ROLE_ADMIN')  %}{# and is_granted('ROLE_SUP')#}
+                            {% if is_granted('ROLE_ADMIN')  %}{## and is_granted('ROLE_SUP')#}
                             <a class="dropdown-item" href="{{path('categorie_index')}}">Fiche Catégorie</a>
                             <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche Fournisseur</a>
                             <a class="dropdown-item" href="{{ path('showroom_index') }}">Fiche Showroom</a>
