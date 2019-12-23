@@ -32,7 +32,7 @@ class StockshowroomRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findAvailableStock($iduser)
+    public function findAvailableStock($iduse)
     {
         return $this->createQueryBuilder('s')
             ->select('p.designation, p.id')
@@ -45,7 +45,7 @@ class StockshowroomRepository extends ServiceEntityRepository
             ->where('s.vendu = ?1')
             ->andWhere('us.id = ?2')
             ->setParameter(1,false)
-            ->setParameter(2,$iduser)
+            ->setParameter(2,$iduse)
             ->orderBy('p.designation', 'ASC')
             //->setMaxResults(8)
             ->getQuery()
