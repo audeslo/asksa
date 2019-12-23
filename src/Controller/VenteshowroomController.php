@@ -6,7 +6,10 @@ use App\Entity\Venteshowroom;
 use App\Entity\VenteStock;
 use App\Form\VenteshowroomEditType;
 use App\Form\VenteshowroomType;
+use App\Repository\CategorieRepository;
 use App\Repository\VenteshowroomRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +32,44 @@ class VenteshowroomController extends AbstractController
             'venteshowrooms' => $venteshowroomRepository->findAll(),
         ]);
     }
+
+
+    /**
+     * @Route("/liste", name="venteshowroom_liste", methods={"GET"})
+     */
+    public function liste(VenteshowroomRepository $venteshowroomRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+// Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $venteshowrooms = $venteshowroomRepository->findAll();
+        /*return $this->render('categorie/liste.html.twig', [
+            'categories' => $categories,
+        ]);*/
+
+
+// Retrieve the HTML generated in our twig file
+        $html = $this->renderView('venteshowroom/liste.html.twig', [
+            'venteshowrooms' => $venteshowrooms,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+// (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+// Render the HTML as PDF
+        $dompdf->render();
+// Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Facture.pdf", [
+            "Attachment" => false
+        ]);
+
+    }
+
+
+
 
     /**
      * @Route("/new", name="venteshowroom_new", methods={"GET","POST"})

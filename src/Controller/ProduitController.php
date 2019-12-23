@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Form\ProduitType;
+use App\Repository\CategorieRepository;
 use App\Repository\ProduitRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +30,39 @@ class ProduitController extends AbstractController
         return $this->render('produit/index.html.twig', [
             'produits' => $produitRepository->findAll(),
         ]);
+    }
+    /**
+     * @Route("/liste", name="produit_liste", methods={"GET"})
+     */
+    public function liste(ProduitRepository $produitRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+// Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $produits = $produitRepository->findAll();
+        /*return $this->render('categorie/liste.html.twig', [
+            'categories' => $categories,
+        ]);*/
+
+
+// Retrieve the HTML generated in our twig file
+        $html = $this->renderView('produit/liste.html.twig', [
+            'produits' => $produits,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+// (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+// Render the HTML as PDF
+        $dompdf->render();
+// Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Liste des produits.pdf", [
+            "Attachment" => false
+        ]);
+
     }
 
     /**
