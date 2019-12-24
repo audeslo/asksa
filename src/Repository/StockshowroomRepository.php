@@ -32,6 +32,27 @@ class StockshowroomRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findAvailableStock($iduse)
+    {
+        return $this->createQueryBuilder('s')
+            ->select('p.designation, p.id')
+            ->distinct(true)
+            ->join('s.Commandershow','cs')
+            ->join('cs.produit','p')
+            ->join('cs.commandeshow','c')
+            ->join('c.showroom','sh')
+            ->join('sh.users','us')
+            ->where('s.vendu = ?1')
+            ->andWhere('us.id = ?2')
+            ->setParameter(1,false)
+            ->setParameter(2,$iduse)
+            ->orderBy('p.designation', 'ASC')
+            //->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Stockshowroom[] Returns an array of Stockshowroom objects
     //  */

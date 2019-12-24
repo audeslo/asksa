@@ -56,6 +56,17 @@ class VenteshowroomRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findStockAvailableByUser($user)
+    {
+        return $this->createQueryBuilder('v')
+            ->andWhere('v.exampleField = :val')
+            ->setParameter('val', $user)
+            ->orderBy('v.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Venteshowroom[] Returns an array of Venteshowroom objects
     //  */

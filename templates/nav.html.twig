@@ -44,12 +44,16 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ path('client_index') }}">Fiche Client</a>
+                            {% if is_granted('ROLE_ADMIN')  %}{## and is_granted('ROLE_SUP')#}
                             <a class="dropdown-item" href="{{path('categorie_index')}}">Fiche Catégorie</a>
                             <a class="dropdown-item" href="{{path('fournisseur_index')}}">Fiche Fournisseur</a>
                             <a class="dropdown-item" href="{{ path('showroom_index') }}">Fiche Showroom</a>
+                            {% endif %}
 
                         </div>
                     </li>
+
+                    {% if is_granted('ROLE_ADMIN')  %}{# and is_granted('ROLE_SUP')#}
 
                     <li class="nav-item dropdown">
 
@@ -72,6 +76,7 @@
                             <a class="dropdown-item" href="{{ path('tarifcategorieclt_index') }}">Fiche de tarif des clients</a>
                         </div>
                     </li>
+                    {% endif %}
                     <li class="nav-item dropdown">
 
                         <a
@@ -95,7 +100,7 @@
                         </div>
                     </li>
 
-
+                    {% if is_granted('ROLE_ADMIN')  %}{# and is_granted('ROLE_SUP')#}
                     <li class="nav-item dropdown">
                         <a
                                 {% if var == 'commandes' or var=='commanders' or var=='stock_actuel'  or var=='entrees'%}
@@ -118,7 +123,7 @@
                             <a class="dropdown-item" href="{{ path('commande.showroom') }}">Consulter le stock actuel des showrooms</a>
                         </div>
                     </li>
-
+                    {% endif %}
                     <li class="nav-item dropdown">
 
                         <a

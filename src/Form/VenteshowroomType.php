@@ -18,7 +18,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class VenteshowroomType extends AbstractType
 {
 
-    private $bidon;
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -71,10 +70,15 @@ class VenteshowroomType extends AbstractType
             ->add('produit',EntityType::class, [
                     'class' => Produit::class,
                     'placeholder' => 'Veuillez sélectionner un produit',
-                    'query_builder' => function (EntityRepository $rp) {
+                    'query_builder' => function (EntityRepository $rp, $option) {
                         return $rp->createQueryBuilder('p')
                             ->join('p.commandershows','cs')
-                            //->where('p')
+                            ->join('cs.commandeshow','c')
+                            ->join('c.showroom','sh')
+                            ->join('sh.users','us')
+                            ->where('st.vendu = 0')
+                            ->andWhere('us.id = ?1')
+                            ->setParameter(1,$option['carton'])
                             ->orderBy('p.designation', 'ASC');
                     },
                     'attr' => ['data-select' => 'true']

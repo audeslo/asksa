@@ -23,6 +23,8 @@ class VenteshowroomController extends AbstractController
 {
     /**
      * @Route("/", name="venteshowroom_index", methods={"GET"})
+     * @param VenteshowroomRepository $venteshowroomRepository
+     * @return Response
      */
     public function index(VenteshowroomRepository $venteshowroomRepository): Response
     {
@@ -74,13 +76,21 @@ class VenteshowroomController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $produits=$entityManager->getRepository('App:Stockshowroom')
+                                ->findAvailableStock($this->getUser()->getId());
+        dump($produits);
+        return null;
+
+
         $venteshowroom = new Venteshowroom();
         $bidon=[2 => 2];
 
         $form = $this->createForm(VenteshowroomType::class, $venteshowroom,array('bidon' => $bidon));
         $form->handleRequest($request);
         $ventes=null;
-        $entityManager = $this->getDoctrine()->getManager();
+
 
         if ($form->isSubmitted() && $form->isValid()) {
 
