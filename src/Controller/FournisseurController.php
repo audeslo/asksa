@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Fournisseur;
 use App\Form\FournisseurType;
+use App\Repository\CategorieRepository;
 use App\Repository\FournisseurRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,6 +26,40 @@ class FournisseurController extends AbstractController
         return $this->render('fournisseur/index.html.twig', [
             'fournisseurs' => $fournisseurRepository->findAll(),
         ]);
+    }
+
+    /**
+     * @Route("/liste", name="fournisseur_liste", methods={"GET"})
+     */
+    public function liste(FournisseurRepository $fournisseurRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+// Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $fournisseurs = $fournisseurRepository->findAll();
+        /*return $this->render('categorie/liste.html.twig', [
+            'categories' => $categories,
+        ]);*/
+
+
+// Retrieve the HTML generated in our twig file
+        $html = $this->renderView('fournisseur/liste.html.twig', [
+            'fournisseurs' => $fournisseurs,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+// (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+// Render the HTML as PDF
+        $dompdf->render();
+// Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Liste des fournisseurs.pdf", [
+            "Attachment" => false
+        ]);
+
     }
 
     /**

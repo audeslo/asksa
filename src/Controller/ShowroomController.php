@@ -5,7 +5,10 @@ namespace App\Controller;
 
 use App\Entity\Showroom;
 use App\Form\ShowroomType;
+use App\Repository\FournisseurRepository;
 use App\Repository\ShowroomRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +30,41 @@ class ShowroomController extends AbstractController
         return $this->render('showroom/index.html.twig', [
             'showrooms' => $showroomRepository->findAll(),
         ]);
+    }
+
+
+    /**
+     * @Route("/liste", name="showroom_liste", methods={"GET"})
+     */
+    public function liste(ShowroomRepository $showroomRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+// Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $showrooms = $showroomRepository->findAll();
+        /*return $this->render('categorie/liste.html.twig', [
+            'categories' => $categories,
+        ]);*/
+
+
+// Retrieve the HTML generated in our twig file
+        $html = $this->renderView('showroom/liste.html.twig', [
+            'showrooms' => $showrooms,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+// (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+// Render the HTML as PDF
+        $dompdf->render();
+// Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Liste des showrooms.pdf", [
+            "Attachment" => false
+        ]);
+
     }
 
     /**

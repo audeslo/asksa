@@ -19,7 +19,7 @@
         <div class="card-header">
             <h2 align="center">
                 <i class="fa fa-table" ></i>
-                Liste des catégories</h2></div>
+                Liste des showrooms</h2></div>
         Imprimé le :
         <br>
         Par : <b> {{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</b>
@@ -28,23 +28,25 @@
         <table class="content">
             <thead>
             <tr>
-
-                <th class="text-center" style="...">Numéro</th>
-                <th class="text-center" style="...">Libellé</th>
-                <th class="text-center" style="...">Description</th>
+                <th class="text-center" style="...">Référence</th>
+                <th class="text-center" style="...">Showrooms</th>
+                <th class="text-center" style="...">Quartier</th>
+                <th class="text-center" style="...">Telephone</th>
+                <th class="text-center" style="...">Representant</th>
+                <th class="text-center" style="...">telephone</th>
             </tr>
             </thead>
             <tbody>
-            {% for categorie in categories %}
+            {% for showroom in showrooms %}
                 <tr>
-
-                    <td class="text-center">{{ categorie.id }}</td>
-                    <td class="text-center">{{categorie.libelle }}</td>
-                    <td class="text-center">{{ categorie.description }}</td>
-
+                    <td class="text-center">{{showroom.code }}</td>
+                    <td class="text-center">{{ showroom.nomshow }}</td>
+                    <td class="text-center">{{ showroom.quartier}}</td>
+                    <td class="text-center">{{ showroom.telephone}}</td>
+                    <td class="text-center">{{ showroom.representant}}</td>
+                    <td class="text-center">{{ showroom.tel}}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-
         </div>
