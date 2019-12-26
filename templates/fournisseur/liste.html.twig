@@ -19,7 +19,7 @@
         <div class="card-header">
             <h2 align="center">
                 <i class="fa fa-table" ></i>
-                Liste des catégories</h2></div>
+                Liste des fournisseurs</h2></div>
         Imprimé le :
         <br>
         Par : <b> {{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</b>
@@ -28,19 +28,26 @@
         <table class="content">
             <thead>
             <tr>
-
-                <th class="text-center" style="...">Numéro</th>
-                <th class="text-center" style="...">Libellé</th>
-                <th class="text-center" style="...">Description</th>
+                <th class="text-center" style="...">Nom court</th>
+                <th class="text-center" style="...">Nom complet</th>
+                <th class="text-center" style="...">Ville/Pays</th>
+                <th class="text-center" style="...">E-mail</th>
+                <th class="text-center" style="...">Téléphone</th>
+                <th class="text-center" style="...">Representant</th>
             </tr>
             </thead>
             <tbody>
-            {% for categorie in categories %}
+            {% for fournisseur in fournisseurs %}
                 <tr>
 
-                    <td class="text-center">{{ categorie.id }}</td>
-                    <td class="text-center">{{categorie.libelle }}</td>
-                    <td class="text-center">{{ categorie.description }}</td>
+                    <td class="text-center">{{fournisseur.nomcourt }}</td>
+                    <td class="text-center">{{ fournisseur.nomcomplet }}</td>
+                    <td class="text-center">{{ fournisseur.ville ~ '/'~ fournisseur.pays}}</td>
+                    <td class="text-center">{{ fournisseur.mail}}</td>
+                    <td class="text-center">{{ fournisseur.telephone}}</td>
+                    <td class="text-center">{{ fournisseur.representant}}</td>
+
+
 
                 </tr>
             {% endfor %}
