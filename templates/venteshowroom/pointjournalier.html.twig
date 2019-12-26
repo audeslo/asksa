@@ -1,0 +1,123 @@
+<style type="text/css">
+    table{width:100%; border-collapse: collapse}
+    .header td{width: 50%; vertical-align: top}
+    .text-left{text-align: left}
+    .text-right{text-align: right}
+    .text-center {text-align:center}
+    .separator{height: 150px; width: 100%}
+    .content td{border:solid 1px #CFD1D2; padding: 5px;}
+    .content th{border:solid 1px #000000; padding: 5px; background-color: darkorange; color: #ffffff}
+</style>
+
+<div class="row">
+
+    <div class="col-md-2">
+
+    </div>
+
+    <div class="col-md-2 offset-8 ">
+        <h5 class="text-right" align="justify">SOCIETE INDUSTRIELLE D'ACIER DU BENIN<br>
+            S.I.A.B SA<br>
+            Société Anonyme au capital de FCFA 1 Millard<br>
+            RCCM : RC.RB M2-PK/14-9 -N° IFU 3201001434418<br></h5>
+    </div>
+
+</div>
+
+<br>
+<page backtop="20mm" backright="10mm" backbottom="20mm" backleft="10mm">
+    <table class="header">
+        <tr>
+            <td class="text-left">
+                <b>Date de vente :</b>
+                <br>
+                <b>Point journalier de {{ app.user.username }}</b>
+            </td>
+        </tr>
+    </table>
+    <br>
+    {# <div class="separator"></div>#}
+
+    <table class="content">
+        <thead>
+
+        <tr>
+            {#  <th class="text-left" style="...">Vendeur</th>#}
+            <th class="text-center" style="...">Showrooms</th>
+            <th class="text-center" style="...">Quartier</th>
+            <th class="text-center" style="...">Numéro</th>
+            <th class="text-center" style="...">E-mail</th>
+
+        </tr>
+
+        </thead>
+        <tbody>
+{#        {% for venteshowroom in venteshowrooms %}#}
+            <tr>
+                {# <td class="text-left">UFI <br/>PAYMENT<br/> SOLUTION <br/>SA</td>#}
+                <td class="text-center">-{#{{ venteshowroom.reference }}#}</td>
+                <td class="text-center">-{#{{venteshowroom.datevente |date('d-m-Y ')}}#}</td>
+                <td class="text-center">-{#{{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}#}</td>
+                <td class="text-center">-</td>
+                {# <td class="text-center">-</td>#}
+               {# <td class="text-right">#}{#{{ venteshowroom.modereglement ? "Par espèce":"Par chèque" }}#}{#</td>#}
+            </tr>
+      {#  {% endfor %}#}
+        </tbody>
+    </table>
+    <br/>
+    <table class="content">
+        <thead>
+        <tr>
+            <th class="text-left" style="...">Reference</th>
+            <th class="text-center" style="...">Description</th>
+            <th class="text-center" style="...">Quantité</th>
+            <th class="text-center" style="...">Prix Unitaire</th>
+            <th class="text-right" style="...">Prix Total</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="text-left"></td>
+            <td class="text-center"></td>
+            <td class="text-center"></td>
+            <td class="text-center"></td>
+            <td class="text-right"></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Montant total :</b></td>
+            <td class="text-right"><b> FCFA</b></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Montant des vente a crédit :</b></td>
+            <td class="text-right"><b> 0</b></td>
+        </tr>
+        <tr>
+            <td colspan="4" class="text-right"><b>Montant en caisse :</b></td>
+            <td class="text-right"><b> FCFA</b></td>
+        </tr>
+
+    </table>
+    <p>Arrêté ce présent point journalier à la somme de :</p>
+    <p>Pour toute question concernant ce point journalier, veuillez contacter votre supérieur par mail <a style="color: red" href="mailto:asksa@gmail.com"></a>asksa@gmail.com</p>
+
+    <table class="header">
+        <tr>
+            <td class="text-right">
+                <b>Le vendeur</b><br><br>
+                <b>{{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</b>
+            </td>
+        </tr>
+    </table>
+    </tbody>
+    <div id="pieddepage">
+
+        <div class="separator"></div>
+        <div class="separator"></div>
+
+        <hr>
+        <p>
+            ASK SA, Société Anonyme au Capital de 100 000 000 FCFA, BP  <br/>
+            RC: -Tel +229 97 33 95 86 -mail:dehouenouboris@gmail.com - web:www.ask.net</p>
+    </div>
+</page>

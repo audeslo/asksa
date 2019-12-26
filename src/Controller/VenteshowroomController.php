@@ -33,7 +33,6 @@ class VenteshowroomController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/liste", name="venteshowroom_liste", methods={"GET"})
      */
@@ -68,6 +67,39 @@ class VenteshowroomController extends AbstractController
 
     }
 
+    /**
+     * @Route("/pointjournalier", name="venteshowroom_pointjournalier", methods={"GET"})
+     */
+    public function pointjournalier(VenteshowroomRepository $venteshowroomRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+// Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $venteshowroom = $venteshowroomRepository->findAll();
+        /*return $this->render('categorie/liste.html.twig', [
+            'categories' => $categories,
+        ]);*/
+
+
+// Retrieve the HTML generated in our twig file
+        $html = $this->renderView('venteshowroom/pointjournalier.html.twig', [
+            'venteshowroom' => $venteshowroom,
+        ]);
+// Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+// (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+// Render the HTML as PDF
+        $dompdf->render();
+// Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Point journalier.pdf", [
+            "Attachment" => false
+        ]);
+
+    }
 
 
 
@@ -81,9 +113,8 @@ class VenteshowroomController extends AbstractController
         $produits=$entityManager->getRepository('App:Stockshowroom')
                                 ->findAvailableStock($this->getUser()->getId());
         dump($produits);
+
         return null;
-
-
         $venteshowroom = new Venteshowroom();
         $bidon=[2 => 2];
 
