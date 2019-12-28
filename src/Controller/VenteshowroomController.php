@@ -39,31 +39,31 @@ class VenteshowroomController extends AbstractController
     public function liste(VenteshowroomRepository $venteshowroomRepository): Response
     {
         // Configure Dompdf according to your needs
-        $pdfOptions = new Options();
-        $pdfOptions->set('defaultFont', 'Arial');
+                $pdfOptions = new Options();
+                $pdfOptions->set('defaultFont', 'Arial');
 
-// Instantiate Dompdf with our options
-        $dompdf = new Dompdf($pdfOptions);
-        $venteshowrooms = $venteshowroomRepository->findAll();
-        /*return $this->render('categorie/liste.html.twig', [
-            'categories' => $categories,
-        ]);*/
+        // Instantiate Dompdf with our options
+                $dompdf = new Dompdf($pdfOptions);
+                $venteshowrooms = $venteshowroomRepository->findAll();
+                /*return $this->render('categorie/liste.html.twig', [
+                    'categories' => $categories,
+                ]);*/
 
 
-// Retrieve the HTML generated in our twig file
-        $html = $this->renderView('venteshowroom/liste.html.twig', [
-            'venteshowrooms' => $venteshowrooms,
-        ]);
-// Load HTML to Dompdf
-        $dompdf->loadHtml($html);
-// (Optional) Setup the paper size and orientation 'p
-        $dompdf->setPaper('A4', 'portrait');
-// Render the HTML as PDF
-        $dompdf->render();
-// Output the generated PDF to Browser (force downloa
-        $dompdf->stream("Facture.pdf", [
-            "Attachment" => false
-        ]);
+        // Retrieve the HTML generated in our twig file
+                $html = $this->renderView('venteshowroom/liste.html.twig', [
+                    'venteshowrooms' => $venteshowrooms,
+                ]);
+        // Load HTML to Dompdf
+                $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation 'p
+                $dompdf->setPaper('A4', 'portrait');
+        // Render the HTML as PDF
+                $dompdf->render();
+        // Output the generated PDF to Browser (force downloa
+                $dompdf->stream("Facture.pdf", [
+                    "Attachment" => false
+                ]);
 
     }
 

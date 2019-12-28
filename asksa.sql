@@ -266,7 +266,7 @@ CREATE TABLE `commandeshow` (
 
 LOCK TABLES `commandeshow` WRITE;
 /*!40000 ALTER TABLE `commandeshow` DISABLE KEYS */;
-INSERT INTO `commandeshow` VALUES (1,NULL,NULL,'listge prods','2019-11-24','CS-00001','Roland','listge-prods',NULL,NULL,1,1),(2,NULL,1,'azertyuiop','2019-12-14','CS-00002','Gildas','azertyuiop',NULL,'2019-12-14 15:55:56',1,0),(3,NULL,1,'test','2019-12-14','CS-00003','Gildas','test',NULL,'2019-12-14 16:12:22',2,1),(4,NULL,1,'voir','2019-12-14','CS-00004','Gildas','voir',NULL,'2019-12-14 16:17:57',2,1),(5,NULL,1,'PCZKC?ZDCIO','2019-12-14','CS-00005','Jean','pczkc-zdcio',NULL,'2019-12-14 16:34:03',3,1),(6,NULL,1,'vue','2019-12-14','CS-00006','Roland','vue',NULL,'2019-12-14 16:38:21',3,1);
+INSERT INTO `commandeshow` VALUES (1,NULL,NULL,'listge prods','2019-11-24','CS-00001','Roland','listge-prods',NULL,NULL,1,1),(2,NULL,1,'azertyuiop','2019-12-14','CS-00002','Gildas','azertyuiop',NULL,'2019-12-14 15:55:56',1,0),(3,NULL,1,'test','2019-12-14','CS-00003','Gildas','test',NULL,'2019-12-14 16:12:22',3,1),(4,NULL,1,'voir','2019-12-14','CS-00004','Gildas','voir',NULL,'2019-12-14 16:17:57',2,1),(5,NULL,1,'PCZKC?ZDCIO','2019-12-14','CS-00005','Jean','pczkc-zdcio',NULL,'2019-12-14 16:34:03',3,1),(6,NULL,1,'vue','2019-12-14','CS-00006','Roland','vue',NULL,'2019-12-14 16:38:21',2,1);
 /*!40000 ALTER TABLE `commandeshow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -546,7 +546,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Audrey','Audrey',NULL,'audrey-audrey',NULL,NULL,'M','audrey',NULL,'audeslo@live.fr',NULL,NULL,NULL,'$2y$13$wpTtN13nSBTv1uThOtsRVONsVI1JD1Gy99FDhYvk5fgHiMiTER302',NULL,NULL,NULL,NULL,'a:0:{}','a:2:{i:0;s:9:\"ROLE_USER\";i:1;s:10:\"ROLE_ADMIN\";}','2019-08-27 13:09:54',NULL,NULL),(2,'daniel','daniel',NULL,'daniel-daniel',1,NULL,'M','daniel',NULL,'daniel@yahoo.fr',NULL,NULL,NULL,'$2y$13$hD3KC2.qom4m275kE7eSXefdpfrhAVteZNgVFCmaUB9jZsScIftUO',NULL,NULL,NULL,NULL,'a:0:{}','a:1:{i:0;s:9:\"ROLE_USER\";}','2019-12-11 22:22:30',NULL,NULL);
+INSERT INTO `user` VALUES (1,'Audrey','Audrey',NULL,'audrey-audrey',NULL,NULL,'M','audrey',NULL,'audeslo@live.fr',NULL,NULL,NULL,'$2y$13$wpTtN13nSBTv1uThOtsRVONsVI1JD1Gy99FDhYvk5fgHiMiTER302',NULL,NULL,NULL,NULL,'a:0:{}','a:2:{i:0;s:9:\"ROLE_USER\";i:1;s:10:\"ROLE_ADMIN\";}','2019-08-27 13:09:54',NULL,NULL),(2,'daniel','daniel',NULL,'daniel-daniel',1,NULL,'M','daniel',NULL,'daniel@yahoo.fr',NULL,NULL,NULL,'$2y$13$hD3KC2.qom4m275kE7eSXefdpfrhAVteZNgVFCmaUB9jZsScIftUO',NULL,NULL,NULL,NULL,'a:0:{}','a:1:{i:0;s:9:\"ROLE_USER\";}','2019-12-11 22:22:30',NULL,2);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,4 +640,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-14 19:23:13
+-- Dump completed on 2019-12-26 13:08:16
