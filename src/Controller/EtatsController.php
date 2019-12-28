@@ -37,7 +37,7 @@ class EtatsController extends AbstractController
         $dompdf->loadHtml($html);
 // (Optional) Setup the paper size and orientation 'p
         $dompdf->setPaper('A4', 'portrait');
-// Render the HTML as PDF
+// Render the HTML ag<T5>Tgs PDF
         $dompdf->render();
 // Output the generated PDF to Browser (force downloa
         $dompdf->stream("Liste des catégories.pdf", [
