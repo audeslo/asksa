@@ -75,14 +75,20 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{slug}/edit", name="user_edit", methods={"GET","POST"})
+     * @param Request $request
+     * @param User $user
+     * @param UserPasswordEncoderInterface $encoder
+     * @return Response
      */
-    public function edit(Request $request, User $user): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $encoder): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setEditedBy($this->getUser());
+            $passEncoder=$encoder->encodePassword($user, $form->getData()->getPassword());
+            $user->setPassword($passEncoder);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index', [
