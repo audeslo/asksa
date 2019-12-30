@@ -16,6 +16,43 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `capacite`
+--
+
+DROP TABLE IF EXISTS `capacite`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `capacite` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `created_by_id` int(11) DEFAULT NULL,
+  `edited_by_id` int(11) DEFAULT NULL,
+  `code` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `libelle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_on` datetime NOT NULL,
+  `edited_on` datetime DEFAULT NULL,
+  `capacitecarton` int(11) NOT NULL,
+  `capacitebidon` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `IDX_A1E9ED3BB03A8386` (`created_by_id`),
+  KEY `IDX_A1E9ED3BDD7B2EBC` (`edited_by_id`),
+  CONSTRAINT `FK_A1E9ED3BB03A8386` FOREIGN KEY (`created_by_id`) REFERENCES `user` (`id`),
+  CONSTRAINT `FK_A1E9ED3BDD7B2EBC` FOREIGN KEY (`edited_by_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `capacite`
+--
+
+LOCK TABLES `capacite` WRITE;
+/*!40000 ALTER TABLE `capacite` DISABLE KEYS */;
+INSERT INTO `capacite` VALUES (1,2,NULL,'5B de 3L','5 bidons de 2 par carton',NULL,'5-bidons-de-2-par-carton','2019-12-28 21:08:09',NULL,5,3),(2,2,NULL,'5B de 1L','5 bidons de 1L par carton',NULL,'5-bidons-de-1l-par-carton','2019-12-28 21:10:25',NULL,5,1),(3,2,NULL,'5B de 4L','5 bidons de 4 par carton',NULL,'5-bidons-de-4-par-carton','2019-12-28 21:10:49',NULL,5,4),(4,2,NULL,'10B de 1L','10 bidons de 1L par carton',NULL,'10-bidons-de-1l-par-carton','2019-12-28 21:11:19',NULL,10,1);
+/*!40000 ALTER TABLE `capacite` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `categorie`
 --
 
@@ -27,7 +64,7 @@ CREATE TABLE `categorie` (
   `created_by_id` int(11) DEFAULT NULL,
   `edited_by_id` int(11) DEFAULT NULL,
   `libelle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_on` datetime NOT NULL,
   `edited_on` datetime DEFAULT NULL,
@@ -332,7 +369,7 @@ CREATE TABLE `migration_versions` (
 
 LOCK TABLES `migration_versions` WRITE;
 /*!40000 ALTER TABLE `migration_versions` DISABLE KEYS */;
-INSERT INTO `migration_versions` VALUES ('20191105180022','2019-11-06 15:22:16'),('20191106104541','2019-11-06 15:22:30'),('20191106113135','2019-11-06 15:22:39'),('20191111140211','2019-11-11 14:02:30'),('20191111141951','2019-11-11 14:19:56'),('20191112190758','2019-11-13 07:51:54'),('20191113054631','2019-11-13 07:51:54'),('20191113075535','2019-11-13 07:56:07'),('20191113180506','2019-11-13 18:07:53'),('20191115183941','2019-11-15 18:41:05'),('20191116113917','2019-11-16 11:40:38'),('20191116124456','2019-11-16 12:45:51'),('20191116143807','2019-11-16 14:38:27'),('20191119212641','2019-11-19 21:28:48'),('20191124161251','2019-11-24 16:14:06'),('20191124164734','2019-11-24 16:48:19'),('20191124164804','2019-11-24 16:48:20'),('20191127211606','2019-11-27 21:17:27'),('20191127212757','2019-11-27 21:28:42'),('20191128004546','2019-11-28 00:51:31'),('20191128013255','2019-11-28 08:05:19'),('20191128080802','2019-11-28 08:08:46'),('20191201175428','2019-12-01 17:55:11'),('20191207205117','2019-12-07 20:52:33'),('20191207215905','2019-12-07 22:14:27'),('20191208151751','2019-12-08 15:18:16'),('20191210214000','2019-12-10 21:49:42'),('20191210214716','2019-12-10 21:49:43'),('20191211213604','2019-12-11 21:37:03'),('20191213095703','2019-12-13 09:58:32'),('20191214172903','2019-12-14 17:29:46');
+INSERT INTO `migration_versions` VALUES ('20191105180022','2019-11-06 15:22:16'),('20191106104541','2019-11-06 15:22:30'),('20191106113135','2019-11-06 15:22:39'),('20191111140211','2019-11-11 14:02:30'),('20191111141951','2019-11-11 14:19:56'),('20191112190758','2019-11-13 07:51:54'),('20191113054631','2019-11-13 07:51:54'),('20191113075535','2019-11-13 07:56:07'),('20191113180506','2019-11-13 18:07:53'),('20191115183941','2019-11-15 18:41:05'),('20191116113917','2019-11-16 11:40:38'),('20191116124456','2019-11-16 12:45:51'),('20191116143807','2019-11-16 14:38:27'),('20191119212641','2019-11-19 21:28:48'),('20191124161251','2019-11-24 16:14:06'),('20191124164734','2019-11-24 16:48:19'),('20191124164804','2019-11-24 16:48:20'),('20191127211606','2019-11-27 21:17:27'),('20191127212757','2019-11-27 21:28:42'),('20191128004546','2019-11-28 00:51:31'),('20191128013255','2019-11-28 08:05:19'),('20191128080802','2019-11-28 08:08:46'),('20191201175428','2019-12-01 17:55:11'),('20191207205117','2019-12-07 20:52:33'),('20191207215905','2019-12-07 22:14:27'),('20191208151751','2019-12-08 15:18:16'),('20191210214000','2019-12-10 21:49:42'),('20191210214716','2019-12-10 21:49:43'),('20191211213604','2019-12-11 21:37:03'),('20191213095703','2019-12-13 09:58:32'),('20191214172903','2019-12-14 17:29:46'),('20191228115549','2019-12-28 11:56:02'),('20191228201200','2019-12-28 20:14:41');
 /*!40000 ALTER TABLE `migration_versions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -355,8 +392,7 @@ CREATE TABLE `produit` (
   `edited_on` datetime DEFAULT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `categprod` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `marque` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `prixventeconseiller` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prixventeconseiller` int(11) NOT NULL,
   `stockalerte` int(11) NOT NULL,
   `img` longblob,
   PRIMARY KEY (`id`),
@@ -373,7 +409,7 @@ CREATE TABLE `produit` (
 
 LOCK TABLES `produit` WRITE;
 /*!40000 ALTER TABLE `produit` DISABLE KEYS */;
-INSERT INTO `produit` VALUES (1,NULL,NULL,'PD-00001','HX5',4500,'4 litres','2019-11-11 15:20:04',NULL,'hx5','','','',0,NULL),(2,NULL,NULL,'PD-00002','HX7 (4)',7500,'10w-40','2019-11-11 15:22:03',NULL,'hx7-4','','','',0,NULL),(3,1,NULL,'PD-00003','HX8 5w-30',7500,NULL,'2019-12-14 18:00:11',NULL,'hx8-5w-30','lubrifiant','lubrifiant','7700',50,NULL);
+INSERT INTO `produit` VALUES (1,NULL,NULL,'PD-00001','HX5',4500,'4 litres','2019-11-11 15:20:04',NULL,'hx5','',0,0,NULL),(2,NULL,NULL,'PD-00002','HX7 (4)',7500,'10w-40','2019-11-11 15:22:03',NULL,'hx7-4','',0,0,NULL),(3,1,NULL,'PD-00003','HX8 5w-30',7500,NULL,'2019-12-14 18:00:11',NULL,'hx8-5w-30','lubrifiant',7700,50,NULL);
 /*!40000 ALTER TABLE `produit` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -640,4 +676,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-12-26 13:08:16
+-- Dump completed on 2019-12-30 16:21:48
