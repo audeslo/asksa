@@ -67,10 +67,11 @@ class VenteshowroomType extends AbstractType
         'attr'      =>['placeholder'    =>  'Saisissez la quantité']
     ))
 
-            ->add('produit',EntityType::class, [
-                    'class' => Produit::class,
-                    'placeholder' => 'Veuillez sélectionner un produit',
-                    'query_builder' => function (EntityRepository $rp, $option) {
+            ->add('produit',ChoiceType::class, [
+                    'required' =>   true,
+                    'placeholder'   => 'Veuillez sélectionner un produit',
+                    'choices'       => $options['produits'],
+                    /*'query_builder' => function (EntityRepository $rp, $option) {
                         return $rp->createQueryBuilder('p')
                             ->join('p.commandershows','cs')
                             ->join('cs.commandeshow','c')
@@ -80,7 +81,7 @@ class VenteshowroomType extends AbstractType
                             ->andWhere('us.id = ?1')
                             ->setParameter(1,$option['carton'])
                             ->orderBy('p.designation', 'ASC');
-                    },
+                    },*/
                     'attr' => ['data-select' => 'true']
             ])
 
@@ -102,6 +103,7 @@ class VenteshowroomType extends AbstractType
             'data_class' => Venteshowroom::class,
             'bidon'     => null,
             'carton'    => null,
+            'produits'    => null
         ]);
     }
 }

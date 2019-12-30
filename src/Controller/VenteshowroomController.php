@@ -35,59 +35,31 @@ class VenteshowroomController extends AbstractController
 
 
     /**
-     * @Route("/liste", name="venteshowroom_liste", methods={"GET"})
-     */
-    public function liste(VenteshowroomRepository $venteshowroomRepository): Response
-    {
-        // Configure Dompdf according to your needs
-                $pdfOptions = new Options();
-                $pdfOptions->set('defaultFont', 'Arial');
-
-        // Instantiate Dompdf with our options
-                $dompdf = new Dompdf($pdfOptions);
-                $venteshowrooms = $venteshowroomRepository->findAll();
-                /*return $this->render('categorie/liste.html.twig', [
-                    'categories' => $categories,
-                ]);*/
-
-
-        // Retrieve the HTML generated in our twig file
-                $html = $this->renderView('venteshowroom/liste.html.twig', [
-                    'venteshowrooms' => $venteshowrooms,
-                ]);
-        // Load HTML to Dompdf
-                $dompdf->loadHtml($html);
-        // (Optional) Setup the paper size and orientation 'p
-                $dompdf->setPaper('A4', 'portrait');
-        // Render the HTML as PDF
-                $dompdf->render();
-        // Output the generated PDF to Browser (force downloa
-                $dompdf->stream("Facture.pdf", [
-                    "Attachment" => false
-                ]);
-
-    }
-
-
-
-
-    /**
      * @Route("/new", name="venteshowroom_new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
 
-        $produits=$entityManager->getRepository('App:Stockshowroom')
+        // recuperer les produits disponible en stock du showroom de l'utilisateur connecté
+        $listProduits=$entityManager->getRepository('App:Stockshowroom')
                                 ->findAvailableStock($this->getUser()->getId());
-        dump($produits);
-        return null;
+        $produits=[];
+        foreach ($listProduits as $key => $produit){
+            $produits[$produit['designation']]=$produit['id'];
+        }
+
+        // recuperer les bidons et  cartons disponible
+
+        $bidon=[2 => 2];
 
 
         $venteshowroom = new Venteshowroom();
-        $bidon=[2 => 2];
 
-        $form = $this->createForm(VenteshowroomType::class, $venteshowroom,array('bidon' => $bidon));
+        $form = $this->createForm(VenteshowroomType::class, $venteshowroom,array(
+            'bidon'     => $bidon,
+            'produits'  => $produits
+        ));
         $form->handleRequest($request);
         $ventes=null;
 
@@ -212,6 +184,40 @@ class VenteshowroomController extends AbstractController
         }
 
         return $this->redirectToRoute('fournisseur_index');
+    }
+
+    /**
+     * @Route("/liste", name="venteshowroom_liste", methods={"GET"})
+     */
+    public function liste(VenteshowroomRepository $venteshowroomRepository): Response
+    {
+        // Configure Dompdf according to your needs
+        $pdfOptions = new Options();
+        $pdfOptions->set('defaultFont', 'Arial');
+
+        // Instantiate Dompdf with our options
+        $dompdf = new Dompdf($pdfOptions);
+        $venteshowrooms = $venteshowroomRepository->findAll();
+        /*return $this->render('categorie/liste.html.twig', [
+            'categories' => $categories,
+        ]);*/
+
+
+        // Retrieve the HTML generated in our twig file
+        $html = $this->renderView('venteshowroom/liste.html.twig', [
+            'venteshowrooms' => $venteshowrooms,
+        ]);
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+        // Render the HTML as PDF
+        $dompdf->render();
+        // Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Facture.pdf", [
+            "Attachment" => false
+        ]);
+
     }
 
 }

@@ -66,10 +66,10 @@ class DefaultController extends AbstractController
         foreach ($references as $key => $reference){
             $listes[$key]=['referencecarton' => $reference->getReferencecarton(),
                             'referencebidon' => $reference->getReferencebidon(),
-                            'produit' => $reference->getCommandershow()->getProduit()->getDesignation(),
+                            'produit'        => $reference->getCommandershow()->getProduit()->getDesignation(),
                             'capacitecarton' => $reference->getCommandershow()->getCapacitecartonshow(),
-                            'capacitebidon' => $reference->getCommandershow()->getCapacitebidonshow(),
-                            'codecarton' => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
+                            'capacitebidon'  => $reference->getCommandershow()->getCapacitebidonshow(),
+                            'codecarton'    => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
                                                                 $reference->getReferencecarton()),
                             'codebidon' => codebar($reference->getCommandershow()->getProduit()->getDesignation(),
                                                                 $reference->getReferencebidon())

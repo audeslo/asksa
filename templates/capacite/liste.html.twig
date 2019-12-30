@@ -1,0 +1,60 @@
+
+
+{# page tableau et recherche #}
+
+    <!-- Grâce aux options définies dans le contrôleur on peut insérer des
+      images à partir de leur url absolue -->
+<img src="{{ asset('templates/img/Ask.jpg') }}" alt="">
+
+
+
+
+    <div class="card mb-3">
+        <div class="card-header">
+            <h2 align="center">
+                <i class="fa fa-table" ></i>
+                Liste des produits</h2></div>
+        Imprimé le :
+        <br>
+        Par : <b> {{ app.user.nom ~  '  ' ~  app.user.prenom | upper}}</b>
+
+            <hr>
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                <thead>
+                <tr>
+                    <th width="50%">Réference</th>
+                    <th  width="50%">Désignation</th>
+                    <th  width="50%">Prix unitaire</th>
+                    <th  width="50%">Prix conseillé</th>
+                    <th  width="50%">Alerte</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for produit in produits %}
+                    <tr>
+                        <td> {{produit.reference }}</a></td>
+                        <td> {{produit.designation }}</a></td>
+                        <td>{{ produit.prixU | number_format(0,0,' ')}}</td>
+
+                        <td>{{ produit.prixventeconseiller | number_format(0,0,' ')}}</td>
+
+                        <td>{{ produit.stockalerte }}</td>
+
+                       {# <td>
+                            {% include('categorie/viewmodal.html.twig') %}
+                        </td>#}
+                       {# <td>
+                            <a  class="" href="{{ path('categorie_show', {'slug': categorie.slug}) }}">
+                                <i class="fa fa-edit tm-product-delete-icon"></i>
+                            </a>
+                        </td>#}
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+
+
+        </div>

@@ -42,7 +42,7 @@ class CategorieController extends AbstractController
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
 
-// Instantiate Dompdf with our options
+        // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
         $categories = $categorieRepository->findAll();
         /*return $this->render('categorie/liste.html.twig', [
@@ -50,20 +50,20 @@ class CategorieController extends AbstractController
         ]);*/
 
 
-// Retrieve the HTML generated in our twig file
+        // Retrieve the HTML generated in our twig file
         $html = $this->renderView('categorie/liste.html.twig', [
-'categories' => $categories,
-]);
-// Load HTML to Dompdf
-$dompdf->loadHtml($html);
-// (Optional) Setup the paper size and orientation 'p
-$dompdf->setPaper('A4', 'portrait');
-// Render the HTML as PDF
-$dompdf->render();
-// Output the generated PDF to Browser (force downloa
-$dompdf->stream("Liste des catégories.pdf", [
-    "Attachment" => false
-]);
+            'categories' => $categories,
+            ]);
+        // Load HTML to Dompdf
+        $dompdf->loadHtml($html);
+        // (Optional) Setup the paper size and orientation 'p
+        $dompdf->setPaper('A4', 'portrait');
+        // Render the HTML as PDF
+        $dompdf->render();
+        // Output the generated PDF to Browser (force downloa
+        $dompdf->stream("Liste des catégories.pdf", [
+            "Attachment" => false
+    ]);
 
     }
 
@@ -91,11 +91,7 @@ $dompdf->stream("Liste des catégories.pdf", [
         return $this->render('categorie/new.html.twig', [
             'categorie' => $categorie,
             'form' => $form->createView(),
-/*<<<<<<< HEAD*/
 
-/*=======*/
-          /*  'id'    => $user->getId()*/
-/*>>>>>>> cccffef21ab05015167d3fea9954872b3e053207*/
         ]);
     }
 
