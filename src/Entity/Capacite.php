@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -74,6 +76,22 @@ class Capacite
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $editedBy;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Produit", mappedBy="capacite")
+     */
+    private $produits;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commander", mappedBy="capacite")
+     */
+    private $commanders;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+        $this->commanders = new ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist()
@@ -218,6 +236,65 @@ class Capacite
     public function setCapacitebidon(int $capacitebidon): self
     {
         $this->capacitebidon = $capacitebidon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->addCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->contains($produit)) {
+            $this->produits->removeElement($produit);
+            $produit->removeCapacite($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commander[]
+     */
+    public function getCommanders(): Collection
+    {
+        return $this->commanders;
+    }
+
+    public function addCommander(Commander $commander): self
+    {
+        if (!$this->commanders->contains($commander)) {
+            $this->commanders[] = $commander;
+            $commander->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commander $commander): self
+    {
+        if ($this->commanders->contains($commander)) {
+            $this->commanders->removeElement($commander);
+            // set the owning side to null (unless already changed)
+            if ($commander->getCapacite() === $this) {
+                $commander->setCapacite(null);
+            }
+        }
 
         return $this;
     }
