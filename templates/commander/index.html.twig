@@ -11,12 +11,17 @@
                 Liste des produits: {{ commande.intitule }}</h2></div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-2">
-                    <a href="{{ path('commander_new') }}" class="btn btn-primary ">
-                        <i class="fa fa-chevron-right"></i>
-                      Ajouter
-                    </a>
-                </div>
+
+                {% if commande.etat != 2 %}
+                    <div class="col-md-2">
+                        <a href="{{ path('commander_new') }}" class="btn btn-primary ">
+                            <i class="fa fa-chevron-right"></i>
+                            Ajouter
+                        </a>
+                    </div>
+
+                {% endif %}
+
 
                 <div class="offset-8 col-md-2 ">
                     <a href="#" class="btn btn-success ">
@@ -71,6 +76,18 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="row">
+
+                <div class="col-md-2 offset-9">
+                    {% if commande.etat == 0 %}
+                        <a class="btn btn-danger col-md-3" href="#"  > Approuver
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+
+                    {% endif %}
+
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-2">
