@@ -35,10 +35,10 @@ class TarifcategoriecltType extends AbstractType
             ))
 
             ->add('borneinferieure',IntegerType::class,array(
-                'label'     => 'Borne inférieure :',
-                'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez la borne inférieure']
-            ))
+        'label'     => 'Borne inférieure :',
+        'required'  => false,
+        'attr'      =>['placeholder'    =>  'Saisissez la borne inférieure']
+    ))
 
 
             ->add('categorie', EntityType::class, [
