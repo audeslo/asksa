@@ -35,6 +35,7 @@
                     <th>Date</th>
                     <th>Intitulé</th>
                     <th>Fournisseur</th>
+                    <th>Etat</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -46,6 +47,14 @@
                         <td> {{ commande.datecommande ? commande.datecommande | date('d-M-Y') : ''}}</td>
                         <td><a style="color: white" href="{{ path('commander_index', {'slug' : commande.slug}) }}">{{ commande.intitule | upper }}</a></td>
                         <td>{{ commande.fournisseur }}</td>
+                        <td>
+                            {% if commande.etat == 2 %}
+                                Validée
+                            {% else %}
+                                En attente
+                            {% endif %}
+
+                        </td>
 
                         <td>
                             {% include('commande/viewmodal.html.twig') %}
