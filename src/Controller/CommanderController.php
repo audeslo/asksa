@@ -132,6 +132,23 @@ class CommanderController extends AbstractController
         ]);
     }
 
+
+    /**
+     * @Route("/{id}/edit", name="commander_approuver", methods={"GET","POST"})
+     */
+    public function approuver(Request $request, Commander $commander): Response
+    {
+        $commande=$this->get('session')->get('commande');
+        $form = $this->createForm(CommanderType::class, $commander);
+
+        return $this->render('commander/edit.html.twig', [
+            'commander' => $commander,
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
     /**
      * @Route("/{id}", name="commander_delete", methods={"DELETE"})
      */
