@@ -49,9 +49,11 @@
                         <td>{{ commande.fournisseur }}</td>
                         <td>
                             {% if commande.etat == 2 %}
-                                Validée
+                                <div class="tm-status-circle moving">
+                                </div>Validée
                             {% else %}
-                                En attente
+                                <div class="tm-status-circle pending">
+                                </div>En cours
                             {% endif %}
 
                         </td>
