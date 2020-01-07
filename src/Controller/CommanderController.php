@@ -134,17 +134,15 @@ class CommanderController extends AbstractController
 
 
     /**
-     * @Route("/{id}/edit", name="commander_approuver", methods={"GET","POST"})
+     * @Route("/{id}/commande-approuver", name="commande_approuver", methods={"GET","POST"})
      */
-    public function approuver(Request $request, Commander $commander): Response
+    public function approuver(Request $request, Commande $commande): Response
     {
-        $commande=$this->get('session')->get('commande');
-        $form = $this->createForm(CommanderType::class, $commander);
+        $em=$this->getDoctrine()->getManager();
 
-        return $this->render('commander/edit.html.twig', [
-            'commander' => $commander,
-            'form' => $form->createView(),
-        ]);
+        $query=$em->getRepository('App:Commande')->modifierEtatCommande($commande->getId(),2);
+
+        return $this->redirectToRoute('commander_index',['slug' => $commande->getSlug()]);
     }
 
 

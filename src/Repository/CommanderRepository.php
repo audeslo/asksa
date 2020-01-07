@@ -26,16 +26,18 @@ class CommanderRepository extends ServiceEntityRepository
      * @param $carton
      * @param $bidon
      * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
      */
     public function findQuantityInStock($produit, $carton, $bidon)
     {
         try {
             return $this->createQueryBuilder('c')
                 ->select('SUM(c.quantiteenstock) AS quantite')
+                ->join('c.commande','cm')
                 ->Where('c.produit =?1')
                 ->andWhere('c.capacitebidon =?2')
                 ->andWhere('c.capacitecarton =?3')
-                ->andWhere('c.etat =?4')
+                ->andWhere('cm.etat =?4')
                 ->setParameter(1, $produit)
                 ->setParameter(2, $bidon)
                 ->setParameter(3, $carton)
@@ -50,11 +52,12 @@ class CommanderRepository extends ServiceEntityRepository
     public function findListCommanderDispo($produit, $carton, $bidon)
     {
         return $this->createQueryBuilder('c')
+            ->join('c.commande','cm')
             ->Where('c.produit =?1')
             ->andWhere('c.capacitebidon =?2')
             ->andWhere('c.capacitecarton =?3')
             ->andWhere('c.quantiteenstock >?4')
-            ->andWhere('c.etat =?5')
+            ->andWhere('cm.etat =?5')
             ->setParameter(1, $produit)
             ->setParameter(2, $bidon)
             ->setParameter(3, $carton)
@@ -88,6 +91,7 @@ class CommanderRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
 
 
 

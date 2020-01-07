@@ -55,10 +55,17 @@ class CommandershowController extends AbstractController
            $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
            $refproduit=$produit->getReference();
 
+            // Récupération de la capacité
+           $capacite=$entityManager->getRepository('App:Capacite')->find($form['capacite']->getData());
+
+
             //refernce commande
             $refcommandeshow=$commandeshow->getReference();
 
-            $commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$form['capacitecartonshow']->getData().'C-'.$form['capacitebidonshow']->getData().'B');
+            $commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$capacite->getCode());
+            $commandershow->setCapacitecartonshow($capacite->getCapacitecarton());
+            $commandershow->setCapacitebidonshow($capacite->getCapacitebidon());
+            //$commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$form['capacitecartonshow']->getData().'C-'.$form['capacitebidonshow']->getData().'B');
 
             $commandershow->setCreatedBy($this->getUser());
             $entityManager->persist($commandershow);
@@ -153,6 +160,7 @@ class CommandershowController extends AbstractController
            }
         }
 
+
         // tous les produit étant disponible, le traitement passe à la validation
 
         foreach ($commandershows as $key => $commandershow){
@@ -165,7 +173,6 @@ class CommandershowController extends AbstractController
                 ->findListCommanderDispo($commandershow->getProduit()->getId(),
                     $commandershow->getCapacitecartonshow(),
                     $commandershow->getCapacitebidonshow());
-
 
             // Parcour de chaque commande
             foreach ($commanders as $commander ){

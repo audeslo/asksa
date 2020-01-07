@@ -37,11 +37,10 @@
                 <thead>
                 <tr>
 
-                    {#<th>commande</th>#}
                     <th>Produit</th>
                     <th>Qté commandée</th>
-                    <th>Bidon/carton</th>
-                    <th>Qté bidon/Litre</th>
+{#                    <th>Bidon/carton</th>#}
+                    <th>Capacité</th>
                     <th>Etat</th>
                     <th></th>
                     <th></th>
@@ -51,15 +50,13 @@
                 {% for commander in commanders %}
                     <tr>
 
-                       {# <td>{{ commander.id }}</td>
-#}
                         <td> {{commander.produit }}</a></td>
 
                         <td>{{ commander.quantitecommandee}}</td>
 
-                        <td>{{ commander.capacitecarton }}</td>
+{#                        <td>{{ commander.capacitecarton }}</td>#}
 
-                        <td>{{ commander.capacitebidon }}</td>
+                        <td>{{ commander.capacite.code }}</td>
 
                         <td>{{ commander.etat }}</td>
 
@@ -80,7 +77,7 @@
 
                 <div class="col-md-2 offset-9">
                     {% if commande.etat == 0 %}
-                        <a class="btn btn-danger col-md-3" href="#"  > Approuver
+                        <a class="btn btn-danger col-md-3" href="{{path('commande_approuver',{'id':commande.id})}}"  > Approuver
                             <i class="fa fa-chevron-right"></i>
                         </a>
 

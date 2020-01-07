@@ -41,8 +41,8 @@
                     <th>Réference</th>
                     <th>Produit</th>
                     <th>Qté commandée</th>
-                    <th>Bidon/carton</th>
-                    <th>Qté bidon/Litre</th>
+                    <th>Capacité</th>
+                    {#<th>Qté bidon/Litre</th>#}
 
                     <th></th>
                     <th></th>
@@ -55,8 +55,8 @@
                         <td>{{ commandershow.reference }}</td>
                         <td> {{commandershow.produit.designation }}</a></td>
                         <td>{{ commandershow.quantitecommandeshow}}</td>
-                        <td>{{ commandershow.capacitecartonshow }}</td>
-                        <td>{{ commandershow.capacitebidonshow }}</td>
+                        <td>{{ commandershow.capacite.code }}</td>
+                        {#<td>{{ commandershow.capacitebidonshow }}</td>#}
 
                         {#  <td>
   #}{#                              {% include('commande/viewmodal.html.twig') %}#}{#
@@ -73,21 +73,21 @@
 
             <div class="row">
 
-                <div class="col-md-2 offset-9">
-                    {% if commandeshow.statut == 0 %}
-                        <a class="btn btn-danger col-md-3" href="{{ path('commandershow_approuver',{'id':commandeshow.id}) }}"  > Approuver
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
+                {% if commandershows %}
+                    <div class="col-md-2 offset-9">
+                        {% if commandeshow.statut == 0 %}
+                            <a class="btn btn-danger col-md-3" href="{{ path('commandershow_approuver',{'id':commandeshow.id}) }}"  > Approuver
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
+                        {% else %}
+                            <a class="btn btn-success col-md-3" href="{{path('code_bare_generate',{'slug':commandeshow.slug})}}">
+                                <i class="fa fa-qrcode"></i>
+                                Imp. Code QR
+                            </a>
+                        {% endif %}
+                    </div>
 
-                    {% else %}
-                        <a class="btn btn-success col-md-3" href="{{path('code_bare_generate',{'slug':commandeshow.slug})}}">
-                            <i class="fa fa-qrcode"></i>
-                            Imp. Code QR
-                        </a>
-
-                    {% endif %}
-
-                </div>
+                {% endif %}
             </div>
 
             <div class="row">
