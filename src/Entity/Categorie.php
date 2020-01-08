@@ -52,10 +52,10 @@ class Categorie
      */
     private $createdBy;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="categorie")
-     */
-    private $users;
+//    /**
+//     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="categorie")
+//     */
+//    private $users;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -257,35 +257,35 @@ class Categorie
         // TODO: Implement __toString() method.
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setCategorie($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getCategorie() === $this) {
-                $user->setCategorie(null);
-            }
-        }
-
-        return $this;
-    }
+//    /**
+//     * @return Collection|User[]
+//     */
+//    public function getUsers(): Collection
+//    {
+//        return $this->users;
+//    }
+//
+//    public function addUser(User $user): self
+//    {
+//        if (!$this->users->contains($user)) {
+//            $this->users[] = $user;
+//            $user->setCategorie($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeUser(User $user): self
+//    {
+//        if ($this->users->contains($user)) {
+//            $this->users->removeElement($user);
+//            // set the owning side to null (unless already changed)
+//            if ($user->getCategorie() === $this) {
+//                $user->setCategorie(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
 
 }

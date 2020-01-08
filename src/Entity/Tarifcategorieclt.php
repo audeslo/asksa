@@ -5,12 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TarifcategoriecltRepository")
  * @ORM\HasLifecycleCallbacks()
- *
+ *@UniqueEntity(fields={"categorie","borneinferieure","bornesupperieur"}, message="cet intervalle existe déjà")
  */
 class Tarifcategorieclt
 {
@@ -59,10 +61,6 @@ class Tarifcategorieclt
      */
     private $produit;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $litre;
 
     /**
      * @ORM\Column(type="datetime")
@@ -73,6 +71,12 @@ class Tarifcategorieclt
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $createdBy;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Gedmo\Slug(fields={"borneinferieure","bornesupperieur"})
+     */
+    private $slug;
 
     /**
      *
@@ -94,6 +98,11 @@ class Tarifcategorieclt
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $editedBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Capacite", inversedBy="tarifcategorieclts")
+     */
+    private $capacite;
 
     /**
      * @ORM\PrePersist()
@@ -188,18 +197,6 @@ class Tarifcategorieclt
         return $this;
     }
 
-    public function getLitre(): ?string
-    {
-        return $this->litre;
-    }
-
-    public function setLitre(string $litre): self
-    {
-        $this->litre = $litre;
-
-        return $this;
-    }
-
     public function getCreatedOn(): ?\DateTimeInterface
     {
         return $this->createdOn;
@@ -244,6 +241,30 @@ class Tarifcategorieclt
     public function setEditedBy(?User $editedBy): self
     {
         $this->editedBy = $editedBy;
+
+        return $this;
+    }
+
+    public function getCapacite(): ?Capacite
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?Capacite $capacite): self
+    {
+        $this->capacite = $capacite;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

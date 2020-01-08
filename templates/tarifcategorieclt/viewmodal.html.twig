@@ -1,9 +1,9 @@
-<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ tarifcategorieclt.id }}">
+<a style="cursor: pointer"  data-toggle="modal" data-target="#{{ tarifcategorieclt.slug }}">
     <i style="font-size: 20px" class="fa fa-eye "></i>
 </a>
 
 <!-- Modal -->
-<div class="modal fade " id="{{ tarifcategorieclt.id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
+<div class="modal fade " id="{{ tarifcategorieclt.slug}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="color: #000000">
     <div class="modal-dialog modal-lg" role="document"  >
         <div class="modal-content">
             <div class="modal-header">
@@ -15,29 +15,26 @@
                     <tbody>
 
                     <tr>
-                        <th>Id</th>
+                        <th>Catégorie</th>
                         <td>{{ tarifcategorieclt.categorie }}</td>
                     </tr>
                     <tr>
-                        <th>Id</th>
+                        <th>Produit</th>
                         <td>{{ tarifcategorieclt.produit }}</td>
                     </tr>
-
-                        <th>Libelle</th>
-                        <td>{{tarifcategorieclt.bornesupperieur }}</td>
-                    </tr>
-                        <th>Libelle</th>
-                        <td>{{tarifcategorieclt.borneinferieure }}</td>
+                    <tr>
+                        <th>Intervalle</th>
+                        <td> De {{tarifcategorieclt.borneinferieure }} À {{tarifcategorieclt.bornesupperieur }}</td>
                     </tr>
                     <tr>
-                        <th>Description</th>
-                        <td>{{ tarifcategorieclt.litre }}</td>
+                        <th>Capacité</th>
+                        <td>{{ tarifcategorieclt.capacite.code }}</td>
                     </tr>
 
                     <tr>
+                        <th>Montant</th>
                         <td>{{ tarifcategorieclt.montant }}</td>
                     </tr>
-                    <tr>
                     </tbody>
                 </table>
                 <div class="row" >

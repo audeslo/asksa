@@ -32,24 +32,23 @@
                     {# <th>Id</th>#}
                     <th>Catégorie</th>
                     <th>Désignation</th>
-                    <th>B. supérieure</th>
-                    <th>B. inférieure</th>
-                    <th>C. bidon</th>
+                    <th>Intervalle</th>
+                    <th>Capacité</th>
                     <th>Montant</th>
 
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
                 {% for tarifcategorieclt in tarifcategorieclts %}
                     <tr>
 
                         <td>{{ tarifcategorieclt.categorie }}</td>
                         <td>{{ tarifcategorieclt.produit.designation }}</td>
-                        <td>{{ tarifcategorieclt.bornesupperieur }}</td>
-                        <td>{{ tarifcategorieclt.borneinferieure }}</td>
-                        <td>{{ tarifcategorieclt.litre }}</td>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <td>De {{ tarifcategorieclt.borneinferieure | number_format(0,0,' ')}} À
+                            {{ tarifcategorieclt.bornesupperieur | number_format(0,0,' ')}}</td>
+                        <td>{{ tarifcategorieclt.capacite.code }}</td>
                         <td>{{ tarifcategorieclt.montant | number_format(0,0,' ')}}</td>
 
 
@@ -61,10 +60,6 @@
                                 <i class="fa fa-edit tm-product-delete-icon"></i>
                             </a>
                         </td>
-                    </tr>
-                {% else %}
-                    <tr>
-                        <td colspan="14">no records found</td>
                     </tr>
                 {% endfor %}
                 </tbody>

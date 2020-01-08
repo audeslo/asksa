@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Capacite;
 use App\Entity\Tarifcategorieclt;
 use App\Entity\Produit;
 use App\Entity\Categorie;
@@ -56,10 +57,11 @@ class TarifcategoriecltType extends AbstractType
                          'placeholder' => 'Sélectionnez un produit',
             ])
 
-            ->add('litre', IntegerType::class, [
+            ->add('capacite', EntityType::class, [
+                'class' => Capacite::class,
                 'label' => 'Capacité du bidon',
+                'choice_label' => 'code',
                 'required'  => false,
-                'attr'      =>['placeholder'    =>  'Saisissez la quantite']
             ])
         ;
     }

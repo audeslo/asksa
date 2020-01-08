@@ -87,10 +87,16 @@ class Capacite
      */
     private $commanders;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tarifcategorieclt", mappedBy="capacite")
+     */
+    private $tarifcategorieclts;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->commanders = new ArrayCollection();
+        $this->tarifcategorieclts = new ArrayCollection();
     }
 
     /**
@@ -293,6 +299,37 @@ class Capacite
             // set the owning side to null (unless already changed)
             if ($commander->getCapacite() === $this) {
                 $commander->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tarifcategorieclt[]
+     */
+    public function getTarifcategorieclts(): Collection
+    {
+        return $this->tarifcategorieclts;
+    }
+
+    public function addTarifcategorieclt(Tarifcategorieclt $tarifcategorieclt): self
+    {
+        if (!$this->tarifcategorieclts->contains($tarifcategorieclt)) {
+            $this->tarifcategorieclts[] = $tarifcategorieclt;
+            $tarifcategorieclt->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarifcategorieclt(Tarifcategorieclt $tarifcategorieclt): self
+    {
+        if ($this->tarifcategorieclts->contains($tarifcategorieclt)) {
+            $this->tarifcategorieclts->removeElement($tarifcategorieclt);
+            // set the owning side to null (unless already changed)
+            if ($tarifcategorieclt->getCapacite() === $this) {
+                $tarifcategorieclt->setCapacite(null);
             }
         }
 
