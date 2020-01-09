@@ -49,14 +49,20 @@ class VenteshowroomController extends AbstractController
             $produits[$produit['designation']]=$produit['id'];
         }
 
+        // recuperer les capacité disponible en stock du showroom de l'utilisateur connecté
+        $listCapacites=$entityManager->getRepository('App:Stockshowroom')
+                                ->findAvailableCapacite($this->getUser()->getId());
+        $capacites=[];
+        foreach ($listCapacites as $key => $capacite){
+            $capacites[$capacite['code']]=$capacite['id'];
+        }
 
         // recuperer les bidons et  cartons disponible
-        $bidon=[2 => 2];
 
         $venteshowroom = new Venteshowroom();
 
         $form = $this->createForm(VenteshowroomType::class, $venteshowroom,array(
-            'bidon'     => $bidon,
+            'capacite'     => $capacites,
             'produits'  => $produits
         ));
         $form->handleRequest($request);

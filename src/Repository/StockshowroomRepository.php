@@ -52,6 +52,27 @@ class StockshowroomRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+    public function findAvailableCapacite($iduse)
+    {
+        return $this->createQueryBuilder('s')
+            ->select('cp.code, cp.id')
+            ->distinct(true)
+            ->join('s.Commandershow','cs')
+            ->join('s.capacite','cp')
+            ->join('cs.produit','p')
+            ->join('cs.commandeshow','c')
+            ->join('c.showroom','sh')
+            ->join('sh.users','us')
+            ->where('s.vendu = ?1')
+            ->andWhere('us.id = ?2')
+            ->setParameter(1,false)
+            ->setParameter(2,$iduse)
+            ->orderBy('cp.code', 'ASC')
+            //->setMaxResults(8)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 
     // /**
     //  * @return Stockshowroom[] Returns an array of Stockshowroom objects

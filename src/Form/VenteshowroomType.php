@@ -30,18 +30,13 @@ class VenteshowroomType extends AbstractType
         'attr'      =>['placeholder'    =>  'Saisissez la date de commande']
     ))
 
-            ->add('quantitecarton',ChoiceType::class,array(
-            'label'     => 'Capacite carton :',
-            'choices'   => $options['carton'],
-            'required'  => true,
 
-    ))
             ->add('capacitebidon',ChoiceType::class,array(
-            'label'     => 'Capacité bidon:',
-        'choices'      => $options['bidon'],
-        'required'  => true,
-        'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
-    ))
+            'label'     => 'Capacité:',
+            'choices'      => $options['capacite'],
+            'required'  => true,
+            'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
+                 ))
             ->add('modereglement', ChoiceType::class, array(
                 'choices'     =>['Par espèce' => '1',
                                  'Par chèque' => '2',
@@ -101,8 +96,7 @@ class VenteshowroomType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Venteshowroom::class,
-            'bidon'     => null,
-            'carton'    => null,
+            'capacite'     => null,
             'produits'    => null
         ]);
     }
