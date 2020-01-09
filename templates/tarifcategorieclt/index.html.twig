@@ -28,30 +28,27 @@
 
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
-                <tr>
-                    {# <th>Id</th>#}
-                    <th>Catégorie</th>
-                    <th>Désignation</th>
-                    <th>Intervalle</th>
-                    <th>Capacité</th>
-                    <th>Montant</th>
-
+                    <tr>
+                        {# <th>Id</th>#}
+                        <th>Catégorie</th>
+                        <th>Désignation</th>
+                        <th>Intervalle</th>
+                        <th>Capacité</th>
+                        <th>Montant</th>
+                        <th ></th>
+                        <th ></th>
+                    </tr>
+                </thead>
+                <tbody>
                 {% for tarifcategorieclt in tarifcategorieclts %}
                     <tr>
 
                         <td>{{ tarifcategorieclt.categorie }}</td>
                         <td>{{ tarifcategorieclt.produit.designation }}</td>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
                         <td>De {{ tarifcategorieclt.borneinferieure | number_format(0,0,' ')}} À
                             {{ tarifcategorieclt.bornesupperieur | number_format(0,0,' ')}}</td>
                         <td>{{ tarifcategorieclt.capacite.code }}</td>
                         <td>{{ tarifcategorieclt.montant | number_format(0,0,' ')}}</td>
-
-
                         <td>
                             {% include('tarifcategorieclt/viewmodal.html.twig') %}
                         </td>

@@ -49,10 +49,9 @@ class VenteshowroomController extends AbstractController
             $produits[$produit['designation']]=$produit['id'];
         }
 
+
         // recuperer les bidons et  cartons disponible
-
         $bidon=[2 => 2];
-
 
         $venteshowroom = new Venteshowroom();
 

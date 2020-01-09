@@ -41,7 +41,6 @@
                     <th>Qté commandée</th>
 {#                    <th>Bidon/carton</th>#}
                     <th>Capacité</th>
-                    <th>Etat</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -58,7 +57,6 @@
 
                         <td>{{ commander.capacite.code }}</td>
 
-                        <td>{{ commander.etat }}</td>
 
 
                         {#  <td>
@@ -76,11 +74,13 @@
             <div class="row">
 
                 <div class="col-md-2 offset-9">
-                    {% if commande.etat == 0 %}
-                        <a class="btn btn-danger col-md-3" href="{{path('commande_approuver',{'id':commande.id})}}"  > Approuver
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
+                   {% if commanders %}
+                       {% if commande.etat == 0 %}
+                           <a class="btn btn-danger col-md-3" href="{{path('commande_approuver',{'id':commande.id})}}"  > Approuver
+                               <i class="fa fa-chevron-right"></i>
+                           </a>
 
+                       {% endif %}
                     {% endif %}
 
                 </div>

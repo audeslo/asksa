@@ -81,6 +81,11 @@ class Stockshowroom
     private $sync=0;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Capacite", inversedBy="stockshowrooms")
+     */
+    private $capacite;
+
+    /**
      * @ORM\PrePersist()
      */
     public function datecreated()
@@ -242,6 +247,18 @@ class Stockshowroom
     public function setSync(bool $sync): self
     {
         $this->sync = $sync;
+
+        return $this;
+    }
+
+    public function getCapacite(): ?Capacite
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?Capacite $capacite): self
+    {
+        $this->capacite = $capacite;
 
         return $this;
     }

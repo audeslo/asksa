@@ -92,11 +92,23 @@ class Capacite
      */
     private $tarifcategorieclts;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Stockshowroom", mappedBy="capacite")
+     */
+    private $stockshowrooms;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\VenteStock", mappedBy="capacite")
+     */
+    private $venteStocks;
+
     public function __construct()
     {
         $this->produits = new ArrayCollection();
         $this->commanders = new ArrayCollection();
         $this->tarifcategorieclts = new ArrayCollection();
+        $this->stockshowrooms = new ArrayCollection();
+        $this->venteStocks = new ArrayCollection();
     }
 
     /**
@@ -335,4 +347,67 @@ class Capacite
 
         return $this;
     }
+
+    /**
+     * @return Collection|Stockshowroom[]
+     */
+    public function getStockshowrooms(): Collection
+    {
+        return $this->stockshowrooms;
+    }
+
+    public function addStockshowroom(Stockshowroom $stockshowroom): self
+    {
+        if (!$this->stockshowrooms->contains($stockshowroom)) {
+            $this->stockshowrooms[] = $stockshowroom;
+            $stockshowroom->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockshowroom(Stockshowroom $stockshowroom): self
+    {
+        if ($this->stockshowrooms->contains($stockshowroom)) {
+            $this->stockshowrooms->removeElement($stockshowroom);
+            // set the owning side to null (unless already changed)
+            if ($stockshowroom->getCapacite() === $this) {
+                $stockshowroom->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|VenteStock[]
+     */
+    public function getVenteStocks(): Collection
+    {
+        return $this->venteStocks;
+    }
+
+    public function addVenteStock(VenteStock $venteStock): self
+    {
+        if (!$this->venteStocks->contains($venteStock)) {
+            $this->venteStocks[] = $venteStock;
+            $venteStock->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVenteStock(VenteStock $venteStock): self
+    {
+        if ($this->venteStocks->contains($venteStock)) {
+            $this->venteStocks->removeElement($venteStock);
+            // set the owning side to null (unless already changed)
+            if ($venteStock->getCapacite() === $this) {
+                $venteStock->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

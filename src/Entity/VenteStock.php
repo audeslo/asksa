@@ -18,7 +18,7 @@ class VenteStock
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
     private $contenant;
 
@@ -57,6 +57,13 @@ class VenteStock
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $createdBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Capacite", inversedBy="venteStocks")
+     */
+    private $capacite;
+
+
 
     /**
      * @ORM\PrePersist()
@@ -166,4 +173,18 @@ class VenteStock
 
         return $this;
     }
+
+    public function getCapacite(): ?Capacite
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?Capacite $capacite): self
+    {
+        $this->capacite = $capacite;
+
+        return $this;
+    }
+
+
 }
