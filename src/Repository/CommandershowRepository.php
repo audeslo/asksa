@@ -24,6 +24,7 @@ class CommandershowRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->join('c.produit','p')
             ->join('c.commandeshow','sh')
+            ->join('c.capacite','cp')
             ->andWhere('sh.id = ?1')
             ->setParameter(1, $value)
             ->orderBy('c.id', 'ASC')

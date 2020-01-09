@@ -26,20 +26,20 @@ class CommanderRepository extends ServiceEntityRepository
      * @param $carton
      * @param $bidon
      * @return mixed
+     * @throws \Doctrine\ORM\NoResultException
      */
-    public function findQuantityInStock($produit, $carton, $bidon)
+    public function findQuantityInStock($produit, $capacite)
     {
         try {
             return $this->createQueryBuilder('c')
                 ->select('SUM(c.quantiteenstock) AS quantite')
+                ->join('c.commande','cm')
                 ->Where('c.produit =?1')
-                ->andWhere('c.capacitebidon =?2')
-                ->andWhere('c.capacitecarton =?3')
-                ->andWhere('c.etat =?4')
+                ->andWhere('c.capacite =?2')
+                ->andWhere('cm.etat =?3')
                 ->setParameter(1, $produit)
-                ->setParameter(2, $bidon)
-                ->setParameter(3, $carton)
-                ->setParameter(4, 2)
+                ->setParameter(2, $capacite)
+                ->setParameter(3, 2)
                 ->getQuery()
                 ->getSingleScalarResult();
         } catch (NonUniqueResultException $e) {
@@ -47,19 +47,18 @@ class CommanderRepository extends ServiceEntityRepository
     }
 
 
-    public function findListCommanderDispo($produit, $carton, $bidon)
+    public function findListCommanderDispo($produit, $capacite)
     {
         return $this->createQueryBuilder('c')
+            ->join('c.commande','cm')
             ->Where('c.produit =?1')
-            ->andWhere('c.capacitebidon =?2')
-            ->andWhere('c.capacitecarton =?3')
-            ->andWhere('c.quantiteenstock >?4')
-            ->andWhere('c.etat =?5')
+            ->andWhere('c.capacite =?2')
+            ->andWhere('c.quantiteenstock >?3')
+            ->andWhere('cm.etat =?4')
             ->setParameter(1, $produit)
-            ->setParameter(2, $bidon)
-            ->setParameter(3, $carton)
-            ->setParameter(4, 0)
-            ->setParameter(5, 2)
+            ->setParameter(2, $capacite)
+            ->setParameter(3, 0)
+            ->setParameter(4, 2)
             ->getQuery()
             ->getResult()
             ;
@@ -88,6 +87,7 @@ class CommanderRepository extends ServiceEntityRepository
             ->getResult()
             ;
     }
+
 
 
 

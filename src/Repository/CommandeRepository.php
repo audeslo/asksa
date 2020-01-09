@@ -60,6 +60,19 @@ class CommandeRepository extends ServiceEntityRepository
             ;
     }
 
+    public function modifierEtatCommande($commande, $valeur)
+    {
+        return $this->createQueryBuilder('c')
+            ->update()
+            ->set('c.etat','?1')
+            ->andWhere('c.id =?2')
+            ->setParameter(1, $valeur)
+            ->setParameter(2, $commande)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Commande[] Returns an array of Commande objects
     //  */

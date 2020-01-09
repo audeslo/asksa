@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+use App\Entity\Capacite;
 use App\Entity\Produit;
 use phpDocumentor\Reflection\Type;
+use phpDocumentor\Reflection\Types\Collection;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -45,15 +48,18 @@ class ProduitType extends AbstractType
                 'label' => 'Prix de vente conseillé :',
                 'required' => false,
                 'attr'   =>['placeholder'  =>   'Saisissez le prix de vente conseille']
-    ))
-/*<<<<<<< HEAD
-=======
-
->>>>>>> cccffef21ab05015167d3fea9954872b3e053207*/
+                ))
 
             ->add('stockalerte', IntegerType::class, array(
                 'label'     => 'Stock d\'alerte :',
                 'required'  => false,
+
+            ))
+            ->add('capacite', EntityType::class, array(
+                'label'     => 'Capacités',
+                'class'     => Capacite::class,
+                'multiple'  => true,
+                'expanded'  => false,
 
             ))
             /*->add('editedById')

@@ -92,6 +92,11 @@ class Commandershow
      */
     private $produit;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Capacite", cascade={"persist", "remove"})
+     */
+    private $capacite;
+
     public function __construct()
     {
         $this->stockshowrooms = new ArrayCollection();
@@ -294,6 +299,18 @@ class Commandershow
     public function setProduit(?Produit $produit): self
     {
         $this->produit = $produit;
+
+        return $this;
+    }
+
+    public function getCapacite(): ?Capacite
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?Capacite $capacite): self
+    {
+        $this->capacite = $capacite;
 
         return $this;
     }

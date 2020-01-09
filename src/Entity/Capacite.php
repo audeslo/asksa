@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -74,6 +76,40 @@ class Capacite
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $editedBy;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Produit", mappedBy="capacite")
+     */
+    private $produits;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Commander", mappedBy="capacite")
+     */
+    private $commanders;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tarifcategorieclt", mappedBy="capacite")
+     */
+    private $tarifcategorieclts;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Stockshowroom", mappedBy="capacite")
+     */
+    private $stockshowrooms;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\VenteStock", mappedBy="capacite")
+     */
+    private $venteStocks;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+        $this->commanders = new ArrayCollection();
+        $this->tarifcategorieclts = new ArrayCollection();
+        $this->stockshowrooms = new ArrayCollection();
+        $this->venteStocks = new ArrayCollection();
+    }
 
     /**
      * @ORM\PrePersist()
@@ -221,4 +257,157 @@ class Capacite
 
         return $this;
     }
+
+    /**
+     * @return Collection|Produit[]
+     */
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->produits->contains($produit)) {
+            $this->produits[] = $produit;
+            $produit->addCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->produits->contains($produit)) {
+            $this->produits->removeElement($produit);
+            $produit->removeCapacite($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Commander[]
+     */
+    public function getCommanders(): Collection
+    {
+        return $this->commanders;
+    }
+
+    public function addCommander(Commander $commander): self
+    {
+        if (!$this->commanders->contains($commander)) {
+            $this->commanders[] = $commander;
+            $commander->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommander(Commander $commander): self
+    {
+        if ($this->commanders->contains($commander)) {
+            $this->commanders->removeElement($commander);
+            // set the owning side to null (unless already changed)
+            if ($commander->getCapacite() === $this) {
+                $commander->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tarifcategorieclt[]
+     */
+    public function getTarifcategorieclts(): Collection
+    {
+        return $this->tarifcategorieclts;
+    }
+
+    public function addTarifcategorieclt(Tarifcategorieclt $tarifcategorieclt): self
+    {
+        if (!$this->tarifcategorieclts->contains($tarifcategorieclt)) {
+            $this->tarifcategorieclts[] = $tarifcategorieclt;
+            $tarifcategorieclt->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarifcategorieclt(Tarifcategorieclt $tarifcategorieclt): self
+    {
+        if ($this->tarifcategorieclts->contains($tarifcategorieclt)) {
+            $this->tarifcategorieclts->removeElement($tarifcategorieclt);
+            // set the owning side to null (unless already changed)
+            if ($tarifcategorieclt->getCapacite() === $this) {
+                $tarifcategorieclt->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stockshowroom[]
+     */
+    public function getStockshowrooms(): Collection
+    {
+        return $this->stockshowrooms;
+    }
+
+    public function addStockshowroom(Stockshowroom $stockshowroom): self
+    {
+        if (!$this->stockshowrooms->contains($stockshowroom)) {
+            $this->stockshowrooms[] = $stockshowroom;
+            $stockshowroom->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStockshowroom(Stockshowroom $stockshowroom): self
+    {
+        if ($this->stockshowrooms->contains($stockshowroom)) {
+            $this->stockshowrooms->removeElement($stockshowroom);
+            // set the owning side to null (unless already changed)
+            if ($stockshowroom->getCapacite() === $this) {
+                $stockshowroom->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|VenteStock[]
+     */
+    public function getVenteStocks(): Collection
+    {
+        return $this->venteStocks;
+    }
+
+    public function addVenteStock(VenteStock $venteStock): self
+    {
+        if (!$this->venteStocks->contains($venteStock)) {
+            $this->venteStocks[] = $venteStock;
+            $venteStock->setCapacite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVenteStock(VenteStock $venteStock): self
+    {
+        if ($this->venteStocks->contains($venteStock)) {
+            $this->venteStocks->removeElement($venteStock);
+            // set the owning side to null (unless already changed)
+            if ($venteStock->getCapacite() === $this) {
+                $venteStock->setCapacite(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

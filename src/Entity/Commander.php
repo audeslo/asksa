@@ -41,14 +41,14 @@ class Commander
     private $quantitecommandee;
 
     /**
-     * @ORM\Column(type="integer")
-     *  @Assert\NotBlank(message="Veuillez saisir la capacité du bidon !")
+     * @ORM\Column(type="integer", nullable=true)
+     *
      */
     private $capacitebidon;
 
     /**
-     * @ORM\Column(type="integer")
-     *  @Assert\NotBlank(message="Veuillez saisir la capacité du carton !")
+     * @ORM\Column(type="integer", nullable=true)
+     *
      */
     private $capacitecarton;
 
@@ -92,11 +92,15 @@ class Commander
     private $createdBy;
 
     /**
-
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
-
      */
     private $editedBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Capacite", inversedBy="commanders")
+     * @Assert\NotBlank(message="Veuillez saisir la capacité !")
+     */
+    private $capacite;
 
     public function __construct()
     {
@@ -289,6 +293,18 @@ class Commander
     {
         return $this->produit.'/'.$this->capacitecarton.'/'.$this->capacitebidon;
         // TODO: Implement __toString() method.
+    }
+
+    public function getCapacite(): ?Capacite
+    {
+        return $this->capacite;
+    }
+
+    public function setCapacite(?Capacite $capacite): self
+    {
+        $this->capacite = $capacite;
+
+        return $this;
     }
 
 

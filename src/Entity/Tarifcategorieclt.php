@@ -5,12 +5,14 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TarifcategoriecltRepository")
  * @ORM\HasLifecycleCallbacks()
- *
+ *@UniqueEntity(fields={"categorie","borneinferieure","bornesupperieur"}, message="cet intervalle existe déjà")
  */
 class Tarifcategorieclt
 {
@@ -59,10 +61,6 @@ class Tarifcategorieclt
      */
     private $produit;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $litre;
 
     /**
      * @ORM\Column(type="datetime")
@@ -75,7 +73,13 @@ class Tarifcategorieclt
     private $createdBy;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="tarifcategorieclt")
+     * @ORM\Column(type="string", length=255, nullable=false)
+     * @Gedmo\Slug(fields={"borneinferieure","bornesupperieur"})
+     */
+    private $slug;
+
+    /**
+     *
      */
     private $users;
 
@@ -94,6 +98,11 @@ class Tarifcategorieclt
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $editedBy;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Capacite", inversedBy="tarifcategorieclts")
+     */
+    private $capacite;
 
     /**
      * @ORM\PrePersist()
@@ -188,18 +197,6 @@ class Tarifcategorieclt
         return $this;
     }
 
-    public function getLitre(): ?string
-    {
-        return $this->litre;
-    }
-
-    public function setLitre(string $litre): self
-    {
-        $this->litre = $litre;
-
-        return $this;
-    }
-
     public function getCreatedOn(): ?\DateTimeInterface
     {
         return $this->createdOn;
@@ -248,34 +245,29 @@ class Tarifcategorieclt
         return $this;
     }
 
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
+    public function getCapacite(): ?Capacite
     {
-        return $this->users;
+        return $this->capacite;
     }
 
-    public function addUser(User $user): self
+    public function setCapacite(?Capacite $capacite): self
     {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setTarifcategorieclt($this);
-        }
+        $this->capacite = $capacite;
 
         return $this;
     }
 
-    public function removeUser(User $user): self
+    public function getSlug(): ?string
     {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            // set the owning side to null (unless already changed)
-            if ($user->getTarifcategorieclt() === $this) {
-                $user->setTarifcategorieclt(null);
-            }
-        }
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
+
+
 }

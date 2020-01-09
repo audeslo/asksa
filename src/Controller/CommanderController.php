@@ -48,7 +48,8 @@ class CommanderController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()
+                                    ->getManager();
             $commande= $entityManager->getRepository('App:Commande')->find($commande->getId());
             $commander->setCommande($commande);
             $commander->setQuantiteenstock($form['quantitecommandee']->getData());
@@ -59,8 +60,13 @@ class CommanderController extends AbstractController
 
             //refernce commande
             $refcommande=$commande->getReference();
+            // on récupère la capacité afin d'utiliser le code
+            $capacite=$entityManager->getRepository('App:Capacite')->find($form['capacite']->getData());
 
-            $commander->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'B-'.$form['capacitebidon']->getData().'L');
+            $commander->setCapacitecarton($capacite->getCapacitecarton());
+            $commander->setCapacitebidon($capacite->getCapacitebidon());
+            $commander->setSousreference($refcommande.'/'.$refproduit.'-'.$capacite->getCode());
+            //$commander->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'B-'.$form['capacitebidon']->getData().'L');
             $commander->setCreatedBy($this->getUser());
             $entityManager->persist($commander);
             $entityManager->flush();
@@ -90,10 +96,30 @@ class CommanderController extends AbstractController
      */
     public function edit(Request $request, Commander $commander): Response
     {
+        $commande=$this->get('session')->get('commande');
         $form = $this->createForm(CommanderType::class, $commander);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()
+                ->getManager();
+            $commande= $entityManager->getRepository('App:Commande')->find($commande->getId());
+            $commander->setCommande($commande);
+            $commander->setQuantiteenstock($form['quantitecommandee']->getData());
+
+            // Récupération de la reférence produit
+            $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
+            $refproduit=$produit->getReference();
+
+            //refernce commande
+            $refcommande=$commande->getReference();
+            // on récupère la capacité afin d'utiliser le code
+            $capacite=$entityManager->getRepository('App:Capacite')->find($form['capacite']->getData());
+
+            $commander->setCapacitecarton($capacite->getCapacitecarton());
+            $commander->setCapacitebidon($capacite->getCapacitebidon());
+            $commander->setSousreference($refcommande.'/'.$refproduit.'-'.$capacite->getCode());
+            //$commander->setSousreference($refcommande.'/'.$refproduit.'-'.$form['capacitecarton']->getData().'B-'.$form['capacitebidon']->getData().'L');
             $commander->setEditedBy($this->getUser());
             $this->getDoctrine()->getManager()->flush();
 
@@ -105,6 +131,21 @@ class CommanderController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    /**
+     * @Route("/{id}/commande-approuver", name="commande_approuver", methods={"GET","POST"})
+     */
+    public function approuver(Request $request, Commande $commande): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+
+        $query=$em->getRepository('App:Commande')->modifierEtatCommande($commande->getId(),2);
+
+        return $this->redirectToRoute('commander_index',['slug' => $commande->getSlug()]);
+    }
+
+
 
     /**
      * @Route("/{id}", name="commander_delete", methods={"DELETE"})

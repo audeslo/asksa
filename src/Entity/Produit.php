@@ -139,6 +139,11 @@ class Produit
      */
     private $commandershows;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Capacite", inversedBy="produits")
+     */
+    private $capacite;
+
 
 
     public function __construct()
@@ -147,6 +152,7 @@ class Produit
         $this->commanders = new ArrayCollection();
         $this->venteStocks = new ArrayCollection();
         $this->commandershows = new ArrayCollection();
+        $this->capacite = new ArrayCollection();
     }
 
 
@@ -449,6 +455,32 @@ class Produit
             if ($commandershow->getProduit() === $this) {
                 $commandershow->setProduit(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Capacite[]
+     */
+    public function getCapacite(): Collection
+    {
+        return $this->capacite;
+    }
+
+    public function addCapacite(Capacite $capacite): self
+    {
+        if (!$this->capacite->contains($capacite)) {
+            $this->capacite[] = $capacite;
+        }
+
+        return $this;
+    }
+
+    public function removeCapacite(Capacite $capacite): self
+    {
+        if ($this->capacite->contains($capacite)) {
+            $this->capacite->removeElement($capacite);
         }
 
         return $this;

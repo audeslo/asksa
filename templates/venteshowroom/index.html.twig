@@ -6,76 +6,73 @@
     {# <h1>Liste des fournisseurs</h1>#}
 
 <div class="card mb-3">
-    <div class="card-header">
-        <h2>
-            <i class="fa fa-table" ></i>
-            Ventes</h2></div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-2">
-                <a href="{{ path('venteshowroom_new') }}" class="btn btn-primary ">
-                    <i class="fa fa-chevron-right"></i>
-                    Nouveau
-                </a>
-            </div>
-
-            <div class="offset-8 col-md-2 ">
-{#                col-md-offset-4 col-md-2#}
-                <a href="#{#{{ path('venteshowroom_pointjournalier') }}#}" class="btn btn-success ">
-                    <i class="fa fa-print"></i>
-                    Imprimer
-                </a>
-            </div>
+        <div class="card-header">
+            <h2>
+                <i class="fa fa-table" ></i>
+                Ventes</h2>
         </div>
-        <hr>
-
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-               {# <th>Id</th>#}
-                <th>Bordereaux livraison</th>
-                <th>Date de vente</th>
-                <th>Client</th>
-
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for venteshowroom in venteshowrooms %}
-            <tr>
-                {#<td>{{ fournisseur.id }}</td>#}
-                <td><a href="{{ path('venteshowroom_add', {'slug': venteshowroom.slug}) }}">{{ venteshowroom.reference }}</a></td>
-                <td>{{ venteshowroom.datevente |date('d-m-Y ')}}</td>
-                <td>{{ venteshowroom.client }}</td>
-
-
-               <td>
-                   {% include('venteshowroom/viewmodal.html.twig') %}
-
-               </td>
-                <td>
-
-                   <a class="" href="{{ path('venteshowroom_show', {'slug': venteshowroom.slug}) }}">
-                        <i class="fa fa-edit tm-product-delete-icon"></i>
+    <div class="card-body">
+            <div class="row">
+                <div class="col-md-2">
+                    <a href="{{ path('venteshowroom_new') }}" class="btn btn-primary ">
+                        <i class="fa fa-chevron-right"></i>
+                        Nouveau
                     </a>
-                   {# <a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+                </div>
 
-                    <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
-                        <i class="fa fa-edit tm-product-delete-icon"></i>
-                    </a>#}
-                </td>
-                  </tr>
-                  {% else %}
+                <div class="offset-8 col-md-2 ">
+    {#                col-md-offset-4 col-md-2#}
+                    <a href="#{#{{ path('venteshowroom_pointjournalier') }}#}" class="btn btn-success ">
+                        <i class="fa fa-print"></i>
+                        Imprimer
+                    </a>
+                </div>
+            </div>
+            <hr>
+
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
                 <tr>
-                      <td colspan="14">no records found</td>
-                        </tr>
-                  {% endfor %}
-                     </tbody>
-                    </table>
-            {#    <a href="{{ path('fournisseur_new') }}" class="btn btn-primary btn-sm">
-                    <i class="fa fa-chevron-right"></i>Create new</a> #}
+                   {# <th>Id</th>#}
+                    <th>Bordereaux livraison</th>
+                    <th>Date de vente</th>
+                    <th>Client</th>
 
-               </div>
-       </div>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for venteshowroom in venteshowrooms %}
+                <tr>
+                    {#<td>{{ fournisseur.id }}</td>#}
+                    <td><a href="{{ path('venteshowroom_add', {'slug': venteshowroom.slug}) }}">{{ venteshowroom.reference }}</a></td>
+                    <td>{{ venteshowroom.datevente |date('d-m-Y ')}}</td>
+                    <td>{{ venteshowroom.client }}</td>
+
+
+                   <td>
+                       {% include('venteshowroom/viewmodal.html.twig') %}
+
+                   </td>
+                    <td>
+
+                       <a class="" href="{{ path('venteshowroom_show', {'slug': venteshowroom.slug}) }}">
+                            <i class="fa fa-edit tm-product-delete-icon"></i>
+                        </a>
+                       {# <a href="{{ path('fournisseur_edit', {'id': fournisseur.id}) }}">edit</a>
+
+                        <a  class="" href="{{ path('client_show', {'slug': client.slug}) }}">
+                            <i class="fa fa-edit tm-product-delete-icon"></i>
+                        </a>#}
+                    </td>
+                      </tr>
+
+            {% endfor %}
+                         </tbody>
+                        </table>
+                {#    <a href="{{ path('fournisseur_new') }}" class="btn btn-primary btn-sm">
+                        <i class="fa fa-chevron-right"></i>Create new</a> #}
+    </div>
+</div>
 {% endblock %}

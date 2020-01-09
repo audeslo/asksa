@@ -11,12 +11,17 @@
                 Liste des produits: {{ commande.intitule }}</h2></div>
         <div class="card-body">
             <div class="row">
-                <div class="col-md-2">
-                    <a href="{{ path('commander_new') }}" class="btn btn-primary ">
-                        <i class="fa fa-chevron-right"></i>
-                      Ajouter
-                    </a>
-                </div>
+
+                {% if commande.etat != 2 %}
+                    <div class="col-md-2">
+                        <a href="{{ path('commander_new') }}" class="btn btn-primary ">
+                            <i class="fa fa-chevron-right"></i>
+                            Ajouter
+                        </a>
+                    </div>
+
+                {% endif %}
+
 
                 <div class="offset-8 col-md-2 ">
                     <a href="#" class="btn btn-success ">
@@ -32,12 +37,10 @@
                 <thead>
                 <tr>
 
-                    {#<th>commande</th>#}
                     <th>Produit</th>
                     <th>Qté commandée</th>
-                    <th>Bidon/carton</th>
-                    <th>Qté bidon/Litre</th>
-                    <th>Etat</th>
+{#                    <th>Bidon/carton</th>#}
+                    <th>Capacité</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -46,17 +49,14 @@
                 {% for commander in commanders %}
                     <tr>
 
-                       {# <td>{{ commander.id }}</td>
-#}
                         <td> {{commander.produit }}</a></td>
 
                         <td>{{ commander.quantitecommandee}}</td>
 
-                        <td>{{ commander.capacitecarton }}</td>
+{#                        <td>{{ commander.capacitecarton }}</td>#}
 
-                        <td>{{ commander.capacitebidon }}</td>
+                        <td>{{ commander.capacite.code }}</td>
 
-                        <td>{{ commander.etat }}</td>
 
 
                         {#  <td>
@@ -71,6 +71,20 @@
                 {% endfor %}
                 </tbody>
             </table>
+            <div class="row">
+
+                <div class="col-md-2 offset-9">
+                   {% if commanders %}
+                       {% if commande.etat == 0 %}
+                           <a class="btn btn-danger col-md-3" href="{{path('commande_approuver',{'id':commande.id})}}"  > Approuver
+                               <i class="fa fa-chevron-right"></i>
+                           </a>
+
+                       {% endif %}
+                    {% endif %}
+
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-2">

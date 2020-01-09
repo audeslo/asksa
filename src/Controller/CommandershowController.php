@@ -55,10 +55,17 @@ class CommandershowController extends AbstractController
            $produit=$entityManager->getRepository('App:Produit')->find($form['produit']->getData());
            $refproduit=$produit->getReference();
 
+            // Récupération de la capacité
+           $capacite=$entityManager->getRepository('App:Capacite')->find($form['capacite']->getData());
+
+
             //refernce commande
             $refcommandeshow=$commandeshow->getReference();
 
-            $commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$form['capacitecartonshow']->getData().'C-'.$form['capacitebidonshow']->getData().'B');
+            $commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$capacite->getCode());
+            $commandershow->setCapacitecartonshow($capacite->getCapacitecarton());
+            $commandershow->setCapacitebidonshow($capacite->getCapacitebidon());
+            //$commandershow->setreference($refcommandeshow.'/'.$refproduit.'-'.$form['capacitecartonshow']->getData().'C-'.$form['capacitebidonshow']->getData().'B');
 
             $commandershow->setCreatedBy($this->getUser());
             $entityManager->persist($commandershow);
@@ -125,6 +132,7 @@ class CommandershowController extends AbstractController
      * @param Request $request
      * @param Commandeshow $commandeshow
      * @return Response
+     * @throws \Doctrine\ORM\NoResultException
      */
     public function approvisionnement_showroom(Request $request, Commandeshow $commandeshow): Response
     {
@@ -133,25 +141,27 @@ class CommandershowController extends AbstractController
         // Recuperer tous les produits (commandershow) contenus sur la commande showroom
         $commandershows=$em->getRepository('App:Commandershow')
                             ->findAllProducts($commandeshow->getId());
+
         foreach ($commandershows as $key => $commandershow) {
             // recuperer la quantité disponible de chaque produit (en entier, cast)
             $quantiteStock= (int)$em->getRepository('App:Commander')
                 ->findQuantityInStock($commandershow->getProduit()->getId(),
-                    $commandershow->getCapacitecartonshow(),
-                    $commandershow->getCapacitebidonshow());
+                    $commandershow->getCapacite()->getId());
 
                 // comparaison de la quantite commandée et celle disponible
            if ($quantiteStock < (int) $commandershow->getQuantitecommandeshow()) {
               // si un des produit est en quantité insuffisante ou inexistant, le traitement s'arrête
                $request->getSession()->getFlashBag()->add('danger',
                    'Le produit ' . $commandershow->getProduit()->getDesignation() . ' de carton de ' .
-                   $commandershow->getCapacitecartonshow() . ' et de ' . $commandershow->getCapacitebidonshow() .
-                   ' L par bidon n\'existe pas ou est en quantité insuffisante');
+                   $commandershow->getCapacite()->getCapacitecarton(). ' et de ' .
+                   $commandershow->getCapacite()->getCapacitebidon() .' L par bidon ('.$commandershow->getCapacite().') '.
+                   '  n\'existe pas ou est en quantité insuffisante');
 
                return $this->redirectToRoute('commandershow_index', ['slug'
                => $commandershow->getCommandeshow()->getSlug()]);
            }
         }
+
 
         // tous les produit étant disponible, le traitement passe à la validation
 
@@ -159,13 +169,12 @@ class CommandershowController extends AbstractController
             $quantiteCommandee= (int) $commandershow->getQuantitecommandeshow();
 
             // recuperer tous les commandes de au magazin dont la quantité en stock est >0
+            $capacite=$em->getRepository('App:Capacite')->find($commandershow->getCapacite()->getId());
 
 
             $commanders=$em->getRepository('App:Commander')
                 ->findListCommanderDispo($commandershow->getProduit()->getId(),
-                    $commandershow->getCapacitecartonshow(),
-                    $commandershow->getCapacitebidonshow());
-
+                    $commandershow->getCapacite()->getId());
 
             // Parcour de chaque commande
             foreach ($commanders as $commander ){
@@ -189,7 +198,7 @@ class CommandershowController extends AbstractController
             // on continue l'enregistrement dans le stock de sow room
 
             for ($i=0; $i<$quantiteCommandee; $i++){// Enregistrement carton
-                  $nbrebidon = (int) $commandershow->getCapacitecartonshow();
+                  $nbrebidon = (int) $commandershow->getCapacite()->getCapacitecarton();
 
                   // Enregistrement de chaque Bidon
                   for ($cpt=0; $cpt<$nbrebidon; $cpt++){
@@ -201,6 +210,7 @@ class CommandershowController extends AbstractController
                                     ->getReference().'/'.($i+1).'-'.($cpt+1));
                       $stockshowroom->setOuvert(false);
                       $stockshowroom->setVendu(false);
+                      $stockshowroom->setCapacite($capacite);
                       $stockshowroom->setPrixdevente(0);
 
                       // Persistence
