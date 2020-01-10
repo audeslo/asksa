@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Client;
-
-use App\Entity\Produit;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use App\Entity\Venteshowroom;
@@ -25,18 +23,18 @@ class VenteshowroomType extends AbstractType
         $builder
           /*  ->add('reference')*/
             ->add('datevente',DateType::class,array(
-        'label' => 'Date de facture',
-        'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez la date de commande']
-    ))
+                'label' => 'Date de facture',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez la date de commande']
+            ))
 
 
             ->add('capacitebidon',ChoiceType::class,array(
-            'label'     => 'Capacité:',
-            'choices'      => $options['capacite'],
-            'required'  => true,
-            'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
-                 ))
+                'label'     => 'Capacité:',
+                'choices'      => $options['capacite'],
+                'required'  => true,
+                'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
+            ))
             ->add('modereglement', ChoiceType::class, array(
                 'choices'     =>['Par espèce' => '1',
                                  'Par chèque' => '2',
@@ -57,10 +55,10 @@ class VenteshowroomType extends AbstractType
             ))
 
             ->add('quantiteachete',IntegerType::class,array(
-        'label'     => 'Quantité a acheté :',
-        'required'  => false,
-        'attr'      =>['placeholder'    =>  'Saisissez la quantité']
-    ))
+                'label'     => 'Quantité a acheté :',
+                'required'  => false,
+                'attr'      =>['placeholder'    =>  'Saisissez la quantité']
+            ))
 
             ->add('produit',ChoiceType::class, [
                     'required' =>   true,

@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TarifcategoriecltRepository")
  * @ORM\HasLifecycleCallbacks()
- *@UniqueEntity(fields={"categorie","borneinferieure","bornesupperieur"}, message="cet intervalle existe déjà")
+ *@UniqueEntity(fields={"categorie","borneinferieure","bornesupperieur","capacite"}, message="cet intervalle existe déjà")
  */
 class Tarifcategorieclt
 {

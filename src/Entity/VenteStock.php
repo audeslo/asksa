@@ -3,9 +3,11 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\VenteStockRepository")
+ * @UniqueEntity(fields={"produit","venteshowroom","capacite"}, message="ce produit existe déjà dans la liste")
  * @ORM\HasLifecycleCallbacks()
  */
 class VenteStock
@@ -28,12 +30,17 @@ class VenteStock
     private $quantite;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $bidon;
 
     /**
      * @ORM\Column(type="integer")
+     */
+    private $prixvente=0;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $carton;
 
@@ -182,6 +189,18 @@ class VenteStock
     public function setCapacite(?Capacite $capacite): self
     {
         $this->capacite = $capacite;
+
+        return $this;
+    }
+
+    public function getPrixvente(): ?int
+    {
+        return $this->prixvente;
+    }
+
+    public function setPrixvente(int $prixvente): self
+    {
+        $this->prixvente = $prixvente;
 
         return $this;
     }

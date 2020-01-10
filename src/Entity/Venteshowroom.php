@@ -71,10 +71,7 @@ class Venteshowroom
      */
     private $createdBy;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Produit")
-     * @ORM\JoinColumn(nullable=false)
-     */
+
     private $produit;
 
     public function __construct()
@@ -256,12 +253,12 @@ class Venteshowroom
         return $this;
     }
 
-    public function getProduit(): ?Produit
+    public function getProduit()
     {
         return $this->produit;
     }
 
-    public function setProduit(?Produit $produit): self
+    public function setProduit( $produit): self
     {
         $this->produit = $produit;
 

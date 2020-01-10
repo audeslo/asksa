@@ -79,23 +79,28 @@ class VenteshowroomController extends AbstractController
             $entityManager->flush();
 
             $lastid = $entityManager->getRepository('App:Venteshowroom')->findLastId();
+            $lastvente=$entityManager->getRepository('App:Venteshowroom')->find($lastid);
 
             $entityManager->getRepository('App:Venteshowroom')->updateLastReferent($lastid, 'BL-' . getAugmentons($lastid));
 
             $this->get('session')->set('venteshowroom', $lastid);
+            $capacite=$entityManager->getRepository('App:Capacite')
+                                    ->find($form->get('capacitebidon')->getData());
+            $produit=$entityManager->getRepository('App:Produit')
+                                    ->find($form->get('produit')->getData());
 
-            $ventestock->setBidon($form->get('capacitebidon')->getData());
-            $ventestock->setCarton($form->get('quantitecarton')->getData());
+            $ventestock->setCapacite($capacite);
             $ventestock->setContenant($form->get('grosdetail')->getData());
-            $ventestock->setProduit($entityManager->getRepository('App:Produit')
-                ->find($form->get('produit')->getData()));
+            $ventestock->setProduit($produit);
             $ventestock->setQuantite($form->get('quantiteachete')->getData());
 
-            $ventestock->setVenteshowroom($entityManager->getRepository('App:Venteshowroom')
-                ->findLastObjet()
-            );
+            $ventestock->setVenteshowroom($entityManager
+                ->getRepository('App:Venteshowroom')->findLastObjet());
+            $ventestock->setCreatedBy($this->getUser());
             $entityManager->persist($ventestock);
             $entityManager->flush();
+
+           return $this->redirectToRoute('venteshowroom_add',array('slug' =>$lastvente->getSlug() ));
         }
 
         return $this->render('venteshowroom/new.html.twig', [
@@ -112,30 +117,65 @@ class VenteshowroomController extends AbstractController
     public function add(Venteshowroom $venteshowroom, Request $request): Response
     {
 
-
-        $form = $this->createForm(VenteshowroomEditType::class);
-        $form->handleRequest($request);
         $entityManager = $this->getDoctrine()->getManager();
+
+        // recuperer les produits disponible en stock du showroom de l'utilisateur connecté
+        $listProduits=$entityManager->getRepository('App:Stockshowroom')
+            ->findAvailableStock($this->getUser()->getId());
+        $produits=[];
+        foreach ($listProduits as $key => $produit){
+            $produits[$produit['designation']]=$produit['id'];
+        }
+
+        // recuperer les capacité disponible en stock du showroom de l'utilisateur connecté
+        $listCapacites=$entityManager->getRepository('App:Stockshowroom')
+            ->findAvailableCapacite($this->getUser()->getId());
+        $capacites=[];
+        foreach ($listCapacites as $key => $capacite){
+            $capacites[$capacite['code']]=$capacite['id'];
+        }
+
+        // recuperer les bidons et  cartons disponible
+
+        $form = $this->createForm(VenteshowroomEditType::class, $venteshowroom,array(
+            'capacite'     => $capacites,
+            'produits'  => $produits
+        ));
+        $form->handleRequest($request);
 
         //$isset=$this->get('session')->get('venteshowroom');
 
         if ($form->isSubmitted()&& $form->isValid()) {
 
             $ventestock = new VenteStock();
-            $ventestock->setBidon($form->get('capacitebidon')->getData());
-            $ventestock->setCarton($form->get('quantitecarton')->getData());
+            $capacite=$entityManager->getRepository('App:Capacite')
+                ->find($form->get('capacitebidon')->getData());
+            $produit=$entityManager->getRepository('App:Produit')
+                ->find($form->get('produit')->getData());
+
+            // recuperons le prix catégoriel
+            $prix=$entityManager->getRepository('App:Tarifcategorieclt')
+                                ->findPrice($venteshowroom->getClient()->getId(),
+                                    $produit->getId(), $capacite,$form->get('quantiteachete')->getData());
+            // recuperons le prix unitaire au cas de prix null
+            if($prix == null){
+                $prix=$produit->getPrixU();
+            }
+
+
+            $ventestock->setCapacite($capacite);
             $ventestock->setContenant($form->get('grosdetail')->getData());
-            $ventestock->setProduit($entityManager->getRepository('App:Produit')
-                ->find($form->get('produit')->getData()));
+            $ventestock->setProduit($produit);
             $ventestock->setQuantite($form->get('quantiteachete')->getData());
             $ventestock->setVenteshowroom($venteshowroom);
             $ventestock->setCreatedBy($this->getUser());
+            $ventestock->setPrixvente($prix);
             $entityManager->persist($ventestock);
             $entityManager->flush();
         }
+
         $ventes=$entityManager->getRepository('App:VenteStock')->findBy(
             ['venteshowroom' => $venteshowroom]);
-
 
         return $this->render('venteshowroom/new.html.twig', [
             'venteshowroom' => $venteshowroom,

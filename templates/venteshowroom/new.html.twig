@@ -23,8 +23,8 @@
                    <tr>
                        <th width="25%">Désignations</th>
                        <th width="16%">Qté acheté</th>
-                       <th width="16%">Qté carton</th>
-                       <th width="16%">Capacité bidon</th>
+                       <th width="16%">Contenant</th>
+                       <th width="16%">Capacité</th>
                        <th width="16%">Prix vente</th>
                        <th width="5%">Supp</th>
                    </tr>
@@ -33,9 +33,9 @@
                        <tr>
                            <th> {{ vente.produit}} </th>
                            <th>{{ vente.quantite }}</th>
-                           <th>{{ vente.carton }}</th>
-                           <th>{{ vente.bidon ~' '~ 'Litres'}}</th>
-                           <th>{{ vente.bidon ~' '~ 'Litres'}}</th>
+                           <th>{{ vente.contenant ? 'Carton' : 'Bidon' }}</th>
+                           <th>{{ vente.capacite.code}}</th>
+                           <th>{{ vente.prixvente}}</th>
                            <th>
 
                                <a  href="#" >
