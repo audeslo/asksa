@@ -6,7 +6,8 @@ use App\Entity\Client;
 
 use App\Entity\Produit;
 
-use App\Entity\Venteshowroom;
+//use App\Entity\Venteshowroom;
+use App\Entity\VenteStock;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,14 +22,14 @@ class VenteshowroomEditType extends AbstractType
     {
         $builder
 
-            ->add('capacitebidon',ChoiceType::class,array(
+            ->add('capacite',ChoiceType::class,array(
                 'label'     => 'Capacité:',
                 'choices'      => $options['capacite'],
                 'required'  => true,
                 'attr'      =>['placeholder'    =>  'Saisissez la capacité du bidon']
             ))
 
-            ->add('grosdetail',ChoiceType::class,array(
+            ->add('contenant',ChoiceType::class,array(
                 'choices'  => array(
                     'Carton' => 1,
                     'Bidon' => 0,
@@ -38,7 +39,7 @@ class VenteshowroomEditType extends AbstractType
                 'multiple' => false,
             ))
 
-            ->add('quantiteachete',IntegerType::class,array(
+            ->add('quantite',IntegerType::class,array(
                 'label'     => 'Quantité a acheté :',
                 'required'  => false,
                 'attr'      =>['placeholder'    =>  'Saisissez la quantité']
@@ -68,7 +69,7 @@ class VenteshowroomEditType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Venteshowroom::class,
+            'data_class' => VenteStock::class,
             'capacite'     => null,
             'produits'    => null
         ]);

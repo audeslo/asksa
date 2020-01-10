@@ -135,9 +135,13 @@ class VenteshowroomController extends AbstractController
             $capacites[$capacite['code']]=$capacite['id'];
         }
 
+        dump($produits);
+        return null;
+
         // recuperer les bidons et  cartons disponible
 
-        $form = $this->createForm(VenteshowroomEditType::class, $venteshowroom,array(
+        $ventestock = new VenteStock();
+        $form = $this->createForm(VenteshowroomEditType::class, $ventestock,array(
             'capacite'     => $capacites,
             'produits'  => $produits
         ));
@@ -147,7 +151,7 @@ class VenteshowroomController extends AbstractController
 
         if ($form->isSubmitted()&& $form->isValid()) {
 
-            $ventestock = new VenteStock();
+
             $capacite=$entityManager->getRepository('App:Capacite')
                 ->find($form->get('capacitebidon')->getData());
             $produit=$entityManager->getRepository('App:Produit')
@@ -177,7 +181,7 @@ class VenteshowroomController extends AbstractController
         $ventes=$entityManager->getRepository('App:VenteStock')->findBy(
             ['venteshowroom' => $venteshowroom]);
 
-        return $this->render('venteshowroom/new.html.twig', [
+        return $this->render('venteshowroom/newvente.html.twig', [
             'venteshowroom' => $venteshowroom,
             'form' => $form->createView(),
             'ventes' => $ventes
