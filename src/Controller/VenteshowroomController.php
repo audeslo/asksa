@@ -139,7 +139,7 @@ class VenteshowroomController extends AbstractController
         // recuperer les bidons et  cartons disponible
 
 
-        $form = $this->createForm(VenteshowroomEditType::class, $ventestock,array(
+        $form = $this->createForm(VenteshowroomEditType::class, $venteshowroom,array(
             'capacite'     => $capacites,
             'produits'  => $produits
         ));

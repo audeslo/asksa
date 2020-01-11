@@ -14,9 +14,9 @@
 
                 <div class="col-md-5 ">
 
-                        {{ form_label(form.contenant) }}
-                        {{ form_widget(form.contenant) }}
-                        {{ form_errors(form.contenant) }}
+                    {{ form_label(form.grosdetail) }}
+                    {{ form_widget(form.grosdetail) }}
+                    {{ form_errors(form.grosdetail) }}
 
                 </div>
 
@@ -35,17 +35,17 @@
 
             <div class="col-md-5 ">
 
-                {{ form_label(form.quantite) }}
-                {{ form_widget(form.quantite) }}
-                {{ form_errors(form.quantite) }}
+                {{ form_label(form.quantiteachete) }}
+                {{ form_widget(form.quantiteachete) }}
+                {{ form_errors(form.quantiteachete) }}
 
             </div>
 
             <div class="col-md-5 offset-2">
 
-                {{ form_label(form.capacite) }}
-                {{ form_widget(form.capacite) }}
-                {{ form_errors(form.capacite) }}
+                {{ form_label(form.capacitebidon) }}
+                {{ form_widget(form.capacitebidon) }}
+                {{ form_errors(form.capacitebidon) }}
             </div>
         </div>
 
@@ -57,7 +57,6 @@
             {{ form_end(form) }}
         </div>
             {% set ht =0 %}
-            {% set tva=0 %}
            <div class="row">
                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                    <thead>
@@ -72,7 +71,6 @@
                    </thead>
                    {% for vente in ventes %}
                        {% set ht=ht+vente.prixvente %}
-                       {% set tva=ht*0.18 %}
                        <tr>
                            <th> {{ vente.produit}} </th>
                            <th>{{ vente.quantite }}</th>
@@ -96,11 +94,11 @@
                    <tr>
 
                        <th >TVA</th>
-                       <th colspan="2" >{{ tva | number_format(0,0,' ')}} </th>
+                       <th colspan="2" >{{ (ht*0.18) | number_format(0,0,' ')}} </th>
                    </tr>
                    <tr>
                        <th >Total TTC</th>
-                       <th colspan="2"><h4>{{ (tva+ht) | number_format(0,0,' ')}}</h4></th>
+                       <th colspan="2"><h4>{{ (ht*1.18) | number_format(0,0,' ')}}</h4></th>
                    </tr>
                </table>
                {#<table  style="position: center">
