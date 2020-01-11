@@ -118,6 +118,7 @@ class VenteshowroomController extends AbstractController
     {
 
         $entityManager = $this->getDoctrine()->getManager();
+        $ventestock = new VenteStock();
 
         // recuperer les produits disponible en stock du showroom de l'utilisateur connecté
         $listProduits=$entityManager->getRepository('App:Stockshowroom')
@@ -135,12 +136,9 @@ class VenteshowroomController extends AbstractController
             $capacites[$capacite['code']]=$capacite['id'];
         }
 
-        dump($produits);
-        return null;
-
         // recuperer les bidons et  cartons disponible
 
-        $ventestock = new VenteStock();
+
         $form = $this->createForm(VenteshowroomEditType::class, $ventestock,array(
             'capacite'     => $capacites,
             'produits'  => $produits
