@@ -78,6 +78,7 @@ class Venteshowroom
     {
         $this->setDatevente(new \DateTime('now'));
         $this->venteStocks = new ArrayCollection();
+        $this->devis = true;
     }
 
     /**
@@ -123,6 +124,11 @@ class Venteshowroom
      * @ORM\OneToMany(targetEntity="App\Entity\VenteStock", mappedBy="venteshowroom", orphanRemoval=true)
      */
     private $venteStocks;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $devis;
 
 
 
@@ -357,6 +363,18 @@ class Venteshowroom
                 $venteStock->setVenteshowroom(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDevis(): ?bool
+    {
+        return $this->devis;
+    }
+
+    public function setDevis(?bool $devis): self
+    {
+        $this->devis = $devis;
 
         return $this;
     }

@@ -188,6 +188,32 @@ class VenteshowroomController extends AbstractController
 
 
     /**
+     * @Route("/{slug}/encaissement", name="venteshowroom_encaissement", methods={"GET","POST"})
+     */
+    public function encaissement(Venteshowroom $venteshowroom, Request $request): Response
+    {
+        $em=$this->getDoctrine()->getManager();
+        $ventes=$em->getRepository('App:VenteStock')->findBy(
+            ['venteshowroom' => $venteshowroom]);
+
+        // vérifions la dispo,nibilité des produits
+            foreach ($ventes as $key => $vente){
+                if($vente->getContenant()){
+                    //
+                }else{
+
+                }
+            }
+
+        /*return $this->render('venteshowroom/newvente.html.twig', [
+            'venteshowroom' => $venteshowroom,
+            'form' => $form->createView(),
+            'ventes' => $ventes
+        ]);*/
+    }
+
+
+    /**
      * @Route("/{slug}", name="venteshowroom_show", methods={"GET"})
      */
     public function show(Venteshowroom $venteshowroom): Response

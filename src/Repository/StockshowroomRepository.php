@@ -74,6 +74,18 @@ class StockshowroomRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findStock_vente_Available($capacite)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.capacite = ?1')
+            ->setParameter('val', $capacite)
+            ->orderBy('s.id', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     // /**
     //  * @return Stockshowroom[] Returns an array of Stockshowroom objects
     //  */

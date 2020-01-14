@@ -61,22 +61,34 @@
                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                    <thead>
                    <tr>
-                       <th width="25%">Désignations</th>
-                       <th width="16%">Qté acheté</th>
-                       <th width="16%">Contenant</th>
-                       <th width="16%">Capacité</th>
-                       <th width="16%">Prix vente</th>
-                       <th width="5%">Supp</th>
+                       <th>N°</th>
+                       <th>Qté</th>
+                       <th >Désignations</th>
+                       <th >Contenant</th>
+                       <th >Capacité</th>
+                       <th >Prix U.</th>
+                       <th >Prix T.</th>
+                       <th >Supp</th>
                    </tr>
                    </thead>
                    {% for vente in ventes %}
-                       {% set ht=ht+vente.prixvente %}
+                       {% if vente.contenant %}
+                           {% set ht=ht+(vente.prixvente*vente.capacite.capacitecarton*vente.quantite) %}
+                       {% else %}
+                           {% set ht=ht+(vente.prixvente*vente.quantite) %}
+                       {% endif %}
+
                        <tr>
-                           <th> {{ vente.produit}} </th>
+                           <th>{{ loop.index }}</th>
                            <th>{{ vente.quantite }}</th>
+                           <th> {{ vente.produit}} </th>
                            <th>{{ vente.contenant ? 'Carton' : 'Bidon' }}</th>
                            <th>{{ vente.capacite.code}}</th>
-                           <th>{{ vente.prixvente | number_format(0,0,' ')}}</th>
+                           <th>{{ vente.contenant ? (vente.prixvente*vente.capacite.capacitecarton) | number_format(0,0,' ') :
+                                   vente.prixvente| number_format(0,0,' ')}}</th>
+                           <th style="padding-right: 0">{{ vente.contenant ?
+                               (vente.prixvente*vente.capacite.capacitecarton*vente.quantite) | number_format(0,0,' ')
+                               : (vente.prixvente*vente.quantite) | number_format(0,0,' ') }}</th>
                            <th>
 
                                <a  href="#" >
@@ -87,7 +99,7 @@
                        </tr>
                    {% endfor %}
                    <tr >
-                       <th rowspan="3" colspan="3"></th>
+                       <th rowspan="5" colspan="5"></th>
                        <th >Total HT</th>
                        <th colspan="2" >{{ ht | number_format(0,0,' ')}}</th>
                    </tr>
@@ -98,7 +110,7 @@
                    </tr>
                    <tr>
                        <th >Total TTC</th>
-                       <th colspan="2"><h4>{{ (ht*1.18) | number_format(0,0,' ')}}</h4></th>
+                       <th colspan="2"><h5>{{ (ht*1.18) | number_format(0,0,' ')}}</h5></th>
                    </tr>
                </table>
                {#<table  style="position: center">
@@ -136,7 +148,12 @@
             </div>
 
             <div class="col-md-2 offset-3">
-                <button class="btn btn-primary Encaisser">{{ button_label|default('Encaisser') }}</button>
+{#                <button class="btn btn-primary Encaisser">{{ button_label|default('Encaisser') }}</button>#}
+                <a href="{{ path('venteshowroom_encaissement',{'slug' : venteshowroom.slug }) }}" class="btn btn-danger Encaisser "
+                   onclick=" return confirm('Voulez-vous encaisser la vente?');">
+                    <i class="fa fa-euro-sign"></i>
+                    Encaisser
+                </a>
 
             </div>
 
@@ -144,9 +161,9 @@
         <hr>
     </div>
 
-   {# <script>
+    {#<script>
 
-        const add = document.getElementById('add');
+       const add = document.getElementById('add');
 
         if (add){
 
@@ -168,7 +185,6 @@
                }
            })
         }
-
     </script>#}
 {% endblock %}
 
